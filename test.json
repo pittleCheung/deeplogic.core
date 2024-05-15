@@ -1,0 +1,381 @@
+{
+  "Avatar": {},
+  "Badge": {},
+  "Line": {},
+  "Card": {},
+  "Carousel": {},
+  "Collapse": {},
+  "Descriptions": {},
+  "LogsRoller": {},
+  "SegmentedTabs": {},
+  "Segmented": {},
+  "Statistic": {},
+  "Table": {},
+  "Tabs": {},
+  "TimeText": {
+    "compare": null
+  },
+  "Tree": {},
+  "Drawer": {},
+  "Modal": {},
+  "PopConfirm": {},
+  "Progress": {},
+  "Checkbox": {},
+  "DatePicker": {},
+  "FormItem": {},
+  "Form": {},
+  "InputKb": {},
+  "Input": {},
+  "Login": {},
+  "Radio": {},
+  "Select": {},
+  "TimePicker": {},
+  "GenericIcon": {},
+  "Image": {},
+  "Link": {},
+  "Edit": {
+    "compare": null
+  },
+  "NumeralText": {
+    "compare": null
+  },
+  "StateText": {
+    "compare": null
+  },
+  "Display": {
+    "compare": null
+  },
+  "TypographyText": {
+    "compare": null
+  },
+  "Col": {
+    "compare": null
+  },
+  "Columns": {},
+  "Container": {},
+  "Divider": {},
+  "Flex": {},
+  "LayoutFooter": {},
+  "LayoutHeader": {},
+  "LayoutSider": {},
+  "Layout": {},
+  "Row": {},
+  "Space": {},
+  "Breadcrumb": {},
+  "Dropdown": {},
+  "Menu": {},
+  "Pagination": {},
+  "Bar": {},
+  "Gauge": {
+    "compare": null
+  },
+  "Pie": {},
+  "Sankey": {},
+  "Scatter": {},
+  "TreeChart": {},
+  "Charts": {},
+  "CustomNode": {},
+  "Drag": {},
+  "Icon": {},
+  "Resizer": {},
+  "Svg": {},
+  "SvgMaterial": {},
+  "DesignerCanvas": {},
+  "DrawCanva": {},
+  "MovableTool": {
+    "compare": null
+  },
+  "Meta": {
+    "componentName": "WetTankImgGif",
+    "category": "数据展示",
+    "title": "储气湿罐",
+    "screenshot": "/static/Image_thumbnail.1c08288a.png",
+    "isDevice": true,
+    "props": [
+      {
+        "name": "devicetype",
+        "title": {
+          "label": "设备类型",
+          "tip": "devicetype | 设备类型"
+        },
+        "defaultValue": "D0C1D",
+        "propType": "string"
+      },
+      {
+        "name": "device",
+        "title": {
+          "label": "选择设备",
+          "tip": "device | 选择设备"
+        },
+        "defaultValue": "",
+        "propType": "device"
+      },
+      {
+        "name": "status",
+        "title": {
+          "label": "设备状态",
+          "tip": "status | 设备状态"
+        },
+        "propType": "array",
+        "defaultValue": [
+          {
+            "label": "故障",
+            "value": "1",
+            "key": "3",
+            "color": "#f5222d"
+          },
+          {
+            "label": "停止",
+            "value": "0",
+            "key": "1",
+            "color": "#8c8c8c"
+          },
+          {
+            "label": "运行",
+            "value": "1",
+            "key": "2",
+            "color": "#73d13d"
+          }
+        ],
+        "props": [
+          {
+            "name": "label",
+            "title": {
+              "label": "标签",
+              "tip": "label | 选项的标签"
+            },
+            "propType": "string",
+            "defaultValue": ""
+          },
+          {
+            "name": "value",
+            "title": {
+              "label": "值",
+              "tip": "value | 选项的值"
+            },
+            "propType": "string",
+            "defaultValue": ""
+          },
+          {
+            "name": "expression",
+            "title": {
+              "label": "表达式",
+              "tip": "expression | 选项的值"
+            },
+            "propType": "string",
+            "defaultValue": ""
+          },
+          {
+            "name": "img_src",
+            "title": {
+              "label": "3D图片",
+              "tip": "选择一张3D图片"
+            },
+            "propType": "select",
+            "defaultValue": "/static/罐默认.d28f8917.png",
+            "values": {
+              "/static/罐默认.d28f8917.png": {
+                "type": {},
+                "key": null,
+                "ref": null,
+                "props": {
+                  "content": {
+                    "type": "img",
+                    "key": null,
+                    "ref": null,
+                    "props": {
+                      "src": "/static/罐默认.d28f8917.png"
+                    },
+                    "_owner": null,
+                    "_store": {}
+                  },
+                  "title": "默认",
+                  "children": [
+                    {
+                      "type": "img",
+                      "key": null,
+                      "ref": null,
+                      "props": {
+                        "src": "/static/罐默认.d28f8917.png",
+                        "width": 20,
+                        "height": 20
+                      },
+                      "_owner": null,
+                      "_store": {}
+                    },
+                    "默认"
+                  ]
+                },
+                "_owner": null,
+                "_store": {}
+              },
+              "/static/罐运行.e91a6f3f.gif": {
+                "type": {},
+                "key": null,
+                "ref": null,
+                "props": {
+                  "content": {
+                    "type": "img",
+                    "key": null,
+                    "ref": null,
+                    "props": {
+                      "src": "/static/罐运行.e91a6f3f.gif"
+                    },
+                    "_owner": null,
+                    "_store": {}
+                  },
+                  "title": "运行",
+                  "children": [
+                    {
+                      "type": "img",
+                      "key": null,
+                      "ref": null,
+                      "props": {
+                        "src": "/static/罐运行.e91a6f3f.gif",
+                        "width": 20,
+                        "height": 20
+                      },
+                      "_owner": null,
+                      "_store": {}
+                    },
+                    "运行"
+                  ]
+                },
+                "_owner": null,
+                "_store": {}
+              },
+              "/static/罐报警.0e5d4665.gif": {
+                "type": {},
+                "key": null,
+                "ref": null,
+                "props": {
+                  "content": {
+                    "type": "img",
+                    "key": null,
+                    "ref": null,
+                    "props": {
+                      "src": "/static/罐报警.0e5d4665.gif"
+                    },
+                    "_owner": null,
+                    "_store": {}
+                  },
+                  "title": "警告",
+                  "children": [
+                    {
+                      "type": "img",
+                      "key": null,
+                      "ref": null,
+                      "props": {
+                        "src": "/static/罐报警.0e5d4665.gif",
+                        "width": 20,
+                        "height": 20
+                      },
+                      "_owner": null,
+                      "_store": {}
+                    },
+                    "警告"
+                  ]
+                },
+                "_owner": null,
+                "_store": {}
+              },
+              "/static/罐故障.09f62224.gif": {
+                "type": {},
+                "key": null,
+                "ref": null,
+                "props": {
+                  "content": {
+                    "type": "img",
+                    "key": null,
+                    "ref": null,
+                    "props": {
+                      "src": "/static/罐故障.09f62224.gif"
+                    },
+                    "_owner": null,
+                    "_store": {}
+                  },
+                  "title": "故障",
+                  "children": [
+                    {
+                      "type": "img",
+                      "key": null,
+                      "ref": null,
+                      "props": {
+                        "src": "/static/罐故障.09f62224.gif",
+                        "width": 20,
+                        "height": 20
+                      },
+                      "_owner": null,
+                      "_store": {}
+                    },
+                    "故障"
+                  ]
+                },
+                "_owner": null,
+                "_store": {}
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "style": {
+      "name": "style",
+      "title": {
+        "label": "样式",
+        "tip": "style | 样式"
+      },
+      "propType": "object",
+      "setter": {
+        "component": "NodeSetter",
+        "props": {
+          "open": true,
+          "values": {
+            "translateX": 0,
+            "translateY": 0,
+            "scale": 1,
+            "width": 30,
+            "height": 60,
+            "fill": "#c8c8c8",
+            "stroke": "#000",
+            "strokeWidth": 1,
+            "opacity": 1,
+            "borderRadius": 0
+          }
+        }
+      }
+    },
+    "events": {
+      "name": "events",
+      "title": {
+        "label": "事件",
+        "tip": "events | 事件"
+      },
+      "setter": {
+        "component": "EventSetter",
+        "props": [
+          {
+            "name": "onClick",
+            "title": {
+              "label": "点击",
+              "tip": "onClick | 点击"
+            },
+            "fieldProps": {
+              "labelWidth": 80
+            },
+            "props": {
+              "type": "event",
+              "placeholder": "点击事件"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "PipeH": {},
+  "PipeV": {},
+  "Nodes": {},
+  "NodesBox": {
+    "compare": null
+  }
+}

@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4520510 */
+  src: url('iconfont.woff2?t=1715045906861') format('woff2'),
+       url('iconfont.woff?t=1715045906861') format('woff'),
+       url('iconfont.ttf?t=1715045906861') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-temperature:before {
+  content: "\e767";
+}
+
+.icon-normal:before {
+  content: "\e601";
+}
+
+.icon-water-temperature:before {
+  content: "\e606";
+}
+
+.icon-humidity:before {
+  content: "\e604";
+}
+
+.icon-icon-chart-line:before {
+  content: "\e609";
+}
+
+.icon-icon-clock:before {
+  content: "\e60a";
+}
+
+.icon-icon-table:before {
+  content: "\e60b";
+}
+
+.icon-icon-exit:before {
+  content: "\e60c";
+}
+
+.icon-icon-opt:before {
+  content: "\e610";
+}
+
+.icon-icon-log:before {
+  content: "\e611";
+}
+
+.icon-icon-user:before {
+  content: "\e615";
+}
+
+.icon-menu-snow:before {
+  content: "\e616";
+}
+
+.icon-menu-energy:before {
+  content: "\e618";
+}
+
+.icon-menu-home:before {
+  content: "\e619";
+}
+
+.icon-menu-alarm:before {
+  content: "\e61a";
+}
+
+.icon-menu-report:before {
+  content: "\e61b";
+}
+
+.icon-menu-chiller:before {
+  content: "\e61c";
+}
+
+.icon-regular-high:before {
+  content: "\e605";
+}
+
+.icon-a-lujing1x3:before {
+  content: "\e607";
+}
+
+.icon-btn-ai:before {
+  content: "\e600";
+}
+

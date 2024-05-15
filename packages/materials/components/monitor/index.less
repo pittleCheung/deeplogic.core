@@ -1,0 +1,316 @@
+// html,
+// body {
+//   position: relative;
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
+
+// html:has(.no-relative),
+// body:has(.no-relative) {
+//   margin: 8px;
+//   padding: 8px;
+//   position: static;
+//   /* border: 8px solid red; */
+// }
+
+// html:has(.no-relative) {
+//   position: relative;
+// }
+
+// html:has(.margin),
+// body:has(.margin) {
+//   /* margin-top: 50px; */
+// }
+
+.margin .root {
+  position: static;
+}
+
+.description {
+  padding: 10px;
+}
+
+.root {
+  position: relative;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  /*设置缩放中心*/
+  transform-origin: 0 0;
+}
+
+.zoomGroup {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -200px;
+  z-index: 999;
+}
+
+.will-change-container {
+  padding-left: 100px;
+  padding-top: 100px;
+  will-change: transform;
+}
+
+// .moveable-direction {
+//     opacity: 0;
+// } 去除蓝色框框
+// .moveable-control.moveable-origin {
+//     border-color: transparent !important;
+//     background: transparent !important;
+//     width: 0px !important;
+//     height: 0px !important;
+//     margin-top: -6px;
+//     margin-left: -6px;
+//     pointer-events: none;
+// }
+.moveable-control {
+  width: 8px !important;
+  height: 8px !important;
+  margin-top: -4px !important;
+  margin-left: -4px !important;
+}
+
+.will-change-target {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  background: #ee8;
+  color: #333;
+  font-weight: bold;
+  border: 1px solid #333;
+  box-sizing: border-box;
+}
+
+.containerdraw {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.target {
+  position: absolute;
+}
+
+.target1 {
+  left: 120px;
+  top: 120px;
+}
+
+.target2 {
+  left: 300px;
+  top: 140px;
+}
+
+.target3 {
+  left: 180px;
+  top: 250px;
+}
+
+.nested {
+  position: absolute;
+  border: 4px solid #ccc;
+  width: 100px;
+  height: 100px;
+  top: 50px;
+  left: 70px;
+  color: #333;
+  /* box-sizing: border-box; */
+}
+
+.nested.first {
+  top: 150px;
+}
+
+.nested.rotate {
+  transform-origin: 0 0;
+  transform: rotate(-30deg);
+}
+
+.nested.scale {
+  transform: scale(1.5, 1.5);
+}
+
+.nested .target {
+  top: 50px;
+  left: 50px
+}
+
+
+/* pos guidelines */
+.moveable-normal.red {
+  background: red !important;
+  height: 1px !important;
+}
+
+/* gap guidelines */
+.moveable-gap.red {
+  background: red !important;
+  height: 1px !important;
+}
+
+/* When snapped to an element in elementGuidelines */
+.moveable-bold.red {
+  background: red !important;
+  height: 1px !important;
+}
+
+/* A dashed line between target and element */
+.moveable-dashed.red {
+  border-top-color: red !important;
+  border-left-color: red !important;
+}
+
+/* pos guidelines */
+.moveable-normal.green {
+  background: green !important;
+}
+
+/* gap guidelines */
+.moveable-gap.green {
+  background: green !important;
+}
+
+/* When snapped to an element in elementGuidelines */
+.moveable-bold.green {
+  background: green !important;
+}
+
+/* A dashed line between target and element */
+.moveable-dashed.green {
+  border-top-color: green !important;
+  border-left-color: green !important;
+}
+
+.scrollArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.scrollArea:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1000%;
+  width: 100%;
+  background: linear-gradient(#333,
+  #fff);
+}
+
+.infinite-viewer {
+  min-height: 500px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+}
+
+.infinite-viewer-scroll-area {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.control-padding .moveable-around-control {
+  background: #f55 !important;
+}
+
+
+.cube {
+  display: inline-block;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background: #eee;
+  --color: #4af;
+  color: #333;
+  line-height: 40px;
+  text-align: center;
+}
+
+.cube .cube {
+  background: #ddd;
+  margin-left: 20px;
+}
+
+// @keyframes scroll {
+//     0% {
+//         transform: translateX(-120px);
+//     }
+
+//     100% {
+//         transform: translateX(0px);
+//     }
+// }
+
+#scrollingLine {
+  animation-duration: 4s;
+}
+
+// 节点盒子
+#nodebox {
+  position: relative;
+}
+
+
+.zoombox {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  padding: 0 5px;
+  height: 20px;
+  line-height: 20px;
+  text-align: right;
+  background-color: #ee8;
+}
+
+#line {
+  stroke-width: 3px;
+  stroke-dasharray: 12 12;
+  stroke-dashoffset: 0px;
+}
+
+#border {
+  stroke-width: 1px;
+}
+
+@keyframes water_flow {
+  from { stroke-dashoffset: 24; }
+}
+
+@keyframes reverse_water_flow {
+  to { stroke-dashoffset: 24; }
+}
+
+@keyframes water_flow_vertical {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes reverse_awter_flow_vertical {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -100%, 0);
+  }
+}
