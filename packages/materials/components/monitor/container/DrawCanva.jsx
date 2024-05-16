@@ -69,7 +69,7 @@ function DrawCanva(props) {
         connectDrag={connectRef}
         width={style.width}
         height={style.height}
-        style={{ height: '100%', width: '100%', background: background }}
+        style={{ height: '100%', width: '100%', background: background, flex: style.flex }}
       >
         <Suspense
           fallback={
