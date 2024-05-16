@@ -215,7 +215,7 @@ export const deviceTranform = (index, type, tag) => {
     const translateY = deviceTotalTransformY + deviceMargin[type] * index + styleMap[type].height * index + tag;
     return {
         translateY,
-        translateX: deviceTranformX[type]
+        translateX: deviceTranformX[type],
     }
 }
 /**

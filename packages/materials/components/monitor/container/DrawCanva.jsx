@@ -32,7 +32,7 @@ function DrawCanva(props) {
       width: width || '100%',
       height: height || '100%',
       ...otherStyle,
-      background
+      background 
     };
   }, [otherStyle,width, height, background]);
 
