@@ -13,13 +13,14 @@ function NodesBox(props) {
     useEffect(() => {
         const parentElement = nodeRef?.current || {};
         if (parentElement) {
-            const { width, height, translateX, translateY, rotate, zIndex } = state.style;
+            const { width, height, translateX, translateY, rotate, zIndex, marginTop } = state.style;
             const styleToUpdate = {
                 width :`${width}px`,
                 height :`${height}px`,
                 transform :`translate(${translateX}px, ${
                     translateY
                 }px) rotate(${rotate || 0}deg)`,
+                marginTop: `${marginTop}px`,
                 ...(zIndex > 0 && { zIndex }),
             };
             Object.assign(nodeRef?.current.parentElement.style, styleToUpdate);

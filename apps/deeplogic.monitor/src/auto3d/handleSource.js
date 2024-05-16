@@ -79,7 +79,10 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     valuesMapsHandle(ID, VALVES, deviceModelMap?.VALVES);
     const resultMap = device('Chiller', item, pointsObject, deviceModelMap?.CHLS?.[item.ID]);
     deviceMapIdsTool(item.ID, resultMap.id, item);
-    resultMap.props.style = { ...styleMap['CHLS'], ...deviceTranform(index, 'CHLS', 0) };
+    resultMap.props.style = {
+      ...styleMap["CHLS"],
+      ...deviceTranform(index, "CHLS", 0),
+    }
     result[resultMap.id] = resultMap;
     pointsObject[item.P.NAME] = 0;
     pointsObject[item.I_PCT.NAME] = 0;
@@ -88,7 +91,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       result,
       resultMap,
       deviceName: item.NAME,
-      xAxis: -85,
+      xAxis: -100,
       yAxis: -10
     })
     generateText({
@@ -102,7 +105,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateX,
       translateY,
       yAxis: 30,
-      xAxis: -30,
+      xAxis: -45,
     })
     generateText({
       result: result,
@@ -116,7 +119,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateY,
       // yAxis: 60,
       yAxis: 30,
-      xAxis: 60 - 30 + 5
+      xAxis: 40
     })
   });
 
@@ -128,7 +131,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
   CHWPS.forEach((item, index) => {
     const resultMap = device('Pump', item, pointsObject, deviceModelMap?.CHWPS?.[item.ID]);
     deviceMapIdsTool(item.ID, resultMap.id, item);
-    resultMap.props.style = { ...styleMap['CHWPS'], ...deviceTranform(index, 'CHWPS', 15) };
+    resultMap.props.style = { ...styleMap['CHWPS'], ...deviceTranform(index, 'CHWPS', 15),  marginTop: 7};
+    console.log("resultMap=======>", resultMap)
     result[resultMap.id] = resultMap;
     pointsObject[item.P.NAME] = 0;
     pointsObject[item.FREQ.NAME] = 0;
@@ -137,7 +141,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis: -45,
-      yAxis: 5
+      yAxis: 10
     })
     generateText({
       result: result,
@@ -150,7 +154,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateX,
       translateY,
       yAxis: 30,
-      xAxis: -30,
+      xAxis: -30-8,
     })
     generateText({
       result: result,
@@ -164,14 +168,14 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateY,
       // yAxis: 60,
       yAxis: 30,
-      xAxis: 60 - 30 + 5,
+      xAxis: 35 + 8,
     })
   });
 
   CWPS.forEach((item, index) => {
     const resultMap = device('Pump', item, pointsObject, deviceModelMap?.CWPS?.[item.ID]);
     deviceMapIdsTool(item.ID, resultMap.id, item);
-    resultMap.props.style = { ...styleMap['CWPS'], ...deviceTranform(index, 'CWPS', 15) };
+    resultMap.props.style = { ...styleMap['CWPS'], ...deviceTranform(index, 'CWPS', 15),marginTop: 7};
     result[resultMap.id] = resultMap;
     pointsObject[item.P.NAME] = 0;
     pointsObject[item.FREQ.NAME] = 0;
@@ -180,7 +184,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis: -45,
-      yAxis: 5,
+      yAxis: 10,
     })
     generateText({
       result: result,
@@ -192,7 +196,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateX,
       translateY,
       yAxis: 30,
-      xAxis: -30,
+      xAxis: -30-8,
     })
     generateText({
       result: result,
@@ -207,7 +211,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateY,
       // yAxis: 60,
       yAxis: 30,
-      xAxis: 60 - 30 + 5,
+      xAxis: 35 + 8,
     })
   });
 
@@ -239,8 +243,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       type: "Tower",
       translateX,
       translateY,
-      yAxis: 30,
-      xAxis: -30,
+      yAxis: 25,
+      xAxis: -30 - 8,
     })
     generateText({
       result: result,
@@ -254,8 +258,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       translateX,
       translateY,
       // yAxis: 60,
-      yAxis: 30,
-      xAxis: 60 - 30 + 5,
+      yAxis: 25,
+      xAxis: 35 + 8,
     })
   });
 

@@ -1757,7 +1757,7 @@ export const chl_Out = (result, index, tag, current, item, CHLS) => {
   const values = valuesMaps?.[currentID]?.map((t) => t?.ID) || [] // 水泵 有一个展示在冷冻侧 两个就加上冷却侧
   const pipeType = "0"
   // 横管的x位移 向左偏移8px确保能够置于图片下方
-  const translateX = fix(current.translateX + current.width - 8)
+  const translateX = fix(current.translateX + current.width - styleMap['t'].width)
   // 纵管的x位移
   const vtranslateX = fix(translateX + styleMap["h"].width / 2)
   const pipeh1 = pipe("h", "0")
@@ -1774,6 +1774,7 @@ export const chl_Out = (result, index, tag, current, item, CHLS) => {
     width: styleMap["h"].width / 2,
     translateX,
     translateY: fix(current.translateY + current.height / 3),
+    zIndex:-1,
   }
   if (values.length > 0) {
     pointarr = []
@@ -2363,7 +2364,7 @@ export const chl_tower = (item, result, index, CT) => {
     pipeh.props.style = {
       ...styleMap["h"],
       // width: styleMap['h'].width * 0.5,
-      width: styleMap["h"].width * 0.5 + 10, // 管子宽度延长10 到冷机背后
+      width: styleMap["h"].width * 0.5 + styleMap["t"].width, // 管子宽度延长一个三头宽度 到冷机背后
       zIndex: -1,
       translateX: fix(currentpump.translateX - styleMap["h"].width * 0.5),
       translateY: fix(currentpump.translateY + currentpump.height / 3),

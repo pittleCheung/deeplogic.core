@@ -43,7 +43,7 @@ export const commonTextStyle = {
 // const ctWH = { width: 60, height: 57, };  // 冷却塔
 
 // 新设计稿设备宽高度
-const chlWH = { width: 116, height: 80, }; // 冷机
+const chlWH = { width: 166, height: 80, }; // 冷机
 const pumpWH = { width: 32, height: 50, }; // 水泵
 const ctWH = { width: 66, height: 80, };  // 冷却塔
 
