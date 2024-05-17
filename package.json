@@ -46,6 +46,7 @@
     "react-fast-marquee": "^1.6.4",
     "react-infinite-viewer": "^0.28.1",
     "react-moveable": "^0.56.0",
+    "react-router-dom": "^6.23.1",
     "react-selecto": "^1.26.3",
     "react-simple-keyboard": "^3.7.107",
     "react-window": "^1.8.10",

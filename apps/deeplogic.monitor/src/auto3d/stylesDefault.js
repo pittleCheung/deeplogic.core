@@ -146,14 +146,16 @@ export const deviceNumToole = (obj) => {
     CTS: (deviceMargin.CTS + ctStyle.height) * CTS
   };
 
-// 距离顶部最大偏移距离 = (容器高度 - 设备区域最大跨度) / 2
- deviceTotalTransformY = (ConHeight - Math.max(...Object.values(newobj))) / 2
+// 距离顶部和底部平均的偏移距离 = (容器高度 - 设备区域最大跨度 - 设备跨度) / 2
+ deviceTotalTransformY =
+   (ConHeight - Math.max(...Object.values(newobj))) / 2
+
  deviceTotalTransformY = deviceTotalTransformY > 0 ? deviceTotalTransformY : 0
 
   // console.log("newobj=====>", newobj, deviceTotalTransformY, ConHeight)
   //   deviceTotalTransformY = deviceTotalTransformY > 150 ? 150 : deviceTotalTransformY; // 最大垂直距离小于150
   deviceTotalTransformY = deviceTotalTransformY < 100 ? 100 : deviceTotalTransformY; // 最大垂直距离小于100为100
-
+  //  deviceTotalTransformY = 0;
 
   // 计算横向设备之间的间隙 宽度默认先写死1400px 
   let canvasWidth = 1400;
@@ -180,30 +182,32 @@ export const deviceNumToole = (obj) => {
   // deviceTranformX.CHLS = pumpStyle.width + hWH.width + pipeTStyle.width * 2 + deviceTranformX.CWPS;
   // deviceTranformX.CHWPS = chlStyle.width + hWH.width + pipeTStyle.width * 2 + deviceTranformX.CHLS;
 
-  // console.log(
-  //   "deviceMargin====>",
-  //   deviceMargin,
-  //   ConHeight,
-  //   "maxH===>",
-  //   maxH,
-  //   "CHLS====>",
-  //   CHLS,
-  //   "CHLSMarginHeight",
-  //   CHLSMarginHeight,
-  //   "deviceXGap====>",
-  //   deviceXGap,
-  // )
-  // localStorage.setItem(
-  //   "test",
-  //   JSON.stringify({
-  //     deviceMargin,
-  //     ConHeight,
-  //     maxH,
-  //     CHLSMarginHeight,
-  //     deviceTotalTransformY,
-  //     deviceXGap,
-  //   }),
-  // )
+  console.log(
+    "newobj======>",
+    newobj,
+    "deviceMargin====>",
+    deviceMargin,
+    ConHeight,
+    "maxH===>",
+    maxH,
+    "CHLS====>",
+    CHLS,
+    "CHLSMarginHeight",
+    CHLSMarginHeight,
+    "deviceXGap====>",
+    deviceXGap,
+  )
+  localStorage.setItem(
+    "test",
+    JSON.stringify({
+      deviceMargin,
+      ConHeight,
+      maxH,
+      CHLSMarginHeight,
+      deviceTotalTransformY,
+      deviceXGap,
+    }),
+  )
 
 }
 /**

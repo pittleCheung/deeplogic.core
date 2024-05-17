@@ -23,7 +23,7 @@ const DesignerCanvas = ({children, loading, style}) => {
         id,
         // getNodeProps
     } = useCanvas();
-    const {contentMaxX = 0, contentMinX = 0, drawMaxX, drawMinX} = state?.style; 
+    const {contentMaxX = 0, contentMinX = 0,contentMinY = 0, contentMaxY = 0, drawMaxX, drawMinX} = state?.style; 
     const [offset, setOffset] = useState({offsetX: 0, offsetY: 0});
     const {token} = theme?.useToken();
 
@@ -120,27 +120,43 @@ const DesignerCanvas = ({children, loading, style}) => {
     const conMaxX = isNaN(drawMaxX) ? contentMaxX : drawMaxX;
     const conMinx = isNaN(drawMinX) ? contentMinX : drawMinX;
 
-    const isMax = conMaxX - conMinx + 200 > 1400 ? 1400 : conMaxX - conMinx + 200;
+    const isXMax = conMaxX - conMinx + 200 > 1400 ? 1400 : conMaxX - conMinx + 200;
     
     // console.log(
     //   "conMaxX - conMinx + 100",
     //   conMaxX - conMinx + 200,
     //   state
     // )
+    console.log("style===>",style)
 
     return (
       <>
         <div
           ref={canvasRef}
-          className={cls('container', css.layout(token), enabled && css.grids(token))}
-          style={{ transform: `scale(${zoom})`, width: `${100 / zoom}%`, height: `${100 / zoom}%`, ...style }}
-        >
+          className={cls(
+            "container",
+            css.layout(token),
+            enabled && css.grids(token),
+          )}
+          style={{
+            transform: `scale(${zoom})`,
+            width: `${100 / zoom}%`,
+            height: `${100 / zoom}%`,
+            ...style,
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center",
+          }}>
           {/* <div className='containerdraw' style={{width: enabled ? '100%' : (conMaxX - conMinx + 200) + 'px'}}>
                     <>{Children.map(children?.props?.children || [], renderChild)}</>
                     {enabled && <MoveableTool/>}
                     {enabled && <SelectTool/>}
                 </div> */}
-          <div className='containerdraw' style={{ width:isMax }}>
+          <div
+            className="containerdraw"
+            style={{ width: isXMax, 
+            // height: contentMaxY - contentMinY 
+            }}>
             <>{Children.map(children?.props?.children || [], renderChild)}</>
             {enabled && <MoveableTool />}
             {enabled && <SelectTool />}
@@ -149,7 +165,7 @@ const DesignerCanvas = ({children, loading, style}) => {
         {/* 缩放比例 */}
         {/* <div className='zoombox'>画布比例:{zoom}</div> */}
       </>
-    );
+    )
 };
 
 export default memo(DesignerCanvas, (pre, next) => {

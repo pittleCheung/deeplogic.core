@@ -896,11 +896,14 @@ export const box = {
   props: {
     displayName: "DrawCanva",
     style: {
-      height: document.documentElement.clientHeight - 144 - 80 + "px",
+      height: document.documentElement.clientHeight - 139 - 80 + "px",
+      // minHeight: document.documentElement.clientHeight - 144 - 80 + "px",
       // "height": 300,
       // "width": '100%',
-      // "contentMaxX": null,
-      // "contentMinX": null,
+      "contentMaxX": null,
+      "contentMinX": null,
+      "contentMinY": null,
+      "contentMaxY": null,
       // "background": "linear-gradient(#1c2035, #1c2035)",
       backgroundList: [
         {
@@ -2643,7 +2646,7 @@ export const generateTypoText = ({
   nameText.props.value = deviceName
   nameText.props.style = {
     translateX:
-      resultMap.props.style.translateX + resultMap.props.style.width + xAxis,
+      resultMap.props.style.translateX + xAxis,
     translateY:
       resultMap.props.style.translateY + resultMap.props.style.height + yAxis,
     fontSize:"12px"

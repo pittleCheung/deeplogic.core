@@ -1,3 +1,4 @@
+import { theme } from "antd"
 export default {
   cssVar: true,
   hashed: false,
@@ -16,5 +17,5 @@ export default {
     headerHeight: 64,
     footerHeight: 48,
   },
-  // algorithm: [theme.defaultAlgorithm]
+  algorithm: [theme.defaultAlgorithm],
 }

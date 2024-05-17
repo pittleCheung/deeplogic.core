@@ -1,41 +1,16 @@
 import React, { useEffect, useLayoutEffect } from "react"
+import { RouterProvider } from "react-router-dom"
+import dayjs from "dayjs"
 import { Editor, Frame, Element, useEditor } from "@craftjs/core"
+import zhCN from "antd/locale/zh_CN"
 import { useNode } from "@craftjs/core"
 import materials from "@deeplogic/materials"
-import { source4 as source, deviceModelMap, links, global } from "./data"
-import {handleSource} from "./auto3d/handleSource"
+import { source3 as source, deviceModelMap, links, global } from "./data"
+import themeConfig from "./layouts/theme"
+import { ConfigProvider } from "antd"
+import router from "./router"
 
-const ContainerDemo = () => {
-  const { actions, query, enabled } = useEditor((state) => ({
-    enabled: state.options.enabled,
-  }))
 
-  const startTime = performance.now()
-
-  useLayoutEffect(() => {
-    //  const json = lz.decompress(lz.decodeBase64(stateToLoad))
-    // const startTime = performance.now()
-    const result = handleSource(source, deviceModelMap, links, global)
-    const endTime = performance.now()
-    const renderTime = endTime - startTime
-    // console.log(`JSON generator time: ${renderTime} ms`)
-    // console.log("是不是走了热更新了123")
-    // actions.deserialize({})
-    console.log("result====>", result, renderTime)
-    actions.deserialize(result) 
-    // window.location.reload()
-  }, [])
-
-  // useEffect(() => {
-  //   const endTime = performance.now()
-  //   const renderTime = endTime - startTime
-  //   console.log(`JSON render time: ${renderTime} ms`, handleSource)
-  // },[source])
-
-  return (
-    <Frame />
-  )
-}
 
 
 // if (import.meta.hot) {
@@ -45,15 +20,28 @@ const ContainerDemo = () => {
 // }
 
 // Load save state from server on page load
-
+// 初始化语言
+dayjs.locale('zh-cn');
 
 function App() {
+  // 配置弹窗等样式
+  ConfigProvider.config({
+    holderRender: (children: any) => (
+      // <StyleProvider hashPriority="high">
+        <ConfigProvider locale={zhCN} theme={themeConfig}>
+          {children}
+        </ConfigProvider>
+      // </StyleProvider>
+    ),
+  })
+
   return (
     <>
       <div>
-        <Editor resolver={{...materials }}>
-            <ContainerDemo />
-        </Editor>
+        <ConfigProvider locale={zhCN} theme={themeConfig}>
+          <RouterProvider router={router} />
+        </ConfigProvider>
+        
       </div>
     </>
   )
