@@ -1,6 +1,7 @@
 /**
  * 首页
  */
+import {navigationButtonStyle} from '../pageNodeDefault';
 export default (source, links, global, type) => {
   console.log('sourcesource', location.hostname, location.port)
   return {
@@ -24,14 +25,14 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "viewport",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
                 "spacing": 0,
                 "paddingSide": "all",
                 "marginSide": "all",
-                "background": "url(/_api/tfile/9amN2wcWRb17XbWX_diPRu) 50% 50% / 100% 100% no-repeat,linear-gradient(rgba(36, 66, 105, 1), rgba(36, 66, 105, 1))",
+                "background": "url(/assets/images/bg-light.jpg) 50% 50% / 100% 100% no-repeat,linear-gradient(rgba(36, 66, 105, 1), rgba(36, 66, 105, 1))",
                 "padding": 0,
                 "borderRadius": 0,
                 "backgroundList": [
@@ -84,9 +85,12 @@ export default (source, links, global, type) => {
                 [source.ELEC_CT_GROUP?.NAME]: 0,
                 [source.COP_HVAC?.NAME]: 0,
                 [source.P_HVAC?.NAME]: 0,
-                [source.T_OUTDOOR?.NAME]: 0,
-                [source.TW_OUTDOOR?.NAME]: 0,
-                [source.RH_OUTDOOR?.NAME]: 0,
+                // [source.T_OUTDOOR?.NAME]: 0,
+                // [source.TW_OUTDOOR?.NAME]: 0,
+                // [source.RH_OUTDOOR?.NAME]: 0,
+                "T_OUTDOOR": 0,
+                "TW_OUTDOOR": 0,
+                "RH_OUTDOOR": 0
             }
         },
         "displayName": "Page",
@@ -112,7 +116,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -153,7 +157,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -191,7 +195,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fixed",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -200,7 +204,7 @@ export default (source, links, global, type) => {
                 "marginSide": "all",
                 "padding": 0,
                 "heightUnit": "px",
-                "background": "url(/_api/tfile/sQcsYoiVl8GLBY2Hz2XpT7) 50% 50% / 100% 100% no-repeat",
+                "background": "url(/assets/images/header-bg.png) 50% 50% / 100% 100% no-repeat",
                 "backgroundList": [
                     {
                         "id": "pgueloUMWV",
@@ -240,11 +244,11 @@ export default (source, links, global, type) => {
                 "position": "relative",
                 "width": "100%",
                 "height": "80px",
-                "min-height": "80px",
+                "minHeight": "80px",
                 "widthType": "relative",
                 "heightType": "fixed",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -287,7 +291,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -326,7 +330,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -379,7 +383,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 20,
+                "fontSize": 24,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -411,7 +415,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -447,7 +451,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -487,7 +491,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -532,7 +536,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -604,7 +608,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -716,7 +720,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -747,7 +751,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -800,7 +804,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -840,7 +844,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 0,
                 "textAlign": "left",
@@ -872,7 +876,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1,
                 "textAlign": "left",
@@ -904,7 +908,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 16,
+                "fontSize": 18,
                 "fontWeight": "normal",
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -935,7 +939,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -979,7 +983,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1023,7 +1027,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1062,7 +1066,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1101,7 +1105,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1140,7 +1144,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1179,7 +1183,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1219,7 +1223,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 16,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1255,7 +1259,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.1,
                 "textAlign": "left",
@@ -1296,7 +1300,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1344,7 +1348,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 16,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1381,24 +1385,8 @@ export default (source, links, global, type) => {
                 }
             },
             "style": {
-                "position": "relative",
-                "width": "auto",
-                "height": "auto",
-                "widthType": "fit-content",
-                "heightType": "fit-content",
-                "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
-                "fontWeight": 400,
-                "lineHeight": 2,
-                "textAlign": "center",
-                "spacing": 0,
-                "paddingSide": "side",
-                "marginSide": "all",
-                "padding": 4,
-                "paddingTop": 4,
-                "paddingRight": 15,
-                "paddingBottom": 4,
-                "paddingLeft": 15
+                ...navigationButtonStyle,
+                fontWeight: 700
             },
             "displayName": "Button"
         },
@@ -1429,26 +1417,7 @@ export default (source, links, global, type) => {
                     "link": links[1]
                 }
             },
-            "style": {
-                "position": "relative",
-                "width": "initial",
-                "height": "auto",
-                "widthType": "relative",
-                "heightType": "fit-content",
-                "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
-                "fontWeight": 400,
-                "lineHeight": 2,
-                "textAlign": "center",
-                "spacing": 0,
-                "paddingSide": "side",
-                "marginSide": "all",
-                "padding": 4,
-                "paddingTop": 4,
-                "paddingRight": 15,
-                "paddingBottom": 4,
-                "paddingLeft": 15
-            },
+            "style": navigationButtonStyle,
             "displayName": "Button"
         },
         "displayName": "Button",
@@ -1478,26 +1447,7 @@ export default (source, links, global, type) => {
                     "link": links[2]
                 }
             },
-            "style": {
-                "position": "relative",
-                "width": "initial",
-                "height": "auto",
-                "widthType": "relative",
-                "heightType": "fit-content",
-                "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
-                "fontWeight": 400,
-                "lineHeight": 2,
-                "textAlign": "center",
-                "spacing": 0,
-                "paddingSide": "side",
-                "marginSide": "all",
-                "padding": 4,
-                "paddingTop": 4,
-                "paddingRight": 15,
-                "paddingBottom": 4,
-                "paddingLeft": 15
-            },
+            "style": navigationButtonStyle,
             "displayName": "Button"
         },
         "displayName": "Button",
@@ -1527,26 +1477,7 @@ export default (source, links, global, type) => {
                     "link": links[3]
                 }
             },
-            "style": {
-                "position": "relative",
-                "width": "initial",
-                "height": "auto",
-                "widthType": "relative",
-                "heightType": "fit-content",
-                "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
-                "fontWeight": 400,
-                "lineHeight": 2,
-                "textAlign": "center",
-                "spacing": 0,
-                "paddingSide": "side",
-                "marginSide": "all",
-                "padding": 4,
-                "paddingTop": 4,
-                "paddingRight": 15,
-                "paddingBottom": 4,
-                "paddingLeft": 15
-            },
+            "style": navigationButtonStyle,
             "displayName": "Button"
         },
         "displayName": "Button",
@@ -1576,26 +1507,7 @@ export default (source, links, global, type) => {
                     "link": links[4]
                 }
             },
-            "style": {
-                "position": "relative",
-                "width": "initial",
-                "height": "auto",
-                "widthType": "relative",
-                "heightType": "fit-content",
-                "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
-                "fontWeight": 400,
-                "lineHeight": 2,
-                "textAlign": "center",
-                "spacing": 0,
-                "paddingSide": "side",
-                "marginSide": "all",
-                "padding": 4,
-                "paddingTop": 4,
-                "paddingRight": 15,
-                "paddingBottom": 4,
-                "paddingLeft": 15
-            },
+            "style": navigationButtonStyle,
             "displayName": "Button"
         },
         "displayName": "Button",
@@ -1620,7 +1532,7 @@ export default (source, links, global, type) => {
                 "widthType": "fixed",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1654,7 +1566,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1694,7 +1606,7 @@ export default (source, links, global, type) => {
                 "widthType": "fixed",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1736,7 +1648,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fixed",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1772,7 +1684,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1813,7 +1725,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1827,6 +1739,10 @@ export default (source, links, global, type) => {
                 "borderColor": "rgba(0,0,0,1)",
                 "borderSide": "all",
                 "borderRadius": 6
+            },
+            "src": {
+                "bind": "ProjectImage",
+                "type": "global",
             }
         },
         "displayName": "Image",
@@ -1851,7 +1767,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1887,7 +1803,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -1944,7 +1860,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2018,7 +1934,8 @@ export default (source, links, global, type) => {
                 "paddingSide": "all",
                 "marginSide": "all",
                 "color": "rgb(255, 255, 255)"
-            }
+            },
+            "thousandth": true
         },
         "displayName": "TypographyText",
         "custom": {},
@@ -2055,7 +1972,8 @@ export default (source, links, global, type) => {
                 "paddingSide": "all",
                 "marginSide": "all",
                 "color": "rgb(255, 255, 255)"
-            }
+            },
+            "thousandth": true
         },
         "displayName": "TypographyText",
         "custom": {},
@@ -2151,7 +2069,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2187,7 +2105,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2262,7 +2180,8 @@ export default (source, links, global, type) => {
                 "marginSide": "all",
                 "color": "rgb(255, 255, 255)",
                 "translateX": 0
-            }
+            },
+            "thousandth": true
         },
         "displayName": "TypographyText",
         "custom": {},
@@ -2322,7 +2241,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2392,7 +2311,8 @@ export default (source, links, global, type) => {
                 "paddingSide": "all",
                 "marginSide": "all",
                 "color": "rgb(255, 255, 255)"
-            }
+            },
+            "thousandth": true
         },
         "displayName": "TypographyText",
         "custom": {},
@@ -2412,7 +2332,7 @@ export default (source, links, global, type) => {
             "size": "",
             "decimalSeparator": 0,
             "percent": false,
-            "value": "报警",
+            "value": "设备",
             "type": "",
             "strong": false,
             "italic": false,
@@ -2426,7 +2346,7 @@ export default (source, links, global, type) => {
                 "value": "前缀"
             },
             "after": {
-                "value": "条",
+                "value": "台",
                 "color": "rgba(170, 175, 209, 0.5)"
             }
         },
@@ -2452,7 +2372,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2488,7 +2408,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2562,7 +2482,8 @@ export default (source, links, global, type) => {
                 "paddingSide": "all",
                 "marginSide": "all",
                 "color": "rgb(255, 255, 255)"
-            }
+            },
+            "thousandth": true
         },
         "displayName": "TypographyText",
         "custom": {},
@@ -2622,7 +2543,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2692,7 +2613,8 @@ export default (source, links, global, type) => {
                 "paddingSide": "all",
                 "marginSide": "all",
                 "color": "rgb(255, 255, 255)"
-            }
+            },
+            "thousandth": true
         },
         "displayName": "TypographyText",
         "custom": {},
@@ -2752,7 +2674,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2790,7 +2712,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fixed",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2827,7 +2749,7 @@ export default (source, links, global, type) => {
                 "widthType": "fixed",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2882,7 +2804,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2938,7 +2860,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -2975,7 +2897,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3016,7 +2938,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.1,
                 "textAlign": "left",
@@ -3057,7 +2979,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3098,7 +3020,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.1,
                 "textAlign": "left",
@@ -3139,7 +3061,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3163,7 +3085,7 @@ export default (source, links, global, type) => {
         "hidden": false,
         "nodes": [
             "awDDK-6AW-",
-            "pY9NHfoyqA"
+            // "pY9NHfoyqA"
         ],
         "linkedNodes": {}
     },
@@ -3175,6 +3097,7 @@ export default (source, links, global, type) => {
         "props": {
             "displayName": "Gauge",
             "option": {
+                animation:false,
                 "series": [
                     {
                         "id": "m_R0Okff8K",
@@ -3187,7 +3110,7 @@ export default (source, links, global, type) => {
                         "startAngle": 200,
                         "endAngle": -20,
                         "min": 0,
-                        "max": 1000,
+                        "max": 10,
                         "splitNumber": 5,
                         "name": "系统COP",
                         "itemStyle": {
@@ -3249,11 +3172,11 @@ export default (source, links, global, type) => {
                         },
                         "data": [
                             {
-                                "value": 20,
+                                "value": 0,
                                 "name": "系统COP"
                             }
                         ],
-                        "value": 20
+                        "value": 0
                     },
                     {
                         "id": "zQJRs3P1-6",
@@ -3308,7 +3231,7 @@ export default (source, links, global, type) => {
                         },
                         "data": [
                             {
-                                "value": 20,
+                                "value": 0,
                                 "name": "系统COP"
                             }
                         ]
@@ -3328,7 +3251,7 @@ export default (source, links, global, type) => {
                 "margin": 0
             },
             "value": {
-                "bind": "COP_HVAC",
+                "bind": source.COP_HVAC?.NAME,
                 "type": "points",
             }
         },
@@ -3339,179 +3262,179 @@ export default (source, links, global, type) => {
         "nodes": [],
         "linkedNodes": {}
     },
-    "pY9NHfoyqA": {
-        "type": {
-            "resolvedName": "Gauge"
-        },
-        "isCanvas": false,
-        "props": {
-            "displayName": "Gauge",
-            "option": {
-                "series": [
-                    {
-                        "id": "Hql7Cr4wte",
-                        "label": "系统功率kW",
-                        "type": "gauge",
-                        "center": [
-                            "50%",
-                            "60%"
-                        ],
-                        "startAngle": 200,
-                        "endAngle": -20,
-                        "min": 0,
-                        "max": 1000,
-                        "splitNumber": 5,
-                        "name": "系统功率kW",
-                        "itemStyle": {
-                            "color": "rgba(117, 253, 244, 0.52)"
-                        },
-                        "radius": "90%",
-                        "progress": {
-                            "show": true,
-                            "width": "50"
-                        },
-                        "pointer": {
-                            "show": false
-                        },
-                        "axisLine": {
-                            "lineStyle": {
-                                "width": 8
-                            }
-                        },
-                        "axisTick": {
-                            "distance": 8,
-                            "splitNumber": 1,
-                            "lineStyle": {
-                                "width": 1,
-                                "color": "#999"
-                            }
-                        },
-                        "splitLine": {
-                            "distance": 55,
-                            "length": 0,
-                            "lineStyle": {
-                                "width": 5,
-                                "color": "#999"
-                            }
-                        },
-                        "axisLabel": {
-                            "distance": -20,
-                            "color": "#999",
-                            "fontSize": 10
-                        },
-                        "anchor": {
-                            "show": false
-                        },
-                        "title": {
-                            "show": false
-                        },
-                        "detail": {
-                            "formatter": "{value}",
-                            "color": "rgb(255, 255, 255)",
-                            "valueAnimation": true,
-                            "width": "60%",
-                            "lineHeight": 40,
-                            "borderRadius": 8,
-                            "offsetCenter": [
-                                0,
-                                "0"
-                            ],
-                            "fontSize": "1rem",
-                            "fontWeight": "bolder"
-                        },
-                        "data": [
-                            {
-                                "value": 20,
-                                "name": "系统功率kW"
-                            }
-                        ],
-                        "value": 20
-                    },
-                    {
-                        "id": "cN-GNpv3nD",
-                        "label": {
-                            "offsetCenter": [
-                                0,
-                                "50%"
-                            ],
-                            "color": "fff"
-                        },
-                        "type": "gauge",
-                        "center": [
-                            "50%",
-                            "60%"
-                        ],
-                        "startAngle": 200,
-                        "endAngle": -20,
-                        "min": 0,
-                        "max": 1000,
-                        "radius": "90%",
-                        "itemStyle": {
-                            "color": "#75FDF4"
-                        },
-                        "progress": {
-                            "show": true,
-                            "width": 8
-                        },
-                        "pointer": {
-                            "show": false
-                        },
-                        "axisLine": {
-                            "show": false
-                        },
-                        "axisTick": {
-                            "show": false
-                        },
-                        "splitLine": {
-                            "show": false
-                        },
-                        "axisLabel": {
-                            "show": false
-                        },
-                        "detail": {
-                            "show": false
-                        },
-                        "title": {
-                            "offsetCenter": [
-                                0,
-                                "50%"
-                            ],
-                            "color": "fff"
-                        },
-                        "data": [
-                            {
-                                "value": 20,
-                                "name": "系统功率kW"
-                            }
-                        ]
-                    }
-                ]
-            },
-            "style": {
-                "width": "100%",
-                "widthType": "relative",
-                "height": 300,
-                "heightType": "fixed",
-                "heightUnit": "px",
-                "spacing": 0,
-                "paddingSide": "all",
-                "padding": 0,
-                "marginSide": "all",
-                "margin": 0,
-                "widthUnit": "%"
-            },
-            "value": {
-                "bind": "P_HVAC",
-                "type": "points",
-            }
-        },
-        "displayName": "Gauge",
-        "custom": {},
-        "parent": "QhjjAz0cHH",
-        "hidden": false,
-        "nodes": [],
-        "linkedNodes": {}
-    },
+    // "pY9NHfoyqA": {
+    //     "type": {
+    //         "resolvedName": "Gauge"
+    //     },
+    //     "isCanvas": false,
+    //     "props": {
+    //         "displayName": "Gauge",
+    //         "option": {
+    //             "series": [
+    //                 {
+    //                     "id": "Hql7Cr4wte",
+    //                     "label": "系统功率kW",
+    //                     "type": "gauge",
+    //                     "center": [
+    //                         "50%",
+    //                         "60%"
+    //                     ],
+    //                     "startAngle": 200,
+    //                     "endAngle": -20,
+    //                     "min": 0,
+    //                     "max": 1000,
+    //                     "splitNumber": 5,
+    //                     "name": "系统功率kW",
+    //                     "itemStyle": {
+    //                         "color": "rgba(117, 253, 244, 0.52)"
+    //                     },
+    //                     "radius": "90%",
+    //                     "progress": {
+    //                         "show": true,
+    //                         "width": "50"
+    //                     },
+    //                     "pointer": {
+    //                         "show": false
+    //                     },
+    //                     "axisLine": {
+    //                         "lineStyle": {
+    //                             "width": 8
+    //                         }
+    //                     },
+    //                     "axisTick": {
+    //                         "distance": 8,
+    //                         "splitNumber": 1,
+    //                         "lineStyle": {
+    //                             "width": 1,
+    //                             "color": "#999"
+    //                         }
+    //                     },
+    //                     "splitLine": {
+    //                         "distance": 55,
+    //                         "length": 0,
+    //                         "lineStyle": {
+    //                             "width": 5,
+    //                             "color": "#999"
+    //                         }
+    //                     },
+    //                     "axisLabel": {
+    //                         "distance": -20,
+    //                         "color": "#999",
+    //                         "fontSize": 10
+    //                     },
+    //                     "anchor": {
+    //                         "show": false
+    //                     },
+    //                     "title": {
+    //                         "show": false
+    //                     },
+    //                     "detail": {
+    //                         "formatter": "{value}",
+    //                         "color": "rgb(255, 255, 255)",
+    //                         "valueAnimation": true,
+    //                         "width": "60%",
+    //                         "lineHeight": 40,
+    //                         "borderRadius": 8,
+    //                         "offsetCenter": [
+    //                             0,
+    //                             "0"
+    //                         ],
+    //                         "fontSize": "1rem",
+    //                         "fontWeight": "bolder"
+    //                     },
+    //                     "data": [
+    //                         {
+    //                             "value": 20,
+    //                             "name": "系统功率kW"
+    //                         }
+    //                     ],
+    //                     "value": 20
+    //                 },
+    //                 {
+    //                     "id": "cN-GNpv3nD",
+    //                     "label": {
+    //                         "offsetCenter": [
+    //                             0,
+    //                             "50%"
+    //                         ],
+    //                         "color": "fff"
+    //                     },
+    //                     "type": "gauge",
+    //                     "center": [
+    //                         "50%",
+    //                         "60%"
+    //                     ],
+    //                     "startAngle": 200,
+    //                     "endAngle": -20,
+    //                     "min": 0,
+    //                     "max": 1000,
+    //                     "radius": "90%",
+    //                     "itemStyle": {
+    //                         "color": "#75FDF4"
+    //                     },
+    //                     "progress": {
+    //                         "show": true,
+    //                         "width": 8
+    //                     },
+    //                     "pointer": {
+    //                         "show": false
+    //                     },
+    //                     "axisLine": {
+    //                         "show": false
+    //                     },
+    //                     "axisTick": {
+    //                         "show": false
+    //                     },
+    //                     "splitLine": {
+    //                         "show": false
+    //                     },
+    //                     "axisLabel": {
+    //                         "show": false
+    //                     },
+    //                     "detail": {
+    //                         "show": false
+    //                     },
+    //                     "title": {
+    //                         "offsetCenter": [
+    //                             0,
+    //                             "50%"
+    //                         ],
+    //                         "color": "fff"
+    //                     },
+    //                     "data": [
+    //                         {
+    //                             "value": 20,
+    //                             "name": "系统功率kW"
+    //                         }
+    //                     ]
+    //                 }
+    //             ]
+    //         },
+    //         "style": {
+    //             "width": "100%",
+    //             "widthType": "relative",
+    //             "height": 300,
+    //             "heightType": "fixed",
+    //             "heightUnit": "px",
+    //             "spacing": 0,
+    //             "paddingSide": "all",
+    //             "padding": 0,
+    //             "marginSide": "all",
+    //             "margin": 0,
+    //             "widthUnit": "%"
+    //         },
+    //         "value": {
+    //             "bind": source.P_HVAC?.NAME,
+    //             "type": "points",
+    //         }
+    //     },
+    //     "displayName": "Gauge",
+    //     "custom": {},
+    //     "parent": "QhjjAz0cHH",
+    //     "hidden": false,
+    //     "nodes": [],
+    //     "linkedNodes": {}
+    // },
     "fvgJakGZmK": {
         "type": {
             "resolvedName": "Flex"
@@ -3527,7 +3450,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3583,7 +3506,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3624,7 +3547,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.1,
                 "textAlign": "left",
@@ -3665,7 +3588,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3702,7 +3625,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3758,7 +3681,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3799,7 +3722,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.1,
                 "textAlign": "left",
@@ -3840,7 +3763,7 @@ export default (source, links, global, type) => {
                 "widthType": "fit-content",
                 "heightType": "relative",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3869,7 +3792,7 @@ export default (source, links, global, type) => {
         "isCanvas": false,
         "props": {
             "displayName": "Table",
-            "source": "point",
+            "source": "alarm",
             "size": "middle",
             "loading": false,
             "bordered": false,
@@ -3909,7 +3832,7 @@ export default (source, links, global, type) => {
                 "y": 300
             },
             "pagination": {
-                "pageSize": 10,
+                "pageSize": 5,
                 "page": 0
             },
             "extra": {
@@ -3931,7 +3854,7 @@ export default (source, links, global, type) => {
                 "widthType": "relative",
                 "heightType": "fit-content",
                 "fontFamily": "Microsoft YaHei",
-                "fontSize": 14,
+                "fontSize": 18,
                 "fontWeight": 400,
                 "lineHeight": 1.5,
                 "textAlign": "left",
@@ -3998,7 +3921,7 @@ export default (source, links, global, type) => {
                 "series": [
                     {
                         "id": "SLbgm1PLyO",
-                        "label": "ELEC_HVAC",
+                        "label": source?.ELEC_HVAC?.NAME || source?.ELEC_CAS?.NAME,
                         "lineStyle": {
                             "width": 1
                         },
@@ -4015,7 +3938,7 @@ export default (source, links, global, type) => {
                             210
                         ],
                         "smooth": false,
-                        "pointSource": "ELEC_HVAC"
+                        "pointSource": source?.ELEC_HVAC?.NAME || source?.ELEC_CAS?.NAME
                     }
                 ]
             },
@@ -4048,11 +3971,11 @@ export default (source, links, global, type) => {
             "displayName": "Bar",
             "dateType": "day",
             "ranges": [],
-            "aggregate": "last",
-            "timeType": "5 minutes",
+            "aggregate": "sum",
+            "timeType": "1 day",
             "option": {
                 "xAxis": {
-                    "type": "category",
+                    "type": "value",
                     "data": [
                         "周一",
                         "周二",
@@ -4061,7 +3984,9 @@ export default (source, links, global, type) => {
                         "周五",
                         "周六",
                         "周日"
-                    ]
+                    ],
+                    "show": true,
+                    "name": ""
                 },
                 "yAxis": {
                     "type": "value"
@@ -4069,21 +3994,12 @@ export default (source, links, global, type) => {
                 "series": [
                     {
                         "id": "FtN-mSbHyb",
-                        "label": "ELEC_CH_GROUP",
-                        "data": [
-                            120,
-                            200,
-                            150,
-                            80,
-                            70,
-                            110,
-                            130
-                        ],
+                        "label": source.ELEC_CH_GROUP?.NAME,
                         "type": "bar",
                         "showBackground": true,
-                        "backgroundStyle": {
-                            "color": "rgba(180, 180, 180, 0.2)"
-                        },
+                        // "backgroundStyle": {
+                        //     "color": "rgba(180, 180, 180, 0.2)"
+                        // },
                         "name": "",
                         "stack": "",
                         "stackStrategy": "samesign",
@@ -4091,11 +4007,12 @@ export default (source, links, global, type) => {
                         "barGap": "30%",
                         "barCategoryGap": "20%",
                         "large": false,
-                        "pointSource": "ELEC_CH_GROUP"
+                        "data": [],
+                        "pointSource": source.ELEC_CH_GROUP?.NAME,
                     },
                     {
                         "id": "28uxp6v_ya",
-                        "label": "ELEC_CHWP_GROUP",
+                        "label": source.ELEC_CHWP_GROUP?.NAME,
                         "type": "bar",
                         "name": "",
                         "stack": "",
@@ -4105,11 +4022,11 @@ export default (source, links, global, type) => {
                         "barCategoryGap": "20%",
                         "large": false,
                         "data": [],
-                        "pointSource": "ELEC_CHWP_GROUP"
+                        "pointSource": source.ELEC_CHWP_GROUP?.NAME
                     },
                     {
                         "id": "aPnoiRbDax",
-                        "label": "ELEC_CWP_GROUP",
+                        "label": source.ELEC_CWP_GROUP?.NAME,
                         "type": "bar",
                         "name": "",
                         "stack": "",
@@ -4119,7 +4036,7 @@ export default (source, links, global, type) => {
                         "barCategoryGap": "20%",
                         "large": false,
                         "data": [],
-                        "pointSource": "ELEC_CWP_GROUP"
+                        "pointSource": source.ELEC_CWP_GROUP?.NAME
                     },
                     {
                         "id": "kmKrvTK59q",
@@ -4132,17 +4049,31 @@ export default (source, links, global, type) => {
                         "barCategoryGap": "20%",
                         "large": false,
                         "data": [],
-                        "pointSource": "ELEC_CT_GROUP",
-                        "label": "ELEC_CT_GROUP"
+                        "pointSource": source.ELEC_CT_GROUP?.NAME,
+                        "label": source.ELEC_CT_GROUP?.NAME
                     }
-                ]
+                ],
+		        "tooltip": {
+                    "show": true,
+                    "alwaysShowContent": true,
+                    "trigger": "item",
+                    "triggerOn": "mousemove",
+                    "confine": false,
+                    "backgroundColor": "rgb(255, 255, 255)"
+                },
+                "grid": {
+                    "containLabel": false,
+                     "show": false,
+                     "bottom": 20,
+                     "top": 60
+                }
             },
             "style": {
                 "width": "100%",
                 "widthType": "relative",
-                "height": 300,
-                "heightType": "fixed",
-                "heightUnit": "px",
+                "height": "100%",
+                "heightType": "relative",
+                "heightUnit": "%",
                 "spacing": 0,
                 "paddingSide": "all",
                 "padding": 0,
@@ -4150,11 +4081,8 @@ export default (source, links, global, type) => {
                 "margin": 0
             },
             "pointSource": {
-                "bind": "ELEC_CH_GROUP",
+                "bind": source.ELEC_CH_GROUP?.NAME,
                 "type": "points",
-                "point": [
-                    "ELEC_CH_GROUP"
-                ]
             }
         },
         "displayName": "Bar",
@@ -4165,6 +4093,8 @@ export default (source, links, global, type) => {
         "linkedNodes": {}
     }
 }
+
+
 
 
 

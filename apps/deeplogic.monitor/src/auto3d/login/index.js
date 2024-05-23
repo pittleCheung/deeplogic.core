@@ -18,7 +18,7 @@ export default (global) => {
                 "style": {
                     "width": "100%",
                     "height": "auto",
-                    "background": "url(/_api/tfile/be0BQEejGaivgUYpzwghif) 50% 50% / 100% 100% no-repeat",
+                    "background": "url(/assets/images/bg-light.jpg) 50% 50% / 100% 100% no-repeat",
                     "padding": 16,
                     "borderRadius": 0,
                     "widthType": "relative",
@@ -66,12 +66,12 @@ export default (global) => {
                 "displayName": "Container",
                 "style": {
                     "position": "relative",
-                    "width": "660px",
+                    "width": "780px",
                     "height": "auto",
                     "widthType": "fixed",
                     "heightType": "fit-content",
                     "fontFamily": "PingFang SC",
-                    "fontSize": 14,
+                    "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
                     "textAlign": "left",
@@ -243,7 +243,7 @@ export default (global) => {
             "isCanvas": true,
             "props": {
                 "style": {
-                    "background": "linear-gradient(rgba(36, 66, 105, 0.5), rgba(36, 66, 105, 0.5))",
+                    "background": "linear-gradient(rgba(170, 175, 209, 0.1), rgba(170, 175, 209, 0.1))",
                     "backgroundList": [
                         {
                             "id": "-azssu-2hY",
@@ -268,7 +268,8 @@ export default (global) => {
                     "marginBottom": 20,
                     "height": 280,
                     "heightUnit": "px",
-                    "heightType": "fixed"
+                    "heightType": "fixed",
+                    borderRadius: 4
                 }
             },
             "displayName": "Container",
@@ -325,8 +326,13 @@ export default (global) => {
                 "wrapperCol": {
                     "offset": 1,
                     "span": null
-
-                }
+                },
+                "events": {
+                    "onFinish": {
+                        "action": "login"
+                    }
+                },
+                "name": ""
             },
             "displayName": "Form",
             "custom": {},
@@ -397,8 +403,11 @@ export default (global) => {
                 "id": "username-input",
                 "form": {
                     "_init": true,
-                    "__INTERNAL__": {}
-                }
+                    "__INTERNAL__": {
+                        "name": ""
+                    }
+                },
+                "name": "userid"
             },
             "displayName": "Input",
             "custom": {},
@@ -462,8 +471,12 @@ export default (global) => {
                 "type": "password",
                 "form": {
                     "_init": true,
-                    "__INTERNAL__": {}
-                }
+                    "__INTERNAL__": {
+                        "name": ""
+                    }
+                },
+                "value": "",
+                "name": "password"
             },
             "displayName": "Input",
             "custom": {},
@@ -500,8 +513,7 @@ export default (global) => {
             "parent": "Sv8Etz9ekG",
             "hidden": false,
             "nodes": [
-                "QsdCKfJq17",
-                // "6WRCc0a2Xz"
+                "QsdCKfJq17"
             ],
             "linkedNodes": {}
         },
@@ -511,13 +523,39 @@ export default (global) => {
             },
             "isCanvas": false,
             "props": {
-                "id": "submit-button",
-                "type": "primary",
-                "htmlType": "submit",
-                "loading": false,
                 "children": [
                     "登录"
-                ]
+                ],
+                "template": "default",
+                "type": "primary",
+                "shape": "default",
+                "icon": "",
+                "htmlType": "submit",
+                "isHighlight": "default",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "initial",
+                    "height": 32,
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "center",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "marginSide": "all",
+                    "padding": 4,
+                    "paddingTop": 4,
+                    "paddingRight": 15,
+                    "paddingBottom": 4,
+                    "paddingLeft": 15
+                },
+                "id": "submit-button",
+                "loading": false
             },
             "displayName": "Button",
             "custom": {},
@@ -546,7 +584,9 @@ export default (global) => {
                     "widthUnit": "px",
                     "height": "280px",
                     "heightType": "fixed",
-                    "heightUnit": "px"
+                    "heightUnit": "px",
+                    "borderTopLeftRadius": 4,
+                    "borderBottomLeftRadius": 4
                 }
             },
             "displayName": "Image",
@@ -627,7 +667,9 @@ export default (global) => {
                             "value": "rgba(255, 255, 255, 0)",
                             "disabled": false
                         }
-                    ]
+                    ],
+                    "display": 'flex',
+                    "justifyContent": "center"
                 }
             },
             "displayName": "Col",

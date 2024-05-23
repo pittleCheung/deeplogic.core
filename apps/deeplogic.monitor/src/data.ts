@@ -16438,8 +16438,6 @@ export const data = {
 
 
 
-export const data2 ={}
-
 export const source = {
   MODE_SYS: {
     NAME: "MODE_SYS",

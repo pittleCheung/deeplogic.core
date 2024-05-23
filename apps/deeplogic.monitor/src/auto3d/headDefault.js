@@ -2,6 +2,7 @@ import { contentstyle, txtstyle, btnstyle, colrowstyle } from './pageNodeDefault
 import { commonTextStyle } from './stylesDefault';
 import { nanoid } from 'nanoid';
 import { drawerid } from './pageDefault'
+import {navigationButtonStyle} from './pageNodeDefault';
 // import source from '../../source';
 // import position from '@/pages/editor/components/setter/style/block/position';
 
@@ -26,7 +27,7 @@ export default (headid, parentbox, source, tag, allsource) => {
                 // "span": 24,
                 "style": {
                     ...contentstyle,
-                    "height": '48px',
+                    "height": '60px',
                     "translateX": 0,
                     "translateY": 0,
                     "display": "flex",
@@ -48,7 +49,7 @@ export default (headid, parentbox, source, tag, allsource) => {
             "parent": parentbox,
             "nodes": [
                 "Qig2cA0j1y",
-                "bkTsl7i0EB",
+                "bkTsl7i0EA",
                 "C-Drdz3ynO"
             ],
             "linkedNodes": {},
@@ -103,7 +104,7 @@ export default (headid, parentbox, source, tag, allsource) => {
             "hidden": false,
             "isCanvas": true
         },
-        "bkTsl7i0EB": {
+        "bkTsl7i0EA": {
             "id": "bkTsl7i0EA",
             "type": {
                 "resolvedName": "Col"
@@ -408,7 +409,7 @@ const footItem = (footid, name, unit, point, type) => {
                 "props": {
                     "displayName": "NumeralText",
                     "level": "5",
-                    "size": "",
+                    "size": "18px",
                     "decimalSeparator": 1,
                     "percent": false,
                     "value": {
@@ -427,10 +428,12 @@ const footItem = (footid, name, unit, point, type) => {
                     "isBefore": true,
                     "isAfter": !!unit,
                     "before": {
-                        "value": name + "："
+                        "value": name + "：",
+                        size: 18,
                     },
                     "after": {
-                        "value": unit || ''
+                        "value": unit || '',
+                        size: 14,
                     },
                     "style": {
                         // ...commonTextStyle,
@@ -472,29 +475,28 @@ const wrapContainer = ({containerid,footid,ids}) => {
     }
   };
 };
-
 export const footDefault = (footid, parentbox, source, type) => {
   const containerid = nanoid(12);
 
     let arr = [];
     if (type === 'air') {
         arr = [
-            footItem(footid, '气电比', null, source?.['R_AIR_COMP']?.NAME, type),
-            footItem(footid, '总功率', 'kW', source?.['P_PLANT']?.NAME, type),
-            footItem(footid, '排气压力', 'kPa', source?.['PR_DISCHARGE']?.NAME, type),
-            footItem(footid, '排气温度', 'kPa', source?.['T_DISCHARGE']?.NAME, type),
-            footItem(footid, '总管压力', 'kPa', source?.['PR_PLANT']?.NAME, type),
-            footItem(footid, '总管露点温度', '℃', source?.['T_DEW']?.NAME, type),
-            footItem(footid, '总管流量', 'Nm³', source?.['FLOW_PLANT_AIR']?.NAME, type)
+            footItem(footid, '气电比', null, source?.['R_AIR_COMP'].NAME, type),
+            footItem(footid, '总功率', 'kW', source?.['P_PLANT'].NAME, type),
+            footItem(footid, '排气压力', 'kPa', source?.['PR_DISCHARGE'].NAME, type),
+            footItem(footid, '排气温度', 'kPa', source?.['T_DISCHARGE'].NAME, type),
+            footItem(footid, '总管压力', 'kPa', source?.['PR_PLANT'].NAME, type),
+            footItem(footid, '总管露点温度', '℃', source?.['T_DEW'].NAME, type),
+            footItem(footid, '总管流量', 'Nm³', source?.['FLOW_PLANT_AIR'].NAME, type)
         ]
     } else {
         arr = [
-            footItem(containerid, '制冷站COP', null, source?.['COP_PLANT']?.NAME),
-            footItem(containerid, '制冷站', 'kW', source?.['P_PLANT']?.NAME),
-            footItem(containerid, '制冷机', 'kW', source?.['P_CH_GROUP']?.NAME),
-            footItem(containerid, '冷冻泵', 'kW', source?.['P_CHWP_GROUP']?.NAME),
-            footItem(containerid, '冷却泵', 'kW', source?.['P_CWP_GROUP']?.NAME),
-            footItem(containerid, '冷却塔', 'kW', source?.['P_CT_GROUP']?.NAME)
+            footItem(containerid, '制冷站COP', null, source?.['COP_PLANT'].NAME),
+            footItem(containerid, '制冷站', 'kW', source?.['P_PLANT'].NAME),
+            footItem(containerid, '制冷机', 'kW', source?.['P_CH_GROUP'].NAME),
+            footItem(containerid, '冷冻泵', 'kW', source?.['P_CHWP_GROUP'].NAME),
+            footItem(containerid, '冷却泵', 'kW', source?.['P_CWP_GROUP'].NAME),
+            footItem(containerid, '冷却塔', 'kW', source?.['P_CT_GROUP'].NAME)
         ]
     }
     const modelSelectId = nanoid(12)
@@ -629,7 +631,6 @@ export const footDefault = (footid, parentbox, source, type) => {
             paddingBottom: 20,
             display: 'flex',
             alignItems: 'center',
-            width: 100,
             borderRadius: '5px 0px 0px 5px',
             background: 'radial-gradient(194% 194% at 50% 164%, rgba(28, 91, 151, 0) 25%, #062B5F 100%)',
             border: 'none'
@@ -664,7 +665,7 @@ export const footDefault = (footid, parentbox, source, type) => {
               expression: {
                 bind: source.MODE_SYS.NAME,
                 type: 'points',
-                point: [source.MODE_SYS.NAME]
+                // point: [source.MODE_SYS.NAME]
               },
               color: 'rgb(38,102,216)'
             },
@@ -675,7 +676,7 @@ export const footDefault = (footid, parentbox, source, type) => {
               expression: {
                 bind: source.MODE_SYS.NAME,
                 type: 'points',
-                point: [source.MODE_SYS.NAME]
+                // point: [source.MODE_SYS.NAME]
               },
               color: 'rgb(38, 38, 38)'
             }
@@ -698,7 +699,6 @@ export const footDefault = (footid, parentbox, source, type) => {
             paddingBottom: 20,
             display: 'flex',
             alignItems: 'center',
-            width: 100,
             background: 'radial-gradient(194% 194% at 50% 164%, rgba(28, 91, 151, 0) 25%, #062B5F 100%)',
             border: 'none'
           },
@@ -717,997 +717,712 @@ export const footDefault = (footid, parentbox, source, type) => {
 
 
 export const bottomDefault = (bottomid,parentbox,source,links) => {
-    return {
-      [bottomid]: {
-        id: bottomid,
-        type: {
-          resolvedName: 'Columns'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Columns',
-          columns: 3,
-          align: 'top',
-          justify: 'start',
-          wrap: false,
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 80,
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'side',
-            padding: 0,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingTop: 4,
-            paddingRight: 0,
-            paddingLeft: 0,
-            paddingBottom: 0,
-            marginTop: 0
+  return {
+    [bottomid]: {
+      id: bottomid,
+      "type": {
+          "resolvedName": "Container"
+      },
+      "isCanvas": true,
+      "props": {
+          "displayName": "Container",
+          "gap": 0,
+          "style": {
+              "position": "relative",
+              "width": "100%",
+              "widthType": "relative",
+              "heightType": "relative",
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 14,
+              "fontWeight": 400,
+              "lineHeight": 1.5,
+              "textAlign": "left",
+              "spacing": 0,
+              "paddingSide": "all",
+              "marginSide": "all",
+              "padding": 0,
+              "heightUnit": "%",
           }
-        },
-        displayName: 'Columns',
-        custom: {},
-        parent: parentbox,
-        hidden: false,
-        nodes: ['VUdfeVWXBI', 'ljr0EKwaNF', 'fA4by4U3b6'],
-        linkedNodes: {}
       },
-      VUdfeVWXBI: {
-        type: {
-          resolvedName: 'CustomNode'
+      "displayName": "Container",
+      "custom": {},
+      "parent": parentbox,
+      "hidden": false,
+      "nodes": [
+        "yvp80M66Sr"
+     ],
+      "linkedNodes": {}
+  },
+   "yvp80M66Sr": {
+        "type": {
+            "resolvedName": "Flex"
         },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'Io8ACnpHuf',
-        hidden: false,
-        nodes: ['wIHLoR35VO'],
-        linkedNodes: {}
-      },
-      wIHLoR35VO: {
-        type: {
-          resolvedName: 'Col'
-        },
-        isCanvas: true,
-        props: {
-          id: 'col-0',
-          span: 4,
-          style: {
-            heightType: 'fixed',
-            height: '40px',
-            heightUnit: 'px',
-            paddingSide: 'all',
-            paddingTop: 8,
-            paddingRight: 8,
-            paddingLeft: 8,
-            paddingBottom: 8,
-            padding: 0
-          }
-        },
-        displayName: 'Col',
-        custom: {},
-        parent: 'VUdfeVWXBI',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      ljr0EKwaNF: {
-        type: {
-          resolvedName: 'CustomNode'
-        },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'Io8ACnpHuf',
-        hidden: false,
-        nodes: ['4ZDgx8MwC6'],
-        linkedNodes: {}
-      },
-      '4ZDgx8MwC6': {
-        type: {
-          resolvedName: 'Col'
-        },
-        isCanvas: true,
-        props: {
-          id: 'col-1',
-          span: 16
-        },
-        displayName: 'Col',
-        custom: {},
-        parent: 'ljr0EKwaNF',
-        hidden: false,
-        nodes: ['gsF1PNfUG5'],
-        linkedNodes: {}
-      },
-      gsF1PNfUG5: {
-        type: {
-          resolvedName: 'Columns'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Columns',
-          columns: 5,
-          align: 'middle',
-          gutter: 12,
-          justify: 'end',
-          wrap: false,
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 0,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }
-        },
-        displayName: 'Columns',
-        custom: {},
-        parent: '4ZDgx8MwC6',
-        hidden: false,
-        nodes: ['Fh84wDBuYB', 'a0hVBozvKY', 'HC7q0VbtSX', '3WqG3vU3QK', 'wdiNiazjtj'],
-        linkedNodes: {}
-      },
-      Fh84wDBuYB: {
-        type: {
-          resolvedName: 'CustomNode'
-        },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'gsF1PNfUG5',
-        hidden: false,
-        nodes: ['otKugVrt6G'],
-        linkedNodes: {}
-      },
-      otKugVrt6G: {
-        type: {
-          resolvedName: 'Col'
-        },
-        isCanvas: true,
-        props: {
-          type: 'span',
-          span: 5,
-          flex: '',
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: 'unset',
-            backgroundList: []
-          },
-          id: 'col-0'
-        },
-        displayName: 'Col',
-        custom: {},
-        parent: 'Fh84wDBuYB',
-        hidden: false,
-        nodes: ['XT6v_yHZLK'],
-        linkedNodes: {}
-      },
-      XT6v_yHZLK: {
-        type: {
-          resolvedName: 'Button'
-        },
-        isCanvas: false,
-        props: {
-          children: '首页',
-          template: 'navigation',
-          type: 'default',
-          shape: 'default',
-          icon: 'icon-menu-home',
-          htmlType: 'button',
-          isHighlight: 'default',
-          status: [],
-          events: {
-            onClick: {
-              action: 'navigateTo',
-              "link": links[0]
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "100%",
+                "height": "80px",
+                "minHeight": "80px",
+                "widthType": "relative",
+                "heightType": "fixed",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "side",
+                "marginSide": "all",
+                "padding": 0,
+                "heightUnit": "px",
+                "paddingTop": 0,
+                "paddingRight": 0,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex"
             }
-          },
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 4,
-            paddingTop: 4,
-            paddingRight: 15,
-            paddingBottom: 4,
-            paddingLeft: 15
-          },
-          displayName: 'Button'
         },
-        displayName: 'Button',
-        custom: {},
-        parent: 'otKugVrt6G',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      a0hVBozvKY: {
-        type: {
-          resolvedName: 'CustomNode'
+        "displayName": "Flex",
+        "custom": {},
+        "parent": bottomid,
+        "hidden": false,
+        "nodes": [
+            "oqkr_D_x_r",
+            "7g-1qjY2U0",
+            "SquM_VWKnv",
+            "tMKSg95JAI"
+        ],
+        "linkedNodes": {}
+    },
+    "oqkr_D_x_r": {
+        "type": {
+            "resolvedName": "Flex"
         },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'gsF1PNfUG5',
-        hidden: false,
-        nodes: ['MClEHUO0XZ'],
-        linkedNodes: {}
-      },
-      MClEHUO0XZ: {
-        type: {
-          resolvedName: 'Col'
-        },
-        isCanvas: true,
-        props: {
-          type: 'span',
-          span: 5,
-          flex: '',
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: 'unset',
-            backgroundList: []
-          },
-          id: 'col-1'
-        },
-        displayName: 'Col',
-        custom: {},
-        parent: 'a0hVBozvKY',
-        hidden: false,
-        nodes: ['Dnj9ZRXHIy'],
-        linkedNodes: {}
-      },
-      Dnj9ZRXHIy: {
-        type: {
-          resolvedName: 'Button'
-        },
-        isCanvas: false,
-        props: {
-          children: '监控',
-          template: 'navigation',
-          type: 'link',
-          shape: 'default',
-          icon: 'icon-menu-snow',
-          htmlType: 'button',
-          isHighlight: 'primary',
-          status: [],
-          events: {
-            onClick: {
-              action: 'navigateTo',
-              "link": links[1]
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "180px",
+                "height": "auto",
+                "widthType": "fixed",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 12,
+                "widthUnit": "px",
+                "display": "flex"
             }
-          },
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 4,
-            paddingTop: 4,
-            paddingRight: 15,
-            paddingBottom: 4,
-            paddingLeft: 15
-          },
-          displayName: 'Button'
         },
-        displayName: 'Button',
-        custom: {},
-        parent: 'MClEHUO0XZ',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      HC7q0VbtSX: {
-        type: {
-          resolvedName: 'CustomNode'
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "yvp80M66Sr",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "7g-1qjY2U0": {
+        "type": {
+            "resolvedName": "Flex"
         },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'gsF1PNfUG5',
-        hidden: false,
-        nodes: ['9UO7EIrN9Q'],
-        linkedNodes: {}
-      },
-      '9UO7EIrN9Q': {
-        type: {
-          resolvedName: 'Col'
-        },
-        isCanvas: true,
-        props: {
-          type: 'span',
-          span: 5,
-          flex: '',
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: 'unset',
-            backgroundList: []
-          },
-          id: 'col-2'
-        },
-        displayName: 'Col',
-        custom: {},
-        parent: 'HC7q0VbtSX',
-        hidden: false,
-        nodes: ['MWmcBEHlMg'],
-        linkedNodes: {}
-      },
-      MWmcBEHlMg: {
-        type: {
-          resolvedName: 'Button'
-        },
-        isCanvas: false,
-        props: {
-          children: '能耗',
-          template: 'navigation',
-          type: 'link',
-          shape: 'default',
-          icon: 'icon-menu-energy',
-          htmlType: 'button',
-          isHighlight: 'default',
-          status: [],
-          events: {
-            onClick: {
-              action: 'navigateTo',
-              "link": links[2]
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 98,
+            "style": {
+                "position": "relative",
+                "width": "100%",
+                "height": "auto",
+                "widthType": "relative",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 6,
+                "widthUnit": "%",
+                "display": "flex",
+                "flexDirection": "row",
+                "key": "bottomCenter",
+                "justifyContent": "center",
+                "alignItems": "flex-end"
             }
-          },
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 4,
-            paddingTop: 4,
-            paddingRight: 15,
-            paddingBottom: 4,
-            paddingLeft: 15
-          },
-          displayName: 'Button'
         },
-        displayName: 'Button',
-        custom: {},
-        parent: '9UO7EIrN9Q',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      '3WqG3vU3QK': {
-        type: {
-          resolvedName: 'CustomNode'
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "yvp80M66Sr",
+        "hidden": false,
+        "nodes": [
+            "HeIoc3CkxO",
+            "rQ_XAZgNd9",
+            "o0idd0B_3p",
+            "l13s0F8q4U",
+            "XUBHdrnvv8"
+        ],
+        "linkedNodes": {}
+    },
+    "HeIoc3CkxO": {
+        "type": {
+            "resolvedName": "Flex"
         },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'gsF1PNfUG5',
-        hidden: false,
-        nodes: ['anQKGZLaZa'],
-        linkedNodes: {}
-      },
-      anQKGZLaZa: {
-        type: {
-          resolvedName: 'Col'
-        },
-        isCanvas: true,
-        props: {
-          type: 'span',
-          span: 5,
-          flex: '',
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: 'unset',
-            backgroundList: []
-          },
-          id: 'col-3'
-        },
-        displayName: 'Col',
-        custom: {},
-        parent: '3WqG3vU3QK',
-        hidden: false,
-        nodes: ['yBku64-z68'],
-        linkedNodes: {}
-      },
-      'yBku64-z68': {
-        type: {
-          resolvedName: 'Button'
-        },
-        isCanvas: false,
-        props: {
-          children: '报警',
-          template: 'navigation',
-          type: 'default',
-          shape: 'default',
-          icon: 'icon-menu-alarm',
-          htmlType: 'button',
-          isHighlight: 'default',
-          status: [],
-          events: {
-            onClick: {
-              action: 'navigateTo',
-              "link": links[3]
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 0,
+                "paddingTop": 0,
+                "paddingRight": 0,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex"
             }
-          },
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 4,
-            paddingTop: 4,
-            paddingRight: 15,
-            paddingBottom: 4,
-            paddingLeft: 15
-          },
-          displayName: 'Button'
         },
-        displayName: 'Button',
-        custom: {},
-        parent: 'anQKGZLaZa',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      wdiNiazjtj: {
-        type: {
-          resolvedName: 'CustomNode'
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "7g-1qjY2U0",
+        "hidden": false,
+        "nodes": [
+            "XofknF5ube"
+        ],
+        "linkedNodes": {}
+    },
+    "XofknF5ube": {
+        "type": {
+            "resolvedName": "Button"
         },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'gsF1PNfUG5',
-        hidden: false,
-        nodes: ['Q8TBXKBhfz'],
-        linkedNodes: {}
-      },
-      Q8TBXKBhfz: {
-        type: {
-          resolvedName: 'Col'
+        "isCanvas": false,
+        "props": {
+            "children": "首页",
+            "template": "navigation",
+            "type": "default",
+            "shape": "default",
+            "icon": "icon-menu-home",
+            "htmlType": "button",
+            "isHighlight": "default",
+            "status": [],
+            events: {
+              onClick: {
+                action: 'navigateTo',
+                "link": links[0]
+              }
+            },
+            "style": navigationButtonStyle,
+            "displayName": "Button"
         },
-        isCanvas: true,
-        props: {
-          type: 'span',
-          span: 4,
-          flex: '',
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: 'unset',
-            backgroundList: []
-          },
-          id: 'col-4'
+        "displayName": "Button",
+        "custom": {},
+        "parent": "HeIoc3CkxO",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "rQ_XAZgNd9": {
+        "type": {
+            "resolvedName": "Flex"
         },
-        displayName: 'Col',
-        custom: {},
-        parent: 'wdiNiazjtj',
-        hidden: false,
-        nodes: ['0TxiBbsyg-'],
-        linkedNodes: {}
-      },
-      '0TxiBbsyg-': {
-        type: {
-          resolvedName: 'Button'
-        },
-        isCanvas: false,
-        props: {
-          children: '报表',
-          template: 'navigation',
-          type: 'default',
-          shape: 'default',
-          icon: 'icon-menu-report',
-          htmlType: 'button',
-          isHighlight: 'default',
-          status: [],
-          events: {
-            onClick: {
-              action: 'navigateTo',
-              "link": links[4]
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 0,
+                "paddingTop": 0,
+                "paddingRight": 0,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex"
             }
-          },
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 4,
-            paddingTop: 4,
-            paddingRight: 15,
-            paddingBottom: 4,
-            paddingLeft: 15
-          },
-          displayName: 'Button'
         },
-        displayName: 'Button',
-        custom: {},
-        parent: 'Q8TBXKBhfz',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      fA4by4U3b6: {
-        type: {
-          resolvedName: 'CustomNode'
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "7g-1qjY2U0",
+        "hidden": false,
+        "nodes": [
+            "fsft9jR_uX"
+        ],
+        "linkedNodes": {}
+    },
+    "fsft9jR_uX": {
+        "type": {
+            "resolvedName": "Button"
         },
-        isCanvas: false,
-        props: {},
-        displayName: 'CustomNode',
-        custom: {},
-        parent: 'Io8ACnpHuf',
-        hidden: false,
-        nodes: ['BktNYBedtf'],
-        linkedNodes: {}
-      },
-      BktNYBedtf: {
-        type: {
-          resolvedName: 'Col'
+        "isCanvas": false,
+        "props": {
+            "children": "监控",
+            "template": "navigation",
+            "type": "default",
+            "shape": "default",
+            "icon": "icon-menu-snow",
+            "htmlType": "button",
+            "isHighlight": "primary",
+            "status": [],
+            events: {
+              onClick: {
+                action: 'navigateTo',
+                "link": links[1]
+              }
+            },
+            "style": {
+              ...navigationButtonStyle,
+              fontWeight: 700
+            },
+            "displayName": "Button"
         },
-        isCanvas: true,
-        props: {
-          id: 'col-2',
-          span: 4,
-          style: {
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerRight',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 24,
-            paddingSide: 'side',
-            paddingTop: 0,
-            paddingRight: 8,
-            paddingLeft: 24,
-            paddingBottom: 0
-          }
+        "displayName": "Button",
+        "custom": {},
+        "parent": "rQ_XAZgNd9",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "o0idd0B_3p": {
+        "type": {
+            "resolvedName": "Flex"
         },
-        displayName: 'Col',
-        custom: {},
-        parent: 'fA4by4U3b6',
-        hidden: false,
-        nodes: ['eyH_wTfsX-', 'prWlgikaM0', 'YYSn8f4pxz', '9SaD63mKm1'],
-        linkedNodes: {}
-      },
-      'eyH_wTfsX-': {
-        type: {
-          resolvedName: 'Container'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Container',
-          style: {
-            position: 'relative',
-            width: '37px',
-            height: 34,
-            widthType: 'fixed',
-            heightType: 'fixed',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 8,
-            widthUnit: 'px',
-            heightUnit: 'px',
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingTop: 8,
-            paddingRight: 0,
-            paddingLeft: 8,
-            paddingBottom: 8
-          }
-        },
-        displayName: 'Container',
-        custom: {},
-        parent: 'BktNYBedtf',
-        hidden: false,
-        nodes: ['vjhT4R7ASK'],
-        linkedNodes: {}
-      },
-      vjhT4R7ASK: {
-        type: {
-          resolvedName: 'GenericIcon'
-        },
-        isCanvas: false,
-        props: {
-          displayName: 'GenericIcon',
-          icon: 'UserOutlined',
-          events: {},
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all'
-          }
-        },
-        displayName: 'GenericIcon',
-        custom: {},
-        parent: 'eyH_wTfsX-',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      prWlgikaM0: {
-        type: {
-          resolvedName: 'Container'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Container',
-          style: {
-            position: 'relative',
-            width: '50px',
-            height: '34px',
-            widthType: 'fixed',
-            heightType: 'fixed',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            padding: 8,
-            widthUnit: 'px',
-            heightUnit: 'px',
-            paddingTop: 8,
-            paddingRight: null,
-            paddingLeft: 0,
-            paddingBottom: 8
-          }
-        },
-        displayName: 'Container',
-        custom: {},
-        parent: 'BktNYBedtf',
-        hidden: false,
-        nodes: ['W-6PcJKgUq'],
-        linkedNodes: {}
-      },
-      'W-6PcJKgUq': {
-        type: {
-          resolvedName: 'TypographyText'
-        },
-        isCanvas: false,
-        props: {
-          displayName: 'Typography.Text',
-          value: {
-            bind: 'UserId',
-            type: 'global'
-          },
-          status: [],
-          events: {},
-          style: {
-            position: 'relative',
-            width: '80%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            color: 'rgba(170, 175, 209, 0.6)'
-          }
-        },
-        displayName: 'TypographyText',
-        custom: {},
-        parent: 'prWlgikaM0',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      YYSn8f4pxz: {
-        type: {
-          resolvedName: 'Container'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Container',
-          style: {
-            position: 'relative',
-            width: 19,
-            height: 43,
-            widthType: 'fixed',
-            heightType: 'fixed',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            widthUnit: 'px',
-            heightUnit: 'px',
-            display: 'flex',
-            flexDirection: 'row',
-            key: 'centerCenter',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }
-        },
-        displayName: 'Container',
-        custom: {},
-        parent: 'BktNYBedtf',
-        hidden: false,
-        nodes: ['1UKidkzVjS'],
-        linkedNodes: {}
-      },
-      '1UKidkzVjS': {
-        type: {
-          resolvedName: 'Divider'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Divider',
-          type: 'vertical',
-          orientation: 'center',
-          children: '',
-          orientationMargin: 8,
-          dashed: false,
-          plain: false
-        },
-        displayName: 'Divider',
-        custom: {},
-        parent: 'YYSn8f4pxz',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      },
-      '9SaD63mKm1': {
-        type: {
-          resolvedName: 'Container'
-        },
-        isCanvas: true,
-        props: {
-          displayName: 'Container',
-          style: {
-            position: 'relative',
-            width: 36,
-            height: 38,
-            widthType: 'fixed',
-            heightType: 'fixed',
-            fontFamily: 'PingFang SC',
-            fontSize: 14,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'all',
-            marginSide: 'all',
-            padding: 8,
-            widthUnit: 'px',
-            heightUnit: 'px'
-          }
-        },
-        displayName: 'Container',
-        custom: {},
-        parent: 'BktNYBedtf',
-        hidden: false,
-        nodes: ['5xjMIwoc1-'],
-        linkedNodes: {}
-      },
-      '5xjMIwoc1-': {
-        type: {
-          resolvedName: 'GenericIcon'
-        },
-        isCanvas: false,
-        props: {
-          displayName: 'GenericIcon',
-          icon: 'icon-icon-exit',
-          events: {
-            onClick: {
-              action: 'logout'
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 0,
+                "paddingTop": 0,
+                "paddingRight": 0,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex"
             }
-          },
-          style: {
-            position: 'relative',
-            width: '100%',
-            height: 'auto',
-            widthType: 'relative',
-            heightType: 'fit-content',
-            fontFamily: 'PingFang SC',
-            fontSize: 18,
-            fontWeight: 400,
-            lineHeight: 1.5,
-            textAlign: 'left',
-            spacing: 0,
-            paddingSide: 'side',
-            marginSide: 'all',
-            paddingTop: 4
-          }
         },
-        displayName: 'GenericIcon',
-        custom: {},
-        parent: '9SaD63mKm1',
-        hidden: false,
-        nodes: [],
-        linkedNodes: {}
-      }
-    };
-
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "7g-1qjY2U0",
+        "hidden": false,
+        "nodes": [
+            "-RWVCILkRl"
+        ],
+        "linkedNodes": {}
+    },
+    "-RWVCILkRl": {
+        "type": {
+            "resolvedName": "Button"
+        },
+        "isCanvas": false,
+        "props": {
+            "children": "能耗",
+            "template": "navigation",
+            "type": "default",
+            "shape": "default",
+            "icon": "icon-menu-energy",
+            "htmlType": "button",
+            "isHighlight": "default",
+            "status": [],
+            events: {
+              onClick: {
+                action: 'navigateTo',
+                "link": links[2]
+              }
+            },
+            "style": navigationButtonStyle,
+            "displayName": "Button"
+        },
+        "displayName": "Button",
+        "custom": {},
+        "parent": "o0idd0B_3p",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "l13s0F8q4U": {
+        "type": {
+            "resolvedName": "Flex"
+        },
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 0,
+                "paddingTop": 0,
+                "paddingRight": 0,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex"
+            }
+        },
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "7g-1qjY2U0",
+        "hidden": false,
+        "nodes": [
+            "ehixYd1aFD"
+        ],
+        "linkedNodes": {}
+    },
+    "ehixYd1aFD": {
+        "type": {
+            "resolvedName": "Button"
+        },
+        "isCanvas": false,
+        "props": {
+            "children": "报警",
+            "template": "navigation",
+            "type": "default",
+            "shape": "default",
+            "icon": "icon-menu-alarm",
+            "htmlType": "button",
+            "isHighlight": "default",
+            "status": [],
+            events: {
+              onClick: {
+                action: 'navigateTo',
+                "link": links[3]
+              }
+            },
+            "style": navigationButtonStyle,
+            "displayName": "Button"
+        },
+        "displayName": "Button",
+        "custom": {},
+        "parent": "l13s0F8q4U",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "XUBHdrnvv8": {
+        "type": {
+            "resolvedName": "Flex"
+        },
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all",
+                "padding": 0,
+                "paddingTop": 0,
+                "paddingRight": 0,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex"
+            }
+        },
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "7g-1qjY2U0",
+        "hidden": false,
+        "nodes": [
+            "qqOU27SGiP"
+        ],
+        "linkedNodes": {}
+    },
+    "qqOU27SGiP": {
+        "type": {
+            "resolvedName": "Button"
+        },
+        "isCanvas": false,
+        "props": {
+            "children": "报表",
+            "template": "navigation",
+            "type": "default",
+            "shape": "default",
+            "icon": "icon-menu-report",
+            "htmlType": "button",
+            "isHighlight": "default",
+            "status": [],
+            events: {
+              onClick: {
+                action: 'navigateTo',
+                "link": links[4]
+              }
+            },
+            "style": navigationButtonStyle,
+            "displayName": "Button"
+        },
+        "displayName": "Button",
+        "custom": {},
+        "parent": "XUBHdrnvv8",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "SquM_VWKnv": {
+        "type": {
+            "resolvedName": "Flex"
+        },
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "side",
+                "marginSide": "all",
+                "padding": 12,
+                "display": "flex",
+                "flexDirection": "row",
+                "key": "centerCenter",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "paddingTop": 12,
+                "paddingRight": 0,
+                "paddingLeft": 12,
+                "paddingBottom": 12
+            }
+        },
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "yvp80M66Sr",
+        "hidden": false,
+        "nodes": [
+            "C89kipMFRN",
+            "wFwn8NiRuw"
+        ],
+        "linkedNodes": {}
+    },
+    "C89kipMFRN": {
+        "type": {
+            "resolvedName": "GenericIcon"
+        },
+        "isCanvas": false,
+        "props": {
+            "displayName": "GenericIcon",
+            "icon": "icon-icon-user",
+            "events": {},
+            "style": {
+                "position": "relative",
+                "width": "100%",
+                "height": "auto",
+                "widthType": "relative",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 18,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all"
+            }
+        },
+        "displayName": "GenericIcon",
+        "custom": {},
+        "parent": "SquM_VWKnv",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "wFwn8NiRuw": {
+        "type": {
+            "resolvedName": "TypographyText"
+        },
+        "isCanvas": false,
+        "props": {
+            "displayName": "Typography.Text",
+            "value": {
+                "bind": "UserId",
+                "type": "global"
+            },
+            "status": [],
+            "events": {},
+            "style": {
+                "position": "relative",
+                "width": "100%",
+                "height": "auto",
+                "widthType": "relative",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 18,
+                "fontWeight": 400,
+                "lineHeight": 1.1,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "side",
+                "marginSide": "all",
+                "borderWidth": 1,
+                "borderStyle": "solid",
+                "borderColor": "rgba(217, 217, 217, 0.3)",
+                "borderSide": "side",
+                "borderRadius": 0,
+                "borderTopWidth": 0,
+                "borderRightWidth": 1,
+                "borderLeftWidth": 0,
+                "borderBottomWidth": 0,
+                "paddingRight": 12
+            }
+        },
+        "displayName": "TypographyText",
+        "custom": {},
+        "parent": "SquM_VWKnv",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    },
+    "tMKSg95JAI": {
+        "type": {
+            "resolvedName": "Flex"
+        },
+        "isCanvas": true,
+        "props": {
+            "displayName": "Flex",
+            "gap": 12,
+            "style": {
+                "position": "relative",
+                "width": "auto",
+                "height": "auto",
+                "widthType": "fit-content",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 14,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "side",
+                "marginSide": "all",
+                "padding": 0,
+                "paddingTop": 0,
+                "paddingRight": 24,
+                "paddingLeft": 0,
+                "paddingBottom": 0,
+                "display": "flex",
+                "flexDirection": "row",
+                "key": "centerCenter",
+                "justifyContent": "center",
+                "alignItems": "center"
+            }
+        },
+        "displayName": "Flex",
+        "custom": {},
+        "parent": "yvp80M66Sr",
+        "hidden": false,
+        "nodes": [
+            "Q_Uh6XA1HJ"
+        ],
+        "linkedNodes": {}
+    },
+    "Q_Uh6XA1HJ": {
+        "type": {
+            "resolvedName": "GenericIcon"
+        },
+        "isCanvas": false,
+        "props": {
+            "displayName": "GenericIcon",
+            "icon": "icon-icon-exit",
+            "events": {
+                "onClick": {
+                    "action": "logout"
+                }
+            },
+            "style": {
+                "position": "relative",
+                "width": "100%",
+                "height": "auto",
+                "widthType": "relative",
+                "heightType": "fit-content",
+                "fontFamily": "Microsoft YaHei",
+                "fontSize": 18,
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+                "textAlign": "left",
+                "spacing": 0,
+                "paddingSide": "all",
+                "marginSide": "all"
+            }
+        },
+        "displayName": "GenericIcon",
+        "custom": {},
+        "parent": "tMKSg95JAI",
+        "hidden": false,
+        "nodes": [],
+        "linkedNodes": {}
+    }
+}
 }

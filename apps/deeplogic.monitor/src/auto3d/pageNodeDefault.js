@@ -104,7 +104,7 @@ export const textborderstyle = {
     "borderBottomWidth": 0,
     "paddingTop": 0,
     "paddingRight": 0,
-    "paddingLeft": 4,
+    "paddingLeft": 8,
     "paddingBottom": 0,
      lineHeight: 1
 }
@@ -112,13 +112,14 @@ export const textborderstyle = {
 export const titlestyle = {
     "position": "relative",
     "width": "100%",
-    "height": 30,
+    // "height": 30,
     "heightType": "fit-content",
     "widthType": "relative",
     "fontFamily": "PingFang SC",
     "fontSize": 14,
     "fontWeight": 400,
     "lineHeight": "30px",
+     padding:"4px 0",
      background: 'rgba(0, 0, 0, 0.1)',
      color: '#fff'
 }
@@ -224,12 +225,12 @@ export const colrowstyle = {
 
 export const btnstyle = {
     "position": "relative",
-    "width": "initial",
+    "width": "auto",
     "height": "32",
     "widthType": "relative",
     "heightType": "fit-content",
     "fontFamily": "PingFang SC",
-    "fontSize": 14,
+    "fontSize": 18,
     "fontWeight": 400,
     "lineHeight": 1.5,
     "textAlign": "center",
@@ -270,6 +271,28 @@ export const txtstyle = {
     "translateY": 0
 }
 
+export const navigationButtonStyle = {
+    "position": "relative",
+    "width": "auto",
+    "height": "auto",
+    "widthType": "fit-content",
+    "heightType": "fit-content",
+    "fontFamily": "Microsoft YaHei",
+    "fontSize": 20,
+    "fontWeight": 400,
+    "lineHeight": 2,
+    "textAlign": "center",
+    "spacing": 0,
+    "paddingSide": "side",
+    "marginSide": "all",
+    "padding": 4,
+    "paddingTop": 4,
+    "paddingRight": 15,
+    "paddingBottom": 4,
+    "paddingLeft": 15,
+    'z-index': 10,
+}
+
 export const inpProps = {
     "type": {
         "resolvedName": "Input"
@@ -295,57 +318,58 @@ export const inpProps = {
  * 上限，下限，是否开启，设定值
  * @returns 
  */
-export const drawmap = () => {
+export const drawmap = (source) => {
     return [{
         name: '冷冻水供水温度(℃)',
-        point1: 'T_CHW_S_MAX',
-        point2: 'T_CHW_S_MIN',
-        point3: 'T_CHW_S_OPT_EB',
-        point4: 'T_CHW_S_SP',
-        val: 'T_CHW_S'
+        point1: source?.['T_CHW_S_MAX']?.NAME || 'T_CHW_S_MAX',
+        point2: source?.['T_CHW_S_MIN']?.NAME || 'T_CHW_S_MIN',
+        point3: source?.['T_CHW_S_OPT_EB']?.NAME || 'T_CHW_S_OPT_EB',
+        point4: source?.['T_CHW_S_SP']?.NAME || 'T_CHW_S_SP',
+        val: source?.['T_CHW_S']?.NAME || 'T_CHW_S'
     }, {
         name: '冷冻泵频率(Hz)',
-        point1: 'FREQ_CHWP_MAX',
-        point2: 'FREQ_CHWP_MIN',
-        point3: 'FREQ_CHWP_OPT_EB',
-        point4: 'FREQ_CHWP_SP',
-        val: 'FREQ_CHWP'
+        point1: source?.['FREQ_CHWP_MAX']?.NAME || 'FREQ_CHWP_MAX',
+        point2: source?.['FREQ_CHWP_MIN']?.NAME || 'FREQ_CHWP_MIN',
+        point3: source?.['FREQ_CHWP_OPT_EB']?.NAME || 'FREQ_CHWP_OPT_EB',
+        point4: source?.['FREQ_CHWP_SP']?.NAME || 'FREQ_CHWP_SP',
+        val: source?.['FREQ_CHWP']?.NAME || 'FREQ_CHWP'
     }, {
         name: '冷却泵频率(Hz)',
-        point1: 'FREQ_CWP_MAX',
-        point2: 'FREQ_CWP_MIN',
-        point3: 'FREQ_CWP_OPT_EB',
-        point4: 'FREQ_CWP_SP',
-        val: 'FREQ_CWP'
+        point1: source?.['FREQ_CWP_MAX']?.NAME || 'FREQ_CWP_MAX',
+        point2: source?.['FREQ_CWP_MIN']?.NAME || 'FREQ_CWP_MIN',
+        point3: source?.['FREQ_CWP_OPT_EB']?.NAME || 'FREQ_CWP_OPT_EB',
+        point4: source?.['FREQ_CWP_SP']?.NAME || 'FREQ_CWP_SP',
+        val: source?.['FREQ_CWP']?.NAME || 'FREQ_CWP'
     }, {
         name: '冷却塔频率(Hz)',
-        point1: 'FREQ_CT_MAX',
-        point2: 'FREQ_CT_MIN',
-        point3: 'FREQ_CT_OPT_EB',
-        point4: 'FREQ_CT_SP',
-        val: 'FREQ_CT'
+        point1: source?.['FREQ_CT_MAX']?.NAME || 'FREQ_CT_MAX',
+        point2: source?.['FREQ_CT_MIN']?.NAME || 'FREQ_CT_MIN',
+        point3: source?.['FREQ_CT_OPT_EB']?.NAME || 'FREQ_CT_OPT_EB',
+        point4: source?.['FREQ_CT_SP']?.NAME || 'FREQ_CT_SP',
+        val: source?.['FREQ_CT']?.NAME || 'FREQ_CT'
     }, {
         name: '冷却水回水温度(℃)',
-        point1: 'T_CW_R_MAX',
-        point2: 'T_CW_R_MIN',
-        point3: 'T_CW_R_OPT_EB',
-        point4: 'T_CW_R_SP',
-        val: 'T_CW_R'
+        point1: source?.['T_CW_R_MAX']?.NAME || 'T_CW_R_MAX',
+        point2: source?.['T_CW_R_MIN']?.NAME || 'T_CW_R_MIN',
+        point3: source?.['T_CW_R_OPT_EB']?.NAME || 'T_CW_R_OPT_EB',
+        point4: source?.['T_CW_R_SP']?.NAME || 'T_CW_R_SP',
+        val: source?.['T_CW_R']?.NAME || 'T_CW_R'
     }, {
         name: '末端压差(kPa)',
-        point1: 'DPR_CHW_MAX',
-        point2: 'DPR_CHW_MIN',
-        point3: 'DPR_CHW_OPT_EB',
-        point4: 'DPR_CHW_SP',
-        val: 'DPR_CHW'
+        point1: source?.['DPR_CHW_MAX']?.NAME || 'DPR_CHW_MAX',
+        point2: source?.['DPR_CHW_MIN']?.NAME || 'DPR_CHW_MIN',
+        point3: source?.['DPR_CHW_OPT_EB']?.NAME || 'DPR_CHW_OPT_EB',
+        point4: source?.['DPR_CHW_SP']?.NAME || 'DPR_CHW_SP',
+        val: source?.['DPR_CHW']?.NAME || 'DPR_CHW'
     }, {
         name: '冷冻水温差(℃)',
-        point1: 'DT_CHW_MAX',
-        point2: 'DT_CHW_MIN',
-        point3: 'DT_CHW_OPT_EB',
-        point4: 'DT_CHW_SP',
-        val: 'DT_CHW'
-    }]
+        point1: source?.['DT_CHW_MAX']?.NAME || 'DT_CHW_MAX',
+        point2: source?.['DT_CHW_MIN']?.NAME || 'DT_CHW_MIN',
+        point3: source?.['DT_CHW_OPT_EB']?.NAME || 'DT_CHW_OPT_EB',
+        point4: source?.['DT_CHW_SP']?.NAME || 'DT_CHW_SP',
+        val: source?.['DT_CHW']?.NAME || 'DT_CHW'
+    }];
+    
 }
 
 // 空压
@@ -444,9 +468,9 @@ export const ariMap = [
     ]
 ]
 
-export const drawpointmap = () => {
+export const drawpointmap = (source) => {
     const obj = {};
-    drawmap().forEach(t => {
+    drawmap(source).forEach(t => {
         for (const t0 in t) {
             if (t0 !== 'name') {
                 obj[t[t0]] = 0;
@@ -581,7 +605,7 @@ export const drawthree = (parentid, drawitem, source) => {
             },
             [clcol2]: {
                 "type": {
-                    "resolvedName": "Input"
+                    "resolvedName": "InputKb"
                 },
                 "isCanvas": false,
                 "props": {
@@ -592,9 +616,9 @@ export const drawthree = (parentid, drawitem, source) => {
                             source?.[drawitem.point2]?.NAME
                         ]
                     } : '',
-                    "displayName": "Input",
+                    "displayName": "InputKb",
                     "size": "middle",
-                    "type": "text",
+                    "type": "number",
                     "placeholder": "",
                     "disabled": false,
                     "allowClear": false,
@@ -625,7 +649,7 @@ export const drawthree = (parentid, drawitem, source) => {
             },
             [clcol3]: {
                 "type": {
-                    "resolvedName": "Input"
+                    "resolvedName": "InputKb"
                 },
                 "isCanvas": false,
                 "props": {
@@ -636,9 +660,9 @@ export const drawthree = (parentid, drawitem, source) => {
                             source?.[drawitem.point1]?.NAME
                         ]
                     } : '',
-                    "displayName": "Input",
+                    "displayName": "InputKb",
                     "size": "middle",
-                    "type": "text",
+                    "type": "number",
                     "placeholder": "",
                     "disabled": false,
                     "allowClear": false,
@@ -813,7 +837,7 @@ export const drwacontrol = (parentid, drawitem, source) => {
     const boxcol2 = nanoid(10);
     const box3 = nanoid(10);
     const boxcol3 = nanoid(10);
-    // console.log('source[drawitem.val]?.NAMEsource[drawitem.val]?.NAME', source[drawitem.val]?.NAME)
+    console.log('source[drawitem.val]?.NAMEsource[drawitem.val]?.NAME', source[drawitem.val]?.NAME)
     return {
         id: idbox,
         page: {
@@ -832,7 +856,7 @@ export const drwacontrol = (parentid, drawitem, source) => {
                     "style": {
                         "position": "relative",
                         "width": "100%",
-                        "height": "50px",
+                        // "height": "50px",
                         "heightUnit": "px",
                         "widthType": "relative",
                         "heightType": "fixed",
@@ -843,7 +867,7 @@ export const drwacontrol = (parentid, drawitem, source) => {
                         "textAlign": "left",
                         "spacing": 0,
                         "paddingSide": "all",
-                        "padding": 8,
+                        // "padding": 8,
                         "marginSide": "all",
                         "margin": 0
                     }
@@ -1006,7 +1030,7 @@ export const drwacontrol = (parentid, drawitem, source) => {
             },
             [boxcol2]: {
                 "type": {
-                    "resolvedName": "Input"
+                    "resolvedName": "InputKb"
                 },
                 "isCanvas": false,
                 "props": {
@@ -1017,9 +1041,9 @@ export const drwacontrol = (parentid, drawitem, source) => {
                             source[drawitem.point4]?.NAME
                         ]
                     } : '',
-                    "displayName": "Input",
+                    "displayName": "InputKb",
                     "size": "middle",
-                    "type": "text",
+                    "type": "number",
                     "placeholder": "",
                     "isNumber": true,
                     "disabled": false,
@@ -1042,8 +1066,11 @@ export const drwacontrol = (parentid, drawitem, source) => {
                             }
                         }
                     },
+                    "style": {
+                        "width": "62px",
+                    }
                 },
-                "displayName": "Input",
+                "displayName": "InputKb",
                 "custom": {},
                 "parent": box2,
                 "hidden": false,
