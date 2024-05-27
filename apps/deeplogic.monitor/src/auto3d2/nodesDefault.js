@@ -6,8 +6,8 @@ import { EFAULT_PUMP_MAP } from './global';
 import { checkCHLTotal, checkTotal, deviceCheckH, deviceCheckV } from './ifDefault';
 import pointDefault from './pointDefault';
 import { deviceMargin, deviceXGap, styleMap, textSystemTransform, textTransform } from './stylesDefault';
-import deviceMap from "@/pages/editor/components/materials/components/monitor/devices/__deviceImg__/deviceMap"
-// import deviceMap from '@deeplogic/materials/components/monitor/devices/__deviceImg__/deviceMap';
+// import deviceMap from "@/pages/editor/components/materials/components/monitor/devices/__deviceImg__/deviceMap"
+import deviceMap from '@deeplogic/materials/components/monitor/devices/__deviceImg__/deviceMap';
 /**
  * 保留一位小数
  */

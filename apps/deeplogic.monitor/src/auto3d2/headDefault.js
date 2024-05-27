@@ -3,8 +3,8 @@ import { commonTextStyle } from './stylesDefault';
 import { nanoid } from 'nanoid';
 import { drawerid } from './pageDefault'
 import {navigationButtonStyle} from './pageNodeDefault';
-import source from '../../source';
-import position from '@/pages/editor/components/setter/style/block/position';
+// import source from '../../source';
+// import position from '@/pages/editor/components/setter/style/block/position';
 
 export default (headid, parentbox, source, tag, allsource) => {
     const allArr = allsource && Object.values(allsource).map(t => ({

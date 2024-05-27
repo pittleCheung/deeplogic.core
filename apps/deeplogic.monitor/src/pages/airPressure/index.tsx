@@ -2,7 +2,7 @@ import { Editor, Frame, useEditor } from "@craftjs/core"
 import materials from "@deeplogic/materials"
 import React, { useLayoutEffect, useEffect, useRef } from "react"
 // 空调
-import { handleSource } from "../../auto3d2/airPressure/handleSource"
+import { handleSource } from "../../auto3d/airPressure/handleSource"
 import {
   re,
   deviceModelMap,
@@ -33,18 +33,17 @@ const ContainerDemo = () => {
     // actions.deserialize({})
     // console.log("result====>", result, renderTime)
 
-    timer.current = setTimeout(() => {
-      const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
-      const result = handleSource(
-        re.CAS_PLANTS[item],
-        deviceModelMap,
-        links,
-        global,
-        re.CAS_PLANTS,
-      )
-      actions.deserialize(result)
-      alert(123)
-    }, 100)
+    // timer.current = setTimeout(() => {
+    //   const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
+    //   const result = handleSource(
+    //     re.CAS_PLANTS[item],
+    //     deviceModelMap,
+    //     links,
+    //     global,
+    //     re.CAS_PLANTS,
+    //   )
+    //   actions.deserialize(result)
+    // }, 100)
 
     //  const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
     //  const result = handleSource(
@@ -63,21 +62,22 @@ const ContainerDemo = () => {
   }, [actions, re, deviceModelMap, links, global])
 
 
-  // useEffect(() => {
-  //   const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
-  //   const result = handleSource(
-  //     re.CAS_PLANTS[item],
-  //     deviceModelMap,
-  //     links,
-  //     global,
-  //     re.CAS_PLANTS,
-  //   )
-  //   actions.deserialize(result)
-  // }, [re, deviceModelMap, links, global])
+  useEffect(() => {
+    const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
+    const result = handleSource(
+      re.CAS_PLANTS[item],
+      deviceModelMap,
+      links,
+      global,
+      re.CAS_PLANTS,
+    )
+    actions.deserialize(result)
+    // console.log("执行了多少次呢")
+  }, [actions,re, deviceModelMap, links, global])
 
 
- 
-    
+
+
   
 
 
