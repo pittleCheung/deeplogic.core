@@ -106,7 +106,7 @@ export const textborderstyle = {
     "paddingRight": 0,
     "paddingLeft": 8,
     "paddingBottom": 0,
-     lineHeight: 1
+    lineHeight: 1
 }
 
 export const titlestyle = {
@@ -119,9 +119,9 @@ export const titlestyle = {
     "fontSize": 14,
     "fontWeight": 400,
     "lineHeight": "30px",
-     padding:"4px 0",
-     background: 'rgba(0, 0, 0, 0.1)',
-     color: '#fff'
+    padding: "4px 0",
+    background: 'rgba(0, 0, 0, 0.1)',
+    color: '#fff'
 }
 
 export const contentflexstyle = {
@@ -369,104 +369,106 @@ export const drawmap = (source) => {
         point4: source?.['DT_CHW_SP']?.NAME || 'DT_CHW_SP',
         val: source?.['DT_CHW']?.NAME || 'DT_CHW'
     }];
-    
+
 }
 
 // 空压
-export const ariMap = [
-    [ // 控制
-        {
-            name: '空压机排气压力(Mpa)',
-            point4: 'PR_DISCHARGE_SP',
-            val: 'PR_DISCHARGE',
-        }, {
-            name: '空压机加载压力(Mpa)',
-            point4: 'PR_LOAD_SP',
-            val: 'PR_LOAD',
-        }, {
-            name: '空压机卸载压力(Mpa)',
-            point4: 'PR_UNLOAD_SP',
-            val: 'PR_UNLOAD',
-        }, {
-            name: '空压机排气温度(℃)',
-            point4: 'T_DISCHARGE_SP',
-            val: 'T_DISCHARGE',
-        }, {
-            name: '反吹触发压差(kPa)',
-            point4: 'DPR_BACKFLUSH_SP',
-            val: 'DPR_BACKFLUSH',
-        }, {
-            name: '后处理温度(℃)',
-            point4: 'T_POST_TX_SP',
-            val: 'T_POST_TX',
-        }, {
-            name: '最不利末端压差(kPa)',
-            point4: 'DPR_TERMINAL_SP',
-            val: 'DPR_TERMINAL',
-        }, {
-            name: '冷却水回水温度(℃)',
-            point4: 'T_CW_R_SP',
-            val: 'T_CW_R',
-        }
-    ], [ // 开关
-        {
-            name: '加载压力',
-            point3: 'PR_LOAD_OPT_EB'
-        }, {
-            name: '卸载压力',
-            point3: 'PR_UNLOAD_OPT_EB'
-        }, {
-            name: '目标压力',
-            point3: 'PR_DISCHARGE_OPT_EB'
-        }, {
-            name: '冷却水回水温度',
-            point3: 'T_CW_R_OPT_EB'
-        }, {
-            name: '空压机频率',
-            point3: 'FREQ_ACOP_OPT_EB'
-        }, {
-            name: '吸干机频率',
-            point3: 'FREQ_DRYER_OPT_EB'
-        }, {
-            name: '冷却泵频率',
-            point3: 'FREQ_CWP_OPT_EB'
-        }, {
-            name: '冷却塔频率',
-            point3: 'FREQ_CT_OPT_EB'
-        }
-    ], [ //设置
-        {
-            name: '空压机频率(Hz)',
-            point2: 'FREQ_ACOP_MIN',
-            point1: 'FREQ_ACOP_MAX',
-        }, {
-            name: '吸干机频率(Hz)',
-            point2: 'FREQ_DRYER_MIN',
-            point1: 'FREQ_DRYER_MAX',
-        }, {
-            name: '冷却泵频率(Hz)',
-            point2: 'FREQ_CWP_MIN',
-            point1: 'FREQ_CWP_MAX',
-        }, {
-            name: '冷却塔频率(Hz)',
-            point2: 'FREQ_CT_MIN',
-            point1: 'FREQ_CT_MAX',
-        }, {
-            name: '冷却水回水温度(℃)',
-            point2: 'T_CW_R_MIN',
-            point1: 'T_CW_R_MAX',
-        }, {
-            name: '末端压差(kPa)',
-            point2: 'DPR_TERMINAL_MIN',
-            point1: 'DPR_TERMINAL_MAX',
-        },
-         {
-            name: '冷冻水温差(℃)',
-            point2: 'DT_CHW_MIN',
-            point1: 'DT_CHW_MAX',
-        }
+export const arimap = (source) => {
+    return [
+        [ // 控制
+            {
+                name: '空压机排气压力(Mpa)',
+                point4: source?.['PR_DISCHARGE_SP']?.NAME || 'PR_DISCHARGE_SP',
+                val: source?.['PR_DISCHARGE']?.NAME || 'PR_DISCHARGE'
+            }, {
+                name: '空压机加载压力(Mpa)',
+                point4: source?.['PR_LOAD_SP']?.NAME || 'PR_LOAD_SP',
+                val: source?.['PR_LOAD']?.NAME || 'PR_LOAD'
+            }, {
+                name: '空压机卸载压力(Mpa)',
+                point4: source?.['PR_UNLOAD_SP']?.NAME || 'PR_UNLOAD_SP',
+                val: source?.['PR_UNLOAD']?.NAME || 'PR_UNLOAD'
+            }, {
+                name: '空压机排气温度(℃)',
+                point4: source?.['T_DISCHARGE_SP']?.NAME || 'T_DISCHARGE_SP',
+                val: source?.['T_DISCHARGE']?.NAME || 'T_DISCHARGE'
+            }, {
+                name: '反吹触发压差(kPa)',
+                point4: source?.['DPR_BACKFLUSH_SP']?.NAME || 'DPR_BACKFLUSH_SP',
+                val: source?.['DPR_BACKFLUSH']?.NAME || 'DPR_BACKFLUSH'
+            }, {
+                name: '后处理温度(℃)',
+                point4: source?.['T_POST_TX_SP']?.NAME || 'T_POST_TX_SP',
+                val: source?.['T_POST_TX']?.NAME || 'T_POST_TX'
+            }, {
+                name: '最不利末端压差(kPa)',
+                point4: source?.['DPR_TERMINAL_SP']?.NAME || 'DPR_TERMINAL_SP',
+                val: source?.['DPR_TERMINAL']?.NAME || 'DPR_TERMINAL'
+            }, {
+                name: '冷却水回水温度(℃)',
+                point4: source?.['T_CW_R_SP']?.NAME || 'T_CW_R_SP',
+                val: source?.['T_CW_R']?.NAME || 'T_CW_R'
+            }
+        ], [ // 开关
+            {
+                name: '加载压力',
+                point3: source?.['PR_LOAD_OPT_EB']?.NAME || 'PR_LOAD_OPT_EB'
+            }, {
+                name: '卸载压力',
+                point3: source?.['PR_UNLOAD_OPT_EB']?.NAME || 'PR_UNLOAD_OPT_EB'
+            }, {
+                name: '目标压力',
+                point3: source?.['PR_DISCHARGE_OPT_EB']?.NAME || 'PR_DISCHARGE_OPT_EB'
+            }, {
+                name: '冷却水回水温度',
+                point3: source?.['T_CW_R_OPT_EB']?.NAME || 'T_CW_R_OPT_EB'
+            }, {
+                name: '空压机频率',
+                point3: source?.['FREQ_ACOP_OPT_EB']?.NAME || 'FREQ_ACOP_OPT_EB'
+            }, {
+                name: '吸干机频率',
+                point3: source?.['FREQ_DRYER_OPT_EB']?.NAME || 'FREQ_DRYER_OPT_EB'
+            }, {
+                name: '冷却泵频率',
+                point3: source?.['FREQ_CWP_OPT_EB']?.NAME || 'FREQ_CWP_OPT_EB'
+            }, {
+                name: '冷却塔频率',
+                point3: source?.['FREQ_CT_OPT_EB']?.NAME || 'FREQ_CT_OPT_EB'
+            }
+        ], [ // 设置
+            {
+                name: '空压机频率(Hz)',
+                point2: source?.['FREQ_ACOP_MIN']?.NAME || 'FREQ_ACOP_MIN',
+                point1: source?.['FREQ_ACOP_MAX']?.NAME || 'FREQ_ACOP_MAX'
+            }, {
+                name: '吸干机频率(Hz)',
+                point2: source?.['FREQ_DRYER_MIN']?.NAME || 'FREQ_DRYER_MIN',
+                point1: source?.['FREQ_DRYER_MAX']?.NAME || 'FREQ_DRYER_MAX'
+            }, {
+                name: '冷却泵频率(Hz)',
+                point2: source?.['FREQ_CWP_MIN']?.NAME || 'FREQ_CWP_MIN',
+                point1: source?.['FREQ_CWP_MAX']?.NAME || 'FREQ_CWP_MAX'
+            }, {
+                name: '冷却塔频率(Hz)',
+                point2: source?.['FREQ_CT_MIN']?.NAME || 'FREQ_CT_MIN',
+                point1: source?.['FREQ_CT_MAX']?.NAME || 'FREQ_CT_MAX'
+            }, {
+                name: '冷却水回水温度(℃)',
+                point2: source?.['T_CW_R_MIN']?.NAME || 'T_CW_R_MIN',
+                point1: source?.['T_CW_R_MAX']?.NAME || 'T_CW_R_MAX'
+            }, {
+                name: '末端压差(kPa)',
+                point2: source?.['DPR_TERMINAL_MIN']?.NAME || 'DPR_TERMINAL_MIN',
+                point1: source?.['DPR_TERMINAL_MAX']?.NAME || 'DPR_TERMINAL_MAX'
+            }, {
+                name: '冷冻水温差(℃)',
+                point2: source?.['DT_CHW_MIN']?.NAME || 'DT_CHW_MIN',
+                point1: source?.['DT_CHW_MAX']?.NAME || 'DT_CHW_MAX'
+            }
+        ]
     ]
-]
+    
+}
 
 export const drawpointmap = (source) => {
     const obj = {};
@@ -480,15 +482,15 @@ export const drawpointmap = (source) => {
     return obj;
 }
 
-export const drwaitemair = () => {
+export const drwaitemair = (source) => {
     const obj = {};
-    ariMap.forEach(t => {
+    arimap(source).forEach(t => {
         t.forEach(t0 => {
             for (const tobj in t0) {
                 if (tobj !== 'name') {
                     obj[t0[tobj]] = 0;
                 }
-            }  
+            }
         })
     })
 }
@@ -654,7 +656,7 @@ export const drawthree = (parentid, drawitem, source) => {
                 "isCanvas": false,
                 "props": {
                     "value": source?.[drawitem.point1]?.NAME ? {
-                        "bind": source?.[drawitem.point1]?.NAME|| '',
+                        "bind": source?.[drawitem.point1]?.NAME || '',
                         "type": "points",
                         "point": [
                             source?.[drawitem.point1]?.NAME
@@ -674,13 +676,13 @@ export const drawthree = (parentid, drawitem, source) => {
                         "onPressEnter": {
                             "action": "pushData",
                             "link": {
-                                "component": source?.[drawitem.point1]?.NAME|| ''
+                                "component": source?.[drawitem.point1]?.NAME || ''
                             }
                         },
                         "onPush": {
                             "action": "pushData",
                             "link": {
-                                "component": source?.[drawitem.point1]?.NAME|| ''
+                                "component": source?.[drawitem.point1]?.NAME || ''
                             }
                         }
                     },
@@ -796,7 +798,7 @@ export const drawtwo = (parentid, drawitem, source) => {
                 "displayName": "Checkbox",
                 "props": {
                     "value": {
-                        "bind": source[drawitem.point3]?.NAME|| '0',
+                        "bind": source[drawitem.point3]?.NAME || '0',
                         "type": "points",
                         "point": [
                             source[drawitem.point3]?.NAME
@@ -1036,7 +1038,7 @@ export const drwacontrol = (parentid, drawitem, source) => {
                 "isCanvas": false,
                 "props": {
                     "value": source[drawitem.point4]?.NAME ? {
-                        "bind": source[drawitem.point4]?.NAME|| '',
+                        "bind": source[drawitem.point4]?.NAME || '',
                         "type": "points",
                         "point": [
                             source[drawitem.point4]?.NAME
@@ -1057,13 +1059,13 @@ export const drwacontrol = (parentid, drawitem, source) => {
                         "onPressEnter": {
                             "action": "pushData",
                             "link": {
-                                "component": source[drawitem.point4]?.NAME|| ''
+                                "component": source[drawitem.point4]?.NAME || ''
                             }
                         },
                         "onPush": {
                             "action": "pushData",
                             "link": {
-                                "component": source[drawitem.point4]?.NAME|| ''
+                                "component": source[drawitem.point4]?.NAME || ''
                             }
                         }
                     },

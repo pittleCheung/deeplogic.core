@@ -77,7 +77,7 @@ export const styleMap = {
   DesDryer: DDRYStyle,
   RefDryer: RDRYStyle,
   WetTank: ARWTStyle,
-  Tank: ARDTStyle, 
+  Tank: ARDTStyle,
   ConHeight
 };
 // export const deviceMargin = {

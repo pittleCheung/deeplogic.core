@@ -1,7 +1,6 @@
 /**
- * 制冷机弹窗
+ * 空压机
  */
-import { pageStyle, contentstyle, statsuMap, colGrid, contentpaddingstyle, colnoflex, txtstyle } from '../pageNodeDefault';
 export default (source) => {
     return {
         "ROOT": {
@@ -51,28 +50,45 @@ export default (source) => {
                 "events": {
                     "onLoad": null
                 },
-                "projId": "Gy3dmClBqavaG0Aeccdvzu",
+                "projId": "VBXjaBVNFzoDEsZVSMsG3F",
                 "points": {
-                    [source.PR_COND.NAME]: 0,
-                    [source.T_COND.NAME]: 0,
-                    [source.T_EVAP_LEV.NAME]: 0,
-                    [source.T_EVAP_ENT.NAME]: 0,
-                    [source.PR_EVAP.NAME]: 0,
-                    [source.T_EVAP.NAME]: 0,
-                    [source.I_PCT.NAME]: 0,
-                    [source.I_PCT_MAX_SP.NAME]: 0,
-                    [source.DPR_OIL.NAME]: 0,
-                    [source.T_OIL.NAME]: 0,
-                    [source.P.NAME]: 0,
-                    [source.COP.NAME]: 0,
-                    [source.ONOFF.NAME]: 0,
-                    [source.FAULT.NAME]: 0,
-                    [source.AM.NAME]: 0,
-                    [source.ONOFF_SP.NAME]: 0,
-                    [source.T_CHW_S_SP.NAME]: 0,
-                    [source.EB.NAME]: 0,
-                    [source.T_COND_ENT.NAME]: 0,
-                    [source.T_COND_LEV.NAME]: 0
+                    "CH1#PR_COND": 0,
+                    "CH1#T_COND": 0,
+                    "CH1#T_EVAP_LEV": 0,
+                    "CH1#T_EVAP_ENT": 0,
+                    "CH1#PR_EVAP": 0,
+                    "CH1#T_EVAP": 0,
+                    "CH1#I_PCT": 0,
+                    "CH1#I_PCT_MAX_SP": 0,
+                    "CH1#DPR_OIL": 0,
+                    "CH1#T_OIL": 0,
+                    "CH1#P": 0,
+                    "CH1#COP": 0,
+                    "CH1#ONOFF": 0,
+                    "CH1#FAULT": 0,
+                    "CH1#AM": 0,
+                    "CH1#ONOFF_SP": 0,
+                    "CH1#T_CHW_S_SP": 0,
+                    "CH1#EB": 0,
+                    "CH1#T_COND_ENT": 0,
+                    "CH1#T_COND_LEV": 0
+                },
+                "global": {
+                    "ProjectId": "Mvux_IMiSQxgrLD4bImW4g",
+                    "ProjectName": "组态测试项目",
+                    "ProjectImage": null,
+                    "BuildingArea": 50002,
+                    "DeviceNum": 27,
+                    "TagNum": 897,
+                    "LogicNum": 8,
+                    "AlarmIndexNum": 9,
+                    "AlarmNum": 0,
+                    "Temp": "25",
+                    "Hum": "87",
+                    "Weather": "阴",
+                    "Wind": "东风 2",
+                    "WeatherCode": "200",
+                    "UserId": null
                 }
             },
             "displayName": "Page",
@@ -90,13 +106,13 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Image",
-                "src": "/assets/images/chiller.png",
+                "src": "xrWjawRuhXHzV7iGgQ3ldn",
                 "events": {},
                 "style": {
                     "position": "relative",
-                    "width": "auto",
+                    "width": "200px",
                     "height": "auto",
-                    "widthType": "fit-content",
+                    "widthType": "fixed",
                     "heightType": "fit-content",
                     "fontFamily": "Microsoft YaHei",
                     "fontSize": 18,
@@ -105,7 +121,8 @@ export default (source) => {
                     "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
-                    "marginSide": "all"
+                    "marginSide": "all",
+                    "widthUnit": "px"
                 }
             },
             "displayName": "Image",
@@ -260,7 +277,7 @@ export default (source) => {
             "props": {
                 "displayName": "Typography.Text",
                 "value": {
-                    "bind": source.ONOFF.NAME,
+                    "bind": "CH1#ONOFF",
                     "type": "points"
                 },
                 "status": [
@@ -271,7 +288,7 @@ export default (source) => {
                         "key": "1",
                         "color": "rgba(255, 255, 255, 1)",
                         "expression": {
-                            "bind": source.ONOFF.NAME,
+                            "bind": "CH1#ONOFF",
                             "type": "points"
                         },
                         "backgroundColor": ""
@@ -283,7 +300,7 @@ export default (source) => {
                         "key": "2",
                         "color": "#73d13d",
                         "expression": {
-                            "bind": source.ONOFF.NAME,
+                            "bind": "CH1#ONOFF",
                             "type": "points"
                         }
                     }
@@ -437,7 +454,7 @@ export default (source) => {
             "hidden": false,
             "nodes": [
                 "iB4YE2Xg-O",
-                "KlGhmhTYXS"
+                "xZVNPLAlBY"
             ],
             "linkedNodes": {}
         },
@@ -497,8 +514,8 @@ export default (source) => {
             "parent": "04cXEf6bK-",
             "hidden": false,
             "nodes": [
-                "t6mkGwlrdE",
-                "odkfr25wMX"
+                "7Yivz7KyrJ",
+                "1gW_RsQr-3"
             ],
             "linkedNodes": {}
         },
@@ -641,7 +658,9 @@ export default (source) => {
                 "z53RHAhzYo",
                 "C3sMKJRIFg",
                 "f6zYvZL2nK",
-                "1kXufULuoQ"
+                "1kXufULuoQ",
+                "WxhQkSm0cx",
+                "sYrC9vFiRZ"
             ],
             "linkedNodes": {}
         },
@@ -774,7 +793,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷凝器",
+                "value": "主机",
                 "status": [],
                 "events": {},
                 "style": {
@@ -862,7 +881,9 @@ export default (source) => {
                 "hEH5gJs36L",
                 "pBCDUPnQID",
                 "i2oeRnw4Wk",
-                "UG6W0LkIGW"
+                "UG6W0LkIGW",
+                "uYmbHF2MBp",
+                "TY3AI3rejq"
             ],
             "linkedNodes": {}
         },
@@ -935,7 +956,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器",
+                "value": "时间",
                 "status": [],
                 "events": {},
                 "style": {
@@ -1054,27 +1075,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷凝器出水温度（℃）",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "加载压力（Mpa）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -1139,52 +1141,8 @@ export default (source) => {
             "parent": "z53RHAhzYo",
             "hidden": false,
             "nodes": [
-                "6mNH2opIUo"
+                "lp9xbpcLkk"
             ],
-            "linkedNodes": {}
-        },
-        "6mNH2opIUo": {
-            "type": {
-                "resolvedName": "StateText"
-            },
-            "isCanvas": false,
-            "props": {
-                "displayName": "StateText",
-                "level": "5",
-                "size": "14px",
-                "decimalSeparator": 1,
-                "percent": false,
-                "value": {
-                    "bind": source.T_COND_LEV.NAME,
-                    "type": "points"
-                },
-                "type": "",
-                "strong": true,
-                "italic": false,
-                "underline": false,
-                "disabled": false,
-                "mark": false,
-                "keyboard": false,
-                "delete": false,
-                "code": false,
-                "isBefore": false,
-                "isAfter": false,
-                "before": {
-                    "value": "前缀"
-                },
-                "after": {
-                    "value": "℃",
-                    "type": "secondary"
-                },
-                "style": {
-                    "color": "rgb(255, 255, 255)"
-                }
-            },
-            "displayName": "StateText",
-            "custom": {},
-            "parent": "xNL_49QSKV",
-            "hidden": false,
-            "nodes": [],
             "linkedNodes": {}
         },
         "C3sMKJRIFg": {
@@ -1280,27 +1238,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷凝器进水温度（℃",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "卸载压力（Mpa）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -1365,52 +1304,8 @@ export default (source) => {
             "parent": "C3sMKJRIFg",
             "hidden": false,
             "nodes": [
-                "qTONH879D7"
+                "w9dIovBstT"
             ],
-            "linkedNodes": {}
-        },
-        "qTONH879D7": {
-            "type": {
-                "resolvedName": "StateText"
-            },
-            "isCanvas": false,
-            "props": {
-                "displayName": "StateText",
-                "level": "5",
-                "size": "14px",
-                "decimalSeparator": 1,
-                "percent": false,
-                "value": {
-                    "bind": source.T_COND_ENT.NAME,
-                    "type": "points"
-                },
-                "type": "",
-                "strong": true,
-                "italic": false,
-                "underline": false,
-                "disabled": false,
-                "mark": false,
-                "keyboard": false,
-                "delete": false,
-                "code": false,
-                "isBefore": false,
-                "isAfter": false,
-                "before": {
-                    "value": "前缀"
-                },
-                "after": {
-                    "value": "℃",
-                    "type": "secondary"
-                },
-                "style": {
-                    "color": "rgb(255, 255, 255)"
-                }
-            },
-            "displayName": "StateText",
-            "custom": {},
-            "parent": "cLD9J6vLxW",
-            "hidden": false,
-            "nodes": [],
             "linkedNodes": {}
         },
         "f6zYvZL2nK": {
@@ -1503,27 +1398,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷凝器冷媒压力（kPa）",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "前轴温度（℃）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -1604,7 +1480,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.PR_COND.NAME,
+                    "bind": "CH1#PR_COND",
                     "type": "points"
                 },
                 "type": "",
@@ -1726,7 +1602,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷凝器冷媒温度(℃)",
+                "value": "后轴温度（℃）",
                 "status": [
                     {
                         "label": "停止",
@@ -1827,7 +1703,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.T_COND.NAME,
+                    "bind": "CH1#T_COND",
                     "type": "points"
                 },
                 "type": "",
@@ -1952,7 +1828,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器出水温度（℃）",
+                "value": "本次加载时间（H）",
                 "status": [
                     {
                         "label": "停止",
@@ -2053,7 +1929,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.T_EVAP_LEV.NAME,
+                    "bind": "CH1#T_EVAP_LEV",
                     "type": "points"
                 },
                 "type": "",
@@ -2175,27 +2051,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器进水温度（℃）",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "油滤器使用时间（H）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -2276,7 +2133,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.T_EVAP_ENT.NAME,
+                    "bind": "CH1#T_EVAP_ENT",
                     "type": "points"
                 },
                 "type": "",
@@ -2398,27 +2255,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器冷媒压力(kPa)",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "油分器使用时间（H）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -2499,7 +2337,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.PR_EVAP.NAME,
+                    "bind": "CH1#PR_EVAP",
                     "type": "points"
                 },
                 "type": "",
@@ -2621,27 +2459,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器冷媒温度（℃）",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "空滤器使用时间（H）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -2722,7 +2541,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.T_EVAP.NAME,
+                    "bind": "CH1#T_EVAP",
                     "type": "points"
                 },
                 "type": "",
@@ -2765,10 +2584,7 @@ export default (source) => {
                 "size": "14px",
                 "decimalSeparator": 1,
                 "percent": false,
-                "value": {
-                    "bind": source.T_CHW_S.NAME,
-                    "type": "points"
-                },
+                "value": "0.0",
                 "type": "",
                 "strong": true,
                 "italic": false,
@@ -2777,12 +2593,12 @@ export default (source) => {
                 "keyboard": false,
                 "code": false,
                 "isBefore": false,
-                "isAfter": false,
+                "isAfter": true,
                 "before": {
                     "value": "前缀"
                 },
                 "after": {
-                    "value": "℃",
+                    "value": "Mpa",
                     "type": "secondary"
                 },
                 "style": {
@@ -2797,206 +2613,6 @@ export default (source) => {
             "nodes": [],
             "linkedNodes": {}
         },
-        "KlGhmhTYXS": {
-            "type": {
-                "resolvedName": "InputKb"
-            },
-            "isCanvas": false,
-            "props": {
-                "displayName": "InputKb",
-                "value": {
-                    "bind": source.T_CHW_S_SP.NAME,
-                    "type": "points"
-                },
-                "size": "middle",
-                "type": "number",
-                "placeholder": "",
-                "disabled": false,
-                "variant": "outlined",
-                "allowClear": false,
-                "showCount": false,
-                "events": {
-                    "onPressEnter": {
-                        "action": "pushData",
-                        "link": {
-                            "component": source?.T_CHW_S_SP?.NAME
-                        }
-                    }
-                },
-                "style": {
-                    "position": "relative",
-                    "width": "70px",
-                    "height": "100%",
-                    "widthType": "fixed",
-                    "heightType": "relative",
-                    "fontFamily": "Microsoft YaHei",
-                    "fontSize": 18,
-                    "fontWeight": 400,
-                    "lineHeight": 1.5,
-                    "textAlign": "center",
-                    "spacing": 0,
-                    "paddingSide": "all",
-                    "marginSide": "side",
-                    "widthUnit": "px",
-                    "heightUnit": "%",
-                    "color": "rgb(255, 255, 255)",
-                    "marginBottom": 0,
-                    "display": "",
-                    "flexDirection": "",
-                    "key": "centerCenter",
-                    "justifyContent": "",
-                    "alignItems": "",
-                    "alignContent": "",
-                    "flexWrap": "",
-                    "gap": "",
-                    "rowGap": "",
-                    "columnGap": "",
-                    "justifyItems": ""
-                }
-            },
-            "displayName": "InputKb",
-            "custom": {},
-            "parent": "0wzSnVbAgD",
-            "hidden": false,
-            "nodes": [],
-            "linkedNodes": {}
-        },
-        "t6mkGwlrdE": {
-            "type": {
-                "resolvedName": "Button"
-            },
-            "isCanvas": false,
-            "props": {
-                "children": "启动",
-                "template": "default",
-                "type": "primary",
-                "shape": "default",
-                "icon": "CaretRightOutlined",
-                "htmlType": "button",
-                "isHighlight": "default",
-                "status": [],
-                "events": {
-                    "onClick": {
-                        "action": "pushData",
-                        "link": {
-                            "component": source.ONOFF_SP.NAME,
-                            "value": "1"
-                        }
-                    }
-                },
-                "style": {
-                    "position": "relative",
-                    "width": "initial",
-                    "height": 32,
-                    "widthType": "relative",
-                    "heightType": "fit-content",
-                    "fontFamily": "Microsoft YaHei",
-                    "fontSize": 18,
-                    "fontWeight": 400,
-                    "lineHeight": 1.5,
-                    "textAlign": "center",
-                    "spacing": 0,
-                    "paddingSide": "side",
-                    "marginSide": "all",
-                    "padding": 4,
-                    "paddingTop": 4,
-                    "paddingRight": 15,
-                    "paddingBottom": 4,
-                    "paddingLeft": 15,
-                    "background": "linear-gradient(rgba(6, 43, 95, 0.5), rgba(6, 43, 95, 0.5))",
-                    "backgroundList": [
-                        {
-                            "id": "MM5chbM_bv",
-                            "type": "color",
-                            "key": "MM5chbM_bv",
-                            "value": "rgba(6, 43, 95, 0.5)",
-                            "disabled": false
-                        }
-                    ],
-                    "borderWidth": 0,
-                    "borderStyle": "solid",
-                    "borderColor": "rgba(255, 255, 255, 0.2)",
-                    "borderSide": "all",
-                    "borderRadius": 6,
-                    "color": "rgba(117, 253, 244, 1)"
-                },
-                "displayName": "Button"
-            },
-            "displayName": "Button",
-            "custom": {},
-            "parent": "3aEuy7ga5c",
-            "hidden": false,
-            "nodes": [],
-            "linkedNodes": {}
-        },
-        "odkfr25wMX": {
-            "type": {
-                "resolvedName": "Button"
-            },
-            "isCanvas": false,
-            "props": {
-                "children": "停止",
-                "template": "default",
-                "type": "primary",
-                "shape": "default",
-                "icon": "PauseOutlined",
-                "htmlType": "button",
-                "isHighlight": "default",
-                "status": [],
-                "events": {
-                    "onClick": {
-                        "action": "pushData",
-                        "link": {
-                            "component": source.ONOFF_SP.NAME,
-                            "value": "0"
-                        }
-                    }
-                },
-                "style": {
-                    "position": "relative",
-                    "width": "initial",
-                    "height": 32,
-                    "widthType": "relative",
-                    "heightType": "fit-content",
-                    "fontFamily": "Microsoft YaHei",
-                    "fontSize": 18,
-                    "fontWeight": 400,
-                    "lineHeight": 1.5,
-                    "textAlign": "center",
-                    "spacing": 0,
-                    "paddingSide": "side",
-                    "marginSide": "all",
-                    "padding": 4,
-                    "paddingTop": 4,
-                    "paddingRight": 15,
-                    "paddingBottom": 4,
-                    "paddingLeft": 15,
-                    "background": "linear-gradient(rgba(6, 43, 95, 0.5), rgba(6, 43, 95, 0.5))",
-                    "backgroundList": [
-                        {
-                            "id": "MM5chbM_bv",
-                            "type": "color",
-                            "key": "MM5chbM_bv",
-                            "value": "rgba(6, 43, 95, 0.5)",
-                            "disabled": false
-                        }
-                    ],
-                    "borderWidth": 0,
-                    "borderStyle": "solid",
-                    "borderColor": "rgba(255, 255, 255, 0.2)",
-                    "borderSide": "all",
-                    "borderRadius": 6,
-                    "color": "rgba(117, 253, 244, 1)"
-                },
-                "displayName": "Button"
-            },
-            "displayName": "Button",
-            "custom": {},
-            "parent": "3aEuy7ga5c",
-            "hidden": false,
-            "nodes": [],
-            "linkedNodes": {}
-        },
         "Q3BPYm9Ggw": {
             "type": {
                 "resolvedName": "TypographyText"
@@ -3004,7 +2620,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器出水温度（℃）",
+                "value": "排气压力",
                 "status": [
                     {
                         "label": "停止",
@@ -3058,7 +2674,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "蒸发器出水温度设置",
+                "value": "排气温度",
                 "status": [
                     {
                         "label": "停止",
@@ -3209,18 +2825,18 @@ export default (source) => {
             "props": {
                 "displayName": "Typography.Text",
                 "value": {
-                    "bind": source.AM.NAME,
+                    "bind": "CH1#AM",
                     "type": "points"
                 },
                 "status": [
                     {
                         "id": "1",
                         "label": "远程",
-                        "value": "1",
+                        "value": "0",
                         "key": "1",
-                        "color": "#73d13d",
+                        "color": "rgba(255, 255, 255, 1)",
                         "expression": {
-                            "bind": source.AM.NAME,
+                            "bind": "CH1#AM",
                             "type": "points"
                         },
                         "backgroundColor": ""
@@ -3228,11 +2844,11 @@ export default (source) => {
                     {
                         "id": "2",
                         "label": "就地",
-                        "value": "0",
+                        "value": "1",
                         "key": "2",
-                        "color": "#ffffff",
+                        "color": "#73d13d",
                         "expression": {
-                            "bind": source.AM.NAME,
+                            "bind": "CH1#AM",
                             "type": "points"
                         },
                         "backgroundColor": ""
@@ -3403,7 +3019,7 @@ export default (source) => {
                     "onChange": {
                         "action": "pushData",
                         "link": {
-                            "component": source.EB.NAME
+                            "component": "CH1#EB"
                         }
                     }
                 },
@@ -3433,11 +3049,7 @@ export default (source) => {
                     "paddingRight": null,
                     "paddingLeft": 0,
                     "paddingBottom": 0
-                },
-                "value": {
-                    "bind": source.EB.NAME,
-                    "type": "points",
-                },
+                }
             },
             "displayName": "Select",
             "custom": {},
@@ -3836,7 +3448,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "电机",
+                "value": "开度",
                 "status": [],
                 "events": {},
                 "style": {
@@ -3952,27 +3564,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "油压（kPa）",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "频率（Hz）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -4053,7 +3646,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.DPR_OIL.NAME,
+                    "bind": "CH1#DPR_OIL",
                     "type": "points"
                 },
                 "type": "",
@@ -4071,7 +3664,7 @@ export default (source) => {
                     "value": "前缀"
                 },
                 "after": {
-                    "value": "kPa",
+                    "value": "Mpa",
                     "type": "secondary"
                 },
                 "style": {
@@ -4175,27 +3768,8 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "油温（℃）",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": "频率设置（Hz）",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -4260,52 +3834,8 @@ export default (source) => {
             "parent": "pZtz_IaxJU",
             "hidden": false,
             "nodes": [
-                "XEiQk-efNU"
+                "tpB2CCzYPt"
             ],
-            "linkedNodes": {}
-        },
-        "XEiQk-efNU": {
-            "type": {
-                "resolvedName": "StateText"
-            },
-            "isCanvas": false,
-            "props": {
-                "displayName": "StateText",
-                "level": "5",
-                "size": "14px",
-                "decimalSeparator": 1,
-                "percent": false,
-                "value": {
-                    "bind": source.T_OIL.NAME,
-                    "type": "points"
-                },
-                "type": "",
-                "strong": true,
-                "italic": false,
-                "underline": false,
-                "disabled": false,
-                "mark": false,
-                "keyboard": false,
-                "delete": false,
-                "code": false,
-                "isBefore": false,
-                "isAfter": false,
-                "before": {
-                    "value": "前缀"
-                },
-                "after": {
-                    "value": "℃",
-                    "type": "secondary"
-                },
-                "style": {
-                    "color": "rgb(255, 255, 255)"
-                }
-            },
-            "displayName": "StateText",
-            "custom": {},
-            "parent": "h1SjkQlJAj",
-            "hidden": false,
-            "nodes": [],
             "linkedNodes": {}
         },
         "RLf7wcrV-o": {
@@ -4398,7 +3928,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "电流百分比（%）",
+                "value": "IGV 开度（%）",
                 "status": [
                     {
                         "label": "停止",
@@ -4499,7 +4029,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.I_PCT.NAME,
+                    "bind": "CH1#I_PCT",
                     "type": "points"
                 },
                 "type": "",
@@ -4621,7 +4151,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "电流百分比设定值（%）",
+                "value": "BOV开度（%）",
                 "status": [
                     {
                         "label": "停止",
@@ -4722,7 +4252,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.I_PCT_MAX_SP.NAME,
+                    "bind": "CH1#I_PCT_MAX_SP",
                     "type": "points"
                 },
                 "type": "",
@@ -4811,7 +4341,7 @@ export default (source) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "left",
+                    "textAlign": "center",
                     "spacing": 0,
                     "paddingSide": "side",
                     "padding": 8,
@@ -4943,7 +4473,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.P.NAME,
+                    "bind": "CH1#P",
                     "type": "points"
                 },
                 "type": "",
@@ -5031,7 +4561,7 @@ export default (source) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "left",
+                    "textAlign": "center",
                     "spacing": 0,
                     "paddingSide": "side",
                     "padding": 8,
@@ -5163,7 +4693,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.COP.NAME,
+                    "bind": "CH1#COP",
                     "type": "points"
                 },
                 "type": "",
@@ -5193,7 +4723,1357 @@ export default (source) => {
             "hidden": false,
             "nodes": [],
             "linkedNodes": {}
+        },
+        "WxhQkSm0cx": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "vk8aO-LfkI",
+            "hidden": false,
+            "nodes": [
+                "05cNKGTQPH",
+                "ErcpTcZJoU"
+            ],
+            "linkedNodes": {}
+        },
+        "05cNKGTQPH": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingLeft": 16
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "WxhQkSm0cx",
+            "hidden": false,
+            "nodes": [
+                "PiBMwxR9Rd"
+            ],
+            "linkedNodes": {}
+        },
+        "PiBMwxR9Rd": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "电流（A）",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "05cNKGTQPH",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "ErcpTcZJoU": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "WxhQkSm0cx",
+            "hidden": false,
+            "nodes": [
+                "MBAYwPkPRu"
+            ],
+            "linkedNodes": {}
+        },
+        "MBAYwPkPRu": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "CH1#T_COND",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "℃",
+                    "type": "secondary"
+                },
+                "style": {
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "ErcpTcZJoU",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "sYrC9vFiRZ": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "vk8aO-LfkI",
+            "hidden": false,
+            "nodes": [
+                "b2dZVfgBu3",
+                "MSG_aw_drJ"
+            ],
+            "linkedNodes": {}
+        },
+        "b2dZVfgBu3": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingLeft": 16
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "sYrC9vFiRZ",
+            "hidden": false,
+            "nodes": [
+                "ZlHRdDvFzA"
+            ],
+            "linkedNodes": {}
+        },
+        "ZlHRdDvFzA": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "油分压差（Mpa）",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "b2dZVfgBu3",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "MSG_aw_drJ": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "sYrC9vFiRZ",
+            "hidden": false,
+            "nodes": [
+                "7_KbEB4Xym"
+            ],
+            "linkedNodes": {}
+        },
+        "7_KbEB4Xym": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "CH1#T_COND",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "℃",
+                    "type": "secondary"
+                },
+                "style": {
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "MSG_aw_drJ",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "uYmbHF2MBp": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "p6191kqKsp",
+            "hidden": false,
+            "nodes": [
+                "9znBjO1ebX",
+                "UoYCUxcD-3"
+            ],
+            "linkedNodes": {}
+        },
+        "9znBjO1ebX": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingTop": 8,
+                    "paddingRight": 8,
+                    "paddingLeft": 16,
+                    "paddingBottom": 8
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "uYmbHF2MBp",
+            "hidden": false,
+            "nodes": [
+                "7SQV_PH_Gg"
+            ],
+            "linkedNodes": {}
+        },
+        "7SQV_PH_Gg": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "润滑油使用时间（H）",
+                "status": [
+                    {
+                        "label": "停止",
+                        "value": "0",
+                        "key": "1",
+                        "color": "#8c8c8c"
+                    },
+                    {
+                        "label": "运行",
+                        "value": "1",
+                        "key": "2",
+                        "color": "#73d13d"
+                    },
+                    {
+                        "label": "故障",
+                        "value": "1",
+                        "key": "3",
+                        "color": "#f5222d"
+                    }
+                ],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "9znBjO1ebX",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "UoYCUxcD-3": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "uYmbHF2MBp",
+            "hidden": false,
+            "nodes": [
+                "lB16r9x7Fz"
+            ],
+            "linkedNodes": {}
+        },
+        "lB16r9x7Fz": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "CH1#T_EVAP_LEV",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "℃",
+                    "type": "secondary"
+                },
+                "style": {
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "UoYCUxcD-3",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "TY3AI3rejq": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "p6191kqKsp",
+            "hidden": false,
+            "nodes": [
+                "RtIVGWeAfZ",
+                "kiOifIggfx"
+            ],
+            "linkedNodes": {}
+        },
+        "RtIVGWeAfZ": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingTop": 8,
+                    "paddingRight": 8,
+                    "paddingLeft": 16,
+                    "paddingBottom": 8
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "TY3AI3rejq",
+            "hidden": false,
+            "nodes": [
+                "J9ZM-5K5mA"
+            ],
+            "linkedNodes": {}
+        },
+        "J9ZM-5K5mA": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "润滑脂使用时间（H）",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "RtIVGWeAfZ",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "kiOifIggfx": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "TY3AI3rejq",
+            "hidden": false,
+            "nodes": [
+                "phkhjD8jPk"
+            ],
+            "linkedNodes": {}
+        },
+        "phkhjD8jPk": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "CH1#T_EVAP_LEV",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "℃",
+                    "type": "secondary"
+                },
+                "style": {
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "kiOifIggfx",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "7Yivz7KyrJ": {
+            "type": {
+                "resolvedName": "Flex"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Flex",
+                "gap": 12,
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all",
+                    "padding": 0,
+                    "display": "flex"
+                }
+            },
+            "displayName": "Flex",
+            "custom": {},
+            "parent": "3aEuy7ga5c",
+            "hidden": false,
+            "nodes": [
+                "RiK6tzKp7S",
+                "3I45uFu7wi"
+            ],
+            "linkedNodes": {}
+        },
+        "RiK6tzKp7S": {
+            "type": {
+                "resolvedName": "Button"
+            },
+            "isCanvas": false,
+            "props": {
+                "children": "启动",
+                "template": "default",
+                "type": "primary",
+                "shape": "default",
+                "icon": "CaretRightOutlined",
+                "htmlType": "button",
+                "isHighlight": "default",
+                "status": [],
+                "events": {
+                    "onClick": {
+                        "action": "pushData",
+                        "link": {
+                            "component": "CH1#ONOFF_SP",
+                            "value": "1"
+                        }
+                    }
+                },
+                "style": {
+                    "position": "relative",
+                    "width": "initial",
+                    "height": 32,
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "center",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "marginSide": "all",
+                    "padding": 4,
+                    "paddingTop": 4,
+                    "paddingRight": 15,
+                    "paddingBottom": 4,
+                    "paddingLeft": 15,
+                    "background": "linear-gradient(rgba(6, 43, 95, 0.5), rgba(6, 43, 95, 0.5))",
+                    "backgroundList": [
+                        {
+                            "id": "MM5chbM_bv",
+                            "type": "color",
+                            "key": "MM5chbM_bv",
+                            "value": "rgba(6, 43, 95, 0.5)",
+                            "disabled": false
+                        }
+                    ],
+                    "borderWidth": 0,
+                    "borderStyle": "solid",
+                    "borderColor": "rgba(255, 255, 255, 0.2)",
+                    "borderSide": "all",
+                    "borderRadius": 6,
+                    "color": "rgba(117, 253, 244, 1)"
+                },
+                "displayName": "Button"
+            },
+            "displayName": "Button",
+            "custom": {},
+            "parent": "7Yivz7KyrJ",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "3I45uFu7wi": {
+            "type": {
+                "resolvedName": "Button"
+            },
+            "isCanvas": false,
+            "props": {
+                "children": "停止",
+                "template": "default",
+                "type": "primary",
+                "shape": "default",
+                "icon": "PauseOutlined",
+                "htmlType": "button",
+                "isHighlight": "default",
+                "status": [],
+                "events": {
+                    "onClick": {
+                        "action": "pushData",
+                        "link": {
+                            "component": "CH1#ONOFF_SP",
+                            "value": "0"
+                        }
+                    }
+                },
+                "style": {
+                    "position": "relative",
+                    "width": "initial",
+                    "height": 32,
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "center",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "marginSide": "all",
+                    "padding": 4,
+                    "paddingTop": 4,
+                    "paddingRight": 15,
+                    "paddingBottom": 4,
+                    "paddingLeft": 15,
+                    "background": "linear-gradient(rgba(6, 43, 95, 0.5), rgba(6, 43, 95, 0.5))",
+                    "backgroundList": [
+                        {
+                            "id": "MM5chbM_bv",
+                            "type": "color",
+                            "key": "MM5chbM_bv",
+                            "value": "rgba(6, 43, 95, 0.5)",
+                            "disabled": false
+                        }
+                    ],
+                    "borderWidth": 0,
+                    "borderStyle": "solid",
+                    "borderColor": "rgba(255, 255, 255, 0.2)",
+                    "borderSide": "all",
+                    "borderRadius": 6,
+                    "color": "rgba(117, 253, 244, 1)"
+                },
+                "displayName": "Button"
+            },
+            "displayName": "Button",
+            "custom": {},
+            "parent": "7Yivz7KyrJ",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "1gW_RsQr-3": {
+            "type": {
+                "resolvedName": "Flex"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Flex",
+                "gap": 12,
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all",
+                    "padding": 0,
+                    "display": "flex"
+                }
+            },
+            "displayName": "Flex",
+            "custom": {},
+            "parent": "3aEuy7ga5c",
+            "hidden": false,
+            "nodes": [
+                "WyVSW8ejtB",
+                "TPrMl19Htb"
+            ],
+            "linkedNodes": {}
+        },
+        "WyVSW8ejtB": {
+            "type": {
+                "resolvedName": "Button"
+            },
+            "isCanvas": false,
+            "props": {
+                "children": "加载",
+                "template": "default",
+                "type": "primary",
+                "shape": "default",
+                "icon": "CaretRightOutlined",
+                "htmlType": "button",
+                "isHighlight": "default",
+                "status": [],
+                "events": {
+                    "onClick": {
+                        "action": "pushData",
+                        "link": {
+                            "component": "CH1#ONOFF_SP",
+                            "value": "1"
+                        }
+                    }
+                },
+                "style": {
+                    "position": "relative",
+                    "width": "initial",
+                    "height": 32,
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "center",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "marginSide": "all",
+                    "padding": 4,
+                    "paddingTop": 4,
+                    "paddingRight": 15,
+                    "paddingBottom": 4,
+                    "paddingLeft": 15,
+                    "background": "linear-gradient(rgba(6, 43, 95, 0.5), rgba(6, 43, 95, 0.5))",
+                    "backgroundList": [
+                        {
+                            "id": "MM5chbM_bv",
+                            "type": "color",
+                            "key": "MM5chbM_bv",
+                            "value": "rgba(6, 43, 95, 0.5)",
+                            "disabled": false
+                        }
+                    ],
+                    "borderWidth": 0,
+                    "borderStyle": "solid",
+                    "borderColor": "rgba(255, 255, 255, 0.2)",
+                    "borderSide": "all",
+                    "borderRadius": 6,
+                    "color": "rgba(117, 253, 244, 1)"
+                },
+                "displayName": "Button"
+            },
+            "displayName": "Button",
+            "custom": {},
+            "parent": "1gW_RsQr-3",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "TPrMl19Htb": {
+            "type": {
+                "resolvedName": "Button"
+            },
+            "isCanvas": false,
+            "props": {
+                "children": "卸载",
+                "template": "default",
+                "type": "primary",
+                "shape": "default",
+                "icon": "PauseOutlined",
+                "htmlType": "button",
+                "isHighlight": "default",
+                "status": [],
+                "events": {
+                    "onClick": {
+                        "action": "pushData",
+                        "link": {
+                            "component": "CH1#ONOFF_SP",
+                            "value": "0"
+                        }
+                    }
+                },
+                "style": {
+                    "position": "relative",
+                    "width": "initial",
+                    "height": 32,
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "center",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "marginSide": "all",
+                    "padding": 4,
+                    "paddingTop": 4,
+                    "paddingRight": 15,
+                    "paddingBottom": 4,
+                    "paddingLeft": 15,
+                    "background": "linear-gradient(rgba(6, 43, 95, 0.5), rgba(6, 43, 95, 0.5))",
+                    "backgroundList": [
+                        {
+                            "id": "MM5chbM_bv",
+                            "type": "color",
+                            "key": "MM5chbM_bv",
+                            "value": "rgba(6, 43, 95, 0.5)",
+                            "disabled": false
+                        }
+                    ],
+                    "borderWidth": 0,
+                    "borderStyle": "solid",
+                    "borderColor": "rgba(255, 255, 255, 0.2)",
+                    "borderSide": "all",
+                    "borderRadius": 6,
+                    "color": "rgba(117, 253, 244, 1)"
+                },
+                "displayName": "Button"
+            },
+            "displayName": "Button",
+            "custom": {},
+            "parent": "1gW_RsQr-3",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "xZVNPLAlBY": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "value": "0.0",
+                "decimalSeparator": 1,
+                "percent": false,
+                "isBefore": false,
+                "isAfter": true,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "℃"
+                },
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "widthType": "relative",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 18,
+                    "fontWeight": "normal",
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all",
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "0wzSnVbAgD",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "lp9xbpcLkk": {
+            "type": {
+                "resolvedName": "InputKb"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "InputKb",
+                "value": "",
+                "name": "",
+                "size": "middle",
+                "type": "number",
+                "placeholder": "",
+                "disabled": false,
+                "variant": "outlined",
+                "allowClear": false,
+                "showCount": false,
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "70px",
+                    "height": "auto",
+                    "widthType": "fixed",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all",
+                    "widthUnit": "px"
+                }
+            },
+            "displayName": "InputKb",
+            "custom": {},
+            "parent": "xNL_49QSKV",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "w9dIovBstT": {
+            "type": {
+                "resolvedName": "InputKb"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "InputKb",
+                "value": "",
+                "name": "",
+                "size": "middle",
+                "type": "number",
+                "placeholder": "",
+                "disabled": false,
+                "variant": "outlined",
+                "allowClear": false,
+                "showCount": false,
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "70px",
+                    "height": "auto",
+                    "widthType": "fixed",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all",
+                    "widthUnit": "px"
+                }
+            },
+            "displayName": "InputKb",
+            "custom": {},
+            "parent": "cLD9J6vLxW",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "tpB2CCzYPt": {
+            "type": {
+                "resolvedName": "InputKb"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "InputKb",
+                "value": "",
+                "name": "",
+                "size": "middle",
+                "type": "number",
+                "placeholder": "",
+                "disabled": false,
+                "variant": "outlined",
+                "allowClear": false,
+                "showCount": false,
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "70px",
+                    "height": "auto",
+                    "widthType": "fixed",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all",
+                    "widthUnit": "px"
+                }
+            },
+            "displayName": "InputKb",
+            "custom": {},
+            "parent": "h1SjkQlJAj",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
         }
     }
-
 }
+

@@ -3,7 +3,7 @@
  */
 import { nanoid } from 'nanoid';
 import { contentstyle, colstyle, btnstyle, txtstyle, contentflexstyle, colnoflex, colrowstyle, textborderstyle, titlestyle } from './pageNodeDefault';
-import { drawthree, drawmap, drawtwo, drwacontrol, ariMap } from './pageNodeDefault';
+import { drawthree, drawmap, drawtwo, drwacontrol, arimap } from './pageNodeDefault';
 export const drawerid = nanoid(10);
 
 export const pageDefault = (parentbox, boxid, headid, footid, bottomid) => {
@@ -46,165 +46,31 @@ export const pageDefault = (parentbox, boxid, headid, footid, bottomid) => {
     };
 };
 
-
-// export const pageDefault = (parentbox, boxid, headid, footid, bottomid) => {
-//     const container = {
-//       id: parentbox,
-//       type: {
-//         resolvedName: 'Columns'
-//       },
-//       isCanvas: true,
-//       props: {
-//         displayName: 'Columns',
-//         columns: 3,
-//         wrap: false,
-//         style: {
-//           position: 'relative',
-//           width: '100%',
-//           height: '100vh',
-//           widthType: 'relative',
-//           heightType: 'viewport',
-//           fontFamily: 'Microsoft YaHei',
-//           fontSize: 14,
-//           fontWeight: 400,
-//           lineHeight: 1.5,
-//           textAlign: 'left',
-//           spacing: 0,
-//           paddingSide: 'all',
-//           marginSide: 'all',
-//           padding: null,
-//           display: 'flex',
-//           flexDirection: 'column',
-//           rowGap: 0,
-//           columnGap: 0,
-//           heightUnit: 'vh'
-//         }
-//       },
-//       displayName: 'Columns',
-//       custom: {},
-//       parent: 'ROOT',
-//       hidden: false,
-//       nodes: ['f8aJwz8fVk', 'AmQ25CxoFQ', 'b2-mJavExG'],
-//       linkedNodes: {}
-//     }; 
-//     const LayoutArea = {
-//       f8aJwz8fVk: {
-//         type: {
-//           resolvedName: 'CustomNode'
-//         },
-//         isCanvas: false,
-//         props: {},
-//         displayName: 'CustomNode',
-//         custom: {},
-//         parent: parentbox,
-//         hidden: false,
-//         nodes: ['ajDPGISxZj'],
-//         linkedNodes: {}
-//       },
-//       ajDPGISxZj: {
-//         type: {
-//           resolvedName: 'Col'
-//         },
-//         isCanvas: true,
-//         props: {
-//           id: 'col-0',
-//           span: 8,
-//           type: 'flex',
-//           style: {
-//             heightType: 'fixed',
-//             height: '100px',
-//             heightUnit: 'px'
-//           }
-//         },
-//         displayName: 'Col',
-//         custom: {},
-//         parent: 'f8aJwz8fVk',
-//         hidden: false,
-//         nodes: [footid, headid],
-//         linkedNodes: {}
-//       },
-//       AmQ25CxoFQ: {
-//         type: {
-//           resolvedName: 'CustomNode'
-//         },
-//         isCanvas: false,
-//         props: {},
-//         displayName: 'CustomNode',
-//         custom: {},
-//         parent: 'nIlD89X7T2',
-//         hidden: false,
-//         nodes: ['wfY-vzbQQD'],
-//         linkedNodes: {}
-//       },
-//       'wfY-vzbQQD': {
-//         type: {
-//           resolvedName: 'Col'
-//         },
-//         isCanvas: true,
-//         props: {
-//           id: 'col-1',
-//           span: 8,
-//           type: 'flex',
-//           flex: 'auto',
-//           style: {
-//             heightType: 'relative',
-//             height: '100%',
-//             heightUnit: '%',
-//             overflow: 'auto'
-//           }
-//         },
-//         displayName: 'Col',
-//         custom: {},
-//         parent: 'AmQ25CxoFQ',
-//         hidden: false,
-//         nodes: [boxid],
-//         linkedNodes: {}
-//       },
-//       'b2-mJavExG': {
-//         type: {
-//           resolvedName: 'CustomNode'
-//         },
-//         isCanvas: false,
-//         props: {},
-//         displayName: 'CustomNode',
-//         custom: {},
-//         parent: 'nIlD89X7T2',
-//         hidden: false,
-//         nodes: ['9N7wy0LAWt'],
-//         linkedNodes: {}
-//       },
-//       '9N7wy0LAWt': {
-//         type: {
-//           resolvedName: 'Col'
-//         },
-//         isCanvas: true,
-//         props: {
-//           id: 'col-2',
-//           span: 8,
-//           type: 'flex',
-//           style: {
-//             heightType: 'fixed',
-//             height: '100px',
-//             heightUnit: 'px'
-//           }
-//         },
-//         displayName: 'Col',
-//         custom: {},
-//         parent: 'b2-mJavExG',
-//         hidden: false,
-//         nodes: [bottomid],
-//         linkedNodes: {}
-//       }
-//     };
-
-
-//     return {
-//         ...container,
-//         ...LayoutArea
-//     }
-// };
 // 能耗能效反馈
-const efficiencyTab = (parentid, source) => {
+const efficiencyTab = (parentid, source,tag) => {
+    const {
+        COP_PLANT,
+        P_CH_GROUP,
+        COP_CH_GROUP,
+        P_CHWP_GROUP,
+        COP_CHWP_GROUP,
+        P_CWP_GROUP,
+        COP_CWP_GROUP,
+        P_CT_GROUP,
+        COP_CT_GROUP,
+        P_PLANT
+    } = {
+        COP_PLANT: source?.['COP_PLANT'].NAME,
+        P_CH_GROUP: source?.['P_CH_GROUP'].NAME,
+        COP_CH_GROUP: source?.["COP_CH_GROUP"].NAME,
+        P_CHWP_GROUP: source?.['P_CHWP_GROUP'].NAME,
+        COP_CHWP_GROUP: source?.["COP_CHWP_GROUP"].NAME,
+        P_CWP_GROUP: source?.["P_CWP_GROUP"].NAME,
+        COP_CWP_GROUP: source?.["COP_CWP_GROUP"].NAME,
+        P_CT_GROUP: source?.["P_CT_GROUP"].NAME,
+        COP_CT_GROUP: source?.["COP_CT_GROUP"].NAME,
+        P_PLANT: source?.["P_PLANT"].NAME,
+    };
     return {
         "WjE5WGRXQ8": {
             "type": {
@@ -245,7 +111,7 @@ const efficiencyTab = (parentid, source) => {
                 "zcAz3tuKp_",
                 "pDjq40AL8X",
                 "eqGr_o4d0r",
-               
+
             ],
             "linkedNodes": {}
         },
@@ -692,10 +558,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.['P_CH_GROUP']?.NAME,
+                    "bind": P_CH_GROUP,
                     "type": "points",
                     "point": [
-                        source?.['P_CH_GROUP']?.NAME
+                        P_CH_GROUP
                     ]
                 },
                 "decimalSeparator": 1,
@@ -777,10 +643,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.["COP_CH_GROUP"]?.NAME,
+                    "bind": COP_CH_GROUP,
                     "type": "points",
                     "point": [
-                        source?.["COP_CH_GROUP"]?.NAME,
+                        COP_CH_GROUP,
                     ]
                 },
                 "decimalSeparator": 1,
@@ -975,10 +841,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.['P_CHWP_GROUP']?.NAME,
+                    "bind": P_CHWP_GROUP,
                     "type": "points",
                     "point": [
-                        source?.['P_CHWP_GROUP']?.NAME
+                        P_CHWP_GROUP
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1060,10 +926,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.["COP_CHWP_GROUP"]?.NAME,
+                    "bind": COP_CHWP_GROUP,
                     "type": "points",
                     "point": [
-                        source?.["COP_CHWP_GROUP"]?.NAME,
+                        COP_CHWP_GROUP,
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1258,10 +1124,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind":  source?.["P_CWP_GROUP"]?.NAME,
+                    "bind": P_CWP_GROUP,
                     "type": "points",
                     "point": [
-                        source?.["P_CWP_GROUP"]?.NAME
+                        P_CWP_GROUP
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1343,10 +1209,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.["COP_CWP_GROUP"]?.NAME,
+                    "bind": COP_CWP_GROUP,
                     "type": "points",
                     "point": [
-                        source?.["COP_CWP_GROUP"]?.NAME
+                        COP_CWP_GROUP
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1541,10 +1407,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.["P_CT_GROUP"]?.NAME,
+                    "bind": P_CT_GROUP,
                     "type": "points",
                     "point": [
-                        source?.["P_CT_GROUP"]?.NAME
+                        P_CT_GROUP
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1626,10 +1492,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.["COP_CT_GROUP"]?.NAME,
+                    "bind": COP_CT_GROUP,
                     "type": "points",
                     "point": [
-                        source?.["COP_CT_GROUP"]?.NAME
+                        COP_CT_GROUP
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1824,10 +1690,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind": source?.["P_PLANT"]?.NAME,
+                    "bind": P_PLANT,
                     "type": "points",
                     "point": [
-                        source?.["P_PLANT"]?.NAME
+                        P_PLANT
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1909,10 +1775,10 @@ const efficiencyTab = (parentid, source) => {
             "props": {
                 "displayName": "StateText",
                 "value": {
-                    "bind":  source?.['COP_PLANT']?.NAME,
+                    "bind": COP_PLANT,
                     "type": "points",
                     "point": [
-                         source?.['COP_PLANT']?.NAME
+                        COP_PLANT
                     ]
                 },
                 "decimalSeparator": 1,
@@ -1963,7 +1829,9 @@ export const pageLayout = (parentid, source, tag) => {
     const settingparent = nanoid(10); // 优化边界设置
     const openparent = nanoid(10); // 优化参数开关盒子
     const controlparent = nanoid(10); // 控制参数
+    // 抽屉相关点位与名称
     const drawMap = drawmap();
+    const ariMap = arimap();
     const setting = Array(7).fill(1).map((_, i) => {
         return drawthree(settingparent, tag ? ariMap[2]?.[i] : drawMap[i], source)
     });
@@ -2130,14 +1998,14 @@ export const pageLayout = (parentid, source, tag) => {
                         "name": "优化控制",
                         "title": "优化控制"
                     },
-                    {
+                    ...(tag ? []: [{
                         "id": "3",
                         "label": "能耗能效",
                         "key": "3",
                         "children": "内容3",
                         "name": "能耗能效",
                         "title": "能耗能效"
-                    },
+                    }]),
                     {
                         "id": "2",
                         "label": "优化设置",
@@ -2180,12 +2048,10 @@ export const pageLayout = (parentid, source, tag) => {
             },
             "custom": {},
             "parent": drawercontentchildid,
-            "nodes": [
-                "n2Lt6nV2Um",
-                "rSVhIgwusS",
-                "CVWTWILYn6",
+            "nodes":[
+                // 需要保证字符串的顺序
+                ...(tag ? ["rSVhIgwusS"] : ["n2Lt6nV2Um","rSVhIgwusS","CVWTWILYn6"]),
                 controlparent,
-
             ],
             "linkedNodes": {},
             "hidden": false,
@@ -2223,7 +2089,7 @@ export const pageLayout = (parentid, source, tag) => {
             },
             "custom": {},
             "parent": drawercontentchildid,
-            "nodes": [
+            "nodes": tag ? [] : [
                 "WjE5WGRXQ8"
             ],
             "linkedNodes": {},
@@ -2608,6 +2474,7 @@ export const pageLayout = (parentid, source, tag) => {
         ...open[5].page,
         ...open?.[6]?.page,
         ...open?.[7]?.page,
+        // 一键开关机json -- 空压不展示这个按钮-控制nodes的子节点来隐藏
         "n2Lt6nV2Um": {
             "id": "n2Lt6nV2Um",
             "type": {
@@ -3315,8 +3182,8 @@ export const pageLayout = (parentid, source, tag) => {
         ...control?.[5]?.page,
         ...control?.[6]?.page,
         ...control?.[7]?.page,
-        // 能耗能效tab
-        ...efficiencyTab(tab3,source),
+        // 能耗能效tab -- 空压目前不展示这一项tab
+        ...(tag ? {} : efficiencyTab(tab3,source,tag)),
         "CVWTWILYn6": {
             "type": {
                 "resolvedName": "Columns"

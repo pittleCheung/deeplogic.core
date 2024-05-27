@@ -4,6 +4,7 @@
 import { navigationButtonStyle } from '../pageNodeDefault';
 
 export default (source, links, global, type) => {
+    const isCAS = type === 'CAS';
     return {
         "ROOT": {
             "type": {
@@ -2015,27 +2016,8 @@ export default (source, links, global, type) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "系统COP",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": isCAS ? "系统总功率" : "系统COP",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -2047,7 +2029,7 @@ export default (source, links, global, type) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "center",
+                    "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
                     "padding": 0,
@@ -2185,7 +2167,7 @@ export default (source, links, global, type) => {
                         ]
                     },
                     "grid": {
-                         "left": 30,
+                        "left": 30,
                         "right": 7,
                         "bottom": 10,
                         "top": "15%",
@@ -2207,18 +2189,18 @@ export default (source, links, global, type) => {
                     },
                     "yAxis": {
                         "type": "value",
-                    "name": ""
+                        "name": isCAS ? "kW" : "",
                     },
                     "series": [
                         {
                             "id": "FehDVpavZK",
-                            "label": type ? source?.P_CAS?.NAME : source?.COP_HVAC?.NAME,
-                            "name": '系统COP',
+                            "label": isCAS ? source?.P_CAS?.NAME : source?.COP_HVAC?.NAME,
+                            "name": isCAS ? "系统总功率" : "系统COP",
                             "type": "line",
                             "stack": "总量",
                             "data": [],
                             "smooth": false,
-                            "pointSource": source?.COP_HVAC?.NAME
+                            "pointSource": isCAS ? source?.P_CAS?.NAME : source?.COP_HVAC?.NAME,
                         }
                     ]
                 },
@@ -2339,27 +2321,8 @@ export default (source, links, global, type) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "系统总功率",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": isCAS ? "系统气电比" : "系统总功率",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -2371,7 +2334,7 @@ export default (source, links, global, type) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "center",
+                    "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
                     "padding": 0,
@@ -2509,7 +2472,7 @@ export default (source, links, global, type) => {
                         ]
                     },
                     "grid": {
-                         "left": 30,
+                        "left": 30,
                         "right": 7,
                         "bottom": 10,
                         "top": "15%",
@@ -2531,21 +2494,21 @@ export default (source, links, global, type) => {
                     },
                     "yAxis": {
                         "type": "value",
-                        "name": "kW",
+                        "name": isCAS ? "kWh/Nm³" : "kW",
                         "nameTextStyle": {
-                            padding: [0, 34, 0, 0], // 调整这个值以根据需要定位
+                            padding: [0, isCAS ? 0 : 34, 0, 0], // 调整这个值以根据需要定位
                         },
                     },
                     "series": [
                         {
                             "id": "FehDVpavZK",
-                            "label": type === 'CAS' ? source?.R_AIR_COMP?.NAME : source?.P_HVAC?.NAME,
-                            "name": "系统总功率",
+                            "label": isCAS ? source?.R_AIR_COMP?.NAME : source?.P_HVAC?.NAME,
+                            "name": isCAS ? "系统气电比" : "系统总功率",
                             "type": "line",
                             "stack": "总量",
                             "data": [],
                             "smooth": false,
-                            "pointSource": type === 'CAS' ? source?.R_AIR_COMP?.NAME : source?.P_HVAC?.NAME
+                            "pointSource": isCAS ? source?.R_AIR_COMP?.NAME : source?.P_HVAC?.NAME
                         }
                     ]
                 },
@@ -2666,27 +2629,8 @@ export default (source, links, global, type) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "系统制冷量",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": isCAS ? "输入比功率" : "系统制冷量",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -2698,7 +2642,7 @@ export default (source, links, global, type) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "center",
+                    "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
                     "padding": 0,
@@ -2836,7 +2780,7 @@ export default (source, links, global, type) => {
                         ]
                     },
                     "grid": {
-                         "left": 30,
+                        "left": 30,
                         "right": 7,
                         "bottom": 10,
                         "top": "15%",
@@ -2858,21 +2802,21 @@ export default (source, links, global, type) => {
                     },
                     "yAxis": {
                         "type": "value",
-                        "name": "kW",
+                        "name": isCAS ? "kW/(m³/min)" : "kW",
                         "nameTextStyle": {
-                            padding: [0, 34, 0, 0], // 调整这个值以根据需要定位
+                            padding: [0, isCAS ? -15 : 34, 0, 0], // 调整这个值以根据需要定位
                         },
                     },
                     "series": [
                         {
                             "id": "FehDVpavZK",
-                            "label": source?.[type ? 'AIR_DU_RATIO' : 'LOAD']?.NAME,
-                            "name": "系统制冷量",
+                            "label": source?.[isCAS ? 'P_SPECIFIC' : 'LOAD']?.NAME,
+                            "name": isCAS ? "输入比功率" : "系统制冷量",
                             "type": "line",
                             "stack": "总量",
                             "data": [],
                             "smooth": false,
-                            "pointSource": source?.LOAD?.NAME
+                            "pointSource": source?.[isCAS ? 'P_SPECIFIC' : 'LOAD']?.NAME,
                         }
                     ]
                 },
@@ -3030,27 +2974,8 @@ export default (source, links, global, type) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "系统总能耗",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": isCAS ? "加载压力" : "系统总能耗",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -3062,7 +2987,7 @@ export default (source, links, global, type) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "center",
+                    "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
                     "padding": 0,
@@ -3222,21 +3147,21 @@ export default (source, links, global, type) => {
                     },
                     "yAxis": {
                         "type": "value",
-                         "name": "kW/h",
-                         "nameTextStyle": {
+                        "name": isCAS ? "Mpa" : "kW/h",
+                        "nameTextStyle": {
                             padding: [0, 46, 0, 0], // 调整这个值以根据需要定位
                         },
                     },
                     "series": [
                         {
                             "id": "FehDVpavZK",
-                            "label": type == 'CAS' ? source?.PR_LOAD?.NAME : source?.ELEC_HVAC?.NAME,
-                            "name": "系统总能耗",
+                            "label": isCAS ? source?.PR_LOAD?.NAME : source?.ELEC_HVAC?.NAME,
+                            "name": isCAS ? "加载压力" : "系统总能耗",
                             "type": "line",
                             "stack": "总量",
                             "data": [],
                             "smooth": false,
-                            "pointSource": type == 'CAS' ? source?.PR_LOAD?.NAME : source?.ELEC_HVAC?.NAME
+                            "pointSource": isCAS ? source?.PR_LOAD?.NAME : source?.ELEC_HVAC?.NAME
                         }
                     ]
                 },
@@ -3357,27 +3282,8 @@ export default (source, links, global, type) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷机出水温度",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": isCAS ? "卸载压力" : "冷机出水温度",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -3389,7 +3295,7 @@ export default (source, links, global, type) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "center",
+                    "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
                     "padding": 0,
@@ -3527,7 +3433,7 @@ export default (source, links, global, type) => {
                         ]
                     },
                     "grid": {
-                         "left": 30,
+                        "left": 30,
                         "right": 7,
                         "bottom": 10,
                         "top": "15%",
@@ -3549,7 +3455,7 @@ export default (source, links, global, type) => {
                     },
                     "yAxis": {
                         "type": "value",
-                        "name": "℃",
+                        "name": isCAS ? "Mpa" : "℃",
                         "nameTextStyle": {
                             padding: [0, 25, 0, 0], // 调整这个值以根据需要定位
                         },
@@ -3557,13 +3463,13 @@ export default (source, links, global, type) => {
                     "series": [
                         {
                             "id": "FehDVpavZK",
-                            "label": source?.[type ? 'PR_UNLOAD' : 'T_CHW_S']?.NAME,
-                            "name": type? "卸载压力": "冷机出水温度",
+                            "label": source?.[isCAS ? 'PR_UNLOAD' : 'T_CHW_S']?.NAME,
+                            "name": isCAS ? "卸载压力" : "冷机出水温度",
                             "type": "line",
                             "stack": "总量",
                             "data": [],
                             "smooth": false,
-                            "pointSource": source?.[type ? 'PR_UNLOAD' : 'T_CHW_S']?.NAME
+                            "pointSource": source?.[isCAS ? 'PR_UNLOAD' : 'T_CHW_S']?.NAME
                         }
                     ]
                 },
@@ -3684,27 +3590,8 @@ export default (source, links, global, type) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "冷却回水温度",
-                "status": [
-                    {
-                        "label": "停止",
-                        "value": "0",
-                        "key": "1",
-                        "color": "#8c8c8c"
-                    },
-                    {
-                        "label": "运行",
-                        "value": "1",
-                        "key": "2",
-                        "color": "#73d13d"
-                    },
-                    {
-                        "label": "故障",
-                        "value": "1",
-                        "key": "3",
-                        "color": "#f5222d"
-                    }
-                ],
+                "value": isCAS ? "排气压力" : "冷却回水温度",
+                "status": [],
                 "events": {},
                 "style": {
                     "position": "relative",
@@ -3716,7 +3603,7 @@ export default (source, links, global, type) => {
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
-                    "textAlign": "center",
+                    "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
                     "padding": 0,
@@ -3854,7 +3741,7 @@ export default (source, links, global, type) => {
                         ]
                     },
                     "grid": {
-                         "left": 30,
+                        "left": 30,
                         "right": 7,
                         "bottom": 10,
                         "top": "15%",
@@ -3876,7 +3763,7 @@ export default (source, links, global, type) => {
                     },
                     "yAxis": {
                         "type": "value",
-                        "name": "℃",
+                        "name": isCAS ? "Mpa" : "℃",
                         "nameTextStyle": {
                             padding: [0, 25, 0, 0], // 调整这个值以根据需要定位
                         },
@@ -3884,13 +3771,13 @@ export default (source, links, global, type) => {
                     "series": [
                         {
                             "id": "FehDVpavZK",
-                            "label": source?.[type ? 'PR_DISCHARGE' : 'T_CW_R']?.NAME,
-                            "name": "冷却回水温度",
+                            "label": source?.[isCAS ? 'PR_DISCHARGE' : 'T_CW_R']?.NAME,
+                            "name": isCAS ? "排气压力" : "冷却回水温度",
                             "type": "line",
                             "stack": "总量",
                             "data": [],
                             "smooth": false,
-                            "pointSource": source?.[type ? 'PR_DISCHARGE' : 'T_CW_R']?.NAME
+                            "pointSource": source?.[isCAS ? 'PR_DISCHARGE' : 'T_CW_R']?.NAME
                         }
                     ]
                 },
@@ -4407,9 +4294,9 @@ export default (source, links, global, type) => {
                         ]
                     },
                     "grid": {
-                    "left": 30,
+                        "left": 30,
                         "right": 7,
-                    "bottom": 30,
+                        "bottom": 30,
                         "top": "15%",
                         "containLabel": true
                     },

@@ -1,4 +1,6 @@
-import { contentstyle, contentpaddingstyle, statsuMap } from '../pageNodeDefault';
+/**
+ * 吸干机
+ */
 export default (source) => {
     return {
         "ROOT": {
@@ -47,14 +49,15 @@ export default (source) => {
                 "events": {
                     "onLoad": null
                 },
-                "projId": "Gy3dmClBqavaG0Aeccdvzu",
+                "projId": "VBXjaBVNFzoDEsZVSMsG3F",
                 "points": {
-                    [source.AM.NAME]: 0,
                     [source.ONOFF.NAME]: 0,
-                    [source.POS.NAME]: 0,
-                    [source.POS_SP.NAME]: 0,
+                    [source.AM.NAME]: 0,
                     [source.EB.NAME]: 0,
-                    [source.ONOFF_SP.NAME]: 0
+                    [source.ONOFF_SP.NAME]: 0,
+                    [source.T_AIR_ENT.NAME]: 0,
+                    [source.T_AIR_LEV.NAME]: 0,
+                    [source.T_DEW.NAME]: 0
                 }
             },
             "displayName": "Page",
@@ -253,8 +256,11 @@ export default (source) => {
                         "key": "1",
                         "color": "rgb(255, 255, 255)",
                         "expression": {
-                            "bind": source.ONOFF.NAME,
-                            "type": "points"
+                            "bind": "${" + source.ONOFF.NAME + "}==0",
+                            "type": "expressions",
+                            "point": [
+                                source.ONOFF.NAME
+                            ],
                         },
                         "backgroundColor": ""
                     },
@@ -265,8 +271,11 @@ export default (source) => {
                         "key": "2",
                         "color": "#73d13d",
                         "expression": {
-                            "bind": source.ONOFF.NAME,
-                            "type": "points"
+                            "bind": "${" + source.ONOFF.NAME + "}==1",
+                            "type": "expressions",
+                            "point": [
+                                source.ONOFF.NAME
+                            ],
                         },
                         "backgroundColor": ""
                     }
@@ -582,13 +591,9 @@ export default (source) => {
                     "onChange": {
                         "action": "pushData",
                         "link": {
-                            "component": source.EB.NAME
+                            "component": source.EB.NAME,
                         }
                     }
-                },
-                "value": {
-                    "bind": source.EB.NAME,
-                    "type": "points",
                 },
                 "displayName": "Select",
                 "style": {
@@ -893,7 +898,11 @@ export default (source) => {
             "nodes": [
                 "bvfvvCzD7S",
                 "lp8HDlOVkf",
-                "BQBtM96eqL"
+                "BQBtM96eqL",
+                "bLRbMxveql",
+                "ZiLB3eXfxe",
+                "2jUimon4-n",
+                "dYnqfglWt8"
             ],
             "linkedNodes": {}
         },
@@ -1085,7 +1094,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "开度（%）",
+                "value": "进口温度（℃）",
                 "status": [],
                 "events": {},
                 "style": {
@@ -1167,7 +1176,7 @@ export default (source) => {
                 "decimalSeparator": 1,
                 "percent": false,
                 "value": {
-                    "bind": source.POS.NAME,
+                    "bind": "V1#POS",
                     "type": "points"
                 },
                 "type": "",
@@ -1290,7 +1299,7 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Typography.Text",
-                "value": "开度设置（%）",
+                "value": "出口温度（℃）",
                 "status": [],
                 "events": {},
                 "style": {
@@ -1356,7 +1365,7 @@ export default (source) => {
             "parent": "BQBtM96eqL",
             "hidden": false,
             "nodes": [
-                "5364_PUJ23"
+                "kNaP_jFuzf"
             ],
             "linkedNodes": {}
         },
@@ -1432,14 +1441,14 @@ export default (source) => {
             "isCanvas": false,
             "props": {
                 "displayName": "Image",
-                "src": "/assets/images/values.png",
+                "src": "1YgMK3nBiBDFvUgt16KOai",
                 "events": {},
                 "style": {
                     "position": "relative",
                     "width": "auto",
-                    "height": "100px",
+                    "height": "auto",
                     "widthType": "fit-content",
-                    "heightType": "fixed",
+                    "heightType": "fit-content",
                     "fontFamily": "Microsoft YaHei",
                     "fontSize": 18,
                     "fontWeight": 400,
@@ -1447,8 +1456,7 @@ export default (source) => {
                     "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
-                    "marginSide": "all",
-                    "heightUnit": "px"
+                    "marginSide": "all"
                 }
             },
             "displayName": "Image",
@@ -1458,56 +1466,894 @@ export default (source) => {
             "nodes": [],
             "linkedNodes": {}
         },
-        "5364_PUJ23": {
+        "bLRbMxveql": {
             "type": {
-                "resolvedName": "InputKb"
+                "resolvedName": "Container"
             },
-            "isCanvas": false,
+            "isCanvas": true,
             "props": {
-                "displayName": "InputKb",
-                "value": {
-                    "bind": source.POS_SP.NAME,
-                    "type": "points"
-                },
-                "size": "middle",
-                "type": "number",
-                "placeholder": "",
-                "disabled": false,
-                "variant": "outlined",
-                "allowClear": false,
-                "showCount": false,
-                "events": {
-                    "onPressEnter": {
-                        "action": "pushData",
-                        "link": {
-                            "component": source.POS_SP.NAME
-                        }
-                    }
-                },
+                "displayName": "Container",
                 "style": {
                     "position": "relative",
-                    "width": "70px",
+                    "width": "100%",
                     "height": "auto",
-                    "widthType": "fixed",
                     "heightType": "fit-content",
-                    "fontFamily": "Microsoft YaHei",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
                     "fontSize": 18,
                     "fontWeight": 400,
                     "lineHeight": 1.5,
                     "textAlign": "left",
                     "spacing": 0,
                     "paddingSide": "all",
+                    "padding": 0,
                     "marginSide": "all",
-                    "widthUnit": "px"
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
                 }
             },
-            "displayName": "InputKb",
+            "displayName": "Container",
+            "custom": {},
+            "parent": "_XqvH33DDN",
+            "hidden": false,
+            "nodes": [
+                "wSVcFP8Iga",
+                "zzye0eUOX2"
+            ],
+            "linkedNodes": {}
+        },
+        "wSVcFP8Iga": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingTop": 8,
+                    "paddingRight": 8,
+                    "paddingLeft": 16,
+                    "paddingBottom": 8
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "bLRbMxveql",
+            "hidden": false,
+            "nodes": [
+                "7UufY065Yi"
+            ],
+            "linkedNodes": {}
+        },
+        "7UufY065Yi": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "露点温度（℃）",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "wSVcFP8Iga",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "zzye0eUOX2": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "bLRbMxveql",
+            "hidden": false,
+            "nodes": [
+                "FtXv-THJHE"
+            ],
+            "linkedNodes": {}
+        },
+        "FtXv-THJHE": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "V1#POS",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "kPa",
+                    "type": "secondary"
+                },
+                "style": {
+                    "fontSize": 18,
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "zzye0eUOX2",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "ZiLB3eXfxe": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "_XqvH33DDN",
+            "hidden": false,
+            "nodes": [
+                "nsr3zFtU2_",
+                "CQL69XdYOC"
+            ],
+            "linkedNodes": {}
+        },
+        "nsr3zFtU2_": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingTop": 8,
+                    "paddingRight": 8,
+                    "paddingLeft": 16,
+                    "paddingBottom": 8
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "ZiLB3eXfxe",
+            "hidden": false,
+            "nodes": [
+                "cjNS2S2-lD"
+            ],
+            "linkedNodes": {}
+        },
+        "cjNS2S2-lD": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "运行压力",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "nsr3zFtU2_",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "CQL69XdYOC": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "ZiLB3eXfxe",
+            "hidden": false,
+            "nodes": [
+                "pGSvze_oY5"
+            ],
+            "linkedNodes": {}
+        },
+        "pGSvze_oY5": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "V1#POS",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "kPa",
+                    "type": "secondary"
+                },
+                "style": {
+                    "fontSize": 18,
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
+            "custom": {},
+            "parent": "CQL69XdYOC",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "2jUimon4-n": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "_XqvH33DDN",
+            "hidden": false,
+            "nodes": [
+                "BZYcKCsx1q",
+                "lK728zTb8D"
+            ],
+            "linkedNodes": {}
+        },
+        "BZYcKCsx1q": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingTop": 8,
+                    "paddingRight": 8,
+                    "paddingLeft": 16,
+                    "paddingBottom": 8
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "2jUimon4-n",
+            "hidden": false,
+            "nodes": [
+                "kv1yHG988f"
+            ],
+            "linkedNodes": {}
+        },
+        "kv1yHG988f": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "保养状态",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "BZYcKCsx1q",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "lK728zTb8D": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "right",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "2jUimon4-n",
+            "hidden": false,
+            "nodes": [
+                "0DI7xvrwSX"
+            ],
+            "linkedNodes": {}
+        },
+        "0DI7xvrwSX": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "保养状态",
+                "thousandth": false,
+                "status": [
+                    {
+                        "id": "b5qXWT_RHd",
+                        "label": "保养中",
+                        "value": "1",
+                        "expression": "",
+                        "color": "rgba(255, 207, 110, 1)",
+                        "backgroundColor": ""
+                    },
+                    {
+                        "id": "aGe-Fv8Vs0",
+                        "label": "未保养",
+                        "value": "0",
+                        "expression": "",
+                        "color": "rgba(93, 255, 136, 1)",
+                        "backgroundColor": ""
+                    }
+                ],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "auto",
+                    "height": "auto",
+                    "widthType": "fit-content",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all"
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "lK728zTb8D",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "kNaP_jFuzf": {
+            "type": {
+                "resolvedName": "StateText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "StateText",
+                "level": "5",
+                "size": "14px",
+                "decimalSeparator": 1,
+                "percent": false,
+                "value": {
+                    "bind": "V1#POS",
+                    "type": "points"
+                },
+                "type": "",
+                "strong": true,
+                "italic": false,
+                "underline": false,
+                "disabled": false,
+                "mark": false,
+                "keyboard": false,
+                "delete": false,
+                "code": false,
+                "isBefore": false,
+                "isAfter": false,
+                "before": {
+                    "value": "前缀"
+                },
+                "after": {
+                    "value": "kPa",
+                    "type": "secondary"
+                },
+                "style": {
+                    "fontSize": 18,
+                    "color": "rgb(255, 255, 255)"
+                }
+            },
+            "displayName": "StateText",
             "custom": {},
             "parent": "CexcoTXBS3",
             "hidden": false,
             "nodes": [],
             "linkedNodes": {}
+        },
+        "dYnqfglWt8": {
+            "type": {
+                "resolvedName": "Container"
+            },
+            "isCanvas": true,
+            "props": {
+                "displayName": "Container",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center"
+                }
+            },
+            "displayName": "Container",
+            "custom": {},
+            "parent": "_XqvH33DDN",
+            "hidden": false,
+            "nodes": [
+                "Y29GLi2ib4",
+                "b-nag_Xsze"
+            ],
+            "linkedNodes": {}
+        },
+        "Y29GLi2ib4": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 13,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "side",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerLeft",
+                    "justifyContent": "flex-start",
+                    "alignItems": "center",
+                    "paddingTop": 8,
+                    "paddingRight": 8,
+                    "paddingLeft": 16,
+                    "paddingBottom": 8
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "dYnqfglWt8",
+            "hidden": false,
+            "nodes": [
+                "IaMyu-aldJ"
+            ],
+            "linkedNodes": {}
+        },
+        "IaMyu-aldJ": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "加热状态",
+                "status": [],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 0,
+                    "marginSide": "all",
+                    "margin": 0
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "Y29GLi2ib4",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
+        },
+        "b-nag_Xsze": {
+            "type": {
+                "resolvedName": "Col"
+            },
+            "isCanvas": true,
+            "props": {
+                "type": "span",
+                "span": 11,
+                "flex": "",
+                "style": {
+                    "position": "relative",
+                    "width": "100%",
+                    "height": "auto",
+                    "heightType": "fit-content",
+                    "widthType": "relative",
+                    "fontFamily": "PingFang SC",
+                    "fontSize": 18,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "right",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "padding": 8,
+                    "marginSide": "all",
+                    "margin": 0,
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "key": "centerRight",
+                    "justifyContent": "flex-end",
+                    "alignItems": "center"
+                },
+                "displayName": "Col"
+            },
+            "displayName": "Col",
+            "custom": {},
+            "parent": "dYnqfglWt8",
+            "hidden": false,
+            "nodes": [
+                "MRJunImCKe"
+            ],
+            "linkedNodes": {}
+        },
+        "MRJunImCKe": {
+            "type": {
+                "resolvedName": "TypographyText"
+            },
+            "isCanvas": false,
+            "props": {
+                "displayName": "Typography.Text",
+                "value": "加热状态",
+                "thousandth": false,
+                "status": [
+                    {
+                        "id": "b5qXWT_RHd",
+                        "label": "加热中",
+                        "value": "1",
+                        "expression": "",
+                        "color": "rgba(255, 207, 110, 1)",
+                        "backgroundColor": ""
+                    },
+                    {
+                        "id": "aGe-Fv8Vs0",
+                        "label": "未加热",
+                        "value": "0",
+                        "expression": "",
+                        "color": "rgba(93, 255, 136, 1)",
+                        "backgroundColor": ""
+                    }
+                ],
+                "events": {},
+                "style": {
+                    "position": "relative",
+                    "width": "auto",
+                    "height": "auto",
+                    "widthType": "fit-content",
+                    "heightType": "fit-content",
+                    "fontFamily": "Microsoft YaHei",
+                    "fontSize": 14,
+                    "fontWeight": 400,
+                    "lineHeight": 1.5,
+                    "textAlign": "left",
+                    "spacing": 0,
+                    "paddingSide": "all",
+                    "marginSide": "all"
+                }
+            },
+            "displayName": "TypographyText",
+            "custom": {},
+            "parent": "b-nag_Xsze",
+            "hidden": false,
+            "nodes": [],
+            "linkedNodes": {}
         }
     }
-
 }

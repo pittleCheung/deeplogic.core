@@ -80,13 +80,7 @@ export const helpFunction = (arr, result, tag, prevX, initTop, lastdevice, idsLi
                 result[nameText.id] = nameText;
                 deviceMap[current.TYPE].slice(2).forEach((textItem, textIndex) => {
                     pointsObject[textItem[0]] = 0;
-                    // generateText(result, textItem, textIndex, target);
-                    generateText({
-                      result,
-                      item: textItem,
-                      index: textIndex,
-                      parentStyle: nameText.props.style,
-                    })
+                    generateText(result, textItem, textIndex, target);
                 })
                 // 左侧管
                 const pipeh1 = pipe('h', '0');
@@ -319,25 +313,18 @@ export const helpFunction = (arr, result, tag, prevX, initTop, lastdevice, idsLi
 
     })
 }
-
-export const generateText = ({ result, item, index, parentStyle }) => {
-  const poc = statusText(null, item[1])
-  // poc.props.style = {
-  //     ...commonTextStyle,
-  //     translateX: parentStyle.translateX - 40,
-  //     translateY: (index) * 50 + parentStyle.translateY,
-  // }
-  // 调整数码管的位置
-  poc.props.style = {
-    ...commonTextStyle,
-    translateX: parentStyle.translateX + (index === 0 ? -40 : 40),
-    translateY: parentStyle.translateY + 40,
-  }
-  poc.props.value = {
-    bind: item[0],
-    type: "points",
-  }
-  result[poc.id] = poc
+export const generateText = (result, item, index, parentStyle) => {
+    const poc = statusText(null, item[1]);
+    poc.props.style = {
+        ...commonTextStyle,
+        translateX: parentStyle.translateX - 40,
+        translateY: (index) * 50 + parentStyle.translateY,
+    }
+    poc.props.value = {
+        "bind": item[0],
+        "type": "points"
+    }
+    result[poc.id] = poc;
 }
 
 export default {

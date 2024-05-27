@@ -6,8 +6,8 @@ import { EFAULT_PUMP_MAP } from './global';
 import { checkCHLTotal, checkTotal, deviceCheckH, deviceCheckV } from './ifDefault';
 import pointDefault from './pointDefault';
 import { deviceMargin, deviceXGap, styleMap, textSystemTransform, textTransform } from './stylesDefault';
-// import deviceMap from "@/pages/editor/components/materials/components/monitor/devices/__deviceImg__/deviceMap"
-import deviceMap from '@deeplogic/materials/components/monitor/devices/__deviceImg__/deviceMap';
+import deviceMap from "@/pages/editor/components/materials/components/monitor/devices/__deviceImg__/deviceMap"
+// import deviceMap from '@deeplogic/materials/components/monitor/devices/__deviceImg__/deviceMap';
 /**
  * 保留一位小数
  */
@@ -820,15 +820,7 @@ export const box = {
       contentMinY: null,
       contentMaxY: null,
       // "background": "linear-gradient(#1c2035, #1c2035)",
-      backgroundList: [
-        {
-          id: 'kOXXN92lpv',
-          type: 'color',
-          key: 'kOXXN92lpv',
-          value: '#1c2035',
-          disabled: false
-        }
-      ],
+      backgroundList: [],
       // "display":"flex",
       flex: '1 1 0%' // 设置画布容器撑满剩余高度
     },
@@ -867,7 +859,7 @@ const deviceModelProps = {
   D0A1C: ['冷却泵', '880px'],
   D0A1D: ['冷却塔', '840px'],
   D0A30: ['阀门', '1020px'],
-  D0C1A: ['空压机', '900px'],
+  D0C1A: ['空压机', '1200px'],
   D0C1D: ['储气湿罐', '900px'],
   D0C1B: ['冷干机', '900px'],
   D0C1C: ['吸干机', '900px'],

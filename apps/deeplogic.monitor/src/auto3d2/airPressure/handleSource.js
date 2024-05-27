@@ -1,53 +1,35 @@
-import {
-  root,
-  boxid,
-  box,
-  parentbox,
-  footid,
-  device,
-  headid,
-  text,
-  bottomid,
-  rootHeader,
-} from "../nodesDefault"
-import headDefault, {bottomDefault, footDefault } from "../headDefault";
+import { root, boxid, box, parentbox, footid, device, headid, text,rootHeader,bottomid } from "../nodesDefault";
+import headDefault, { footDefault, bottomDefault } from "../headDefault";
 import { pageLayout, pageDefault } from "../pageDefault";
 import { position, getMaxHieght, helpFunction, pipevHeight, generateText } from './nodesDefault';
 import { styleMap } from '../stylesDefault';
 import { pipe } from '../nodesDefault';
 import { rootPointAirMap, drwaitemair } from '../pageNodeDefault';
 import { EFAULT_PUMP_MAP } from '../global';
-
 const { ConHeight } = styleMap;
-
-
 
 
 // 垂直间隙 80 
 export const handleSource = (source, deviceModelMap, links, global, allsource) => {
-    // let result = {
-    //     ROOT: root, // 根节点
-    //     [parentbox]: pageDefault(parentbox, boxid, headid, footid),
-    //     ...headDefault(headid, parentbox, source, 'air', allsource),
-    //     ...pageLayout(parentbox, source, 'air'),
-    //     // 页面框架节点
-    //     [boxid]: box,
-    //     ...footDefault(footid, parentbox, source, 'air'),
-    // }
-
     let result = {
-      ROOT: root,
-      ...rootHeader,
-      [parentbox]: pageDefault(parentbox, boxid, headid, footid, bottomid),
-      ...headDefault(headid, parentbox, source, "air", allsource),
-      ...pageLayout(parentbox, source, 'air'),
-      [boxid]: box,
-      ...footDefault(footid, parentbox, source,'air'),
-      ...bottomDefault(bottomid, parentbox, source, links),
-    }
+        ROOT: root,
+        ...rootHeader,
+        [parentbox]: pageDefault(parentbox, boxid, headid, footid, bottomid),
+        ...headDefault(headid, parentbox, source, "air", allsource),
+        ...pageLayout(parentbox, source, 'air'),
+        [boxid]: box,
+        ...footDefault(footid, parentbox, source,'air'),
+        ...bottomDefault(bottomid, parentbox, source, links),
+      }
     result.ROOT.props['projId'] = global?.ProjectId;
     result.ROOT.props['global'] = { "ProjectName": global?.ProjectName, "ProjectId": global?.ProjectId };
-    const pointsObject = { ...rootPointAirMap(source), ...drwaitemair(), MODE_SYS: 0, HINT: '' }; // 点表映射
+    const pointsObject = { ...rootPointAirMap(source), ...drwaitemair(source), 
+        [source["MODE_SYS"]?.NAME || "MODE_SYS"]: 0,
+        [source["HINT"]?.NAME || "HINT"]: '',
+        "T_OUTDOOR": 0,
+        "TW_OUTDOOR": 0,
+        "RH_OUTDOOR": 0
+     }; // 点表映射
     const ACOPS = source?.ACOPS || {}; // 空压机
     const ARWTS = source?.ARWTS || {}; // 储气湿罐
     for (const t in ARWTS) {
@@ -96,7 +78,6 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
         }
 
     }
-    // tag 默认是L
     let tag = 'L';
     for (let key in ACOPSobj) {
         if (ACOPSobj[key].length > JSON.parse(key).length) {
@@ -112,27 +93,18 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
     };
     // 空压机
     // 总管的位置: 在少的那一侧的中间设备上
-    console.log('initTopinitTopinitTop', initTop) // 当前设备 -100
-    // console.log("len====>0", ACOPS)
-    // [
-    //     [ 'KpdXsavFmUDYpGuGkuNtGq' ],
-    //     [ 'rmZ48XSm2xG2PfR32f8TbM', 'dO0iw_2KrfkCerlRk6Yf6S' ]
-    // ]
+    console.log('initTopinitTopinitTop', initTop)
     ACOPSARR.forEach((item, index) => {
         // 总管是否在当前侧,就是多设定一个横管
-        const len = item.length - 1; // 假设3个空压item  这里的len 第一个类为len=0  第二类为len=1
-        console.log("len====>3 index",len)
+        const len = item.length - 1;
         let str = ''
         item.forEach(t0 => str += `${'${' + ACOPS[t0].ONOFF.NAME + '}'}==1&&`);
         item.forEach((t, i) => {
             const current = ACOPS[t];
             const deviceItem = device('Acop', current, pointsObject, deviceModelMap?.ACOPS?.[current.ID]);
             result[deviceItem.id] = deviceItem;
-            // 计算空压机的位置 目前间距是 80
             result[deviceItem.id].props.style = { ...styleMap['Acop'], ...position((index + i), initTop, 0) };
-            // prevX为当前设备X轴的的位移
-            prevX = result[deviceItem.id].props.style.translateX; 
-            // target为当前设备Acop的样式
+            prevX = result[deviceItem.id].props.style.translateX;
             const target = result[deviceItem.id].props.style;
             const nameText = text();
             nameText.props.value = current.NAME
@@ -142,28 +114,17 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
                 translateY: target.translateY + target.height + 10
             }
             result[nameText.id] = nameText;
-            [['PR_DISCHARGE', 'Mpa'], ['T_DISCHARGE', '℃']].forEach((textItem, textIndex) => {
-                // generateText(result, textitem, textindex, target);
-                generateText({
-                  result,
-                  item: textItem,
-                  index: textIndex,
-                  parentStyle: nameText.props.style,
-                  relativeHeight: styleMap.Acop.height,
-                })
+            [['PR_DISCHARGE', 'Mpa'], ['T_DISCHARGE', '℃']].forEach((textitem, textindex) => {
+                generateText(result, textitem, textindex, target);
             })
             pointsObject['PR_DISCHARGE'] = 0;
             pointsObject['T_DISCHARGE'] = 0;
             const pipeh1 = pipe('h', '0');
             pipeh1.props.waterstyle = '1';
             pipeh1.props.style = { ...styleMap['h'], fill: '#407FCB', };
-            // pipeh1.props.style.width = fix(pipeh1.props.style.width * 0.33);
-            pipeh1.props.style.width = fix(pipeh1.props.style.width /  3)
-            // 空压连接处管子 X轴位移 位于空压设备右侧
+            pipeh1.props.style.width = fix(pipeh1.props.style.width * 0.33);
             pipeh1.props.style.translateX = target.translateX + target.width;
-            // pipeh1.props.style.translateY = target.translateY + target.height * 0.7 + styleMap['h'].height;
-            // 空压连接处管子 Y轴位移 位于空压设备高度的70%处
-            pipeh1.props.style.translateY = target.translateY + target.height * 0.7;
+            pipeh1.props.style.translateY = target.translateY + target.height * 0.7 + styleMap['h'].height;
             pipeh1.props.status = {
                 bind: `${'${' + current.ONOFF.NAME + '}'}==1`,
                 type: "expressions",
@@ -172,17 +133,10 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
             const X = pipeh1.props.style.translateX + pipeh1.props.style.width;
             const pipeh2 = pipe('h', '0');
             const vheight = len % 2 == 0 ? pipevHeight : pipevHeight * 0.5;
-
-            // 0 0
-            // 1 0
-            // 1 1
-
-            // 总管横管
             if (tag === 'L' && i === (len >> 1)) { // 生成总管
                 pipeh2.props.waterstyle = '1';
                 pipeh2.props.style = { ...styleMap['h'], fill: '#407FCB', };
-                // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
-                pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
+                pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
                 pipeh2.props.style.translateX = X + styleMap['v'].width;
                 pipeh2.props.style.translateY = pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight);
                 pipeh2.props.status = {
@@ -191,9 +145,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
                 };
                 result[pipeh2.id] = pipeh2;
             }
-            // 总管竖管
             if ( i === (len >> 1)) {
-                console.log("len====>2", len)
                 const pipev1 = pipe('v', (i > (len >> 1)) ? '1' : '0');
                 pipev1.props.waterstyle = '1';
                 pipev1.props.style = { ...styleMap['v'], fill: '#407FCB', };
@@ -206,6 +158,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
                 };
                 result[pipev1.id] = pipev1;
                 if (len % 2 == 1) {
+                    // 生成总管的地方要生成两个竖管
                     const pipev2 = pipe('v', '1');
                     pipev2.props.waterstyle = '1';
                     pipev2.props.style = { ...styleMap['v'], fill: '#407FCB', };
@@ -219,7 +172,6 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
                     result[pipev2.id] = pipev2;
                 }
             } else if (i !== len && i !== (len >> 1)) {
-                console.log("len====>3", "i=====>",i, "len====>",len)
                 const pipev = pipe('v', (i > (len >> 1)) ? '1' : '0');
                 pipev.props.waterstyle = '1';
                 pipev.props.style = { ...styleMap['v'], fill: '#407FCB', };
@@ -232,14 +184,12 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
                 };
                 result[pipev.id] = pipev;
             }
-
             if (i == 0) {
                 const nextlen = current.NEXT_NODE?.length;
                 const curlen = item.length;
-                current.NEXT_NODE.forEach(d => {
-                    d.LEN = nextlen;
+                current.NEXT_NODE.forEach(t => {
+                    t.LEN = nextlen;
                 })
-                console.log("i======>",nextlen,current.NEXT_NODE)
                 helpFunction(current.NEXT_NODE, result, tag, prevX, initTop + (curlen - nextlen) * pipevHeight * 0.5, result[deviceItem.id], idsList, deviceModelMap, item.length, pointsObject)
             }
         })
@@ -531,6 +481,6 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
             "linkedNodes": {}
         },
     }
-    // console.log('result', result)
+    console.log('result', result)
     return result;
 }

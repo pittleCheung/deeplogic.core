@@ -3,8 +3,8 @@ import { commonTextStyle } from './stylesDefault';
 import { nanoid } from 'nanoid';
 import { drawerid } from './pageDefault'
 import {navigationButtonStyle} from './pageNodeDefault';
-// import source from '../../source';
-// import position from '@/pages/editor/components/setter/style/block/position';
+import source from '../../source';
+import position from '@/pages/editor/components/setter/style/block/position';
 
 export default (headid, parentbox, source, tag, allsource) => {
     const allArr = allsource && Object.values(allsource).map(t => ({
@@ -483,17 +483,17 @@ export const footDefault = (footid, parentbox, source, type) => {
         arr = [
             footItem(footid, '气电比', null, source?.['R_AIR_COMP'].NAME, type),
             footItem(footid, '总功率', 'kW', source?.['P_PLANT'].NAME, type),
-            footItem(footid, '排气压力', 'kPa', source?.['PR_DISCHARGE'].NAME, type),
-            footItem(footid, '排气温度', 'kPa', source?.['T_DISCHARGE'].NAME, type),
-            footItem(footid, '总管压力', 'kPa', source?.['PR_PLANT'].NAME, type),
+            footItem(footid, '排气压力', 'Mpa', source?.['PR_DISCHARGE'].NAME, type),
+            footItem(footid, '排气温度', '℃', source?.['T_DISCHARGE'].NAME, type),
+            footItem(footid, '总管压力', 'Mpa', source?.['PR_PLANT'].NAME, type),
             footItem(footid, '总管露点温度', '℃', source?.['T_DEW'].NAME, type),
             footItem(footid, '总管流量', 'Nm³', source?.['FLOW_PLANT_AIR'].NAME, type)
         ]
     } else {
         arr = [
-            footItem(containerid, '系统冷负荷', 'kW', source?.['LOAD']?.NAME),
-            footItem(containerid, '制冷站', 'kW', source?.['P_PLANT']?.NAME),
-            footItem(containerid, '制冷站COP', null, source?.['COP_PLANT']?.NAME),
+            footItem(containerid, '系统冷负荷', 'kW', source?.['LOAD'].NAME),
+            footItem(containerid, '制冷站', 'kW', source?.['P_PLANT'].NAME),
+            footItem(containerid, '制冷站COP', null, source?.['COP_PLANT'].NAME),
             // footItem(containerid, '制冷机', 'kW', source?.['P_CH_GROUP'].NAME),
             // footItem(containerid, '冷冻泵', 'kW', source?.['P_CHWP_GROUP'].NAME),
             // footItem(containerid, '冷却泵', 'kW', source?.['P_CWP_GROUP'].NAME),

@@ -3,7 +3,8 @@
  */
 import {navigationButtonStyle} from '../pageNodeDefault';
 export default (source, links, global, type) => {
-  console.log('sourcesource', location.hostname, location.port)
+  console.log('sourcesource', source)
+  const isCAS = type === 'CAS';
   return {
     "ROOT": {
         "type": {
@@ -75,9 +76,12 @@ export default (source, links, global, type) => {
                 "AlarmNum": global.AlarmNum,
                 "UserId": global.UserId,
             },
-            "points": type === 'CAS' ? {
+            "points": isCAS ? {
                 [source.AIR_DISCHARGE_GROUP?.NAME]: 0,
-                [source.AIR_USED_GROUP?.NAME]: 0
+                [source.AIR_USED_GROUP?.NAME]: 0,
+                "T_OUTDOOR": 0,
+                "TW_OUTDOOR": 0,
+                "RH_OUTDOOR": 0
             } : {
                 [source.ELEC_CH_GROUP?.NAME]: 0,
                 [source.ELEC_CHWP_GROUP?.NAME]: 0,
@@ -90,9 +94,6 @@ export default (source, links, global, type) => {
                 [source.P_CHWP_GROUP?.NAME]: 0,
                 [source.P_CWP_GROUP?.NAME]: 0,
                 [source.P_CT_GROUP?.NAME]: 0,
-                // [source.T_OUTDOOR?.NAME]: 0,
-                // [source.TW_OUTDOOR?.NAME]: 0,
-                // [source.RH_OUTDOOR?.NAME]: 0,
                 "T_OUTDOOR": 0,
                 "TW_OUTDOOR": 0,
                 "RH_OUTDOOR": 0
@@ -1922,7 +1923,7 @@ export default (source, links, global, type) => {
         "props": {
             "displayName": "Typography.Text",
             "value": {
-                "bind": source?.ELEC_HVAC?.NAME,
+                "bind": isCAS ? source?.ELEC_CAS?.NAME: source?.ELEC_HVAC?.NAME,
                 "type": "points",
             },
             "status": [],
@@ -1960,7 +1961,7 @@ export default (source, links, global, type) => {
         "props": {
             "displayName": "Typography.Text",
             "value": {
-                "bind": source.P_HVAC?.NAME,
+                "bind": isCAS ? source.P_CAS?.NAME : source.P_HVAC?.NAME,
                 "type": "points",
             },
             "status": [],
@@ -2936,7 +2937,7 @@ export default (source, links, global, type) => {
         "isCanvas": false,
         "props": {
             "displayName": "Typography.Text",
-            "value": type === 'CAS' ? "今日监控气电比趋势" :"今日系统能耗趋势",
+            "value": "今日系统能耗趋势",
             "status": [],
             "events": {},
             "style": {
@@ -3109,7 +3110,7 @@ export default (source, links, global, type) => {
                 "series": [
                     {
                         "id": "m_R0Okff8K",
-                        "label": "系统COP",
+                        "label": isCAS ? "系统气电比" : "系统COP",
                         "type": "gauge",
                         "center": [
                             "50%",
@@ -3120,7 +3121,7 @@ export default (source, links, global, type) => {
                         "min": 0,
                         "max": 10,
                         "splitNumber": 5,
-                        "name": "系统COP",
+                        "name": isCAS ? "系统气电比" : "系统COP",
                         "itemStyle": {
                             "color": "rgba(117, 253, 244, 0.52)"
                         },
@@ -3181,7 +3182,7 @@ export default (source, links, global, type) => {
                         "data": [
                             {
                                 "value": 0,
-                                "name": "系统COP"
+                                "name": isCAS ? "系统气电比" : "系统COP",
                             }
                         ],
                         "value": 0
@@ -3240,7 +3241,7 @@ export default (source, links, global, type) => {
                         "data": [
                             {
                                 "value": 0,
-                                "name": "系统COP"
+                                "name": isCAS ? "系统气电比" :"系统COP"
                             }
                         ]
                     }
@@ -3259,7 +3260,7 @@ export default (source, links, global, type) => {
                 "margin": 0
             },
             "value": {
-                "bind": source.COP_HVAC?.NAME,
+                "bind": isCAS ? source.R_AIR_COMP?.NAME : source.COP_HVAC?.NAME,
                 "type": "points",
             }
         },
@@ -3545,7 +3546,7 @@ export default (source, links, global, type) => {
         "isCanvas": false,
         "props": {
             "displayName": "Typography.Text",
-            "value": type === 'CAS' ? "供需平衡" :"分项能耗",
+            "value": isCAS ? "供需平衡" :"分项能耗",
             "status": [],
             "events": {},
             "style": {
@@ -3804,7 +3805,7 @@ export default (source, links, global, type) => {
             "size": "middle",
             "loading": false,
             "bordered": false,
-            "showHeader": true,
+            "showHeader": false,
             "isPagination": false,
             "isScroll": false,
             "columns": [
@@ -3896,7 +3897,11 @@ export default (source, links, global, type) => {
                     "trigger": "axis"
                 },
                 "legend": {
-                    "data": [
+                    "data": isCAS ?[
+                        source?.P_CAS?.NAME,
+                        source?.P_ACOP_GROUP?.NAME,
+                        source?.P_DRYER_GROUP?.NAME,
+                    ]:[
                         source?.P_HVAC?.NAME,
                         source?.P_CH_GROUP?.NAME,
                         source?.P_CHWP_GROUP?.NAME,
@@ -3956,13 +3961,40 @@ export default (source, links, global, type) => {
                 //         "pointSource": source?.ELEC_HVAC?.NAME || source?.ELEC_CAS?.NAME
                 //     }
                 // ],
-                "series": [
+                "series": isCAS ? [
+                    {
+                        "id": "Q_kPPLdI81",
+                        "label": source?.P_CAS?.NAME,
+                        "type": "line",
+                        "name": "系统功率",
+                        "stack": "",
+                        "smooth": false,
+                        "pointSource": source?.P_CAS?.NAME,
+                    },
+                    {
+                        "id": "6G7PkaJ6Hz",
+                        "label": source?.P_ACOP_GROUP?.NAME,
+                        "type": "line",
+                        "name": "空压机功率",
+                        "stack": "",
+                        "smooth": false,
+                        "pointSource": source?.P_ACOP_GROUP?.NAME,
+                    },
+                    {
+                        "id": "3kADnhLJE2",
+                        "label": source?.P_DRYER_GROUP?.NAME,
+                        "type": "line",
+                        "name": "干燥机功率",
+                        "stack": "",
+                        "smooth": false,
+                        "pointSource": source?.P_DRYER_GROUP?.NAME,
+                    },
+                ] :[
                     {
                         "id": "Q_kPPLdI81",
                         "label": source?.P_HVAC?.NAME,
                         "type": "line",
-                        // "name": source?.P_HVAC?.NAME,
-                         "name": "系统总功率",
+                        "name": "系统总功率",
                         "stack": "",
                         "smooth": false,
                         "pointSource": source?.P_HVAC?.NAME,
@@ -3971,7 +4003,6 @@ export default (source, links, global, type) => {
                         "id": "6G7PkaJ6Hz",
                         "label": source?.P_CH_GROUP?.NAME,
                         "type": "line",
-                        // "name": source?.P_CH_GROUP?.NAME,
                         "name": "冷机总功率",
                         "stack": "",
                         "smooth": false,
@@ -3990,7 +4021,6 @@ export default (source, links, global, type) => {
                         "id": "j8DsPeS4Ly",
                         "label": source?.P_CWP_GROUP?.NAME,
                         "type": "line",
-                        // "name": source?.P_CWP_GROUP?.NAME,
                         "name": "冷却泵总功率",
                         "stack": "",
                         "smooth": false,
@@ -3999,7 +4029,6 @@ export default (source, links, global, type) => {
                     {
                         "id": "5SU-i6v8Zq",
                         "type": "line",
-                        // "name": source?.P_CT_GROUP?.NAME,
                         "stack": "",
                         "name": "冷却塔总功率",
                         "smooth": false,
@@ -4061,7 +4090,35 @@ export default (source, links, global, type) => {
                         padding: [0, 46, 0, 0], // 调整这个值以根据需要定位
                     },
                 },
-                "series": [
+                "series": isCAS ? [{
+                    "id": "FtN-mSbHyb",
+                    "label": source.AIR_DISCHARGE_GROUP?.NAME,
+                    "type": "bar",
+                    "showBackground": true,
+                    "name": "产气量",
+                    "stack": "",
+                    "stackStrategy": "samesign",
+                    "barWidth": null,
+                    "barGap": "30%",
+                    "barCategoryGap": "20%",
+                    "large": false,
+                    "data": [],
+                    "pointSource": source.AIR_DISCHARGE_GROUP?.NAME,
+                },
+                {
+                    "id": "28uxp6v_ya",
+                    "label": source.AIR_USED_GROUP?.NAME,
+                    "type": "bar",
+                    "name": "用气量",
+                    "stack": "",
+                    "stackStrategy": "samesign",
+                    "barWidth": null,
+                    "barGap": "30%",
+                    "barCategoryGap": "20%",
+                    "large": false,
+                    "data": [],
+                    "pointSource": source.AIR_USED_GROUP?.NAME
+                },]:[
                     {
                         "id": "FtN-mSbHyb",
                         "label": source.ELEC_CH_GROUP?.NAME,

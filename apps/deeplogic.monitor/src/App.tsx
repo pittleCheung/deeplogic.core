@@ -11,8 +11,6 @@ import { ConfigProvider } from "antd"
 import router from "./router"
 
 
-
-
 // if (import.meta.hot) {
 //   import.meta.hot.accept("./auto3d/handleSource", (newModule) => {
 //     console.log("触发热更新")
@@ -40,8 +38,7 @@ function App() {
       <div>
         <ConfigProvider locale={zhCN} theme={themeConfig}>
           <RouterProvider router={router} />
-        </ConfigProvider>
-        
+        </ConfigProvider>        
       </div>
     </>
   )

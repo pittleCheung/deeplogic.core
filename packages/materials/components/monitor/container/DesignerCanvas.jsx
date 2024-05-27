@@ -127,7 +127,7 @@ const DesignerCanvas = ({children, loading, style}) => {
     //   conMaxX - conMinx + 200,
     //   state
     // )
-    console.log("style===>",style)
+    console.log("style===>",style, isXMax)
 
     return (
       <>

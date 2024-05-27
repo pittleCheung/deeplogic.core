@@ -12,8 +12,10 @@ function Display(props) {
     ...(status?.backgroundColor && { backgroundColor: status.backgroundColor })
   };
 
+  const { transform, translateX, translateY, ...style } = state.style
+
   return (
-    <span style={{ ...state.style, ...statusStyle }} className={css.content}>
+    <span style={{ ...style, ...statusStyle }} className={css.content}>
       {(status?.label || state?.value) ?? ''}
     </span>
   );
