@@ -14,7 +14,7 @@ export const pipehWidth = 150;
 // X轴最小间距为横管宽度的倍数
 export const acopXGap = styleMap.h.width * 1.2
 // Y轴最小间距为80
-export const acopYGap = 120
+export const acopYGap = 80
 /**
  * 最大高度
  */
@@ -31,38 +31,53 @@ export const getMaxHieght = (ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) => {
 /**
  * 设备位置
  */
-export const position = (index, initTop, prevX, laststyle) => {
-     console.log(
-       "position====>1",
-       laststyle,
-       "initTop===>",
-       initTop,
-       (index + 1) * (styleMap.Acop.height + acopYGap) + initTop,
-       "sup===>",
-       styleMap.Acop.height,
-       acopYGap,
-       initTop,
-     )
-    return {
-      // translateY: (index + 1) * (styleMap.Acop.height + 80) + initTop,
-      // 当前设备的垂直位移 = 当前设备索引 * (按照Acop的高度算 + 上下设备之间的间隙) + 初始化距离顶部的高度
-      translateY: (index + 1) * (styleMap.Acop.height + acopYGap) + initTop,
-      // translateX: (laststyle ? (prevX + styleMap.h.width) : 160) + (laststyle ? laststyle.props.style.width: 0)
-      // 当前设备的水平位移 = 前一个设备的宽度+前一个设备的位移+ 距离前一个设备的位移
-      translateX: laststyle
-        ? prevX + laststyle.props.style.width + acopXGap
-        : 160,
-      // translateX: (laststyle ? (prevX + styleMap.h.width) : 100) + (laststyle ? laststyle.props.style.width + 80: 0)
-    }
+export const position = ({ index, initTop, prevX, laststyle }) => {
+  console.log(
+    "position====>1",
+    laststyle,
+    "initTop===>",
+    initTop,
+    (index + 1) * (styleMap.Acop.height + acopYGap) + initTop,
+    "sup===>",
+    styleMap.Acop.height,
+    acopYGap,
+    initTop,
+  )
+  return {
+    // translateY: (index + 1) * (styleMap.Acop.height + 80) + initTop,
+    // 当前设备的垂直位移 = 当前设备索引 * (按照Acop的高度算 + 上下设备之间的间隙) + 初始化距离顶部的高度
+    translateY: (index + 1) * (styleMap.Acop.height + acopYGap) + initTop,
+    // translateX: (laststyle ? (prevX + styleMap.h.width) : 160) + (laststyle ? laststyle.props.style.width: 0)
+    // 当前设备的水平位移 = 前一个设备的宽度+前一个设备的位移+ 距离前一个设备的位移
+    translateX: laststyle
+      ? prevX + laststyle.props.style.width + acopXGap
+      : 160,
+    // translateX: (laststyle ? (prevX + styleMap.h.width) : 100) + (laststyle ? laststyle.props.style.width + 80: 0)
+  }
 }
 
+// const deviceMap = {
+//     'D0C1A': ['Acop', null, ['PR_DISCHARGE', 'Mpa'], ['T_DISCHARGE', '℃'],{
+//         width:"104px",
+//         height:"120px",
+//     }],
+//     // 'D0C1D': ['WetTank', null, ['PR', 'Mpa']],
+//     'D0C1D': ['Tank', null, ['PR', 'Mpa'],[], {width:"78px",height:"120px"}],
+//     'D0C1B': ['RefDryer', 'RDRYS',[],[], {width:"95px",height:"100px"}],
+//     'D0C1C': ['DesDryer', 'DDRYS',[],[], {width:"120px",height:"100px"}],
+//     'D0C1E': ['Tank', null, ['PR', 'Mpa'],[], {width:"78px",height:"120px"}]
+// }
+
 const deviceMap = {
-    'D0C1A': ['Acop', null, ['PR_DISCHARGE', 'Mpa'], ['T_DISCHARGE', '℃']],
+    'D0C1A': ['Acop', null, ['PR_DISCHARGE', 'Mpa'], ['T_DISCHARGE', '℃'],{
+        width:"104px",
+        height:"120px",
+    }],
     // 'D0C1D': ['WetTank', null, ['PR', 'Mpa']],
-    'D0C1D': ['Tank', null, ['PR', 'Mpa']],
-    'D0C1B': ['RefDryer', 'RDRYS'],
-    'D0C1C': ['DesDryer', 'DDRYS'],
-    'D0C1E': ['Tank', null, ['PR', 'Mpa']]
+    'D0C1D': ['Tank', null, ['PR', 'Mpa'],[], {width:"78px",height:"120px"}],
+    'D0C1B': ['RefDryer', 'RDRYS',[],[], {width:"95px",height:"100px"}],
+    'D0C1C': ['DesDryer', 'DDRYS',[],[], {width:"120px",height:"100px"}],
+    'D0C1E': ['Tank', null, ['PR', 'Mpa'],[], {width:"78px",height:"120px"}]
 }
 // const deviceMap = {
 //   D0C1A: ["AcopImgGif", null, ["PR_DISCHARGE", "Mpa"], ["T_DISCHARGE", "℃"]],
@@ -136,11 +151,17 @@ export const helpFunction = ({
           current,
           pointsObject,
           deviceModelMap?.[deviceMap[current.TYPE]?.[1]]?.[item],
+        //   ...[deviceMap[current.TYPE]?.[4]]
         ) // 创建设备
         result[deviceItem.id] = deviceItem
         result[deviceItem.id].props.style = {
           ...styleMap[deviceMap[current.TYPE][0]],
-          ...position(t.length > 1 ? index : i, initTop, prevX, lastdevice),
+          ...position({
+            index: t.length > 1 ? index : i,
+            initTop,
+            prevX,
+            laststyle:lastdevice,
+          }),
         }
         // console.log("position====>", prevX, lastdevice)
         // result[deviceItem.id].props.style.translateY = result[deviceItem.id].props.style.translateY + 10
@@ -156,6 +177,7 @@ export const helpFunction = ({
         }
         result[nameText.id] = nameText
         deviceMap[current.TYPE].slice(2).forEach((textItem, textIndex) => {
+          if ((!textItem || !Array.isArray(textItem) || !textItem?.length )) return
           pointsObject[textItem[0]] = 0
           // generateText(result, textItem, textIndex, target);
           generateText({

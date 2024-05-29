@@ -150,7 +150,11 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           // 计算空压机的位置 目前间距是 80
           result[deviceItem.id].props.style = {
             ...styleMap["Acop"],
-            ...position(index + i, initTop, 0),
+            ...position({
+                index:index + i, 
+                initTop, 
+                prevX:0
+            }),
           }
           // prevX为当前设备X轴的的位移
           prevX = result[deviceItem.id].props.style.translateX

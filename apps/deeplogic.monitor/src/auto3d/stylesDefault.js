@@ -48,11 +48,24 @@ const ctWH = { width: 66, height: 80 }; // 冷却塔
 
 const hWH = { width: 150, height: 5, fill: '' };
 const vWH = { width: 5, height: 150, fill: '' };
-const ACOPStyle = { ...commonStyle, width: 90, height: 70 }; // 空压机
-const DDRYStyle = { ...commonStyle, width: 65, height: 60 }; // margin 10 吸干机
-const RDRYStyle = { ...commonStyle, width: 55, height: 60 }; // margin 10 冷干机
-const ARWTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气湿罐
-const ARDTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气干罐
+// const ACOPStyle = { ...commonStyle, width: 90, height: 70 }; // 空压机
+// const DDRYStyle = { ...commonStyle, width: 65, height: 60 }; // margin 10 吸干机
+// const RDRYStyle = { ...commonStyle, width: 55, height: 60 }; // margin 10 冷干机
+// const ARWTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气湿罐
+// const ARDTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气干罐
+
+// const ACOPStyle = { ...commonStyle, width: 120, height: 130 }; // 空压机
+// const DDRYStyle = { ...commonStyle, width: 120, height: 120 }; // margin 10 吸干机
+// const RDRYStyle = { ...commonStyle, width: 95, height: 120 }; // margin 10 冷干机
+// const ARWTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气湿罐
+// const ARDTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气干罐
+
+const ACOPStyle = { ...commonStyle, width: 104, height: 120 }; // 空压机
+const DDRYStyle = { ...commonStyle, width: 120, height: 100 }; // margin 10 吸干机
+const RDRYStyle = { ...commonStyle, width: 95, height: 100 }; // margin 10 冷干机
+const ARWTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气湿罐
+const ARDTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气干罐
+
 const chlStyle = { ...commonStyle, ...chlWH }; // 冷机默认样式
 const pumpStyle = { ...commonStyle, ...pumpWH }; // 水泵默认样式
 const ctStyle = { ...commonStyle, ...ctWH }; // 冷却塔默认样式

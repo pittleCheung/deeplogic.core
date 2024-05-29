@@ -17,9 +17,9 @@ function AcopImgGif(props) {
   return (
     <NodesBox state={state} DeviceType={ext?.DeviceType || ''} {...props}>
       {status?.img_src ? (
-        <img ref={connectRef} src={status?.img_src} style={{...props.childrenStyle}}/>
+        <img ref={connectRef} src={status?.img_src} width={'100%'} height={'100%'} style={{...props.childrenStyle}}/>
       ) : (
-        <img ref={connectRef} src={defaultImg} style={{...props.childrenStyle}}/>
+        <img ref={connectRef} src={defaultImg} width={'100%'} height={'100%'} style={{...props.childrenStyle}}/>
       )}
     </NodesBox>
   );
