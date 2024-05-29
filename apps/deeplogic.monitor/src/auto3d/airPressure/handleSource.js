@@ -12,12 +12,20 @@ import {
 } from "../nodesDefault"
 import headDefault, {bottomDefault, footDefault } from "../headDefault";
 import { pageLayout, pageDefault } from "../pageDefault";
-import { position, getMaxHieght, helpFunction, pipevHeight, generateText } from './nodesDefault';
+import {
+  position,
+  getMaxHieght,
+  helpFunction,
+  pipevHeight,
+  generateText,
+  acopXGap,
+  acopYGap
+} from "./nodesDefault"
 import { styleMap } from '../stylesDefault';
 import { pipe } from '../nodesDefault';
 import { rootPointAirMap, drwaitemair } from '../pageNodeDefault';
 import { EFAULT_PUMP_MAP } from '../global';
-
+import { calcAxis, replace2Gif } from "../util"
 const { ConHeight } = styleMap;
 
 
@@ -112,12 +120,14 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
     };
     // 空压机
     // 总管的位置: 在少的那一侧的中间设备上
-    console.log('initTopinitTopinitTop', initTop) // 当前设备 -100
+    console.log("initTopinitTopinitTop", initTop, ACOPSARR, ACOPSobj) // 当前设备 -100
     // console.log("len====>0", ACOPS)
+    // 两类的情况
     // [
     //     [ 'KpdXsavFmUDYpGuGkuNtGq' ],
     //     [ 'rmZ48XSm2xG2PfR32f8TbM', 'dO0iw_2KrfkCerlRk6Yf6S' ]
     // ]
+    // [['KpdXsavFmUDYpGuGkuNtGq','rmZ48XSm2xG2PfR32f8TbM','dO0iw_2KrfkCerlRk6Yf6S']] 
     ACOPSARR.forEach((item, index) => {
         // 总管是否在当前侧,就是多设定一个横管
         const len = item.length - 1; // 假设3个空压item  这里的len 第一个类为len=0  第二类为len=1
@@ -125,123 +135,165 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
         let str = ''
         item.forEach(t0 => str += `${'${' + ACOPS[t0].ONOFF.NAME + '}'}==1&&`);
         item.forEach((t, i) => {
-            const current = ACOPS[t];
-            const deviceItem = device('Acop', current, pointsObject, deviceModelMap?.ACOPS?.[current.ID]);
-            result[deviceItem.id] = deviceItem;
-            // 计算空压机的位置 目前间距是 80
-            result[deviceItem.id].props.style = { ...styleMap['Acop'], ...position((index + i), initTop, 0) };
-            // prevX为当前设备X轴的的位移
-            prevX = result[deviceItem.id].props.style.translateX; 
-            // target为当前设备Acop的样式
-            const target = result[deviceItem.id].props.style;
-            const nameText = text();
-            nameText.props.value = current.NAME
-            nameText.props.style = {
-                ...nameText.props.style,
-                translateX: target.translateX + target.width * 0.5 - 20,
-                translateY: target.translateY + target.height + 10
-            }
-            result[nameText.id] = nameText;
-            [['PR_DISCHARGE', 'Mpa'], ['T_DISCHARGE', '℃']].forEach((textItem, textIndex) => {
-                // generateText(result, textitem, textindex, target);
-                generateText({
-                  result,
-                  item: textItem,
-                  index: textIndex,
-                  parentStyle: nameText.props.style,
-                  relativeHeight: styleMap.Acop.height,
-                })
+          const current = ACOPS[t]
+          const deviceItem = device(
+            "Acop",
+            current,
+            pointsObject,
+            deviceModelMap?.ACOPS?.[current.ID],
+            // {
+            //     width:"104px",
+            //     height:"120px"
+            // }
+          )
+          result[deviceItem.id] = deviceItem
+          // 计算空压机的位置 目前间距是 80
+          result[deviceItem.id].props.style = {
+            ...styleMap["Acop"],
+            ...position(index + i, initTop, 0),
+          }
+          // prevX为当前设备X轴的的位移
+          prevX = result[deviceItem.id].props.style.translateX
+          // target为当前设备Acop的样式
+          const target = result[deviceItem.id].props.style
+          const nameText = text()
+          nameText.props.value = current.NAME
+          const xAxis = calcAxis(deviceItem, item.NAME)
+          nameText.props.style = {
+            ...nameText.props.style,
+            // translateX: target.translateX + target.width * 0.5 - 20,
+            translateX: target.translateX + xAxis,
+            translateY: target.translateY + target.height + 10,
+          }
+          result[nameText.id] = nameText
+          ;[
+            ["PR_DISCHARGE", "Mpa"],
+            ["T_DISCHARGE", "℃"],
+          ].forEach((textItem, textIndex) => {
+            // generateText(result, textitem, textindex, target);
+            generateText({
+              result,
+              item: textItem,
+              index: textIndex,
+              parentStyle: nameText.props.style,
+              relativeHeight: styleMap.Acop.height,
             })
-            pointsObject['PR_DISCHARGE'] = 0;
-            pointsObject['T_DISCHARGE'] = 0;
-            const pipeh1 = pipe('h', '0');
-            pipeh1.props.waterstyle = '1';
-            pipeh1.props.style = { ...styleMap['h'], fill: '#407FCB', };
-            // pipeh1.props.style.width = fix(pipeh1.props.style.width * 0.33);
-            pipeh1.props.style.width = fix(pipeh1.props.style.width /  3)
-            // 空压连接处管子 X轴位移 位于空压设备右侧
-            pipeh1.props.style.translateX = target.translateX + target.width;
-            // pipeh1.props.style.translateY = target.translateY + target.height * 0.7 + styleMap['h'].height;
-            // 空压连接处管子 Y轴位移 位于空压设备高度的70%处
-            pipeh1.props.style.translateY = target.translateY + target.height * 0.7;
-            pipeh1.props.status = {
-                bind: `${'${' + current.ONOFF.NAME + '}'}==1`,
-                type: "expressions",
-            };
-            result[pipeh1.id] = pipeh1;
-            const X = pipeh1.props.style.translateX + pipeh1.props.style.width;
-            const pipeh2 = pipe('h', '0');
-            const vheight = len % 2 == 0 ? pipevHeight : pipevHeight * 0.5;
+          })
+          pointsObject["PR_DISCHARGE"] = 0
+          pointsObject["T_DISCHARGE"] = 0
+          const pipeh1 = pipe("h", "0")
+          pipeh1.props.waterstyle = "1"
+          pipeh1.props.style = { ...styleMap["h"], fill: "#407FCB" }
+          // pipeh1.props.style.width = fix(pipeh1.props.style.width * 0.33);
+          // pipeh1.props.style.width = fix(pipeh1.props.style.width / 3)
+          // 让空压机和储气湿罐直接连接
+          pipeh1.props.style.width = fix(acopXGap - pipeh1.props.style.width / 2)
+          // 空压连接处管子 X轴位移 位于空压设备右侧
+          pipeh1.props.style.translateX = target.translateX + target.width
+          // pipeh1.props.style.translateY = target.translateY + target.height * 0.7 + styleMap['h'].height;
+          // 空压连接处管子 Y轴位移 位于空压设备高度的70%处
+          // pipeh1.props.style.translateY = target.translateY + target.height * .7;
+          // 用空压机的高度开始算 管子Y轴位于空压机的65%的位置 空压机的高度默认是70(在styleMap中定义了) 其他和空压机连接的设备的高度是60
+          // 因此其他设备的管子Y轴的位置 位于该设备的target.translateY + target.height * .65 + (70 - 60) * .65
+          pipeh1.props.style.translateY =
+            target.translateY + target.height * 0.65
+          pipeh1.props.status = {
+            bind: `${"${" + current.ONOFF.NAME + "}"}==1`,
+            type: "expressions",
+          }
+          result[pipeh1.id] = pipeh1
+          const X = pipeh1.props.style.translateX + pipeh1.props.style.width
+          const pipeh2 = pipe("h", "0")
+          const vheight = len % 2 == 0 ? pipevHeight : pipevHeight * 0.5
 
-            // 0 0
-            // 1 0
-            // 1 1
+          // 0 0
+          // 1 0
+          // 1 1
 
-            // 总管横管
-            if (tag === 'L' && i === (len >> 1)) { // 生成总管
-                pipeh2.props.waterstyle = '1';
-                pipeh2.props.style = { ...styleMap['h'], fill: '#407FCB', };
-                // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
-                pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
-                pipeh2.props.style.translateX = X + styleMap['v'].width;
-                pipeh2.props.style.translateY = pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight);
-                pipeh2.props.status = {
-                    bind: str.slice(0, -2),
-                    type: "expressions",
-                };
-                result[pipeh2.id] = pipeh2;
-            }
-            // 总管竖管
-            if ( i === (len >> 1)) {
-                console.log("len====>2", len)
-                const pipev1 = pipe('v', (i > (len >> 1)) ? '1' : '0');
-                pipev1.props.waterstyle = '1';
-                pipev1.props.style = { ...styleMap['v'], fill: '#407FCB', };
-                pipev1.props.style.height = vheight;
-                pipev1.props.style.translateX = X;
-                pipev1.props.style.translateY = pipeh1.props.style.translateY;
-                pipev1.props.status = {
-                    bind: str.slice(0, -2),
-                    type: "expressions",
-                };
-                result[pipev1.id] = pipev1;
-                if (len % 2 == 1) {
-                    const pipev2 = pipe('v', '1');
-                    pipev2.props.waterstyle = '1';
-                    pipev2.props.style = { ...styleMap['v'], fill: '#407FCB', };
-                    pipev2.props.style.height = vheight;
-                    pipev2.props.style.translateX = X;
-                    pipev2.props.style.translateY = pipev1.props.style.translateY + vheight;
-                    pipev2.props.status = {
-                        bind: str.slice(0, -2),
-                        type: "expressions",
-                    };
-                    result[pipev2.id] = pipev2;
-                }
-            } else if (i !== len && i !== (len >> 1)) {
-                console.log("len====>3", "i=====>",i, "len====>",len)
-                const pipev = pipe('v', (i > (len >> 1)) ? '1' : '0');
-                pipev.props.waterstyle = '1';
-                pipev.props.style = { ...styleMap['v'], fill: '#407FCB', };
-                pipev.props.style.height = 150;
-                pipev.props.style.translateX = X;
-                pipev.props.style.translateY = pipeh1.props.style.translateY;
-                pipev.props.status = {
-                    bind: `${'${' + ACOPS[item[i + 1]].ONOFF.NAME + '}'}==1`,
-                    type: "expressions",
-                };
-                result[pipev.id] = pipev;
-            }
-
-            if (i == 0) {
-                const nextlen = current.NEXT_NODE?.length;
-                const curlen = item.length;
-                current.NEXT_NODE.forEach(d => {
-                    d.LEN = nextlen;
-                })
-                console.log("i======>",nextlen,current.NEXT_NODE)
-                helpFunction(current.NEXT_NODE, result, tag, prevX, initTop + (curlen - nextlen) * pipevHeight * 0.5, result[deviceItem.id], idsList, deviceModelMap, item.length, pointsObject)
-            }
+          //   总管横管
+          //   if (tag === "L" && i === len >> 1) {
+        //     // 生成总管
+        //     pipeh2.props.waterstyle = "1"
+        //     pipeh2.props.style = { ...styleMap["h"], fill: "#407FCB" }
+        //     // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
+        //     // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
+        //     pipeh2.props.style.width = fix(acopXGap - (pipeh2.props.style.width / 3) * 2)
+        //     pipeh2.props.style.translateX = X + styleMap["v"].width
+        //     pipeh2.props.style.translateY =
+        //       pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
+        //     pipeh2.props.status = {
+        //       bind: str.slice(0, -2),
+        //       type: "expressions",
+        //     }
+        //     result[pipeh2.id] = pipeh2
+          //   }
+        
+          // 总管竖管
+        //   if (i === len >> 1) {
+        //     // 最后一根竖管
+        //     console.log("len====>2", len)
+        //     const pipev1 = pipe("v", i > len >> 1 ? "1" : "0")
+        //     pipev1.props.waterstyle = "1"
+        //     pipev1.props.style = { ...styleMap["v"], fill: "#407FCB" }
+        //     // pipev1.props.style.height = vheight
+        //     // pipev1.props.style.height = vheight + styleMap.h.height
+        //     pipev1.props.style.height = styleMap.Acop.height + acopYGap + styleMap.h.height
+        //     pipev1.props.style.translateX = X
+        //     pipev1.props.style.translateY = pipeh1.props.style.translateY
+        //     pipev1.props.status = {
+        //       bind: str.slice(0, -2),
+        //       type: "expressions",
+        //     }
+        //     result[pipev1.id] = pipev1
+        //     if (len % 2 == 1) {
+        //       const pipev2 = pipe("v", "1")
+        //       pipev2.props.waterstyle = "1"
+        //       pipev2.props.style = { ...styleMap["v"], fill: "#407FCB" }
+        //       pipev2.props.style.height = vheight
+        //       pipev2.props.style.translateX = X
+        //       pipev2.props.style.translateY =
+        //         pipev1.props.style.translateY + vheight
+        //       pipev2.props.status = {
+        //         bind: str.slice(0, -2),
+        //         type: "expressions",
+        //       }
+        //       result[pipev2.id] = pipev2
+        //     }
+        //   } else if (i !== len && i !== len >> 1) {
+        //     console.log("len====>3", "i=====>", i, "len====>", len)
+        //     const pipev = pipe("v", i > len >> 1 ? "1" : "0")
+        //     pipev.props.waterstyle = "1"
+        //     pipev.props.style = { ...styleMap["v"], fill: "#407FCB" }
+        //     // pipev.props.style.height = pipevHeight 
+        //     pipev.props.style.height = styleMap.Acop.height + acopYGap + styleMap.h.height
+        //     pipev.props.style.translateX = X
+        //     pipev.props.style.translateY = pipeh1.props.style.translateY
+        //     pipev.props.status = {
+        //       bind: `${"${" + ACOPS[item[i + 1]].ONOFF.NAME + "}"}==1`,
+        //       type: "expressions",
+        //     }
+        //     result[pipev.id] = pipev
+        //   }
+          if (i == 0) {
+            const nextlen = current.NEXT_NODE?.length
+            const curlen = item.length
+            current.NEXT_NODE.forEach((d) => {
+              d.LEN = nextlen
+            })
+            // console.log("i======>",nextlen,current.NEXT_NODE) // 3
+            helpFunction({
+              arr: current.NEXT_NODE,
+              result,
+              tag,
+              prevX,
+              initTop: initTop + (curlen - nextlen) * pipevHeight * 0.5,
+              lastdevice: result[deviceItem.id],
+              idsList,
+              deviceModelMap,
+              lastLen: item.length,
+              pointsObject,
+            })
+          }
         })
     })
     const boxidChild = Object.values(result).filter(t => t?.parent === boxid);
@@ -532,5 +584,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
         },
     }
     // console.log('result', result)
-    return result;
+    // return result;
+    return replace2Gif(result)
 }
+

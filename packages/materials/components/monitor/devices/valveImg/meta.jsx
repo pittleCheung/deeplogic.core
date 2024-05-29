@@ -1,8 +1,8 @@
 import { Popover } from 'antd';
 import { commonDeviceHandle as events, commonDeviceStyle as style } from '../../tool';
 // import defaultI from '../__deviceImg__/阀门默认.png';
-import defaultI from '../__deviceImg__/valve_off.png';
-import run from '../__deviceImg__/valve_on.png';
+import off from '../__deviceImg__/valve_off.png';
+import on from '../__deviceImg__/valve_on.png';
 
 import screenshot from '../__screenshots__/Image_thumbnail.png';
 
@@ -41,17 +41,20 @@ export default {
         {
           label: '关闭',
           value: '0',
-          key: '1'
+          key: '1',
+          img_src: off
         },
         {
           label: '开启',
           value: '1',
-          key: '2'
+          key: '2',
+          img_src: on
         },
         {
           label: '报警',
           value: '0',
-          key: '3'
+          key: '3',
+          img_src: off
         }
       ],
       props: [
@@ -98,12 +101,18 @@ export default {
             tip: '选择一张3D图片'
           },
           propType: 'select',
-          defaultValue: defaultI,
+          defaultValue: off,
           values: {
-            [defaultI]: (
-              <Popover content={<img src={defaultI} />} title='默认'>
-                <img src={defaultI} width={20} height={20} />
+            [off]: (
+              <Popover content={<img src={off} />} title='默认'>
+                <img src={off} width={20} height={20} />
                 默认
+              </Popover>
+            ),
+            [on]: (
+              <Popover content={<img src={on} />} title='运行'>
+                <img src={on} width={20} height={20} />
+                运行
               </Popover>
             )
           }

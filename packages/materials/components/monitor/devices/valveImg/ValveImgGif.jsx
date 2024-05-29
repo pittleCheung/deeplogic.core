@@ -22,7 +22,7 @@ function ValveImgGif(props) {
       {status?.img_src ? (
         <img ref={connectRef} src={status?.img_src} width={'100%'} height={'100%'} />
       ) : (
-        <img ref={connectRef} src={defaultImg} width={'100%'} height={'100%'} />
+        <img ref={connectRef} src={props?.defaultImg || defaultImg} width={'100%'} height={'100%'} />
       )}
     </NodesBox>
   );

@@ -873,19 +873,19 @@ const deviceModelProps = {
   D0C1C: ['吸干机', '900px'],
   D0C1E: ['储气干罐', '900px']
 };
-export const device = (type, item, pointsObject, modelId) => {
-  const id = nanoid(10);
-  const { TYPE, ID } = item; //DEVICE_PREFIX 设备前缀 STATION_PREFIX_ORG系统前缀
+export const device = (type, item, pointsObject, modelId, childrenStyle) => {
+  const id = nanoid(10)
+  const { TYPE, ID } = item //DEVICE_PREFIX 设备前缀 STATION_PREFIX_ORG系统前缀
 
   if (pointsObject) {
-    pointsObject[item[pointDefault.status[0]]?.NAME] = 0;
-    pointsObject[item[pointDefault.status[1]]?.NAME] = 0;
+    pointsObject[item[pointDefault.status[0]]?.NAME] = 0
+    pointsObject[item[pointDefault.status[1]]?.NAME] = 0
   }
   if (!item?.[pointDefault.status[1]]) {
     return {
       id: id,
       type: {
-        resolvedName: type
+        resolvedName: type,
       },
       displayName: type,
       props: {
@@ -896,28 +896,29 @@ export const device = (type, item, pointsObject, modelId) => {
         value: item[pointDefault.value]?.map((t) => t?.ID),
         events: {
           onClick: {
-            action: 'openPopup',
+            action: "openPopup",
             link: {
               component: modelId,
-              title: item?.NAME + '详情',
-              width: deviceModelProps[TYPE][1]
-            }
-          }
+              title: item?.NAME + "详情",
+              width: deviceModelProps[TYPE][1],
+            },
+          },
         },
-        style: {}
+        childrenStyle,
+        style: {},
       },
       parent: boxid,
       nodes: [],
       linkedNodes: {},
       hidden: false,
-      isCanvas: false
-    };
+      isCanvas: false,
+    }
   }
 
   return {
     id: id,
     type: {
-      resolvedName: type
+      resolvedName: type,
     },
     displayName: type,
     props: {
@@ -929,61 +930,62 @@ export const device = (type, item, pointsObject, modelId) => {
       value: item[pointDefault.value]?.map((t) => t?.ID),
       status: [
         {
-          label: '故障',
-          value: '1',
-          key: '3',
+          label: "故障",
+          value: "1",
+          key: "3",
           img_src: deviceMap?.[TYPE]?.fault,
-          color: '#f5222d',
+          color: "#f5222d",
           expression: {
-            bind: '${' + item[pointDefault.status[1]]?.NAME + '}',
-            type: 'expressions',
-            point: [item[pointDefault.status[1]]?.NAME]
-          }
+            bind: "${" + item[pointDefault.status[1]]?.NAME + "}",
+            type: "expressions",
+            point: [item[pointDefault.status[1]]?.NAME],
+          },
         },
         {
-          label: '停止',
-          value: '0',
-          key: '1',
+          label: "停止",
+          value: "0",
+          key: "1",
           img_src: deviceMap?.[TYPE]?.off,
-          color: '#7E8B99',
+          color: "#7E8B99",
           expression: {
-            bind: '${' + item[pointDefault.status[0]]?.NAME + '}',
-            type: 'expressions',
-            point: [item[pointDefault.status[0]]?.NAME]
-          }
+            bind: "${" + item[pointDefault.status[0]]?.NAME + "}",
+            type: "expressions",
+            point: [item[pointDefault.status[0]]?.NAME],
+          },
         },
         {
-          label: '运行',
-          value: '1',
-          key: '2',
+          label: "运行",
+          value: "1",
+          key: "2",
           img_src: deviceMap?.[TYPE]?.on,
-          color: '#73d13d',
+          color: "#73d13d",
           expression: {
-            bind: '${' + item[pointDefault.status[0]]?.NAME + '}',
-            type: 'expressions',
-            point: [item[pointDefault.status[0]]?.NAME]
-          }
-        }
+            bind: "${" + item[pointDefault.status[0]]?.NAME + "}",
+            type: "expressions",
+            point: [item[pointDefault.status[0]]?.NAME],
+          },
+        },
       ],
       events: {
         onClick: {
-          action: 'openPopup',
+          action: "openPopup",
           link: {
             component: modelId,
-            title: item?.NAME + '详情',
-            width: deviceModelProps[TYPE][1]
-          }
-        }
+            title: item?.NAME + "详情",
+            width: deviceModelProps[TYPE][1],
+          },
+        },
       },
-      style: {}
+      childrenStyle,
+      style: {},
     },
     parent: boxid,
     nodes: [],
     linkedNodes: {},
     hidden: false,
-    isCanvas: false
-  };
-};
+    isCanvas: false,
+  }
+}
 /**
  * 生成管道
  * @param {*} type 设备类型

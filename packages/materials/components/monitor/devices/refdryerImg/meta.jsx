@@ -1,9 +1,10 @@
 import { Popover } from 'antd';
 import { commonDeviceHandle as events, commonDeviceStyle as style } from '../../tool';
-import warn from '../__deviceImg__/冷冻式干燥机报警.gif';
-import fault from '../__deviceImg__/冷冻式干燥机故障.gif';
-import run from '../__deviceImg__/冷冻式干燥机运行.gif';
-import defaultI from '../__deviceImg__/冷冻式干燥机默认.png';
+import alarm from '../__deviceImg__/ref_dryer_alarm.png';
+import fault from '../__deviceImg__/ref_dryer_fault.png';
+import on from '../__deviceImg__/ref_dryer_on.gif';
+import off from '../__deviceImg__/ref_dryer_off.png';
+
 import screenshot from '../__screenshots__/Image_thumbnail.png';
 
 export default {
@@ -43,19 +44,19 @@ export default {
           label: '故障',
           value: '1',
           key: '3',
-          color: '#f5222d'
+          img_src: fault
         },
         {
           label: '停止',
           value: '0',
           key: '1',
-          color: '#8c8c8c'
+          img_src: off
         },
         {
           label: '运行',
           value: '1',
           key: '2',
-          color: '#73d13d'
+          img_src: on
         }
       ],
       props: [
@@ -93,23 +94,23 @@ export default {
             tip: '选择一张3D图片'
           },
           propType: 'select',
-          defaultValue: defaultI,
+          defaultValue: off,
           values: {
-            [defaultI]: (
-              <Popover content={<img src={defaultI} />} title='默认'>
-                <img src={warn} width={20} height={20} />
+            [off]: (
+              <Popover content={<img src={off} />} title='默认'>
+                <img src={off} width={20} height={20} />
                 默认
               </Popover>
             ),
-            [run]: (
-              <Popover content={<img src={run} />} title='运行'>
-                <img src={run} width={20} height={20} />
+            [on]: (
+              <Popover content={<img src={on} />} title='运行'>
+                <img src={on} width={20} height={20} />
                 运行
               </Popover>
             ),
-            [warn]: (
-              <Popover content={<img src={warn} />} title='警告'>
-                <img src={warn} width={20} height={20} />
+            [alarm]: (
+              <Popover content={<img src={alarm} />} title='警告'>
+                <img src={alarm} width={20} height={20} />
                 警告
               </Popover>
             ),

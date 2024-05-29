@@ -2694,7 +2694,7 @@ export const pageLayout = (parentid, source, tag) => {
                     "onClick": {
                         "action": "pushData",
                         "link": {
-                            "component": source.ONECLICK_START?.NAME,
+                            "component": source?.ONECLICK_START?.NAME,
                             "value": "1"
                         }
                     }
@@ -2705,10 +2705,10 @@ export const pageLayout = (parentid, source, tag) => {
                         "label": "",
                         "value": "0",
                         "expression": {
-                            "bind": "${" + source.ONECLICK_START?.NAME + "}==0?0:1",
+                            "bind": "${" + source?.ONECLICK_START?.NAME + "}==0?0:1",
                             "type": "expressions",
                             "point": [
-                                source.ONECLICK_START?.NAME
+                                source?.ONECLICK_START?.NAME
                             ],
                         },
                         // "color": "transparent"
@@ -2718,10 +2718,10 @@ export const pageLayout = (parentid, source, tag) => {
                         "label": "",
                         "value": "1",
                         "expression": {
-                            "bind": "${" + source.ONECLICK_START?.NAME + "}==1?1:0",
+                            "bind": "${" + source?.ONECLICK_START?.NAME + "}==1?1:0",
                             "type": "expressions",
                             "point": [
-                                source.ONECLICK_START?.NAME
+                                source?.ONECLICK_START?.NAME
                             ],
                         },
                         "color": "rgb(46,142,251)"
@@ -2761,7 +2761,7 @@ export const pageLayout = (parentid, source, tag) => {
                     "onClick": {
                         "action": "pushData",
                         "link": {
-                            "component": source.ONECLICK_STOP?.NAME,
+                            "component": source?.ONECLICK_STOP?.NAME,
                             "value": "1"
                         }
                     }
@@ -2772,10 +2772,10 @@ export const pageLayout = (parentid, source, tag) => {
                         "label": "",
                         "value": "0",
                         "expression": {
-                            "bind": "${" + source.ONECLICK_STOP?.NAME + "}",
+                            "bind": "${" + source?.ONECLICK_STOP?.NAME + "}",
                             "type": "expressions",
                             "point": [
-                                source.ONECLICK_STOP?.NAME
+                                source?.ONECLICK_STOP?.NAME
                             ],
                         },
                         // "color": "transparent"
@@ -2785,10 +2785,10 @@ export const pageLayout = (parentid, source, tag) => {
                         "label": "",
                         "value": "1",
                         "expression": {
-                            "bind": "${" + source.ONECLICK_STOP?.NAME + "}",
+                            "bind": "${" + source?.ONECLICK_STOP?.NAME + "}",
                             "type": "expressions",
                             "point": [
-                                source.ONECLICK_STOP?.NAME
+                                source?.ONECLICK_STOP?.NAME
                             ],
                         },
                         "color": "rgb(46,142,251)"
@@ -3438,7 +3438,7 @@ export const pageLayout = (parentid, source, tag) => {
                     "onClick": {
                         "action": "pushData",
                         "link": {
-                            "component": source.ONECLICK_CANCEL?.NAME,
+                            "component": source?.ONECLICK_CANCEL?.NAME,
                             "value": "1"
                         }
                     }

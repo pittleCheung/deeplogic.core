@@ -2,7 +2,7 @@
 import { craft } from '../../../_utils/utils';
 import { useComponent } from '../../../useComponent';
 import NodesBox from '../../nodes/nodesBox';
-import defaultImg from '../__deviceImg__/吸干机默认.png';
+import defaultImg from '../__deviceImg__/des_dryer_off.png';
 import meta from './meta';
 
 function DesDryerImgGif(props) {

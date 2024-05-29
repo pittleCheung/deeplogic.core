@@ -30,6 +30,15 @@ export default {
     //   propType: 'string'
     // },
     {
+      name: 'value',
+      title: {
+          label: '内容',
+          tip: 'value | 内容'
+      },
+      propType: 'number',
+      defaultValue: '0'
+  },
+    {
       name: 'decimalSeparator',
       title: {
         label: '小数点',

@@ -2,7 +2,7 @@
 import { craft } from '../../../_utils/utils';
 import { useComponent } from '../../../useComponent';
 import NodesBox from '../../nodes/nodesBox';
-import defaultImg from '../__deviceImg__/冷冻式干燥机默认.png';
+import defaultImg from '../__deviceImg__/ref_dryer_off.png';
 import meta from './meta';
 
 function RefDryerImgGif(props) {

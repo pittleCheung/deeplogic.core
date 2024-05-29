@@ -15,7 +15,7 @@ export const rootPointMap = (source) => {
 }
 export const rootPointAirMap = (source) => {
     return {
-        [source['MODE_SYS']?.NAME]: 0,
+        [source?.['MODE_SYS']?.NAME]: 0,
         [source['COP_PLANT']?.NAME]: 0,
         [source['P_PLANT']?.NAME]: 0,
         [source['P_CH_GROUP']?.NAME]: 0,

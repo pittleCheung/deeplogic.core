@@ -6388,19 +6388,22 @@ for (let key in ACOPS) {
 //  (3) [{…}, {…}, {…}]  ['KpdXsavFmUDYpGuGkuNtGq'] 
 //  (3) [{…}, {…}, {…}]  ['rmZ48XSm2xG2PfR32f8TbM', 'dO0iw_2KrfkCerlRk6Yf6S'] 
 
+// 只有一类的情况那就是并联
+// [['KpdXsavFmUDYpGuGkuNtGq','rmZ48XSm2xG2PfR32f8TbM','dO0iw_2KrfkCerlRk6Yf6S']] 
+
 const ACOPSARR = Object.values(ACOPSobj)
 // [['KpdXsavFmUDYpGuGkuNtGq'], ['rmZ48XSm2xG2PfR32f8TbM', 'dO0iw_2KrfkCerlRk6Yf6S'] ]
 
- ACOPSARR.forEach((item:any, index:any) => {
+ ACOPSARR.forEach((item:any) => {
   //  console.log(item, index)
    // 总管是否在当前侧,就是多设定一个横管
-   const len = item.length - 1
+  //  const len = item.length - 1
    let str = ""
    item.forEach((t0:any) => (str += `${"${" + ACOPS[t0].ONOFF.NAME + "}"}==1&&`))
    console.log(str)
  })
 
-console.log(ACOPSARR)
+console.log(ACOPSARR, ACOPSobj)
 
 // target  生成一组所需的设备映射 { 设备类型: {设备id1:随机id,设备id2:随机id,设备id3:随机id3,} }
 // {

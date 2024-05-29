@@ -15,13 +15,13 @@ export const rootPointMap = (source) => {
 }
 export const rootPointAirMap = (source) => {
     return {
-        [source['MODE_SYS']?.NAME]: 0,
-        [source['COP_PLANT']?.NAME]: 0,
-        [source['P_PLANT']?.NAME]: 0,
-        [source['P_CH_GROUP']?.NAME]: 0,
-        [source['P_CHWP_GROUP']?.NAME]: 0,
-        [source['P_CWP_GROUP']?.NAME]: 0,
-        [source.P_CT_GROUP?.NAME]: 0,
+        [source?.['MODE_SYS']?.NAME]: 0,
+        [source?.['COP_PLANT']?.NAME]: 0,
+        [source?.['P_PLANT']?.NAME]: 0,
+        [source?.['P_CH_GROUP']?.NAME]: 0,
+        [source?.['P_CHWP_GROUP']?.NAME]: 0,
+        [source?.['P_CWP_GROUP']?.NAME]: 0,
+        [source?.P_CT_GROUP?.NAME]: 0,
     }
 }
 export const statsuMap = [
@@ -796,10 +796,10 @@ export const drawtwo = (parentid, drawitem, source) => {
                 "displayName": "Checkbox",
                 "props": {
                     "value": {
-                        "bind": source[drawitem.point3]?.NAME|| '0',
+                        "bind": source?.[drawitem.point3]?.NAME|| '0',
                         "type": "points",
                         "point": [
-                            source[drawitem.point3]?.NAME
+                            source?.[drawitem.point3]?.NAME
                         ]
                     },
                     "label": "开启",
@@ -808,7 +808,7 @@ export const drawtwo = (parentid, drawitem, source) => {
                         "onChange": {
                             "action": "pushData",
                             "link": {
-                                "component": source[drawitem.point3]?.NAME
+                                "component": source?.[drawitem.point3]?.NAME
                             }
                         }
                     },
@@ -838,7 +838,7 @@ export const drwacontrol = (parentid, drawitem, source) => {
     const boxcol2 = nanoid(10);
     const box3 = nanoid(10);
     const boxcol3 = nanoid(10);
-    console.log('source[drawitem.val]?.NAMEsource[drawitem.val]?.NAME', source[drawitem.val]?.NAME)
+    console.log('source[drawitem.val]?.NAMEsource[drawitem.val]?.NAME', source?.[drawitem.val]?.NAME)
     return {
         id: idbox,
         page: {
@@ -1035,11 +1035,11 @@ export const drwacontrol = (parentid, drawitem, source) => {
                 },
                 "isCanvas": false,
                 "props": {
-                    "value": source[drawitem.point4]?.NAME ? {
-                        "bind": source[drawitem.point4]?.NAME|| '',
+                    "value": source?.[drawitem.point4]?.NAME ? {
+                        "bind": source?.[drawitem.point4]?.NAME|| '',
                         "type": "points",
                         "point": [
-                            source[drawitem.point4]?.NAME
+                            source?.[drawitem.point4]?.NAME
                         ]
                     } : '',
                     "displayName": "InputKb",
@@ -1057,13 +1057,13 @@ export const drwacontrol = (parentid, drawitem, source) => {
                         "onPressEnter": {
                             "action": "pushData",
                             "link": {
-                                "component": source[drawitem.point4]?.NAME|| ''
+                                "component": source?.[drawitem.point4]?.NAME|| ''
                             }
                         },
                         "onPush": {
                             "action": "pushData",
                             "link": {
-                                "component": source[drawitem.point4]?.NAME|| ''
+                                "component": source?.[drawitem.point4]?.NAME|| ''
                             }
                         }
                     },
@@ -1085,11 +1085,11 @@ export const drwacontrol = (parentid, drawitem, source) => {
                 "isCanvas": false,
                 "props": {
                     "displayName": "StateText",
-                    "value": source[drawitem.val]?.NAME ? {
-                        "bind": source[drawitem.val]?.NAME,
+                    "value": source?.[drawitem.val]?.NAME ? {
+                        "bind": source?.[drawitem.val]?.NAME,
                         "type": "points",
                         "point": [
-                            source[drawitem.val]?.NAME
+                            source?.[drawitem.val]?.NAME
                         ]
                     } : 0,
                     "level": "5",

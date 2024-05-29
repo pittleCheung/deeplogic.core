@@ -687,7 +687,7 @@ export const footDefault = (footid, parentbox, source, type) => {
             onClick: {
               action: 'pushData',
               link: {
-                component: source.MODE_SYS.NAME,
+                component: source?.MODE_SYS.NAME,
                 value: '1'
               }
             }

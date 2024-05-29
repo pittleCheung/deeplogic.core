@@ -14,7 +14,7 @@ import meta from './meta';
 
 function PipeH(props) {
   const { ext } = props;
-  const { state, connectRef } = useComponent(props);
+  const { state, connectRef, enabled } = useComponent(props);
 
   if (!state) return null;
 
@@ -54,7 +54,7 @@ function PipeH(props) {
         <path
           d={`M0 ${height * 0.5}H16000`}
           className={
-            status
+           !enabled && status
               ? direction === '0'
                 ? `${cls(
                     css.water_flow({

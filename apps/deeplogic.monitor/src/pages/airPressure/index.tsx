@@ -5,13 +5,13 @@ import React, { useLayoutEffect, useEffect, useRef } from "react"
 import { handleSource } from "../../auto3d/airPressure/handleSource"
 import {
   re,
+  res,
   deviceModelMap,
   links,
   global,
 } from "../../data/at"
 
 // 空压
-
 const ContainerDemo = () => {
   const { actions, query, enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
@@ -33,17 +33,18 @@ const ContainerDemo = () => {
     // actions.deserialize({})
     // console.log("result====>", result, renderTime)
 
-    // timer.current = setTimeout(() => {
-    //   const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
-    //   const result = handleSource(
-    //     re.CAS_PLANTS[item],
-    //     deviceModelMap,
-    //     links,
-    //     global,
-    //     re.CAS_PLANTS,
-    //   )
-    //   actions.deserialize(result)
-    // }, 100)
+    timer.current = setTimeout(() => {
+      let target = true ? res : re
+      const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
+      const result = handleSource(
+        target.CAS_PLANTS[item],
+        deviceModelMap,
+        links,
+        global,
+        target.CAS_PLANTS,
+      )
+      actions.deserialize(result)
+    }, 100)
 
     //  const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
     //  const result = handleSource(
@@ -62,23 +63,21 @@ const ContainerDemo = () => {
   }, [actions, re, deviceModelMap, links, global])
 
 
-  useEffect(() => {
-    const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
-    const result = handleSource(
-      re.CAS_PLANTS[item],
-      deviceModelMap,
-      links,
-      global,
-      re.CAS_PLANTS,
-    )
-    actions.deserialize(result)
-    // console.log("执行了多少次呢")
-  }, [actions,re, deviceModelMap, links, global])
+  // useEffect(() => {
+  //   const item = Object.keys(re?.CAS_PLANTS || {})?.[0]
+  //   const result = handleSource(
+  //     re.CAS_PLANTS[item],
+  //     deviceModelMap,
+  //     links,
+  //     global,
+  //     re.CAS_PLANTS,
+  //   )
+  //   actions.deserialize(result)
+  //   // console.log("执行了多少次呢")
+  // }, [actions,re, deviceModelMap, links, global])
 
 
 
-
-  
 
 
   // useEffect(() => {

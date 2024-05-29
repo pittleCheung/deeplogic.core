@@ -14,7 +14,7 @@ import meta from './meta';
 
 function PipeV(props) {
     const {ext} = props;
-    const {state, connectRef} = useComponent(props);
+    const {state, connectRef, enabled} = useComponent(props);
 
     if (!state) return null;
 
@@ -33,10 +33,11 @@ function PipeV(props) {
                 style={{width, height: '100%'}}
             >
                 <path d={`M0 0V16000`} stroke='currentColor' shape-rendering='crispEdges' stroke-width='100%'/>
+                {/* 这里决定管道的流动 */}
                 <path
                     d={`M${width * 0.5} 0V16000`}
                     className={
-                        status
+                        !enabled && status
                             ? direction === '0'
                                 ? `${cls(
                                     css.water_flow_vertical({

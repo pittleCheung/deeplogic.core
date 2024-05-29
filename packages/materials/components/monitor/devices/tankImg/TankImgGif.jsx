@@ -2,7 +2,7 @@
 import { craft } from '../../../_utils/utils';
 import { useComponent } from '../../../useComponent';
 import NodesBox from '../../nodes/nodesBox';
-import defaultImg from '../__deviceImg__/罐默认.png';
+import defaultImg from '../__deviceImg__/tank_off.png';
 import meta from './meta';
 
 function TankImgGif(props) {
