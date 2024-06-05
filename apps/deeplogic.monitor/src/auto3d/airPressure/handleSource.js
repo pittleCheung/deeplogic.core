@@ -282,7 +282,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           bind: str.slice(0, -2),
           type: "expressions",
         }
-        // result[pipev1.id] = pipev1
+        result[pipev1.id] = pipev1
         if (len % 2 == 1) {
           const pipev2 = pipe("v", "1")
           pipev2.props.waterstyle = "1"
@@ -295,7 +295,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
             bind: str.slice(0, -2),
             type: "expressions",
           }
-          // result[pipev2.id] = pipev2
+          result[pipev2.id] = pipev2
         }
       } else if (i !== len && i !== len >> 1) {
         console.log("len====>3", "i=====>", i, "len====>", len)

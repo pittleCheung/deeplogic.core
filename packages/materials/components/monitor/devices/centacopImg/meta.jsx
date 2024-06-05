@@ -1,9 +1,10 @@
 import { Popover } from 'antd';
 import { commonDeviceHandle as events, commonDeviceStyle as style } from '../../tool';
-import fault from '../__deviceImg__/冷冻式干燥机故障.gif';
-import warn from '../__deviceImg__/离心式空压机报警.gif';
-import run from '../__deviceImg__/离心式空压机运行.gif';
-import defaultI from '../__deviceImg__/离心式空压机默认.png';
+import fault from '../__deviceImg__/acop_screw_fault.png';
+import warn from '../__deviceImg__/acop_screw_alarm.png';
+import run from '../__deviceImg__/acop_screw_on.webp';
+import defaultI from '../__deviceImg__/acop_screw_off.png';
+
 import screenshot from '../__screenshots__/Image_thumbnail.png';
 
 export default {

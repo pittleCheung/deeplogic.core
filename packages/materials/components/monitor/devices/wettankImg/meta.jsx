@@ -1,9 +1,9 @@
 import { Popover } from 'antd';
 import { commonDeviceHandle as events, commonDeviceStyle as style } from '../../tool';
-import warn from '../__deviceImg__/罐报警.gif';
-import fault from '../__deviceImg__/罐故障.gif';
-import run from '../__deviceImg__/罐运行.gif';
-import defaultI from '../__deviceImg__/罐默认.png';
+import warn from '../__deviceImg__/tank_alarm.png';
+import fault from '../__deviceImg__/tank_fault.png';
+import run from '../__deviceImg__/tank_on.webp';
+import defaultI from '../__deviceImg__/tank_off.png';
 import screenshot from '../__screenshots__/Image_thumbnail.png';
 
 export default {

@@ -4,7 +4,7 @@
 import { craft } from '../../../_utils/utils';
 import { useComponent } from '../../../useComponent';
 import NodesBox from '../../nodes/nodesBox';
-import defaultImg from '../__deviceImg__/离心式空压机默认.png';
+import defaultImg from '../__deviceImg__/acop_screw_off.png';
 import meta from './meta';
 
 function CentAcopImgGif(props) {

@@ -2,7 +2,7 @@ import { Popover } from 'antd';
 import { commonDeviceHandle as events, commonDeviceStyle as style } from '../../tool';
 import alarm from '../__deviceImg__/tank_alarm.png';
 import fault from '../__deviceImg__/tank_fault.png';
-import on from '../__deviceImg__/tank_on.gif';
+import on from '../__deviceImg__/tank_on.webp';
 import off from '../__deviceImg__/tank_off.png';
 
 import screenshot from '../__screenshots__/Image_thumbnail.png';
