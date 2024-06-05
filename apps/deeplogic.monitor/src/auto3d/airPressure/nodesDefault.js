@@ -17,7 +17,7 @@ export const pipehWidth = 150;
 // export let acopYGap = 80
 
 export const pGap = {
-  acopXGap: styleMap.h.width * 1.2,
+  acopXGap: styleMap.h.width * 1.0,
   acopYGap: 80
 }
 

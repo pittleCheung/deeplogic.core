@@ -237,38 +237,34 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
       }
       result[pipeh1.id] = pipeh1
       const X = pipeh1.props.style.translateX + pipeh1.props.style.width
+
       const pipeh2 = pipe("h", "0")
       const vheight = len % 2 == 0 ? pipevHeight : pipevHeight * 0.5
-
-      // 0 0
-      // 1 0
-      // 1 1
-
-      //   总管横管
-      // if (tag === "L" && i === len >> 1) {
-      //   // 生成总管
-      //   pipeh2.props.waterstyle = "1"
-      //   pipeh2.props.style = { ...styleMap["h"], fill: "#407FCB" }
-      //   // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
-      //   // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
-      //   pipeh2.props.style.width = fix(
-      //     pGap.acopXGap - (pipeh2.props.style.width / 3) * 2,
-      //   )
-      //   pipeh2.props.style.translateX = X + styleMap["v"].width
-      //   pipeh2.props.style.translateY =
-      //     pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
-      //   pipeh2.props.style.zIndex = -1
-      //   pipeh2.props.status = {
-      //     bind: str.slice(0, -2),
-      //     type: "expressions",
-      //   }
-      //   result[pipeh2.id] = pipeh2
-      // }
+      //  // 总管横管
+      if (tag === "L" && i === len >> 1) {
+        // 生成总管
+        pipeh2.props.waterstyle = "1"
+        pipeh2.props.style = { ...styleMap["h"], fill: "#407FCB" }
+        // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
+        // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
+        pipeh2.props.style.width = fix(
+          pGap.acopXGap - (pipeh2.props.style.width / 3) * 2,
+        )
+        pipeh2.props.style.translateX = X + styleMap["v"].width
+        pipeh2.props.style.translateY =
+          pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
+        pipeh2.props.style.zIndex = -1
+        pipeh2.props.status = {
+          bind: str.slice(0, -2),
+          type: "expressions",
+        }
+        result[pipeh2.id] = pipeh2
+      }
 
       // 总管竖管
       if (i === len >> 1) {
-        // 最后一根竖管
-        console.log("len====>2", len)
+        // 每组的最后一根竖管
+        console.log("len====>2", len, "i ====> ",i)
         const pipev1 = pipe("v", i > len >> 1 ? "1" : "0")
         pipev1.props.waterstyle = "1"
         pipev1.props.style = { ...styleMap["v"], fill: "#407FCB" }
@@ -283,20 +279,21 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           type: "expressions",
         }
         result[pipev1.id] = pipev1
-        if (len % 2 == 1) {
-          const pipev2 = pipe("v", "1")
-          pipev2.props.waterstyle = "1"
-          pipev2.props.style = { ...styleMap["v"], fill: "#407FCB" }
-          pipev2.props.style.height = vheight
-          pipev2.props.style.translateX = X
-          pipev2.props.style.translateY =
-            pipev1.props.style.translateY + vheight
-          pipev2.props.status = {
-            bind: str.slice(0, -2),
-            type: "expressions",
-          }
-          result[pipev2.id] = pipev2
-        }
+
+        // if (len % 2 == 1) {
+        //   const pipev2 = pipe("v", "1")
+        //   pipev2.props.waterstyle = "1"
+        //   pipev2.props.style = { ...styleMap["v"], fill: "#407FCB" }
+        //   pipev2.props.style.height = vheight
+        //   pipev2.props.style.translateX = X
+        //   pipev2.props.style.translateY =
+        //     pipev1.props.style.translateY + vheight
+        //   pipev2.props.status = {
+        //     bind: str.slice(0, -2),
+        //     type: "expressions",
+        //   }
+        //   result[pipev2.id] = pipev2
+        // }
       } else if (i !== len && i !== len >> 1) {
         console.log("len====>3", "i=====>", i, "len====>", len)
         const pipev = pipe("v", i > len >> 1 ? "1" : "0")
@@ -313,6 +310,8 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
         }
         result[pipev.id] = pipev
       }
+
+      
       if (i == 0) {
         const nextlen = current.NEXT_NODE?.length
         const curlen = item.length
