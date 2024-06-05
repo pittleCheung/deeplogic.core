@@ -63,7 +63,7 @@ export const checkCHLTotal = (CHLS, valuesMaps, pointarr) => {
 /**
  * 
  * @param {*} data 当前设备
- * @param {*} vals 当前设备对应阀门
+ * @paradeviceCheckVm {*} vals 当前设备对应阀门
  * @returns 
  */
 export const deviceCheckH = (data, vals, pointarr) => {

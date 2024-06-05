@@ -5,7 +5,8 @@
 // containerdraw容器中 144为上顶部 168为下底部
 // const ConHeight = document.documentElement.clientHeight - 144 - 168; // 容器默认高度
 // const ConHeight = document.documentElement.clientHeight - 144 - 80; // 容器默认高度
-const ConHeight = document.documentElement.clientHeight - 139 - 80; // ConHeight为容器默认高度 139为上部分高  80为底下高
+// const ConHeight = document.documentElement.clientHeight - 139 - 80 // ConHeight为容器默认高度 139为上部分高  80为底下高
+const ConHeight = document.documentElement.clientHeight - 160 - 80 // ConHeight为容器默认高度 160为上部分高  80为底下高
 
 const commonStyle = {
   translateX: 0,
@@ -48,23 +49,24 @@ const ctWH = { width: 66, height: 80 }; // 冷却塔
 
 const hWH = { width: 150, height: 5, fill: '' };
 const vWH = { width: 5, height: 150, fill: '' };
-// const ACOPStyle = { ...commonStyle, width: 90, height: 70 }; // 空压机
+// const ACOPStyle = { ...commonStyle, width: 90, height: 70 }; // 螺旋空压机
 // const DDRYStyle = { ...commonStyle, width: 65, height: 60 }; // margin 10 吸干机
 // const RDRYStyle = { ...commonStyle, width: 55, height: 60 }; // margin 10 冷干机
 // const ARWTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气湿罐
 // const ARDTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气干罐
 
-// const ACOPStyle = { ...commonStyle, width: 120, height: 130 }; // 空压机
+// const ACOPStyle = { ...commonStyle, width: 120, height: 130 }; // 螺旋空压机
 // const DDRYStyle = { ...commonStyle, width: 120, height: 120 }; // margin 10 吸干机
 // const RDRYStyle = { ...commonStyle, width: 95, height: 120 }; // margin 10 冷干机
 // const ARWTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气湿罐
 // const ARDTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气干罐
 
-const ACOPStyle = { ...commonStyle, width: 104, height: 120 }; // 空压机
-const DDRYStyle = { ...commonStyle, width: 120, height: 100 }; // margin 10 吸干机
-const RDRYStyle = { ...commonStyle, width: 95, height: 100 }; // margin 10 冷干机
-const ARWTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气湿罐
-const ARDTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气干罐
+// 调整空压机的设备大小
+const ACOPStyle = { ...commonStyle, width: 105, height: 90 }; // 螺旋空压机
+const DDRYStyle = { ...commonStyle, width: 90, height: 100 }; // 吸干机
+const RDRYStyle = { ...commonStyle, width: 76, height: 80 };   // 冷干机
+const ARWTStyle = { ...commonStyle, width: 56, height: 100 }  // 储气湿罐
+const ARDTStyle = { ...commonStyle, width: 56, height: 100 };  // 储气干罐
 
 const chlStyle = { ...commonStyle, ...chlWH }; // 冷机默认样式
 const pumpStyle = { ...commonStyle, ...pumpWH }; // 水泵默认样式
@@ -75,6 +77,7 @@ const pipeWStyle = { ...commonStyle, width: 12, height: 12, zIndex: 5 }; // 弯�
 const pipeTStyle = { ...commonStyle, width: 16, height: 12, zIndex: 5 }; // 三头
 const pipeCStyle = { ...commonStyle, width: 16, height: 16, zIndex: 5 }; // 十字头
 const valveStyle = { ...commonStyle, width: 15, height: 19, zIndex: 10 };
+
 export const styleMap = {
   CHLS: chlStyle,
   CHWPS: pumpStyle,
@@ -129,7 +132,7 @@ export const deviceNumToole = (obj) => {
   let CHLSMarginHeight = (ConHeight - CHLS * chlWH.height - paddingY * 2) / maxH;
   // 计算冷机设备垂直间隙限定最大值 大于100取100 小于80取80间距  小于50取50间距
   // CHLSMarginHeight = CHLSMarginHeight > 100 ? 100 : (CHLSMarginHeight < 80 ? (CHLSMarginHeight < 50 ? 50 : CHLSMarginHeight) : CHLSMarginHeight);
-  console.log('CHLSMarginHeight======>1', CHLSMarginHeight);
+  // console.log('CHLSMarginHeight======>1', CHLSMarginHeight);
   CHLSMarginHeight = CHLSMarginHeight > 40 ? 40 : CHLSMarginHeight;
   // 计算冷机设备垂直间隙限定最小值
   // CHLSMarginHeight = CHLSMarginHeight < 35 ? 35 : CHLSMarginHeight;
@@ -157,13 +160,14 @@ export const deviceNumToole = (obj) => {
   };
 
   // 距离顶部最大偏移距离 = (容器高度 - 设备区域最大跨度) / 2
-  deviceTotalTransformY = (ConHeight - Math.max(...Object.values(newobj))) / 2;
-  deviceTotalTransformY = deviceTotalTransformY > 0 ? deviceTotalTransformY : 0;
+  // deviceTotalTransformY = (ConHeight - Math.max(...Object.values(newobj))) / 2;
+  // deviceTotalTransformY = deviceTotalTransformY > 0 ? deviceTotalTransformY : 0;
+  // // console.log("newobj=====>", newobj, deviceTotalTransformY, ConHeight)
+  // // deviceTotalTransformY = deviceTotalTransformY > 150 ? 150 : deviceTotalTransformY; // 最大垂直距离小于150
+  // deviceTotalTransformY = deviceTotalTransformY < 100 ? 100 : deviceTotalTransformY; // 最大垂直距离小于100为100
 
-  // console.log("newobj=====>", newobj, deviceTotalTransformY, ConHeight)
-  //   deviceTotalTransformY = deviceTotalTransformY > 150 ? 150 : deviceTotalTransformY; // 最大垂直距离小于150
-  deviceTotalTransformY = deviceTotalTransformY < 100 ? 100 : deviceTotalTransformY; // 最大垂直距离小于100为100
-
+  // 统一居中显示
+  deviceTotalTransformY = 70;
   // 计算横向设备之间的间隙 宽度默认先写死1400px
   let canvasWidth = 1400;
   // if(window.screen.width > 2000){

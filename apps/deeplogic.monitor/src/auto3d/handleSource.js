@@ -98,8 +98,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     pointsObject[item.I_PCT.NAME] = 0;
     chlsArr.push(resultMap);
     // 计算x文字居中的偏移量
-    const xAxis = calcAxis(resultMap, item.NAME);
-     console.log('resultMap=======>', resultMap, 'xAxis======>', xAxis);
+    const [xAxis,center] = calcAxis(resultMap, item.NAME);
+     console.log("resultMap=======>", resultMap, "xAxis======>", xAxis, center)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
@@ -111,15 +111,15 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       result: result,
       resultMap: resultMap,
       name: item.P,
-      unit: 'kW',
+      unit: "kW",
       percent: null,
       index: 1,
-      type: 'Chiller',
+      type: "Chiller",
       translateX,
       translateY,
       yAxis: 30,
-      xAxis: -45
-    });
+      xAxis: center - 64 - 10,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
@@ -127,13 +127,13 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       unit: null,
       percent: true,
       index: 0,
-      type: 'Chiller',
+      type: "Chiller",
       translateX,
       translateY,
       // yAxis: 60,
       yAxis: 30,
-      xAxis: 40
-    });
+      xAxis: center + 20,
+    })
   });
 
   CHLS.forEach((item, index) => {
@@ -153,7 +153,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     pointsObject[item.P.NAME] = 0;
     pointsObject[item.FREQ.NAME] = 0;
     // 计算x文字居中的偏移量
-    const xAxis = calcAxis(resultMap, item.NAME);
+    const [xAxis, center] = calcAxis(resultMap, item.NAME)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
@@ -165,29 +165,29 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       result: result,
       resultMap: resultMap,
       name: item.P,
-      unit: 'kW',
+      unit: "kW",
       percent: null,
       index: 0,
-      type: 'Pump',
+      type: "Pump",
       translateX,
       translateY,
       yAxis: 30,
-      xAxis: -30 - 8
-    });
+      xAxis: center - 64 - 10,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
       name: item.FREQ,
-      unit: 'Hz',
+      unit: "Hz",
       percent: null,
       index: 1,
-      type: 'Pump',
+      type: "Pump",
       translateX,
       translateY,
       // yAxis: 60,
       yAxis: 30,
-      xAxis: 35 + 8
-    });
+      xAxis: center + 20,
+    })
   });
 
   CWPS.forEach((item, index) => {
@@ -202,7 +202,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     pointsObject[item.P.NAME] = 0;
     pointsObject[item.FREQ.NAME] = 0;
     // 计算x文字居中的偏移量
-    const xAxis = calcAxis(resultMap, item.NAME);
+    const [xAxis, center] = calcAxis(resultMap, item.NAME)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
@@ -214,29 +214,29 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       result: result,
       resultMap: resultMap,
       name: item.P,
-      unit: 'kW',
+      unit: "kW",
       index: 0,
-      type: 'Pump',
+      type: "Pump",
       translateX,
       translateY,
       yAxis: 30,
-      xAxis: -30 - 8
-    });
+      xAxis: center - 64 - 10,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
       name: item.FREQ,
-      unit: 'Hz',
+      unit: "Hz",
       percent: null,
       other: -30,
       index: 1,
-      type: 'Pump',
+      type: "Pump",
       translateX,
       translateY,
       // yAxis: 60,
       yAxis: 30,
-      xAxis: 35 + 8
-    });
+      xAxis: center + 20,
+    })
   });
 
   CTS.forEach((item, index) => {
@@ -251,7 +251,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     pointsObject[item.P.NAME] = 0;
     pointsObject[item.FREQ.NAME] = 0;
     // 计算x文字居中的偏移量
-    const xAxis = calcAxis(resultMap, item.NAME);
+    const [xAxis, center] = calcAxis(resultMap, item.NAME)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
@@ -263,31 +263,31 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       result: result,
       resultMap: resultMap,
       name: item.P,
-      unit: 'kW',
+      unit: "kW",
       percent: null,
       other: -15,
       index: 0,
-      type: 'Tower',
+      type: "Tower",
       translateX,
       translateY,
       yAxis: 25,
-      xAxis: -30 - 8
-    });
+      xAxis: center - 64 - 10,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
       name: item.FREQ,
-      unit: 'Hz',
+      unit: "Hz",
       percent: null,
       other: -10,
       index: 1,
-      type: 'Tower',
+      type: "Tower",
       translateX,
       translateY,
       // yAxis: 60,
       yAxis: 25,
-      xAxis: 35 + 8
-    });
+      xAxis: center + 20,
+    })
   });
 
   DVS.forEach((item) => {
@@ -354,7 +354,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
    */
   // 7. 最后一个水泵的左侧连接冷机 (水泵左侧连接冷机 即最后一个水泵左侧三横线一竖线)
   connectCHWP.forEach((item, index) => {
-    pump_chl(item, result, 'chw', connectCHW[index][connectCHW[index].length - 1], null, '2', index); // 冷冻水回水
+    // pump_chl(item, result, 'chw', connectCHW[index][connectCHW[index].length - 1], null, '2', index); // 冷冻水回水
   });
 
   // /** 冷却侧 pump - chl 8. 第一个水泵左侧三横一竖连接到冷却塔 和 右侧三横一竖连接到冷机*/
@@ -372,10 +372,12 @@ export const handleSource = (source, deviceModelMap, links, global) => {
   // console.log(boxidChild, "======>boxidChild")
   result['ROOT'].props.points = pointsObject;
   result[boxid].nodes = boxidChild?.map((t) => t.id);
-  result[boxid].props.style.contentMaxX = Math.max(...boxidChild?.map((t) => t.props.style.translateX));
-  result[boxid].props.style.contentMinX = Math.min(...boxidChild?.map((t) => t.props.style.translateX));
-  // result[boxid].props.style.contentMinY = Math.min(...boxidChild?.map((t) => t.props.style.translateY));
-  // result[boxid].props.style.contentMaxY =   Math.max(...boxidChild?.map((t) => t.props.style.translateY));
+  const translateXCollect = boxidChild?.map((t) => t.props.style.translateX)
+  const translateYCollect = boxidChild?.map((t) => t.props.style.translateY)
+  result[boxid].props.style.contentMaxX = Math.max(...translateXCollect);
+  result[boxid].props.style.contentMinX = Math.min(...translateXCollect);
+  result[boxid].props.style.contentMinY = Math.min(...translateYCollect)
+  result[boxid].props.style.contentMaxY = Math.max(...translateYCollect)
 
   result = {
     ...result,
@@ -419,10 +421,12 @@ function replace2Gif(result) {
  */
 const calcAxis = (resultMap, deviceName, font = '12px Arial') => {
   const width = getTextWidth(deviceName, font);
+  // 文字偏移量
   const xAxis = (resultMap.props.style.width - width) / 2;
-
-  // console.log('calcAxis=======>', resultMap.props.style.width, width);
-  return xAxis;
+  // 文字中心偏移量
+  const center = width / 2
+  console.log("calcAxis=======>", resultMap.props.style.width, width, xAxis)
+  return [xAxis, center];
 };
 
 function getTextWidth(text, font) {

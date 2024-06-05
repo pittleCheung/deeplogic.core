@@ -122,12 +122,18 @@ const DesignerCanvas = ({children, loading, style}) => {
 
     const isXMax = conMaxX - conMinx + 200 > 1400 ? 1400 : conMaxX - conMinx + 200;
     
+    // const isYMax = contentMaxY - contentMinY > 560 ? 560 : contentMaxY - contentMinY
     // console.log(
     //   "conMaxX - conMinx + 100",
     //   conMaxX - conMinx + 200,
     //   state
     // )
-    console.log("style===>",style, isXMax)
+    console.log(
+      "contentMaxY - contentMinY ===>",
+      style,
+      isXMax,
+      contentMaxY - contentMinY,
+    )
 
     return (
       <>
@@ -143,20 +149,19 @@ const DesignerCanvas = ({children, loading, style}) => {
             width: `${100 / zoom}%`,
             height: `${100 / zoom}%`,
             ...style,
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}>
           {/* <div className='containerdraw' style={{width: enabled ? '100%' : (conMaxX - conMinx + 200) + 'px'}}>
                     <>{Children.map(children?.props?.children || [], renderChild)}</>
                     {enabled && <MoveableTool/>}
                     {enabled && <SelectTool/>}
                 </div> */}
+          {/* 这里设置最大高度的目的是 如果高度超出容器区域需要出现滚动条 而不是把高度顶下去 */}
           <div
             className="containerdraw"
-            style={{ width: isXMax, 
-            // height: contentMaxY - contentMinY 
-            }}>
+            style={{ width: isXMax, maxHeight: contentMaxY - contentMinY }}>
             <>{Children.map(children?.props?.children || [], renderChild)}</>
             {enabled && <MoveableTool />}
             {enabled && <SelectTool />}

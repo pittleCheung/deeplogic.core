@@ -4,8 +4,14 @@ import React, { useLayoutEffect, useEffect, useRef } from "react"
 // 空调
 import { handleSource } from "../../auto3d/airPressure/handleSource"
 import {
-  re,
-  res,
+  re2,
+  res3,
+  re2_1,
+  res3_2,
+  re4,
+  res5,
+  res7,
+  res_2,
   deviceModelMap,
   links,
   global,
@@ -34,7 +40,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = true ? res : re
+      let target = false ? res3_2 : re4
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],
@@ -60,7 +66,7 @@ const ContainerDemo = () => {
     return () => {
       clearTimeout(timer.current)
     }
-  }, [actions, re, deviceModelMap, links, global])
+  }, [actions, deviceModelMap, links, global])
 
 
   // useEffect(() => {
@@ -97,3 +103,4 @@ export const AirPressure = () => {
     </Editor>
   )
 }
+

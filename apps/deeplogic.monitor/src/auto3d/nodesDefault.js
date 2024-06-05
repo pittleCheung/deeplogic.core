@@ -805,14 +805,15 @@ export const rootHeader = {
 export const box = {
   id: boxid,
   type: {
-    resolvedName: 'DrawCanva'
+    resolvedName: "DrawCanva",
   },
-  displayName: 'DrawCanva',
+  displayName: "DrawCanva",
   props: {
-    displayName: 'DrawCanva',
+    displayName: "DrawCanva",
     style: {
-      height: document.documentElement.clientHeight - 139 - 80 + 'px',
       // minHeight: document.documentElement.clientHeight - 144 - 80 + "px",
+      // height: document.documentElement.clientHeight - 139 - 80 + 'px',
+      height: document.documentElement.clientHeight - 160 - 80 + "px",
       // "height": 300,
       // "width": '100%',
       contentMaxX: null,
@@ -822,27 +823,28 @@ export const box = {
       // "background": "linear-gradient(#1c2035, #1c2035)",
       backgroundList: [
         {
-          id: 'kOXXN92lpv',
-          type: 'color',
-          key: 'kOXXN92lpv',
-          value: '#1c2035',
-          disabled: false
-        }
+          id: "kOXXN92lpv",
+          type: "color",
+          key: "kOXXN92lpv",
+          value: "#1c2035",
+          disabled: false,
+        },
       ],
       // "display":"flex",
-      flex: '1 1 0%' // 设置画布容器撑满剩余高度
+      // flex: "1 1 0%", // 设置画布容器撑满剩余高度
+      flex:1,
     },
-    scale: 1
+    scale: 1,
   },
   custom: {
-    class: 'pittle'
+    class: "pittle",
   },
   parent: parentbox, // parentbox
   nodes: [],
   linkedNodes: {},
   hidden: false,
-  isCanvas: true
-};
+  isCanvas: true,
+}
 /**
  * 寻找冷机/冷却塔对应的阀门
  */
@@ -1139,8 +1141,8 @@ export const statusText = (percent, unit) => {
  * type 区分了 位置的差别
  *
  */
-const deviceMapIds = {}; //设备id映射
-const deviceIdsMapValue = {}; // 设备id对应的value
+const deviceMapIds = {}; //所有的设备id映射 {设备id: nonoid(12)} 
+const deviceIdsMapValue = {}; // 设备id对应的value  {设备id: 设备id对应的属性对象}
 export const deviceMapIdsTool = (id, newid, value) => {
   deviceMapIds[id] = newid;
   deviceIdsMapValue[id] = value;
@@ -1773,22 +1775,46 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
         // 竖管的流向
         pipev.props.direction =
           pipev.props.style.translateY - initpos > 0
-            ? dType === 'tower_pump'
-              ? '0'
-              : '1'
-            : dType === 'tower_pump'
-              ? '1'
-              : '0';
-        result[pipev.id] = pipev;
+            ? dType === "tower_pump"
+              ? "0"
+              : "1"
+            : dType === "tower_pump"
+              ? "1"
+              : "0"
+        // vnum为1 当 i === 0的是不会走到这个if里面来的
+        result[pipev.id] = pipev
       }
       const pointarr = [];
-      const pipvArr = [...item.slice(0, i), ...item.slice(i + 1, item.length)]?.map((t) => deviceIdsMapValue[t]);
-      const total = dType === 'tower' || dType === 'tower_pump' ? ifTotslPoints?.CTS?.[index] : ifTotslPoints[type][index];
+      // deviceIdsMapValue存了所有设备id和value的映射{设备id: 设备id对应的属性对象}
+      // item是所有cwps的id的集合 当前四个设备下item为['fFTauxx93PFyarJ7rkfrhl', 'xMRTzmOw8VAKI8tKENLnox', 'jqgYs5JEIFc2U0qkx3P4T7', 'geyRu1XrlxJEcfqyJfyoBS'] 
+      // const pipvArr = [...item.slice(0, i), ...item.slice(i + 1, item.length)]?.map((t) => deviceIdsMapValue[t]);
+      // i为0的时候 不生成管子 所以跳过绑点表的逻辑
+      let pipvArr = []
+      if(i !== 0){
+         pipvArr = [
+           ...item.slice(0,i)
+        ]?.map((t) => deviceIdsMapValue[t])
+      }
+
+      // const total = dType === 'tower' || dType === 'tower_pump' ? ifTotslPoints?.CTS?.[index] : ifTotslPoints[type][index];
+      const total = dType === 'tower_pump' ? ifTotslPoints?.CTS?.[index] : ifTotslPoints[type][index];
+      // item 是冷机的id
       pipev.props.status = {
-        bind: `(${dType === 'tower' || dType === 'tower_pump' ? ifTotal?.CTS?.[index] : ifTotal[type][index]})&&(${deviceCheckV(deviceIdsMapValue[item[i]], pipvArr, null, pointarr)})`,
-        type: 'expressions',
-        point: [...total, ...pointarr]
-      };
+        // bind: `(${dType === "tower" || dType === "tower_pump" ? ifTotal?.CTS?.[index] : ifTotal[type][index]})&&(${deviceCheckV(deviceIdsMapValue[item[i]], pipvArr, null, pointarr)})`,
+        // dType === "tower_pump" 走的是情况8 否则走情况7  这里的dType === "tower"没有意义 进来的if就是dType !== 'tower'
+        bind: `(${dType === "tower_pump" ? ifTotal?.CTS?.[index] : ifTotal[type][index]})&&(${deviceCheckV(deviceIdsMapValue[item[i]], pipvArr, null, pointarr)})`,
+        type: "expressions",
+        point: [...total, ...pointarr],
+      }
+      console.log(
+        "pipev================>",i,
+        pipev.props.status.bind,
+        ifTotal,
+        deviceCheckV(deviceIdsMapValue[item[i]], pipvArr, null, pointarr),
+        deviceIdsMapValue,
+        pipvArr,
+        pointarr,
+      )
       if (
         i == 0 &&
         currentpump.translateY - initpos >= deviceMargin.Pump &&
@@ -1826,6 +1852,8 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
       translateX: fix(type === 'chw' ? translateX : currentpump.translateX + currentpump.width),
       zIndex: -1
     };
+
+    // 第5种情况  冷却塔左三横线
     if (dType === 'tower') {
       const values = valuesMaps?.[item[i]]?.map((t) => t?.ID) || [];
       if (values.length > 0) {
