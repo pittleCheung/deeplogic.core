@@ -37,7 +37,7 @@ function PipeV(props) {
                 <path
                     d={`M${width * 0.5} 0V16000`}
                     className={
-                        !enabled && true
+                        !enabled && status
                             ? direction === '0'
                                 ? `${cls(
                                     css.water_flow_vertical({

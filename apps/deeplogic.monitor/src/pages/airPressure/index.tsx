@@ -5,9 +5,10 @@ import React, { useLayoutEffect, useEffect, useRef } from "react"
 import { handleSource } from "../../auto3d/airPressure/handleSource"
 import {
   re2,
-  res3,
   re2_1,
-  res3_2,
+  res3,   // 并联三台空压 三台干罐
+  res3_1, // 串联三台空压 三台干罐
+  res3_2, // 并联三台空压 两台干罐
   re4,
   res5,
   res7,
@@ -40,7 +41,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = false ? re4 : res5
+      let target = false ? res3_2 : res3_1
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],

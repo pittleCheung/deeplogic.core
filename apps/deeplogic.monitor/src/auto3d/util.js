@@ -31,9 +31,9 @@ export function replace2Gif(result) {
 export const calcAxis = (resultMap, deviceName, font = "12px Arial") => {
   const width = getTextWidth(deviceName, font)
   const xAxis = (resultMap.props.style.width - width) / 2
-
+  const center = width / 2
   // console.log('calcAxis=======>', resultMap.props.style.width, width);
-  return xAxis
+  return [xAxis, center]
 }
 
  function getTextWidth(text, font) {

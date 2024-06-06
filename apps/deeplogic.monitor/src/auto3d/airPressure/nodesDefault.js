@@ -17,7 +17,7 @@ export const pipehWidth = 150;
 // export let acopYGap = 80
 
 export const pGap = {
-  acopXGap: styleMap.h.width * 1.0,
+  acopXGap: styleMap.h.width * 1.2,
   acopYGap: 80
 }
 
@@ -159,10 +159,11 @@ export const helpFunction = ({
     }
   })
 
-  console.log("position====>0", Object.values(obj), obj, tag)
+  console.log("position====>0", Object.values(obj), obj, arr)
 
   // 遍历当前层的id
   Object.values(obj).forEach((t, i) => {
+    // t => ['ReX4jaC8HxW7OMSlM3jFal', 'n4GwOLBgJdMert1OCprPOL', '95ktirI2q4TfxYpVOZO12H']
     if (Array.isArray(t)) {
       t.forEach((item, index) => {
         const current = { ...idsList[item], ...arr.find((t) => t?.ID === item) }
@@ -189,7 +190,7 @@ export const helpFunction = ({
         const target = result[deviceItem.id].props.style
         const nameText = text()
         nameText.props.value = current.NAME
-        const xAxis = calcAxis(deviceItem, item.NAME)
+         const [xAxis, center] = calcAxis(deviceItem, current.NAME)
         nameText.props.style = {
           ...nameText.props.style,
           translateX: target.translateX + xAxis, // 这里的xAxis为偏移量,只有一个数码管的情况需要添加偏移量
@@ -205,7 +206,7 @@ export const helpFunction = ({
             item: textItem,
             index: textIndex,
             parentStyle: nameText.props.style,
-            xAxis: 50,
+            xAxis: center + 64 - 10,
           })
         })
 
@@ -409,7 +410,6 @@ export const helpFunction = ({
             t.length > 1,
             "index====>",
             index,
-            initTop + (t.length > 1 ? index : i) * (pipevHeight + pGap.acopYGap),
           )
           helpFunction({
             arr: obj,
@@ -419,7 +419,8 @@ export const helpFunction = ({
             // initTop: initTop + (t.length > 1 ? index : i) * (pipevHeight),
             initTop:
               initTop +
-              (t.length > 1 ? index : i) * (styleMap.Acop.height + pGap.acopYGap),
+              (t.length > 1 ? index : i) *
+                (styleMap.Acop.height + pGap.acopYGap),
             lastdevice: result[deviceItem.id],
             idsList,
             deviceModelMap,
@@ -464,29 +465,31 @@ export const helpFunction = ({
           }
           result[pipehr1.id] = pipehr1
           const rX = pipehr1.props.style.translateX + pipehr1.props.style.width
-          if (tag === "L" && index === (t.length - 1) >> 1 && index !== 0) {
-            // 生成总管
-            const pipehr2 = pipe("h", "0")
-            pipehr2.props.waterstyle = "1"
-            pipehr2.props.style = { ...styleMap["h"], fill: "#407FCB" }
-            // pipehr2.props.style.width = fix(pipehr2.props.style.width * 0.33) + 2;
-            pipehr2.props.style.width = fix(pipehr2.props.style.width / 3)
-            pipehr2.props.style.translateX = rX - 1
-            pipehr2.props.style.translateY =
-              pipehr1.props.style.translateY + +(len % 2 == 0 ? 0 : vheight)
-            if (str.length > 0) {
-              pipehr2.props.status = {
-                bind: str.slice(0, -2),
-                type: "expressions",
-              }
-            } else {
-              pipehr2.props.status = {
-                bind: current?.preStates,
-                type: "expressions",
-              }
-            }
-            result[pipehr2.id] = pipehr2
-          }
+
+          // 生成总管(储气湿罐右侧)
+          // if (tag === "L" && index === (t.length - 1) >> 1 && index !== 0) {
+          //   const pipehr2 = pipe("h", "0")
+          //   pipehr2.props.waterstyle = "1"
+          //   pipehr2.props.style = { ...styleMap["h"], fill: "#407FCB" }
+          //   // pipehr2.props.style.width = fix(pipehr2.props.style.width * 0.33) + 2;
+          //   pipehr2.props.style.width = fix(pipehr2.props.style.width / 3)
+          //   pipehr2.props.style.translateX = rX - 1
+          //   pipehr2.props.style.translateY =
+          //     pipehr1.props.style.translateY + +(len % 2 == 0 ? 0 : vheight)
+          //   if (str.length > 0) {
+          //     pipehr2.props.status = {
+          //       bind: str.slice(0, -2),
+          //       type: "expressions",
+          //     }
+          //   } else {
+          //     pipehr2.props.status = {
+          //       bind: current?.preStates,
+          //       type: "expressions",
+          //     }
+          //   }
+          //   // result[pipehr2.id] = pipehr2
+          // }
+
           // D0C1E 储气干罐
           if (current.TYPE === "D0C1E" && current.NO !== current.LEN) {
             if (
@@ -557,7 +560,8 @@ export const helpFunction = ({
               piperv.props.style = { ...styleMap["v"], fill: "#407FCB" }
               // piperv.props.style.height = pipevHeight + styleMap.h.height
               // piperv.props.style.height = vheight + styleMap.h.height
-              piperv.props.style.height = styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
+              piperv.props.style.height =
+                styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
               // console.log(
               //   "vheight + styleMap.h.height====>",
               //   vheight,
@@ -586,17 +590,17 @@ export const helpFunction = ({
   })
 }
 
-export const generateText = ({ result, item, index, parentStyle,xAxis = 0 }) => {
+export const generateText = ({ result, item, index, parentStyle,xAxis = 0,center = 0 }) => {
   const poc = statusText(null, item[1])
   // poc.props.style = {
   //     ...commonTextStyle,
   //     translateX: parentStyle.translateX - 40,
   //     translateY: (index) * 50 + parentStyle.translateY,
   // }
-  // 调整数码管的位置
+  // 调整数码管的位置  64为数码管的宽度
   poc.props.style = {
     // ...commonTextStyle,
-    translateX: parentStyle.translateX + xAxis + (index === 0 ? -50 : 50),
+    translateX: parentStyle.translateX + (index === 0 ? center - 64 - 10 : center + 20) + xAxis,
     translateY: parentStyle.translateY + 30,
   }
   poc.props.value = {

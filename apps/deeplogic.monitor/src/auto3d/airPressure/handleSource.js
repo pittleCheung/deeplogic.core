@@ -187,7 +187,8 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
       const target = result[deviceItem.id].props.style
       const nameText = text()
       nameText.props.value = current.NAME
-      const xAxis = calcAxis(deviceItem, item.NAME)
+       const [xAxis, center] = calcAxis(deviceItem, current.NAME)
+      console.log("xAxis=====>", xAxis, deviceItem.props.style.width, center)
       nameText.props.style = {
         ...nameText.props.style,
         // translateX: target.translateX + target.width * 0.5 - 20,
@@ -206,6 +207,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           index: textIndex,
           parentStyle: nameText.props.style,
           relativeHeight: styleMap.Acop.height,
+          center
         })
       })
       pointsObject["PR_DISCHARGE"] = 0
@@ -238,79 +240,94 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
       result[pipeh1.id] = pipeh1
       const X = pipeh1.props.style.translateX + pipeh1.props.style.width
 
-      const pipeh2 = pipe("h", "0")
-      const vheight = len % 2 == 0 ? pipevHeight : pipevHeight * 0.5
-      //  // 总管横管
-      if (tag === "L" && i === len >> 1) {
-        // 生成总管
-        pipeh2.props.waterstyle = "1"
-        pipeh2.props.style = { ...styleMap["h"], fill: "#407FCB" }
-        // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
-        // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
-        pipeh2.props.style.width = fix(
-          pGap.acopXGap - (pipeh2.props.style.width / 3) * 2,
-        )
-        pipeh2.props.style.translateX = X + styleMap["v"].width
-        pipeh2.props.style.translateY =
-          pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
-        pipeh2.props.style.zIndex = -1
-        pipeh2.props.status = {
-          bind: str.slice(0, -2),
-          type: "expressions",
-        }
-        result[pipeh2.id] = pipeh2
-      }
+      // const pipeh2 = pipe("h", "0")
+      // const vheight = len % 2 == 0 ? pipevHeight : pipevHeight * 0.5
+      // //  // 总管横管
+      // if (tag === "L" && i === len >> 1) {
+      //   // 生成总管
+      //   pipeh2.props.waterstyle = "1"
+      //   pipeh2.props.style = { ...styleMap["h"], fill: "#407FCB" }
+      //   // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
+      //   // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
+      //   pipeh2.props.style.width = fix(
+      //     pGap.acopXGap - (pipeh2.props.style.width / 3) * 2,
+      //   )
+      //   pipeh2.props.style.translateX = X + styleMap["v"].width
+      //   pipeh2.props.style.translateY =
+      //     pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
+      //   pipeh2.props.style.zIndex = -1
+      //   pipeh2.props.status = {
+      //     bind: str.slice(0, -2),
+      //     type: "expressions",
+      //   }
+      //   result[pipeh2.id] = pipeh2
+      // }
 
       // 总管竖管
-      if (i === len >> 1) {
-        // 每组的最后一根竖管
-        console.log("len====>2", len, "i ====> ",i)
-        const pipev1 = pipe("v", i > len >> 1 ? "1" : "0")
-        pipev1.props.waterstyle = "1"
-        pipev1.props.style = { ...styleMap["v"], fill: "#407FCB" }
-        // pipev1.props.style.height = vheight
-        // pipev1.props.style.height = vheight + styleMap.h.height
-        pipev1.props.style.height =
-          styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
-        pipev1.props.style.translateX = X
-        pipev1.props.style.translateY = pipeh1.props.style.translateY
-        pipev1.props.status = {
-          bind: str.slice(0, -2),
-          type: "expressions",
-        }
-        result[pipev1.id] = pipev1
+      // if (i === len >> 1) {
+      //   // 每组的最后一根竖管
+      //   console.log("len====>2", len, "i ====> ",i)
+      //   const pipev1 = pipe("v", i > len >> 1 ? "1" : "0")
+      //   pipev1.props.waterstyle = "1"
+      //   pipev1.props.style = { ...styleMap["v"], fill: "#407FCB" }
+      //   // pipev1.props.style.height = vheight
+      //   // pipev1.props.style.height = vheight + styleMap.h.height
+      //   pipev1.props.style.height =
+      //     styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
+      //   pipev1.props.style.translateX = X
+      //   pipev1.props.style.translateY = pipeh1.props.style.translateY
+      //   pipev1.props.status = {
+      //     bind: str.slice(0, -2),
+      //     type: "expressions",
+      //   }
+      //   result[pipev1.id] = pipev1
 
-        // if (len % 2 == 1) {
-        //   const pipev2 = pipe("v", "1")
-        //   pipev2.props.waterstyle = "1"
-        //   pipev2.props.style = { ...styleMap["v"], fill: "#407FCB" }
-        //   pipev2.props.style.height = vheight
-        //   pipev2.props.style.translateX = X
-        //   pipev2.props.style.translateY =
-        //     pipev1.props.style.translateY + vheight
-        //   pipev2.props.status = {
-        //     bind: str.slice(0, -2),
-        //     type: "expressions",
-        //   }
-        //   result[pipev2.id] = pipev2
-        // }
-      } else if (i !== len && i !== len >> 1) {
-        console.log("len====>3", "i=====>", i, "len====>", len)
-        const pipev = pipe("v", i > len >> 1 ? "1" : "0")
-        pipev.props.waterstyle = "1"
-        pipev.props.style = { ...styleMap["v"], fill: "#407FCB" }
-        // pipev.props.style.height = pipevHeight
-        pipev.props.style.height =
-          styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
-        pipev.props.style.translateX = X
-        pipev.props.style.translateY = pipeh1.props.style.translateY
-        pipev.props.status = {
-          bind: `${"${" + ACOPS[item[i + 1]].ONOFF.NAME + "}"}==1`,
-          type: "expressions",
-        }
-        result[pipev.id] = pipev
+      //   // if (len % 2 == 1) {
+      //   //   const pipev2 = pipe("v", "1")
+      //   //   pipev2.props.waterstyle = "1"
+      //   //   pipev2.props.style = { ...styleMap["v"], fill: "#407FCB" }
+      //   //   pipev2.props.style.height = vheight
+      //   //   pipev2.props.style.translateX = X
+      //   //   pipev2.props.style.translateY =
+      //   //     pipev1.props.style.translateY + vheight
+      //   //   pipev2.props.status = {
+      //   //     bind: str.slice(0, -2),
+      //   //     type: "expressions",
+      //   //   }
+      //   //   result[pipev2.id] = pipev2
+      //   // }
+      // } else if (i !== len && i !== len >> 1) {
+      //   console.log("len====>3", "i=====>", i, "len====>", len)
+      //   const pipev = pipe("v", i > len >> 1 ? "1" : "0")
+      //   pipev.props.waterstyle = "1"
+      //   pipev.props.style = { ...styleMap["v"], fill: "#407FCB" }
+      //   // pipev.props.style.height = pipevHeight
+      //   pipev.props.style.height =
+      //     styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
+      //   pipev.props.style.translateX = X
+      //   pipev.props.style.translateY = pipeh1.props.style.translateY
+      //   pipev.props.status = {
+      //     bind: `${"${" + ACOPS[item[i + 1]].ONOFF.NAME + "}"}==1`,
+      //     type: "expressions",
+      //   }
+      //   result[pipev.id] = pipev
+      // }
+
+      if (i !== len) {
+          const pipev = pipe("v", "0")
+          pipev.props.waterstyle = "1"
+          pipev.props.style = { ...styleMap["v"], fill: "#407FCB" }
+          // pipev.props.style.height = pipevHeight
+          pipev.props.style.height =
+            styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
+          pipev.props.style.translateX = X
+          pipev.props.style.translateY = pipeh1.props.style.translateY
+          pipev.props.status = {
+            bind: `${"${" + ACOPS[item[i + 1]].ONOFF.NAME + "}"}==1`,
+            type: "expressions",
+          }
+          result[pipev.id] = pipev
       }
-
       
       if (i == 0) {
         const nextlen = current.NEXT_NODE?.length
@@ -325,6 +342,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
             // 空压设备数量大于下一个设备数量
           newInitTop = newInitTop + (styleMap.Acop.height + pGap.acopYGap) * (curlen - nextlen) * .5
         }
+        // console.log("是不是到这里了====>", nextlen, current.NEXT_NODE, idsList)
         helpFunction({
           arr: current.NEXT_NODE,
           result,
@@ -338,6 +356,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           lastLen: item.length,
           pointsObject,
         })
+
       }
     })
   })

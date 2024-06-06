@@ -107,6 +107,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       xAxis,
       yAxis: -10
     });
+    // 64固定为数码管的宽度
     generateText({
       result: result,
       resultMap: resultMap,
