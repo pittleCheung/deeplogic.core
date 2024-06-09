@@ -59,7 +59,6 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
   const pointsObject = {
     ...rootPointAirMap(source),
     ...drwaitemair(),
-    MODE_SYS: 0,
     HINT: "",
   } // 点表映射
   const ACOPS = source?.ACOPS || {} // 空压机
@@ -67,7 +66,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
   for (const t in ARWTS) {
     let str = ""
     for (const t0 in ACOPS) {
-      str += `${"${" + ACOPS[t0].ONOFF.NAME + "}"}==1&&`
+      str += `${"${" + ACOPS[t0].ONOFF.NAME + "}"}==1||`
     }
     str.slice(-2)
     ARWTS[t].preStates = str
@@ -142,9 +141,9 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
   }
   // 空压机
   // 总管的位置: 在少的那一侧的中间设备上
-  console.log("initTopinitTopinitTop", initTop, ACOPSARR, ACOPSobj) // 当前设备 -100
+  // console.log("initTopinitTopinitTop", initTop, ACOPSARR, ACOPSobj) // 当前设备 -100
 
-  console.log("source=====>", source, ACOPSARR)
+  // console.log("source=====>", source, ACOPSARR)
 
   // console.log("len====>0", ACOPS)
   // 两类的情况
@@ -203,6 +202,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
         // generateText(result, textitem, textindex, target);
         generateText({
           result,
+          current,
           item: textItem,
           index: textIndex,
           parentStyle: nameText.props.style,
@@ -210,8 +210,10 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           center
         })
       })
-      pointsObject["PR_DISCHARGE"] = 0
-      pointsObject["T_DISCHARGE"] = 0
+      console.log("current====>",current)
+      pointsObject[current.PR_DISCHARGE.NAME] = 0
+      pointsObject[current.T_DISCHARGE.NAME] = 0
+      
       const pipeh1 = pipe("h", "0")
       pipeh1.props.waterstyle = "1"
       pipeh1.props.style = { ...styleMap["h"], fill: "#407FCB" }
@@ -313,6 +315,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
       //   result[pipev.id] = pipev
       // }
 
+      // 不是最后一根竖管
       if (i !== len) {
           const pipev = pipe("v", "0")
           pipev.props.waterstyle = "1"
@@ -327,6 +330,26 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
             type: "expressions",
           }
           result[pipev.id] = pipev
+      }
+      // 最后一根横管
+      if(i === len){
+         const pipeh2 = pipe("h", "0")
+         pipeh2.props.waterstyle = "1"
+         pipeh2.props.style = { ...styleMap["h"], fill: "#407FCB" }
+         // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
+         // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
+         pipeh2.props.style.width = fix(
+           pGap.acopXGap - (pipeh2.props.style.width / 3) * 2,
+         )
+         pipeh2.props.style.translateX = X + styleMap["v"].width
+         pipeh2.props.style.translateY =
+           pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
+         pipeh2.props.style.zIndex = -1
+         pipeh2.props.status = {
+           bind: str.slice(0, -2),
+           type: "expressions",
+         }
+         result[pipeh2.id] = pipeh2
       }
       
       if (i == 0) {
@@ -356,7 +379,6 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           lastLen: item.length,
           pointsObject,
         })
-
       }
     })
   })

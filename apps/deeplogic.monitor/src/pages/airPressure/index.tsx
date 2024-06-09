@@ -13,6 +13,7 @@ import {
   res5,
   res7,
   res_2,
+  res_8,
   deviceModelMap,
   links,
   global,
@@ -41,7 +42,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = false ? res3_2 : res3_1
+      let target = false ? res3 : res3_1
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],
@@ -97,7 +98,7 @@ const ContainerDemo = () => {
 }
 
 export const AirPressure = () => {
-  console.log("result===>1")
+  // console.log("result===>1")
   return (
     <Editor resolver={{ ...materials }} enabled={false}>
       <ContainerDemo />

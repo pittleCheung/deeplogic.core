@@ -2307,9 +2307,7 @@ export const tower_chl = (item, result, index) => {
 
 export const generateText = ({ result, name, unit, percent, translateX, translateY, xAxis, yAxis }) => {
   const poc = statusText(percent, unit);
-  // console.log(textTransform(resultMap, tag, other, index), '====>textTransform(resultMap, tag, other, index)');
   poc.props.style = {
-    // ...commonTextStyle,
     ...textTransform({
       translateX,
       translateY,
@@ -2346,7 +2344,6 @@ export const generateSystemText = (result, source, tag, name) => {
   if (!name) return;
   const poc = statusText(false, '℃');
   poc.props.style = {
-    // ...commonTextStyle,
     ...textSystemTransform(source, tag)
   };
   poc.props.value = {

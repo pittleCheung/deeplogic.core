@@ -99,7 +99,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     chlsArr.push(resultMap);
     // 计算x文字居中的偏移量
     const [xAxis,center] = calcAxis(resultMap, item.NAME);
-     console.log("resultMap=======>", resultMap, "xAxis======>", xAxis, center)
+    //  console.log("resultMap=======>", resultMap, "xAxis======>", xAxis, center)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
@@ -386,7 +386,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
   };
   // console.log('pointsObject', pointsObject)
   // console.log('result', result, boxid)
-  // console.log('result: ', result);
+  console.log('result: ', result);
   return replace2Gif(result);
 };
 
