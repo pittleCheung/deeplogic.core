@@ -74,11 +74,12 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
   const RDRYS = source?.RDRYS || {} // 冷干机
   const DDRYS = source?.DDRYS || {} // 吸干机
   const ARDTS = source?.ARDTS || {} // 储气干罐
+
   for (const t in ARDTS) {
     let str = ""
     const obj = source?.DDRYS || source?.RDRYS
     for (const t0 in obj) {
-      str += `${"${" + obj[t0].ONOFF.NAME + "}"}==1&&`
+      str += `${"${" + obj[t0].ONOFF.NAME + "}"}==1||`
     }
     str.slice(-2)
     ARDTS[t].preStates = str
@@ -157,7 +158,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
     const len = item.length - 1 // 假设3个空压item  这里的len 第一个类为len=0  第二类为len=1
     console.log("len====>3 index", len, index)
     let str = ""
-    item.forEach((t0) => (str += `${"${" + ACOPS[t0].ONOFF.NAME + "}"}==1&&`))
+    item.forEach((t0) => (str += `${"${" + ACOPS[t0].ONOFF.NAME + "}"}==1||`))
     item.forEach((t, i) => {
       const current = ACOPS[t]
       const deviceItem = device(
@@ -326,12 +327,14 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
           pipev.props.style.translateX = X
           pipev.props.style.translateY = pipeh1.props.style.translateY
           pipev.props.status = {
-            bind: `${"${" + ACOPS[item[i + 1]].ONOFF.NAME + "}"}==1`,
+            bind: `${"${" + ACOPS[item[i]].ONOFF.NAME + "}"}==1`,
             type: "expressions",
           }
+          
+          console.log("current==========>", current.NAME, ACOPSARR)
           result[pipev.id] = pipev
       }
-      // 最后一根横管
+      // 最后一根横管(总管)
       if(i === len){
          const pipeh2 = pipe("h", "0")
          pipeh2.props.waterstyle = "1"
@@ -339,11 +342,11 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
          // pipeh2.props.style.width = fix(pipeh2.props.style.width * 0.33);
          // pipeh2.props.style.width = fix(pipeh2.props.style.width / 3)
          pipeh2.props.style.width = fix(
-           pGap.acopXGap - (pipeh2.props.style.width / 3) * 2,
+           pGap.acopXGap - (styleMap.h.width)
          )
          pipeh2.props.style.translateX = X + styleMap["v"].width
-         pipeh2.props.style.translateY =
-           pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
+        //  pipeh2.props.style.translateY = pipeh1.props.style.translateY + (len % 2 == 0 ? 0 : vheight)
+         pipeh2.props.style.translateY = pipeh1.props.style.translateY 
          pipeh2.props.style.zIndex = -1
          pipeh2.props.status = {
            bind: str.slice(0, -2),
@@ -364,6 +367,7 @@ export const handleSource = (source, deviceModelMap, links, global, allsource) =
         }else if(curlen > nextlen){
             // 空压设备数量大于下一个设备数量
           newInitTop = newInitTop + (styleMap.Acop.height + pGap.acopYGap) * (curlen - nextlen) * .5
+          // newInitTop = newInitTop + (styleMap.Acop.height + pGap.acopYGap) * (curlen - nextlen) * 1
         }
         // console.log("是不是到这里了====>", nextlen, current.NEXT_NODE, idsList)
         helpFunction({

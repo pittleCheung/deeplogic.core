@@ -54,7 +54,7 @@ function PipeH(props) {
         <path
           d={`M0 ${height * 0.5}H16000`}
           className={
-           !enabled && status
+           !enabled && true
               ? direction === '0'
                 ? `${cls(
                     css.water_flow({
