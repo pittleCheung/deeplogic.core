@@ -2,18 +2,21 @@ import { Editor, Frame, useEditor } from "@craftjs/core"
 import materials from "@deeplogic/materials"
 import React, { useLayoutEffect, useEffect, useRef } from "react"
 // 空调
-import { handleSource } from "../../auto3d/airPressure/handleSource"
+// import { handleSource } from "../../auto3d/airPressure0/handleSource"
+// import { handleSource } from "../../auto3d/airPressure1/handleSource"
+import { handleSource } from "../../auto3d/airPressure2/handleSource"
 import {
-  re2,
-  re2_1,
-  res3,   // 并联三台空压 三台干罐
+  re2, // 串联2个空压机 1个储气湿罐
+  re2_1, // 串联2个空压机 2个储气湿罐
+  res3, // 并联三台空压 三台干罐
   res3_1, // 串联三台空压 三台干罐
   res3_2, // 并联三台空压 两台干罐
   re4,
-  res5,
+  res5_3, // 并联5台空压 3台湿罐
+  res5_3_1, // 串联5台空压 3台湿罐
+  res5_4, // 串联5台空压 4台湿罐
   res7,
-  res_2,
-  res_8,
+  re3_2,
   deviceModelMap,
   links,
   global,
@@ -42,7 +45,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = true ? res3_1 : re4
+      let target = true ? res5_4 : res7
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],

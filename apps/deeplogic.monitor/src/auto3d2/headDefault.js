@@ -487,7 +487,7 @@ export const footDefault = (footid, parentbox, source, type) => {
             footItem(footid, '排气温度', '℃', source?.['T_DISCHARGE'].NAME, type),
             footItem(footid, '总管压力', 'Mpa', source?.['PR_PLANT'].NAME, type),
             footItem(footid, '总管露点温度', '℃', source?.['T_DEW'].NAME, type),
-            footItem(footid, '总管流量', 'Nm³', source?.['FLOW_PLANT_AIR'].NAME, type)
+            footItem(footid, '总管流量', 'Nm³/min', source?.['FLOW_PLANT_AIR'].NAME, type)
         ]
     } else {
         arr = [
