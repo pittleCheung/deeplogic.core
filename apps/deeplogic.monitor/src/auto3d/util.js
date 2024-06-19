@@ -14,8 +14,8 @@ export function replace2Gif(result) {
   }
   for (let cmp in result) {
     const item = result[cmp]
-    const resolvedName = item.type.resolvedName
-    if (cmpCollect[resolvedName]) {
+    const resolvedName = item.type?.resolvedName
+    if (resolvedName && cmpCollect[resolvedName]) {
       item.type.resolvedName = resolvedName + "ImgGif"
     }
   }

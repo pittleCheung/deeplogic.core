@@ -11,6 +11,7 @@ import {
   res3, // 并联三台空压 三台干罐
   res3_1, // 串联三台空压 三台干罐
   res3_2, // 并联三台空压 两台干罐
+  res_3_2_2,
   re4,
   res5_3, // 并联5台空压 3台湿罐
   res5_3_1, // 串联5台空压 3台湿罐
@@ -21,6 +22,15 @@ import {
   links,
   global,
 } from "../../data/at"
+
+import {
+  res5_4_4_4_3,
+  res4_5_5_5_5,
+  res4_2_2_3,
+  res_3_2_2_2,
+} from "../../data/atb"
+import { res_5_4_4_4 } from "../../data/ata"
+
 
 // 空压
 const ContainerDemo = () => {
@@ -35,7 +45,7 @@ const ContainerDemo = () => {
   useLayoutEffect(() => {
     //  const json = lz.decompress(lz.decodeBase64(stateToLoad))
     // const startTime = performance.now()
-    // 空压
+    // 空压 
 
     // const endTime = performance.now()
     // const renderTime = endTime - startTime
@@ -45,7 +55,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = true ? res5_4 : res7
+      let target = true ? res_3_2_2_2 : res7
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],
@@ -54,6 +64,7 @@ const ContainerDemo = () => {
         global,
         target.CAS_PLANTS,
       )
+      console.log("result======>", result)
       actions.deserialize(result)
     }, 100)
 

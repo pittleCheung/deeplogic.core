@@ -102,8 +102,18 @@ export const handleSource = (
   }
   // console.log("maxHeight====>", maxHeight, ConHeight, "gapY====>",gapY , pGap.acopYGap)
   // let initTop = -(styleMap.Acop.height + pGap.acopYGap)
-  // 初始化距离顶部的距离为0
+  // 默认初始化距离顶部的距离为0
   let initTop = 0
+
+  // 当前空压机数量小于湿罐数量 空压机需要往下移动
+  let curlen = Object.keys(ACOPS).length
+  let nextlen = Object.keys(ARWTS).length
+  if (curlen < nextlen) {
+    initTop =
+      initTop +
+      (styleMap.Acop.height + pGap.acopYGap) * Math.abs(curlen - nextlen) * 0.5
+  }
+
   let prevX = 0 //前一个节点的横坐标
   // 空压机分组 x: 50, y: height
   const ACOPSobj = {}
@@ -119,13 +129,17 @@ export const handleSource = (
       }
     }
   }
-  // tag 默认是L
-  let tag = "L"
-  for (let key in ACOPSobj) {
-    if (ACOPSobj[key].length >= JSON.parse(key).length) {
-      tag = "R"
-    }
-  }
+  // tag 默认是L  
+  // let tag = "L"
+  // for (let key in ACOPSobj) {
+  //   // 空压机设备数量 大于等于 下一级的数量 
+  //   if (ACOPSobj[key].length >= JSON.parse(key).length) {
+  //     tag = "R"
+  //   }
+  // }
+  // 考虑下一级设备 大于 空压机设备的数量
+  let tag = "R"
+ 
   let ACOPSARR = Object.values(ACOPSobj)
   /**
    * 保留一位小数
@@ -397,7 +411,11 @@ export const handleSource = (
           newInitTop =
             newInitTop +
             (styleMap.Acop.height + pGap.acopYGap) * (curlen - nextlen) * 0.5
-          // newInitTop = newInitTop + (styleMap.Acop.height + pGap.acopYGap) * (curlen - nextlen) * 1
+        } else {
+          // 当前空压机数量小于湿罐数量 空压机需要往上移动 那么湿罐需要往上移动
+           newInitTop =
+             newInitTop +
+             (styleMap.Acop.height + pGap.acopYGap) * Math.abs(curlen - nextlen) * -0.5
         }
         helpFunction({
           arr: current.NEXT_NODE,
@@ -774,7 +792,8 @@ function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
       points.push(ACOPS[t0].ONOFF.NAME)
     }
     str.slice(-2)
-    ARWTS[t].preStates = str
+    ARWTS[t].preStates = str // 设备预设表达式
+    ARWTS[t].prePipeStates = str // 管子预设表达式
     ARWTS[t].prePoints = points
   }
   // 冷干机
@@ -782,15 +801,15 @@ function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
   for (const t in RDRYS) {
     let str = ""
     let points = []
-    // for (const t0 in RDRYS) {
-    //   // str += `${"${" + RDRYS[t0].ONOFF.NAME + "}"}==1||`
-    //   // points.push(RDRYS[t0].ONOFF.NAME)
-    //   // arr.push(RDRYS[t0])
-    // }
+    for (const t0 in RDRYS) {
+      str += `${"${" + RDRYS[t0].ONOFF.NAME + "}"}==1||`
+      points.push(RDRYS[t0].ONOFF.NAME)
+      // arr.push(RDRYS[t0])
+    }
     points.push(RDRYS[t].ONOFF.NAME)
     arrRDRYS.push(RDRYS[t])
     // console.log("current=====>", arr)
-    // RDRYS[t].preStates = str
+    RDRYS[t].prePipeStates = str
     RDRYS[t].prePoints = points
   }
   onRYS(arrRDRYS)
@@ -800,13 +819,13 @@ function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
   for (const t in DDRYS) {
     let str = ""
     let points = []
-    // for (const t0 in DDRYS) {
-    //   str += `${"${" + DDRYS[t0].ONOFF.NAME + "}"}==1||`
-    //   points.push(DDRYS[t0].ONOFF.NAME)
-    // }
+    for (const t0 in DDRYS) {
+      str += `${"${" + DDRYS[t0].ONOFF.NAME + "}"}==1||`
+      points.push(DDRYS[t0].ONOFF.NAME)
+    }
     points.push(DDRYS[t].ONOFF.NAME)
     arrDDRYS.push(DDRYS[t])
-    // DDRYS[t].preStates = str
+    DDRYS[t].prePipeStates = str
     DDRYS[t].prePoints = points
   }
   onRYS(arrDDRYS)
@@ -814,7 +833,13 @@ function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
   for (const t in ARDTS) {
     let str = ""
     let points = []
-    const obj = DDRYS || RDRYS
+    let obj = {} 
+    // 吸干机不存在 储气干罐表达式 使用冷干机判断
+    if (Object.keys(DDRYS).length !== 0) {
+       obj = DDRYS
+    }else{
+      obj = RDRYS 
+    }
     for (const t0 in obj) {
       str += `${"${" + obj[t0].ONOFF.NAME + "}"}==1||`
       points.push(obj[t0].ONOFF.NAME)

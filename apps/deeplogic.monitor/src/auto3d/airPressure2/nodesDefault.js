@@ -1,10 +1,11 @@
 /**
  * 空压
  */
-import { device, pipe, statusText, text } from "../nodesDefault"
+import { device, pipe, text, boxid, statusText } from "../nodesDefault"
 import { styleMap } from "../stylesDefault"
 import { onPoints } from "./handleSource"
 import { calcAxis } from "../util"
+import { nanoid } from "nanoid"
 
 // 竖管高度
 export const pipevHeight = 150
@@ -259,10 +260,11 @@ export const helpFunction = ({
           // 储气湿罐#1 preStates = ${ACOP1#ONOFF}==1||${ACOP2#ONOFF}==1||${ACOP3#ONOFF}==1||
           if (current?.NEXT_NODE?.length === 1) {
             const curr = current.NEXT_NODE?.[0]
+            
             pipeh1.props.status = {
-              bind: current?.preStates.slice(0, -2) + `&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`,
+              bind: `(${current?.preStates.slice(0, -2)})&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`,
               type: "expressions",
-              point: onPoints(current?.preStates.slice(0, -2) + `&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`)
+              point: onPoints(`(${current?.preStates.slice(0, -2)})&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`),
             }
           } else {
             // 并联
@@ -271,6 +273,7 @@ export const helpFunction = ({
               type: "expressions",
               point: onPoints(current?.preStates?.slice(0, -2)),
             }
+            // console.log("current====>", current.NAME, pipeh1.props.status)
             // todo...
             //  if(current.NEXT_NODE.length > 1){}
           }
@@ -281,14 +284,10 @@ export const helpFunction = ({
 
         const pipeh2 = pipe("h", "0")
 
-        // let vheight =
-        //   len % 2 == 0
-        //     ? styleMap.Acop.height + pGap.acopYGap
-        //     : (styleMap.Acop.height + pGap.acopYGap) * 0.5
 
         // 并联 最后一个储气干罐左侧 最后一个冷干机左侧 和 最后一个吸干机左侧横管
         if (
-          tag === "R" &&
+          tag === "R" &&   // 表示是并联
           // index === t.length - 1 &&
           current.NEXT_NODE?.length > 1 // 最后一个储气干罐不走这里
         ) {
@@ -303,22 +302,12 @@ export const helpFunction = ({
               target.translateX + target.width + pipeh1.props.style.width - 20
             pipeh2.props.style.translateY = pipeh1.props.style.translateY
             if (current.LEN % 2 === 0) {
-              pipeh2.props.style.translateY =
-                pipeh2.props.style.translateY -
-                (pGap.acopYGap + styleMap.Acop.height) / 2
+              pipeh2.props.style.translateY = pipeh2.props.style.translateY - (pGap.acopYGap + styleMap.Acop.height) / 2
             }
-            if (current?.ONOFF) {
-              pipeh2.props.status = {
-                bind: `${"${" + current.ONOFF.NAME + "}"}==1`,
-                type: "expressions",
-                point: [current.ONOFF.NAME],
-              }
-            } else {
-              pipeh2.props.status = {
-                bind: current?.preStates?.slice(0, -2),
-                type: "expressions",
-                point: onPoints(current?.preStates?.slice(0, -2)),
-              }
+            pipeh2.props.status = {
+              bind: current?.prePipeStates?.slice(0, -2),
+              type: "expressions",
+              point: onPoints(current?.prePipeStates?.slice(0, -2)),
             }
             result[pipeh2.id] = pipeh2
           }
@@ -354,11 +343,11 @@ export const helpFunction = ({
               point: onPoints(current?.preStates?.slice(0, -2)),
             }
           }
+          result[pipeh2.id] = pipeh2
 
-          // 串联 最后一个吸干机右侧添加 横管总管和竖管总管
+          // 串联 最后一个吸干机右侧添加 横管总管
           if (
-            current.NO - 1 === current.LEN >> 1 &&
-            t.length < current.NEXT_NODE?.length
+            current.NO - 1 === current.LEN >> 1 && t.length < current.NEXT_NODE?.length
           ) {
             // 横管总管
             const pipeh3 = pipe("h", "0")
@@ -366,32 +355,25 @@ export const helpFunction = ({
             pipeh3.props.style = { ...styleMap["h"], fill: "#407FCB" }
             pipeh3.props.style.width = fix(pGap.acopXGap - styleMap.h.width)
             // 这里pipeh2.props.style.width 是左侧管的宽度(和右侧管的宽度是一样的) 20是pipeh2管子的向左的偏移量
-            pipeh3.props.style.translateX =
-              target.translateX +
-              target.width +
-              pipeh2.props.style.width +
-              20 +
-              styleMap["v"].width * 2
+            pipeh3.props.style.translateX = target.translateX + target.width + pipeh2.props.style.width + 20 +styleMap["v"].width * 2
             pipeh3.props.style.translateY = pipeh2.props.style.translateY
             if (current.LEN % 2 === 0) {
-              pipeh3.props.style.translateY =
-                pipeh2.props.style.translateY -
-                (pGap.acopYGap + styleMap.Acop.height) / 2
+              pipeh3.props.style.translateY = pipeh2.props.style.translateY - (pGap.acopYGap + styleMap.Acop.height) / 2
             }
-            result[pipeh3.id] = pipeh3
-            if (current?.preStates) {
+            if (current?.prePipeStates) {
               pipeh3.props.status = {
-                bind: current?.preStates?.slice(0, -2),
+                bind: current?.prePipeStates?.slice(0, -2),
                 type: "expressions",
-                point: onPoints(current?.preStates?.slice(0, -2)),
+                point: onPoints(current?.prePipeStates?.slice(0, -2)),
               }
             }
+            result[pipeh3.id] = pipeh3
+            // console.log("current=====>", current.NAME, pipeh3.props.status)
           }
-          result[pipeh2.id] = pipeh2
         }
 
-        // 串联储气湿罐左侧竖管
-        if (lastLen > 1 && (index != t.length - 1 || t.length === 1)) {
+        // 串联储气湿罐左侧竖管 
+        if (lastLen > 1 && current.NEXT_NODE?.length === 1) {
           let pipev0
           if (arr.length % 2 === 0) {
             // 偶数
@@ -422,7 +404,6 @@ export const helpFunction = ({
               }
             }
             pipev0.props.style.translateX = pipeh1.props.style.translateX
-            result[pipev0.id] = pipev0
           } else {
             // 奇数
             if (i !== len) {
@@ -433,27 +414,23 @@ export const helpFunction = ({
               pipev0.props.style.height = styleMap.Acop.height + pGap.acopYGap
               pipev0.props.style.translateX = pipeh1.props.style.translateX
               pipev0.props.style.translateY = pipeh1.props.style.translateY
-              result[pipev0.id] = pipev0
             }
           }
-
-          if (current.NEXT_NODE?.length === 1 && pipev0) {
+          if (pipev0) {
+            // pipev0 说明不是最后一根储气湿罐竖管(奇数情况下最后一根竖管是隐藏的)
             // 串联
             const curr = current.NEXT_NODE?.[0]
+            const nextExp = idsList[curr.ID].preStates.slice(0,-2)
             pipev0.props.status = {
-              bind:
-                current?.preStates.slice(0, -2) +
-                `&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`,
+              bind: `(${current?.preStates.slice(0, -2)})&&(${nextExp})`,
               type: "expressions",
-              point: onPoints(current?.preStates.slice(0, -2)+`&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`),
+              point: onPoints(`(${current?.preStates.slice(0, -2)})&&(${nextExp})`),
             }
-          } else {
-            // 并联
-            // todo...
+            result[pipev0.id] = pipev0
           }
         }
 
-        // 并联储气干罐左侧竖管
+        // 并联储气干罐 冷干机 吸干机左侧竖管
         if (t.length > 1) {
           let pipev1
           if (current.LEN % 2 === 0) {
@@ -502,14 +479,14 @@ export const helpFunction = ({
               pipev1.props.style.translateY = pipeh1.props.style.translateY
             }
           }
-
           if (pipev1) {
-            pipev1.props.status = {
-              bind: str.length > 0 ? str.slice(0, -2) : current?.preStates?.slice(0,-2),
-              type: "expressions",
-              point: onPoints(str.length > 0 ? str.slice(0, -2) : current?.preStates?.slice(0,-2)),
-            }
+             pipev1.props.status = {
+               bind: current?.preStates?.slice(0, -2),
+               type: "expressions",
+               point: onPoints(current?.preStates?.slice(0, -2)),
+             }
             result[pipev1.id] = pipev1
+            //  console.log("current======>", current.NAME, pipev1.props.status)
           }
         }
 
@@ -541,11 +518,7 @@ export const helpFunction = ({
             result,
             tag: newtag,
             prevX: newprevX,
-            initTop:
-              initTop +
-              Math.abs(curlen - nextlen) *
-                (styleMap.Acop.height + pGap.acopYGap) *
-                0.5,
+            initTop: initTop + (curlen - nextlen) * (styleMap.Acop.height + pGap.acopYGap) * 0.5,
             lastdevice: result[deviceItem.id],
             idsList,
             deviceModelMap,
@@ -609,24 +582,22 @@ export const helpFunction = ({
               point: [current.ONOFF.NAME],
             }
             // 冷干机右侧为吸干机情况
-            if (current?.NEXT_NODE?.length === 1) {
-                const nextId = current.NEXT_NODE[0].ID
-                pipehr1.props.status = {
-                  bind: `${"${" + current.ONOFF.NAME + "}"}==1&&${idsList[nextId].ONOFF.NAME}=1`,
-                  type: "expressions",
-                  point: [current.ONOFF.NAME, idsList[nextId].ONOFF.NAME],
-                }
+            const nextId = current.NEXT_NODE[0].ID
+            if (current?.NEXT_NODE?.length === 1 &&  idsList[nextId].ONOFF) {
+              pipehr1.props.status = {
+                bind: `${"${" + current.ONOFF.NAME + "}"}==1&&${"${" + idsList[nextId].ONOFF.NAME + "}"}==1`,
+                type: "expressions",
+                point: [current.ONOFF.NAME, idsList[nextId].ONOFF.NAME],
+              }
             }
-            
           } else {
             if (current.NEXT_NODE?.length === 1) {
-              const nextId = current.NEXT_NODE[0].ID
+              const next = current.NEXT_NODE[0]  
               pipehr1.props.status = {
-                bind: "(" + current?.preStates.slice(0, -2) + ")" + `&&${"${" + idsList[nextId].ONOFF.NAME + "}"}==1`,
+                bind: `(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`,
                 type: "expressions",
-                point: onPoints(current?.preStates.slice(0, -2)+ `&&${"${" + idsList[nextId].ONOFF.NAME + "}"}==1`)
+                point: onPoints(`(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`),
               }
-               
             } else {
               // 并联
               pipehr1.props.status = {
@@ -638,7 +609,7 @@ export const helpFunction = ({
               //  if(current.NEXT_NODE?.length > 1){}
             }
           }
-          
+
           // 储气湿罐 冷干机 吸干机 储气干罐 右侧横管
           result[pipehr1.id] = pipehr1
 
@@ -668,7 +639,9 @@ export const helpFunction = ({
                   (styleMap.Acop.height + pGap.acopYGap + styleMap.h.height) / 2
                 pipev1.props.style.translateX = rX
                 pipev1.props.style.translateY =
-                  pipehr1.props.style.translateY - pipev1.props.style.height
+                  pipehr1.props.style.translateY -
+                  pipev1.props.style.height +
+                  styleMap.h.height
               } else {
                 pipev1 = pipe(
                   "v",
@@ -690,7 +663,10 @@ export const helpFunction = ({
             } else {
               // 奇数
               if (current.NO !== current.LEN) {
-                pipev1 = pipe("v",current.NO - 1 >= (current.LEN - 1) >> 1 ? "1" : "0")
+                pipev1 = pipe(
+                  "v",
+                  current.NO - 1 >= (current.LEN - 1) >> 1 ? "1" : "0",
+                )
                 pipev1.props.waterstyle = "1"
                 pipev1.props.style = { ...styleMap["v"], fill: "#407FCB" }
                 pipev1.props.style.height =
@@ -715,13 +691,11 @@ export const helpFunction = ({
                 // console.log("current=====>", current.NAME, pipev1.props.status)
               } else {
                 if (current.NEXT_NODE?.length === 1) {
-                  const curr = current.NEXT_NODE[0]
+                  const next = current.NEXT_NODE[0]
                   pipev1.props.status = {
-                    bind: current?.preStates.slice(0, -2) + `&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`,
+                    bind: `(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`,
                     type: "expressions",
-                    point: onPoints(
-                      current?.preStates.slice(0, -2) + `&&${"${" + idsList[curr.ID].ONOFF.NAME + "}"}==1`,
-                    ),
+                    point: onPoints(`(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`),
                   }
                 } else {
                   // 并联
@@ -734,7 +708,6 @@ export const helpFunction = ({
                   //  if(current.NEXT_NODE?.length > 1){}
                 }
               }
-              // console.log("current=====>", current?.ONOFF, pipev1.props.status)
               result[pipev1.id] = pipev1
             }
 
@@ -781,10 +754,14 @@ export const helpFunction = ({
               }
             } else {
               if (current.NO !== current.LEN) {
-                piperv = pipe("v",current.NO - 1 >= (current.LEN - 1) >> 1 ? "1" : "0")
+                piperv = pipe(
+                  "v",
+                  current.NO - 1 >= (current.LEN - 1) >> 1 ? "1" : "0",
+                )
                 piperv.props.waterstyle = "1"
                 piperv.props.style = { ...styleMap["v"], fill: "#407FCB" }
-                piperv.props.style.height = styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
+                piperv.props.style.height =
+                  styleMap.Acop.height + pGap.acopYGap + styleMap.h.height
                 piperv.props.style.translateX = rX
                 piperv.props.style.translateY = pipehr1.props.style.translateY
               }
@@ -895,6 +872,113 @@ export const helpFunction = ({
   })
 }
 
+// const wrapContainer = ({ containerId, nodes }) => {
+//   return {
+//     id: containerId,
+//     type: {
+//       resolvedName: "Container",
+//     },
+//     displayName: "Container",
+//     props: {
+//       style: {
+//         // display: "flex",
+//         // jusitifyContent: "center",
+//         // position: "relative",
+//         width: "80px",
+//         height: "10px",
+//         background: "#f40",
+//       },
+//       displayName: "Container",
+//     },
+//     parent: boxid,
+//     nodes,
+//   }
+// }
+
+// export const generateText = ({
+//   result,
+//   current,
+//   item,
+//   index,
+//   parentStyle,
+//   xAxis = 0,
+//   yAxis = 30,
+//   center = 0,
+// }) => {
+//   const containerId = nanoid(10)
+//   const poc = statusText(null, item[1], containerId)
+//   result[poc.id] = poc
+//   const container = wrapContainer({ containerId, nodes: [poc.id] })
+  
+//   // 调整数码管的位置  64为数码管的宽度
+//   // poc.props.style = {
+//   //   // ...commonTextStyle,
+//   //   translateX:
+//   //     parentStyle.translateX,
+//   //   translateY: parentStyle.translateY + yAxis,
+//   // }
+//   container.props.style = {
+//     ...container.props.style,
+//     translateX: parentStyle.translateX ,
+//     translateY: parentStyle.translateY + yAxis,
+//   }
+//   console.log("container=====>", container.props.style)
+//   poc.props.value = {
+//     bind: current?.[item[0]]?.NAME ? current?.[item[0]]?.NAME : current,
+//     type: "points",
+//   }
+//   result[containerId] = container
+// }
+
+// const statusText = (percent, unit, containerId) => {
+//   const id = nanoid(10)
+//   return {
+//     id,
+//     type: {
+//       resolvedName: "NumeralText",
+//     },
+//     isCanvas: false,
+//     props: {
+//       displayName: "NumeralText",
+//       level: "5",
+//       size: "",
+//       decimalSeparator: !!percent ? 0 : 1,
+//       percent: false,
+//       value: "",
+//       type: "success",
+//       strong: false,
+//       italic: false,
+//       underline: false,
+//       disabled: false,
+//       mark: false,
+//       keyboard: false,
+//       delete: false,
+//       code: false,
+//       isBefore: false,
+//       isAfter: !!unit || !!percent,
+//       style: {
+//         fontSize: "12px",
+//       },
+//       before: {
+//         value: "前缀",
+//       },
+//       after: {
+//         value: percent ? "%" : unit,
+//         type: "secondary",
+//         props: {
+//           size: "10px",
+//         },
+//       },
+//     },
+//     displayName: "NumeralText",
+//     custom: {},
+//     parent: containerId,
+//     hidden: false,
+//     nodes: [],
+//     linkedNodes: {},
+//   }
+// }
+
 export const generateText = ({
   result,
   current,
@@ -909,10 +993,7 @@ export const generateText = ({
   // 调整数码管的位置  64为数码管的宽度
   poc.props.style = {
     // ...commonTextStyle,
-    translateX:
-      parentStyle.translateX +
-      (index === 0 ? center - 64 - 10 : center + 20) +
-      xAxis,
+    translateX: parentStyle.translateX + (index === 0 ? center - 64 - 10 : center + 20) + xAxis,
     translateY: parentStyle.translateY + yAxis,
   }
   poc.props.value = {

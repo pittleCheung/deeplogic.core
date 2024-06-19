@@ -278,7 +278,7 @@ const wrapContainer = ({ containerid, footid, ids }) => {
             display: "flex",
             position: "relative",
             left: "50%",
-            transform: "translate(-50%, 10px)",
+            transform: "translate(-50%, 25%)",
           },
           displayName: "Container",
         },
