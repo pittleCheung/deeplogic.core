@@ -272,6 +272,7 @@ export const useComponent = (props) => {
     }
     return data;
   }, [data, enabled]);
+  
   return {
     id,
     parentId,

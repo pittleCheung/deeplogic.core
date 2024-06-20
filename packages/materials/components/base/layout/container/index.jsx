@@ -14,7 +14,8 @@ function Container(props) {
         }
     }, [state]);
 
-    return <Resizer {...{...state, enabled}}>{state?.children}</Resizer>;
+    // return <Resizer {...{ ...props.style, enabled:false}}>{props?.children}</Resizer>
+    return <Resizer {...{ ...state, enabled }}>{state?.children}</Resizer>
 }
 
 Container.craft = craft(meta);

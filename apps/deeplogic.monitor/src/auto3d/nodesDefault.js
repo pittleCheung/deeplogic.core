@@ -852,6 +852,7 @@ const deviceModelProps = {
   D0C1C: ["吸干机", "900px"],
   // D0C1E: ['储气干罐', '900px']
 }
+
 export const device = (type, item, pointsObject, modelId) => {
   const id = nanoid(10)
   const { TYPE, ID } = item //DEVICE_PREFIX 设备前缀 STATION_PREFIX_ORG系统前缀
@@ -860,6 +861,7 @@ export const device = (type, item, pointsObject, modelId) => {
     pointsObject[item[pointDefault.status[0]]?.NAME] = 0
     pointsObject[item[pointDefault.status[1]]?.NAME] = 0
   }
+  
   if (!item?.[pointDefault.status[1]]) {
     return {
       id: id,
@@ -967,6 +969,7 @@ export const device = (type, item, pointsObject, modelId) => {
     isCanvas: false,
   }
 }
+
 /**
  * 生成管道
  * @param {*} type 设备类型

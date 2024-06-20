@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 import headDefault, { bottomDefault, footDefault } from "../headDefault"
 import {
   bottomid,
@@ -129,17 +130,17 @@ export const handleSource = (
       }
     }
   }
-  // tag 默认是L  
+  // tag 默认是L
   // let tag = "L"
   // for (let key in ACOPSobj) {
-  //   // 空压机设备数量 大于等于 下一级的数量 
+  //   // 空压机设备数量 大于等于 下一级的数量
   //   if (ACOPSobj[key].length >= JSON.parse(key).length) {
   //     tag = "R"
   //   }
   // }
   // 考虑下一级设备 大于 空压机设备的数量
   let tag = "R"
- 
+
   let ACOPSARR = Object.values(ACOPSobj)
   /**
    * 保留一位小数
@@ -179,6 +180,7 @@ export const handleSource = (
       str += `${"${" + ACOPS[t0].ONOFF.NAME + "}"}==1||`
       arr.push(ACOPS[t0].ONOFF.NAME)
     })
+
     item.forEach((t, i) => {
       const current = ACOPS[t]
       const deviceItem = device(
@@ -201,10 +203,29 @@ export const handleSource = (
           prevX: 0,
         }),
       }
-      // prevX为当前设备X轴的的位移
-      prevX = result[deviceItem.id].props.style.translateX
       // target为当前设备Acop的样式
       const target = result[deviceItem.id].props.style
+
+      const pointItemWrap = pointContainer("Container",boxid)
+      // const pointItem = pointContainer("Container", pointItemWrap.id)
+      // pointItemWrap.nodes = [pointItem.id]
+      // result[pointItem.id] = pointItem
+
+      pointItemWrap.props.style = {
+        translateX: target.translateX + target.width,
+        translateY: target.translateY + target.height * 0.45,
+        // transform: `translate(${target.translateX + target.width}px, ${target.translateY + target.height * 0.45}px)`,
+        width: 15,
+        height: 10,
+        backgroundColor: "#FA5151",
+      }
+      result[pointItemWrap.id] = pointItemWrap
+
+
+
+      // prevX为当前设备X轴的的位移
+      prevX = result[deviceItem.id].props.style.translateX
+
       const nameText = text()
       nameText.props.value = current.NAME
       const [xAxis, center] = calcAxis(deviceItem, current.NAME)
@@ -413,9 +434,11 @@ export const handleSource = (
             (styleMap.Acop.height + pGap.acopYGap) * (curlen - nextlen) * 0.5
         } else {
           // 当前空压机数量小于湿罐数量 空压机需要往上移动 那么湿罐需要往上移动
-           newInitTop =
-             newInitTop +
-             (styleMap.Acop.height + pGap.acopYGap) * Math.abs(curlen - nextlen) * -0.5
+          newInitTop =
+            newInitTop +
+            (styleMap.Acop.height + pGap.acopYGap) *
+              Math.abs(curlen - nextlen) *
+              -0.5
         }
         helpFunction({
           arr: current.NEXT_NODE,
@@ -732,54 +755,54 @@ export function onPoints(inputString) {
   return result
 }
 
-
-function onRYS(arr){
- let str0 = "",str1 = "";
- let len = arr.length - 1
- for (let i = 0; i < arr.length; i++) {
-   if (arr.length % 2 === 0) {
-     // 偶数
-     if (i === len >> 1) {
-       // 中间第一个设备 顺时针
-       str0 += `${"${" + arr[i].ONOFF.NAME + "}"}==1||`
-       arr[i].preStates = str0
-     } else if (i === ((len >> 1) + 1)) {
-       // 中间第二个设备 逆时针
-       for (let j = i; j <= len; j++) {
-         str1 += `${"${" + arr[j].ONOFF.NAME + "}"}==1||`
-       }
-       arr[i].preStates = str1
-     } else {
-       // 上部分 和 下部分设备 和奇数逻辑大体一样 区别:偶数的j从i开始
-       if (i >= len >> 1) {
-         // 逆时针
-         str1 = ""
-         for (let j = i; j <= len; j++) {
-           str1 += `${"${" + arr[j].ONOFF.NAME + "}"}==1||`
-         }
-         arr[i].preStates = str1
-       } else {
-         // 顺时针
-         str0 += `${"${" + arr[i].ONOFF.NAME + "}"}==1||`
-         arr[i].preStates = str0
-       }
-     }
-   } else if (i !== len) {
-     // 奇数 并且不是最后一台
-     if (i >= len >> 1) {
-       // 逆时针
-       str1 = ""
-       for (let j = i + 1; j <= len; j++) {
-         str1 += `${"${" + arr[j].ONOFF.NAME + "}"}==1||`
-       }
-       arr[i].preStates = str1
-     } else {
-       // 顺时针
-       str0 += `${"${" + arr[i].ONOFF.NAME + "}"}==1||`
-       arr[i].preStates = str0
-     }
-   }
- }
+function onRYS(arr) {
+  let str0 = "",
+    str1 = ""
+  let len = arr.length - 1
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.length % 2 === 0) {
+      // 偶数
+      if (i === len >> 1) {
+        // 中间第一个设备 顺时针
+        str0 += `${"${" + arr[i].ONOFF.NAME + "}"}==1||`
+        arr[i].preStates = str0
+      } else if (i === (len >> 1) + 1) {
+        // 中间第二个设备 逆时针
+        for (let j = i; j <= len; j++) {
+          str1 += `${"${" + arr[j].ONOFF.NAME + "}"}==1||`
+        }
+        arr[i].preStates = str1
+      } else {
+        // 上部分 和 下部分设备 和奇数逻辑大体一样 区别:偶数的j从i开始
+        if (i >= len >> 1) {
+          // 逆时针
+          str1 = ""
+          for (let j = i; j <= len; j++) {
+            str1 += `${"${" + arr[j].ONOFF.NAME + "}"}==1||`
+          }
+          arr[i].preStates = str1
+        } else {
+          // 顺时针
+          str0 += `${"${" + arr[i].ONOFF.NAME + "}"}==1||`
+          arr[i].preStates = str0
+        }
+      }
+    } else if (i !== len) {
+      // 奇数 并且不是最后一台
+      if (i >= len >> 1) {
+        // 逆时针
+        str1 = ""
+        for (let j = i + 1; j <= len; j++) {
+          str1 += `${"${" + arr[j].ONOFF.NAME + "}"}==1||`
+        }
+        arr[i].preStates = str1
+      } else {
+        // 顺时针
+        str0 += `${"${" + arr[i].ONOFF.NAME + "}"}==1||`
+        arr[i].preStates = str0
+      }
+    }
+  }
 }
 
 function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
@@ -833,12 +856,12 @@ function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
   for (const t in ARDTS) {
     let str = ""
     let points = []
-    let obj = {} 
+    let obj = {}
     // 吸干机不存在 储气干罐表达式 使用冷干机判断
     if (Object.keys(DDRYS).length !== 0) {
-       obj = DDRYS
-    }else{
-      obj = RDRYS 
+      obj = DDRYS
+    } else {
+      obj = RDRYS
     }
     for (const t0 in obj) {
       str += `${"${" + obj[t0].ONOFF.NAME + "}"}==1||`
@@ -847,5 +870,27 @@ function onPreExpressInit(ACOPS, ARWTS, RDRYS, DDRYS, ARDTS) {
     str.slice(-2)
     ARDTS[t].preStates = str
     ARDTS[t].prePoints = points
+  }
+}
+
+function pointContainer(type,boxid) {
+  const containerId = nanoid(10)
+  return {
+    id: containerId,
+    type: {
+      resolvedName: type,
+    },
+    displayName: type,
+    props: {
+      style: {},
+      class: "zhangsan",
+      displayName: "Container",
+    },
+    nodes: [],
+    linkedNodes: {},
+    custom: {},
+    hidden: false,
+    isCanvas: true,
+    parent: boxid,
   }
 }
