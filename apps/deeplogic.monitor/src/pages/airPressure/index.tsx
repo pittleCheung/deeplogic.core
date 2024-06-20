@@ -28,8 +28,11 @@ import {
   res4_5_5_5_5,
   res4_2_2_3,
   res_3_2_2_2,
+  res2_1_1_2,
 } from "../../data/atb"
-import { res_5_4_4_4 } from "../../data/ata"
+
+// error情况
+import { res_4_2_3_2_2 } from "../../data/ata"
 
 
 // 空压
@@ -55,7 +58,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = true ? res_3_2_2_2 : res7
+      let target = true ? res3_1 : res7
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],

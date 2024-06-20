@@ -490,17 +490,17 @@ export const helpFunction = ({
           }
         }
 
-        let newtag = "L"
+        let newtag = "R" // 并联 L为串联
         const curlen = current.LEN || 0
         if (
           i == 0 &&
-          arr?.[0]?.NEXT_NODE?.length > 1 && // 下一个节点的数据要超过1 说明并联
+          (arr?.[0]?.NEXT_NODE?.length > 1) && // 下一个节点的数据要超过1 说明并联
           arr?.[0]?.NEXT_NODE?.some((t) => !childMap.get(t.ID)) // 串联的情况下并联储气干罐要特殊处理只能进一次,第二轮储气湿罐的循环就不走到这里面来了
         ) {
           // 最后一个储气干罐 和 并联的情况
-          if (arr.length >= current?.NEXT_NODE.length) {
-            newtag = "R"
-          }
+          // if (arr.length >= current?.NEXT_NODE.length) {
+          //   newtag = "R"
+          // }
           const nextlen = arr?.[0]?.NEXT_NODE?.length
           const obj = []
           arr?.[0]?.NEXT_NODE.map((t, i0) => {
@@ -525,6 +525,7 @@ export const helpFunction = ({
             lastLen: t.length,
             pointsObject,
           })
+
         } else if (arr?.[i]?.NEXT_NODE?.length == 1) {
           // 储气湿罐 和 冷干机 串联(并联不会走这里)
           const obj = []
@@ -541,7 +542,8 @@ export const helpFunction = ({
             arr: obj,
             result,
             // tag: "R",
-            tag: newtag,
+            // tag: newtag,
+            tag:"L",
             prevX: newprevX,
             // initTop: initTop + (t.length > 1 ? index : i) * (styleMap.Acop.height + pGap.acopYGap),
             initTop: initTop + i * (styleMap.Acop.height + pGap.acopYGap),
@@ -551,6 +553,7 @@ export const helpFunction = ({
             lastLen: t.length,
             pointsObject,
           })
+        }else{
         }
 
         //  右侧管
@@ -583,7 +586,7 @@ export const helpFunction = ({
             }
             // 冷干机右侧为吸干机情况
             const nextId = current.NEXT_NODE[0].ID
-            if (current?.NEXT_NODE?.length === 1 &&  idsList[nextId].ONOFF) {
+            if (current?.NEXT_NODE?.length === 1 && idsList[nextId].ONOFF) {
               pipehr1.props.status = {
                 bind: `${"${" + current.ONOFF.NAME + "}"}==1&&${"${" + idsList[nextId].ONOFF.NAME + "}"}==1`,
                 type: "expressions",
@@ -592,11 +595,13 @@ export const helpFunction = ({
             }
           } else {
             if (current.NEXT_NODE?.length === 1) {
-              const next = current.NEXT_NODE[0]  
+              const next = current.NEXT_NODE[0]
               pipehr1.props.status = {
                 bind: `(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`,
                 type: "expressions",
-                point: onPoints(`(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`),
+                point: onPoints(
+                  `(${current?.preStates.slice(0, -2)})&&${"${" + idsList[next.ID].ONOFF.NAME + "}"}==1`,
+                ),
               }
             } else {
               // 并联
@@ -615,7 +620,7 @@ export const helpFunction = ({
 
           const rX = pipehr1.props.style.translateX + pipehr1.props.style.width
 
-          // 吸干机 冷干机 储气湿罐 右边竖管
+          // 并联 吸干机 冷干机 储气湿罐 右边竖管 以及  串联 吸干机右边竖管
           if (arr?.[i]?.NEXT_NODE?.length > 1) {
             // 这里使用current.NO current.LEN代替 i 和 len
             let pipev1

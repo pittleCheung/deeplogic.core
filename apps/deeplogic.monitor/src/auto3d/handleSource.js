@@ -1,4 +1,4 @@
-import headDefault, { bottomDefault, footDefault } from './headDefault';
+import headDefault, { bottomDefault, footDefault } from "./headDefault"
 import {
   bottomid,
   box,
@@ -20,11 +20,11 @@ import {
   rootHeader,
   systemTempratureMap,
   tower_chl,
-  valuesMapsHandle
-} from './nodesDefault';
-import { pageDefault, pageLayout } from './pageDefault';
-import { drawpointmap, rootPointMap } from './pageNodeDefault';
-import { deviceNumToole, deviceTranform, styleMap } from './stylesDefault';
+  valuesMapsHandle,
+} from "./nodesDefault"
+import { pageDefault, pageLayout } from "./pageDefault"
+import { drawpointmap, rootPointMap } from "./pageNodeDefault"
+import { deviceNumToole, deviceTranform, styleMap } from "./stylesDefault"
 
 export const handleSource = (source, deviceModelMap, links, global) => {
   // test
@@ -36,78 +36,106 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     ...pageLayout(parentbox, source),
     [boxid]: box,
     ...footDefault(footid, parentbox, source),
-    ...bottomDefault(bottomid, parentbox, source, links)
-  };
-  result.ROOT.props['projId'] = global?.ProjectId;
-  result.ROOT.props['global'] = { ProjectName: global?.ProjectName, ProjectId: global?.ProjectId };
+    ...bottomDefault(bottomid, parentbox, source, links),
+  }
+  result.ROOT.props["projId"] = global?.ProjectId
+  result.ROOT.props["global"] = {
+    ProjectName: global?.ProjectName,
+    ProjectId: global?.ProjectId,
+  }
   // const pointsObject = { ...rootPointMap(source), ...drawpointmap(), MODE_SYS: 0, HINT: '' }; // 点表映射
-  const pointsObject = { ...rootPointMap(source), ...drawpointmap(source), 
+  const pointsObject = {
+    ...rootPointMap(source),
+    ...drawpointmap(source),
     [source["MODE_SYS"]?.NAME || "MODE_SYS"]: 0,
-    [source["HINT"]?.NAME || "HINT"]: '',
-    [source["LOAD"]?.NAME || "LOAD"]: '',
+    [source["HINT"]?.NAME || "HINT"]: "",
+    [source["LOAD"]?.NAME || "LOAD"]: "",
     [source["ONECLICK_START"]?.NAME || "ONECLICK_START"]: 0,
     [source["ONECLICK_STOP"]?.NAME || "ONECLICK_STOP"]: 0,
-    "T_OUTDOOR": 0,
-    "TW_OUTDOOR": 0,
-    "RH_OUTDOOR": 0
-  }; // 点表映射
-  const CHLS = Object.values(source.CHLS);
-  const CHWPS = Object.values(source.CHWPS);
-  const CWPS = Object.values(source.CWPS);
-  const CTS = Object.values(source.CTS);
-  const DVS = Object.values(source.DVS);
-  systemTempratureMap({ cwout: source.T_CW_S, cwin: source.T_CW_R, chwout: source.T_CHW_S, chwin: source.T_CHW_R });
+    T_OUTDOOR: 0,
+    TW_OUTDOOR: 0,
+    RH_OUTDOOR: 0,
+  } // 点表映射
+  const CHLS = Object.values(source.CHLS)
+  const CHWPS = Object.values(source.CHWPS)
+  const CWPS = Object.values(source.CWPS)
+  const CTS = Object.values(source.CTS)
+  const DVS = Object.values(source.DVS)
+  systemTempratureMap({
+    cwout: source.T_CW_S,
+    cwin: source.T_CW_R,
+    chwout: source.T_CHW_S,
+    chwin: source.T_CHW_R,
+  })
   // 根据设备数量 canvas区域宽高来计算横向和纵向的margin
-  deviceNumToole({ CHLS: CHLS.length, CHWPS: CHWPS.length, CWPS: CWPS.length, CTS: CTS.length });
+  deviceNumToole({
+    CHLS: CHLS.length,
+    CHWPS: CHWPS.length,
+    CWPS: CWPS.length,
+    CTS: CTS.length,
+  })
 
   // 将chls下的CHWPS里面的SUITE_IDS属性放入到connectCHWMap中 键值对 {CHLS.ID: [...CHWPS.SUITE_IDS]}
   // {oM6qEMxe50PY3Jv1JGxGVi: ['oM6qEMxe50PY3Jv1JGxGVi', 'jXGJPr5bbu8Pm1azp1qVLz', '3T4PM4a_xeb9HSfb6CA2vP', 'yxOjIyO9w9FfhRDEZmKWZC']}
-  const connectCHWMap = {};
+  const connectCHWMap = {}
 
-  const connectCWMap = {};
-  const chlsArr = [];
+  const connectCWMap = {}
+  const chlsArr = []
 
   // ['制冷机 CHLS', '冷冻泵 CHWPS', '冷却泵 CWPS', '冷却塔 CTS', '阀门 DVS'];
   CHLS.forEach((item, index) => {
-    const { ID, CHWPS, CWPS, VALVES } = item;
+    const { ID, CHWPS, CWPS, VALVES } = item
     CHWPS.forEach((t) => {
-      const ids = t.SUITE_IDS.find((t1) => connectCHWMap[t1]?.length > 1);
+      const ids = t.SUITE_IDS.find((t1) => connectCHWMap[t1]?.length > 1)
       if (ids) {
-        connectCHWMap[ids] = Array.from(new Set([...connectCHWMap[ids], ...t.SUITE_IDS]));
+        connectCHWMap[ids] = Array.from(
+          new Set([...connectCHWMap[ids], ...t.SUITE_IDS]),
+        )
       } else {
-        connectCHWMap[ID] = Array.from(new Set([...(connectCHWMap[ID] || []), ...t.SUITE_IDS]));
+        connectCHWMap[ID] = Array.from(
+          new Set([...(connectCHWMap[ID] || []), ...t.SUITE_IDS]),
+        )
       }
-    });
+    })
     CWPS.forEach((t) => {
-      const ids = t.SUITE_IDS.find((t1) => connectCWMap[t1]?.length > 1);
+      const ids = t.SUITE_IDS.find((t1) => connectCWMap[t1]?.length > 1)
       if (ids) {
-        connectCWMap[ids] = Array.from(new Set([...connectCWMap[ids], ...t.SUITE_IDS]));
+        connectCWMap[ids] = Array.from(
+          new Set([...connectCWMap[ids], ...t.SUITE_IDS]),
+        )
       } else {
-        connectCWMap[ID] = Array.from(new Set([...(connectCWMap[ID] || []), ...t.SUITE_IDS]));
+        connectCWMap[ID] = Array.from(
+          new Set([...(connectCWMap[ID] || []), ...t.SUITE_IDS]),
+        )
       }
-    });
-    valuesMapsHandle(ID, VALVES, deviceModelMap?.VALVES);
-    const resultMap = device('Chiller', item, pointsObject, deviceModelMap?.CHLS?.[item.ID]);
-    deviceMapIdsTool(item.ID, resultMap.id, item);
+    })
+    valuesMapsHandle(ID, VALVES, deviceModelMap?.VALVES)
+    const resultMap = device(
+      "Chiller",
+      item,
+      pointsObject,
+      deviceModelMap?.CHLS?.[item.ID],
+    )
+    deviceMapIdsTool(item.ID, resultMap.id, item)
     resultMap.props.style = {
-      ...styleMap['CHLS'],
-      ...deviceTranform(index, 'CHLS', 0)
-    };
-    result[resultMap.id] = resultMap;
-    pointsObject[item.P.NAME] = 0;
-    pointsObject[item.I_PCT.NAME] = 0;
-    chlsArr.push(resultMap);
-    // 计算x文字居中的偏移量
-    const [xAxis,center] = calcAxis(resultMap, item.NAME);
-    //  console.log("resultMap=======>", resultMap, "xAxis======>", xAxis, center)
+      ...styleMap["CHLS"],
+      ...deviceTranform(index, "CHLS", 0),
+    }
+    result[resultMap.id] = resultMap
+    pointsObject[item.P.NAME] = 0
+    pointsObject[item.I_PCT.NAME] = 0
+    chlsArr.push(resultMap)
+    // 计算x文字居中的偏移量 和 文字居中的位置
+    const [xAxis, center] = calcAxis(resultMap, item.NAME)
+    console.log("resultMap=======>", resultMap, "xAxis======>", xAxis)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
       deviceName: item.NAME,
       xAxis,
-      yAxis: -10
-    });
-    // 64固定为数码管的宽度
+      yAxis: -10,
+    })
+    // 64为数码管的宽度 10和20为向左向右的偏移量
     generateText({
       result: result,
       resultMap: resultMap,
@@ -135,24 +163,36 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       yAxis: 30,
       xAxis: center + 20,
     })
-  });
+  })
 
   CHLS.forEach((item, index) => {
     /**chl -out 1. 冷机右侧上连接出口 (冷机右侧上 四横线一竖线)*/
-    chl_Out(result, index, index == chlsArr.length - 1, chlsArr[index]?.props.style, item, CHLS);
-  });
+    chl_Out(
+      result,
+      index,
+      index == chlsArr.length - 1,
+      chlsArr[index]?.props.style,
+      item,
+      CHLS,
+    )
+  })
 
   CHWPS.forEach((item, index) => {
-    const resultMap = device('Pump', item, pointsObject, deviceModelMap?.CHWPS?.[item.ID]);
-    deviceMapIdsTool(item.ID, resultMap.id, item);
+    const resultMap = device(
+      "Pump",
+      item,
+      pointsObject,
+      deviceModelMap?.CHWPS?.[item.ID],
+    )
+    deviceMapIdsTool(item.ID, resultMap.id, item)
     resultMap.props.style = {
-      ...styleMap['CHWPS'],
-      ...deviceTranform(index, 'CHWPS', 15),
-      marginTop: 7
-    };
-    result[resultMap.id] = resultMap;
-    pointsObject[item.P.NAME] = 0;
-    pointsObject[item.FREQ.NAME] = 0;
+      ...styleMap["CHWPS"],
+      ...deviceTranform(index, "CHWPS", 15),
+      marginTop: 7,
+    }
+    result[resultMap.id] = resultMap
+    pointsObject[item.P.NAME] = 0
+    pointsObject[item.FREQ.NAME] = 0
     // 计算x文字居中的偏移量
     const [xAxis, center] = calcAxis(resultMap, item.NAME)
     const { translateX, translateY } = generateTypoText({
@@ -160,8 +200,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis,
-      yAxis: 10
-    });
+      yAxis: 10,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
@@ -189,19 +229,24 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       yAxis: 30,
       xAxis: center + 20,
     })
-  });
+  })
 
   CWPS.forEach((item, index) => {
-    const resultMap = device('Pump', item, pointsObject, deviceModelMap?.CWPS?.[item.ID]);
-    deviceMapIdsTool(item.ID, resultMap.id, item);
+    const resultMap = device(
+      "Pump",
+      item,
+      pointsObject,
+      deviceModelMap?.CWPS?.[item.ID],
+    )
+    deviceMapIdsTool(item.ID, resultMap.id, item)
     resultMap.props.style = {
-      ...styleMap['CWPS'],
-      ...deviceTranform(index, 'CWPS', 15),
-      marginTop: 7
-    };
-    result[resultMap.id] = resultMap;
-    pointsObject[item.P.NAME] = 0;
-    pointsObject[item.FREQ.NAME] = 0;
+      ...styleMap["CWPS"],
+      ...deviceTranform(index, "CWPS", 15),
+      marginTop: 7,
+    }
+    result[resultMap.id] = resultMap
+    pointsObject[item.P.NAME] = 0
+    pointsObject[item.FREQ.NAME] = 0
     // 计算x文字居中的偏移量
     const [xAxis, center] = calcAxis(resultMap, item.NAME)
     const { translateX, translateY } = generateTypoText({
@@ -209,8 +254,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis,
-      yAxis: 10
-    });
+      yAxis: 10,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
@@ -238,19 +283,24 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       yAxis: 30,
       xAxis: center + 20,
     })
-  });
+  })
 
   CTS.forEach((item, index) => {
-    const resultMap = device('Tower', item, pointsObject, deviceModelMap?.CTS?.[item.ID]);
-    deviceMapIdsTool(item.ID, resultMap.id, item);
-    valuesMapsHandle(item.ID, item.VALVES, deviceModelMap?.VALVES);
+    const resultMap = device(
+      "Tower",
+      item,
+      pointsObject,
+      deviceModelMap?.CTS?.[item.ID],
+    )
+    deviceMapIdsTool(item.ID, resultMap.id, item)
+    valuesMapsHandle(item.ID, item.VALVES, deviceModelMap?.VALVES)
     resultMap.props.style = {
-      ...styleMap['CTS'],
-      ...deviceTranform(index, 'CTS', 6)
-    };
-    result[resultMap.id] = resultMap;
-    pointsObject[item.P.NAME] = 0;
-    pointsObject[item.FREQ.NAME] = 0;
+      ...styleMap["CTS"],
+      ...deviceTranform(index, "CTS", 6),
+    }
+    result[resultMap.id] = resultMap
+    pointsObject[item.P.NAME] = 0
+    pointsObject[item.FREQ.NAME] = 0
     // 计算x文字居中的偏移量
     const [xAxis, center] = calcAxis(resultMap, item.NAME)
     const { translateX, translateY } = generateTypoText({
@@ -258,8 +308,8 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis,
-      yAxis: 5
-    });
+      yAxis: 5,
+    })
     generateText({
       result: result,
       resultMap: resultMap,
@@ -289,65 +339,89 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       yAxis: 25,
       xAxis: center + 20,
     })
-  });
+  })
 
   DVS.forEach((item) => {
-    pointsObject[item.ONOFF.NAME] = 0;
-    pointsObject[item.FAULT.NAME] = 0;
-  });
+    pointsObject[item.ONOFF.NAME] = 0
+    pointsObject[item.FAULT.NAME] = 0
+  })
 
-  const connectCHW = Object.values(connectCHWMap); // 冷冻侧冷机总管
-  const connectCW = Object.values(connectCWMap); // 冷却测冷机总管
+  const connectCHW = Object.values(connectCHWMap) // 冷冻侧冷机总管
+  const connectCW = Object.values(connectCWMap) // 冷却测冷机总管
   const connectCHWP = connectCHW.map((item) => {
     // 每一个总管对应的冷冻泵
-    return Array.from(new Set(item.map((item0) => source.CHLS[item0]?.CHWPS?.map((t) => t.ID)).flat(2)));
-  });
+    return Array.from(
+      new Set(
+        item
+          .map((item0) => source.CHLS[item0]?.CHWPS?.map((t) => t.ID))
+          .flat(2),
+      ),
+    )
+  })
   const connectCWP = connectCW.map((item) => {
     // 每一个总管对应的冷却塔
-    return Array.from(new Set(item.map((item0) => source.CHLS[item0]?.CWPS?.map((t) => t.ID)).flat(2)));
-  });
+    return Array.from(
+      new Set(
+        item.map((item0) => source.CHLS[item0]?.CWPS?.map((t) => t.ID)).flat(2),
+      ),
+    )
+  })
   const connectCT = connectCW.map((item) => {
     // 每一个总管对应的冷却塔
-    return Array.from(new Set(item.map((item0) => source.CHLS[item0]?.CTS?.map((t) => t.ID)).flat(2)));
-  });
+    return Array.from(
+      new Set(
+        item.map((item0) => source.CHLS[item0]?.CTS?.map((t) => t.ID)).flat(2),
+      ),
+    )
+  })
 
   /** chl - pump 2. 冷机右侧下方 连接水泵(冷机右侧下 四横线一竖线)*/
   connectCHW.forEach((item, index) => {
-    chl_pump(item, result, 'chw', 'CHLS', '2', connectCHWP[index], index);
+    chl_pump(item, result, "chw", "CHLS", "2", connectCHWP[index], index)
     //chwTransform(i);
-  });
+  })
 
   // 3. 最后一个水泵的右侧(右侧水泵入水口 即最后一个水泵右侧四横线一竖线)
-  pump_In(CHWPS, result);
+  pump_In(CHWPS, result)
 
   /** 冷却侧 chl - pump  4. 冷机左侧上方连接冷却塔(冷机左上四横线一竖线)*/
   connectCW.forEach((item, index) => {
-    chl_tower(item, result, index, connectCT[index]);
-  });
+    chl_tower(item, result, index, connectCT[index])
+  })
 
   /**
    * 冷却塔与冷却泵与冷机的连接方式是一样的
    */
   /** tower-chl tower-pump   5. 冷却塔左侧连接冷机 右侧连接水泵(冷却塔左三横线 右四横线一竖线)*/
   connectCT.forEach((item, index) => {
-    const chlarr = Array.from(new Set(item.map((item0) => source.CTS[item0]?.SUITE_IDS).flat(2))).sort(); //当前冷却塔组关联的冷机
+    const chlarr = Array.from(
+      new Set(item.map((item0) => source.CTS[item0]?.SUITE_IDS).flat(2)),
+    ).sort() //当前冷却塔组关联的冷机
     connectCW.forEach((t0, i0) => {
       if ([...t0].sort().toString() === chlarr.toString()) {
         // 冷却塔右四横线一竖线
         // chl_pump(item, result, "chw", "CTS", "3", connectCWP[index], index) //冷却泵关联冷却塔 冷却塔组的关联冷机===冷却泵组关联的冷机
-        ct_cw_pump(item, result, 'chw', 'CTS', '3', connectCWP[index], index); //冷却泵关联冷却塔 冷却塔组的关联冷机===冷却泵组关联的冷机
+        ct_cw_pump(item, result, "chw", "CTS", "3", connectCWP[index], index) //冷却泵关联冷却塔 冷却塔组的关联冷机===冷却泵组关联的冷机
         // 冷却塔左三横线or水泵左三横线情况7
         // 对应水泵是
-        pump_chl(connectCT[i0], result, 'chw', connectCW[index][connectCW[index].length - 1], 'tower', '1', index);
+        pump_chl(
+          connectCT[i0],
+          result,
+          "chw",
+          connectCW[index][connectCW[index].length - 1],
+          "tower",
+          "1",
+          index,
+        )
       }
-    });
-  });
+    })
+  })
 
   /** 冷却侧 chl - pump 6. 冷机左侧下方三横线一竖线*/
   connectCW.forEach((item, index) => {
-    chl_pump(item, result, 'cw', 'CHLS', '3', connectCWP[index], index);
+    chl_pump(item, result, "cw", "CHLS", "3", connectCWP[index], index)
     // chl_tower(item, result, index, connectCT[index]);
-  });
+  })
 
   /**pump - chl
    * 每组第一个冷机的位置就是总管的位置，
@@ -355,40 +429,64 @@ export const handleSource = (source, deviceModelMap, links, global) => {
    */
   // 7. 最后一个水泵的左侧连接冷机 (水泵左侧连接冷机 即最后一个水泵左侧三横线一竖线)
   connectCHWP.forEach((item, index) => {
-    // pump_chl(item, result, 'chw', connectCHW[index][connectCHW[index].length - 1], null, '2', index); // 冷冻水回水
-  });
+    pump_chl(
+      item,
+      result,
+      "chw",
+      connectCHW[index][connectCHW[index].length - 1],
+      null,
+      "2",
+      index,
+    ) // 冷冻水回水
+  })
 
   // /** 冷却侧 pump - chl 8. 第一个水泵左侧三横一竖连接到冷却塔 和 右侧三横一竖连接到冷机*/
   connectCWP.forEach((item, index) => {
-    pump_chl(item, result, 'chw', connectCT[index][connectCT[index].length - 1], 'tower_pump', '3', index);
-    pump_chl(item, result, 'cw', connectCW[index][connectCW[index].length - 1], null, '3', index);
-  });
+    pump_chl(
+      item,
+      result,
+      "chw",
+      connectCT[index][connectCT[index].length - 1],
+      "tower_pump",
+      "3",
+      index,
+    )
+    pump_chl(
+      item,
+      result,
+      "cw",
+      connectCW[index][connectCW[index].length - 1],
+      null,
+      "3",
+      index,
+    )
+  })
 
   // 9. 冷却塔左侧一条竖线连接到冷机
   connectCT.forEach((item, index) => {
-    tower_chl(item, result, index);
-  });
+    tower_chl(item, result, index)
+  })
 
-  const boxidChild = Object.values(result).filter((t) => t?.parent === boxid);
+  const boxidChild = Object.values(result).filter((t) => t?.parent === boxid)
   // console.log(boxidChild, "======>boxidChild")
-  result['ROOT'].props.points = pointsObject;
-  result[boxid].nodes = boxidChild?.map((t) => t.id);
+  result["ROOT"].props.points = pointsObject
+  result[boxid].nodes = boxidChild?.map((t) => t.id)
   const translateXCollect = boxidChild?.map((t) => t.props.style.translateX)
   const translateYCollect = boxidChild?.map((t) => t.props.style.translateY)
-  result[boxid].props.style.contentMaxX = Math.max(...translateXCollect);
-  result[boxid].props.style.contentMinX = Math.min(...translateXCollect);
+  result[boxid].props.style.contentMaxX = Math.max(...translateXCollect)
+  result[boxid].props.style.contentMinX = Math.min(...translateXCollect)
   result[boxid].props.style.contentMinY = Math.min(...translateYCollect)
   result[boxid].props.style.contentMaxY = Math.max(...translateYCollect)
 
   result = {
     ...result,
-    ...rootHeader
-  };
+    ...rootHeader,
+  }
   // console.log('pointsObject', pointsObject)
   // console.log('result', result, boxid)
-  console.log('result: ', result);
-  return replace2Gif(result);
-};
+  // console.log('result: ', result);
+  return replace2Gif(result)
+}
 
 function replace2Gif(result) {
   const cmpCollect = {
@@ -402,16 +500,16 @@ function replace2Gif(result) {
     Tank: 1,
     Tower: 1,
     Valve: 1,
-    WetTank: 1
-  };
+    WetTank: 1,
+  }
   for (let cmp in result) {
-    const item = result[cmp];
-    const resolvedName = item.type.resolvedName;
+    const item = result[cmp]
+    const resolvedName = item.type.resolvedName
     if (cmpCollect[resolvedName]) {
-      item.type.resolvedName = resolvedName + 'ImgGif';
+      item.type.resolvedName = resolvedName + "ImgGif"
     }
   }
-  return result;
+  return result
 }
 
 /**
@@ -420,29 +518,30 @@ function replace2Gif(result) {
  * @param {*} font 根据需要设置字体大小和类型
  * @returns
  */
-const calcAxis = (resultMap, deviceName, font = '12px Arial') => {
-  const width = getTextWidth(deviceName, font);
+const calcAxis = (resultMap, deviceName, font = "12px Arial") => {
+  const width = getTextWidth(deviceName, font)
   // 文字偏移量
-  const xAxis = (resultMap.props.style.width - width) / 2;
+  const xAxis = (resultMap.props.style.width - width) / 2
   // 文字中心偏移量
   const center = width / 2
-  console.log("calcAxis=======>", resultMap.props.style.width, width, xAxis)
-  return [xAxis, center];
-};
+  // console.log('calcAxis=======>', resultMap.props.style.width, width);
+  return [xAxis, center]
+}
 
 function getTextWidth(text, font) {
   // 创建一个canvas元素用于测量文字宽度
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+  const canvas = document.createElement("canvas")
+  const context = canvas.getContext("2d")
 
   // 设置与目标元素相同的字体
-  context.font = font || getComputedStyle(document.body).getPropertyValue('font');
+  context.font =
+    font || getComputedStyle(document.body).getPropertyValue("font")
 
   // 测量文本
-  const metrics = context.measureText(text);
+  const metrics = context.measureText(text)
 
   // 返回文本宽度
-  return metrics.width;
+  return metrics.width
 }
 
 /**

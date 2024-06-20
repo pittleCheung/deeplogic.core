@@ -3,7 +3,7 @@ import materials from "@deeplogic/materials";
 import React, { useLayoutEffect } from "react";
 // 空调
 import { handleSource } from "../../auto3d/handleSource"
-import { source4 as source, deviceModelMap, links, global } from "../../data/data"
+import { source3 as source, deviceModelMap, links, global } from "../../data/data"
 
 // 空压
 const ContainerDemo = () => {
