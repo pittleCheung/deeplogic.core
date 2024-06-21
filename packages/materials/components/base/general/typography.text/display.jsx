@@ -9,16 +9,17 @@ function Display(props) {
   const status = state?.status?.find((i) => Number(i.value) === Number(state?.value) || i.value === state?.value);
   const statusStyle = {
     ...(status?.color && { color: status.color }),
-    ...(status?.backgroundColor && { backgroundColor: status.backgroundColor })
-  };
+    ...(status?.backgroundColor && { backgroundColor: status.backgroundColor }),
+  }
 
   const { transform, translateX, translateY, ...style } = state.style
 
+     
   return (
     <span style={{ ...style, ...statusStyle }} className={css.content}>
-      {(status?.label || state?.value) ?? ''}
+      {(status?.label || state?.value || props?.defaultValue) ?? ""}
     </span>
-  );
+  )
 }
 
 export default memo(Display);

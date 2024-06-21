@@ -206,21 +206,37 @@ export const handleSource = (
       // target为当前设备Acop的样式
       const target = result[deviceItem.id].props.style
 
-      const pointItemWrap = pointContainer("Container",boxid)
-      // const pointItem = pointContainer("Container", pointItemWrap.id)
-      // pointItemWrap.nodes = [pointItem.id]
-      // result[pointItem.id] = pointItem
+      // const pointItemWrap = pointContainer("Container",boxid)
+      // // const pointItem = pointContainer("Container", pointItemWrap.id)
+      // // pointItemWrap.nodes = [pointItem.id]
+      // // result[pointItem.id] = pointItem
+      // pointItemWrap.props.style = {
+      //   translateX: target.translateX + target.width,
+      //   translateY: target.translateY + target.height * 0.45,
+      //   // transform: `translate(${target.translateX + target.width}px, ${target.translateY + target.height * 0.45}px)`,
+      //   width: 15,
+      //   height: 10,
+      //   backgroundColor: "#FA5151",
+      //   borderRadius:2
+      // }
+      // result[pointItemWrap.id] = pointItemWrap
 
+      const pointItemWrap = textPoint(ACOPS[t])
       pointItemWrap.props.style = {
-        translateX: target.translateX + target.width,
+        translateX: target.translateX + target.width + 5,
         translateY: target.translateY + target.height * 0.45,
-        // transform: `translate(${target.translateX + target.width}px, ${target.translateY + target.height * 0.45}px)`,
         width: 15,
         height: 10,
         backgroundColor: "#FA5151",
+        borderRadius: 2,
+        color: "#FFF",
+        display: "flex",
+        justifyContent: "center",
+        alignItems:"center",
+        alignItems: "center",
+        fontSize: 8,
       }
       result[pointItemWrap.id] = pointItemWrap
-
 
 
       // prevX为当前设备X轴的的位移
@@ -894,3 +910,63 @@ function pointContainer(type,boxid) {
     parent: boxid,
   }
 }
+
+
+export const textPoint = (source) => {
+  const id = nanoid(10)
+  return {
+    id,
+    type: {
+      resolvedName: "TypographyText",
+    },
+    displayName: "TypographyText",
+    props: {
+      displayName: "Typography.Text",
+      // value: {
+      //   bind: source.LOAD_ST?.NAME,
+      //   type: "points",
+      // },
+      value:1,
+      status: [
+        {
+          id: "rYycDgubH4",
+          label: "L",
+          value: "1",
+          expression: {
+            bind: source.LOAD_ST?.NAME,
+            type: "points",
+          },
+          color: "#FFF",
+          backgroundColor: "#00B032",
+        },
+        {
+          id: "0XiqiE1kOn",
+          label: "",
+          value: "0",
+          expression: {
+            bind: `\${${source.LOAD_ST?.NAME} || 0}`,
+            type: "expressions",
+          },
+          color: "transparent",
+          backgroundColor: "transparent",
+        },
+        // {
+        //   id: "0XiqiE1kOn",
+        //   label: "U",
+        //   value: "0",
+        //   expression: "#FA5151",
+        //   color: "rgba(115, 209, 61, 1)",
+        //   backgroundColor: "transparent",
+        // },
+      ],
+    },
+    parent: boxid,
+    nodes: [],
+    custom: {},
+    nodes: [],
+    linkedNodes: {},
+    hidden: false,
+    isCanvas: false,
+  }
+}
+
