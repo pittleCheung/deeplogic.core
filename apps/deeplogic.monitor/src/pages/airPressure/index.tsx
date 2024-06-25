@@ -32,7 +32,7 @@ import {
 } from "../../data/atb"
 
 // error情况
-import { res_4_2_3_2_2 } from "../../data/ata"
+import { res_4_2_3_2_2, res_1_3_1_1_2 } from "../../data/ata"
 
 
 // 空压
@@ -117,7 +117,7 @@ const ContainerDemo = () => {
 export const AirPressure = () => {
   // console.log("result===>1")
   return (
-    <Editor resolver={{ ...materials }} enabled={false}>
+    <Editor resolver={{ ...materials }} enabled={true}>
       <ContainerDemo />
     </Editor>
   )

@@ -221,22 +221,22 @@ export const handleSource = (
       // }
       // result[pointItemWrap.id] = pointItemWrap
 
-      const pointItemWrap = textPoint(ACOPS[t])
-      pointItemWrap.props.style = {
-        translateX: target.translateX + target.width + 5,
-        translateY: target.translateY + target.height * 0.45,
-        width: 15,
-        height: 10,
-        backgroundColor: "#FA5151",
-        borderRadius: 2,
-        color: "#FFF",
-        display: "flex",
-        justifyContent: "center",
-        alignItems:"center",
-        alignItems: "center",
-        fontSize: 8,
-      }
-      result[pointItemWrap.id] = pointItemWrap
+      // const pointItemWrap = textPoint(ACOPS[t])
+      // pointItemWrap.props.style = {
+      //   translateX: target.translateX + target.width + 5,
+      //   translateY: target.translateY + target.height * 0.45,
+      //   width: 15,
+      //   height: 10,
+      //   backgroundColor: "#FA5151",
+      //   borderRadius: 2,
+      //   color: "#FFF",
+      //   display: "flex",
+      //   justifyContent: "center",
+      //   alignItems:"center",
+      //   alignItems: "center",
+      //   fontSize: 8,
+      // }
+      // result[pointItemWrap.id] = pointItemWrap
 
 
       // prevX为当前设备X轴的的位移
