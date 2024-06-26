@@ -1,0 +1,81 @@
+{
+  "widthOptions": {
+    "title": "宽度",
+    "dataList": [
+      {
+        "label": "固定",
+        "value": "fixed"
+      },
+      {
+        "label": "百分比",
+        "value": "relative"
+      },
+      {
+        "label": "自适应",
+        "value": "fit-content"
+      }
+    ]
+  },
+  "heightOptions": {
+    "title": "高度",
+    "dataList": [
+      {
+        "label": "固定",
+        "value": "fixed"
+      },
+      {
+        "label": "百分比",
+        "value": "relative"
+      },
+      {
+        "label": "自适应",
+        "value": "fit-content"
+      },
+      {
+        "label": "可视高度",
+        "value": "viewport"
+      }
+    ]
+  },  
+  "overflowOptions": {
+    "title": "overflow",
+    "dataList": [
+      {
+        "label": "initial",
+        "value": "initial"
+      },
+      {
+        "label": "visible",
+        "value": "visible"
+      },
+      {
+        "label": "hidden",
+        "value": "hidden"
+      },
+      {
+        "label": "clip",
+        "value": "clip"
+      },
+      {
+        "label": "scroll",
+        "value": "scroll"
+      },
+      {
+        "label": "auto",
+        "value": "auto"
+      },{
+        "label": "inherit",
+        "value": "inherit"
+      },{
+        "label": "revert",
+        "value": "revert"
+      },{
+        "label": "revert-layer",
+        "value": "revert-layer"
+      },{
+        "label": "unset",
+        "value": "unset"
+      }
+    ]
+  }
+}

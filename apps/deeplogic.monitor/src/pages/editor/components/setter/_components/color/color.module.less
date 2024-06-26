@@ -1,0 +1,25 @@
+.picker {
+  display: flex;
+  padding: 4px 11px 4px 4px;
+
+  .row {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+
+    .color {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      border-radius: @borderRadiusSM * 1px;
+      background: @colorFillQuaternary;
+      border: 1px solid @colorSplit;
+      cursor: pointer;
+    }
+
+    .label {
+      padding-left: 4px;
+    }
+  }
+}

@@ -552,20 +552,42 @@ export const helpFunction = ({
             targetInitTop = initTop + i * (styleMap.Acop.height + pGap.acopYGap)
           }
           // const targetInitTop = initTop + i * (styleMap.Acop.height + pGap.acopYGap);
-          helpFunction({
-            arr: obj,
-            result,
-            tag: "L",
-            prevX: newprevX,
-            initTop:targetInitTop,
-            // initTop:initTop + i * (styleMap.Acop.height + pGap.acopYGap),
-            // initTop:initTop +(curlen - nextlen) *(styleMap.Acop.height + pGap.acopYGap) * 0.5,
-            lastdevice: result[deviceItem.id],
-            idsList,
-            deviceModelMap,
-            lastLen: t.length,
-            pointsObject,
-          })
+          // helpFunction({
+          //   arr: obj,
+          //   result,
+          //   tag: "L",
+          //   prevX: newprevX,
+          //   initTop:targetInitTop,
+          //   // initTop:initTop + i * (styleMap.Acop.height + pGap.acopYGap),
+          //   // initTop:initTop +(curlen - nextlen) *(styleMap.Acop.height + pGap.acopYGap) * 0.5,
+          //   lastdevice: result[deviceItem.id],
+          //   idsList,
+          //   deviceModelMap,
+          //   lastLen: t.length,
+          //   pointsObject,
+          // })
+          if (
+            t.length > 1 &&
+            arr?.[0]?.NEXT_NODE?.length === 1 &&
+            index !== t.length - 1
+          ) {
+            // 储气湿罐多个并联 后面串联一个冷干机 或者吸干机的情况
+          } else {
+            helpFunction({
+              arr: obj,
+              result,
+              tag: "L",
+              prevX: newprevX,
+              initTop: targetInitTop,
+              // initTop:initTop + i * (styleMap.Acop.height + pGap.acopYGap),
+              // initTop:initTop +(curlen - nextlen) *(styleMap.Acop.height + pGap.acopYGap) * 0.5,
+              lastdevice: result[deviceItem.id],
+              idsList,
+              deviceModelMap,
+              lastLen: t.length,
+              pointsObject,
+            })
+          }
         } else {
           
         }

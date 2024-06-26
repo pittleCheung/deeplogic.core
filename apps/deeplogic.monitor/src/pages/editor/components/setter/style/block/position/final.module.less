@@ -1,0 +1,190 @@
+.final {
+  padding: 6px 0;
+
+  .center {
+    position: relative;
+    padding-top: 75px;
+    width: 75px;
+    background: @colorFillQuaternary;
+    border-radius: 8px;
+
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 32px;
+      height: 32px;
+      border-radius: @borderRadiusSM * 1px;
+      background: @colorBgContainer;
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%), 0 1px 0 0 rgb(0 0 0 / 5%);
+    }
+
+    .pin {
+      position: absolute;
+      color: @colorBorder;
+
+      &.vertical {
+        svg {
+          width: 2px;
+          height: 10px;
+        }
+      }
+
+      &.horizontal {
+        svg {
+          width: 10px;
+          height: 2px;
+        }
+      }
+
+      &.pinTop,
+      &.pinBottom {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &.pinLeft,
+      &.pinRight {
+        top: 40%;
+        transform: translateY(-40%);
+      }
+
+      &.pinTop {
+        top: 0;
+      }
+
+      &.pinLeft {
+        left: 4px;
+      }
+
+      &.pinRight {
+        right: 4px;
+      }
+
+      &.pinBottom {
+        bottom: 0;
+      }
+    }
+  }
+
+  .space {
+    display: flex;
+
+    :global {
+      .ant-space-item {
+        &:first-child {
+          flex: 1;
+        }
+
+        &:nth-child(2) {
+          flex: 0 0 75px;
+        }
+
+        &:last-child {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .top,
+  .left,
+  .right,
+  .bottom {
+    :global {
+      .ant-input-number {
+        &-group-addon {
+          padding-inline: 8px;
+          background: transparent;
+          font-size: 12px;
+          color: @colorTextQuaternary;
+        }
+
+        &-input {
+          padding-inline: 11px;
+
+          &-wrap {
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              right: 0;
+              height: 100%;
+              line-height: 30px;
+              padding-inline: 6px;
+              background: @colorBgContainer;
+              font-size: @sizeSM * 1px;
+              color: @colorTextQuaternary;
+              border-radius: @borderRadius * 1px;
+            }
+          }
+        }
+
+        &-handler {
+          border-inline-start-color: transparent;
+
+          &-wrap {
+            transition: opacity 50ms linear 50ms;
+            z-index: 1;
+          }
+
+          &-down {
+            border-block-start-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  .top {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '上';
+        }
+      }
+    }
+  }
+
+  .left {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '左';
+        }
+      }
+    }
+  }
+
+  .right {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '右';
+        }
+      }
+    }
+  }
+
+  .bottom {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '下';
+        }
+      }
+    }
+  }
+
+  .select {
+    padding: 6px 0;
+    margin-bottom: 3px;
+  }
+
+  :global {
+    .ant-input-number {
+      width: 100%;
+    }
+  }
+}

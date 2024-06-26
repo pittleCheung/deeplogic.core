@@ -1,8 +1,12 @@
 import {defaultValues} from '../../../_utils/baseMeta';
-import aperture from './__images__/aperture.svg';
-import future from './__images__/future.svg';
-import metals from './__images__/metals.svg';
-import science from './__images__/science.svg';
+// import aperture from "./__images__/aperture.svg"
+// import future from "./__images__/future.svg"
+// import metals from "./__images__/metals.svg"
+// import science from "./__images__/science.svg"
+import { ReactComponent as aperture } from "./__images__/aperture.svg"
+import { ReactComponent as future } from "./__images__/future.svg"
+import { ReactComponent as metals } from "./__images__/metals.svg"
+import { ReactComponent as science } from "./__images__/science.svg"
 
 export default {
     componentName: 'LayoutHeader',

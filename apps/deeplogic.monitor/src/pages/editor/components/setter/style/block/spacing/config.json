@@ -1,0 +1,32 @@
+{
+  "borderStyle": {
+    "title": "样式",
+    "dataList": [
+      {
+        "label": "实线",
+        "value": "solid"
+      },
+      {
+        "label": "虚线",
+        "value": "dashed"
+      },
+      {
+        "label": "点线",
+        "value": "dotted"
+      }
+    ]
+  },
+  "borderType": {
+    "title": "类型",
+    "dataList": [
+      {
+        "label": "全部",
+        "value": "all"
+      },
+      {
+        "label": "局部",
+        "value": "side"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+.size .item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.size .number {
+  background: transparent;
+}
+.size .select {
+  flex: 1;
+}
+.size :global .ant-select-selector {
+  height: 30px !important;
+}

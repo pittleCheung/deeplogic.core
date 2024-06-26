@@ -1,0 +1,59 @@
+{
+  "pageMenus": {
+    "title": "页面操作菜单",
+    "dataList": [
+      {
+        "key": "rename",
+        "label": "重命名"
+      },
+      {
+        "key": "delete",
+        "label": "删除页面"
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "key": "duplicate",
+        "label": "创建页面副本"
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "key": "home",
+        "label": "设置为首页"
+      },
+      {
+        "key": "login",
+        "label": "设置为登录页"
+      }
+    ]
+  },
+  "groupMenus": {
+    "title": "分组操作菜单",
+    "dataList": [
+      {
+        "key": "rename",
+        "label": "重命名"
+      },
+      {
+        "key": "delete",
+        "label": "删除分组"
+      }
+    ]
+  },
+  "createMenus": {
+    "title": "创建菜单",
+    "dataList": [
+      {
+        "key": "page",
+        "label": "新建页面"
+      },
+      {
+        "key": "group",
+        "label": "新建分组"
+      }
+    ]
+  }
+}

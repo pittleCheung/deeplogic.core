@@ -1,0 +1,33 @@
+.toolbar {
+  display: flex;
+  padding-inline: @padding * 1px;
+  background: @colorBgContainer;
+  border-bottom: 1px solid @colorSplit;
+  height: (@sizeXXL + @sizeXS) * 1px;
+
+  .title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    line-height: @sizeXXL * 1px;
+
+    .text {
+      max-width: 240px;
+      margin: 0;
+      text-align: left;
+      padding-right: @paddingXS * 1px;
+    }
+  }
+
+  .action {
+    display: flex;
+
+    :global {
+      .ant-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

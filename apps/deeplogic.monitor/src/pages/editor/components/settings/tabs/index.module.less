@@ -1,0 +1,30 @@
+.tabs {
+  line-height: 0;
+  background: @colorBgLayout;
+  padding-inline: @paddingXXS * 1px;
+  padding-block: @paddingXXS * 1px;
+  padding-block-end: (@paddingXS + 5) * 1px;
+  background: @colorBgContainer;
+
+  :global {
+    .ant-tabs-nav-wrap {
+      background: @colorBgLayout;
+      padding-inline: @paddingXXS * 1px;
+      padding-block-start: @paddingXXS * 1px;
+    }
+
+    .ant-tabs-nav {
+      margin-bottom: 0;
+    }
+
+    .ant-tabs-tab {
+      padding: 8px 12px !important;
+      border-color: transparent !important;
+      background: transparent !important;
+
+      &.ant-tabs-tab-active {
+        background: @colorBgContainer !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,188 @@
+@import (reference) '../../common.less';
+
+.code-editor {
+  :global {
+    #code-editor {
+      overflow-wrap: normal;
+      overflow-x: auto;
+      position: relative;
+      font-family: monospace;
+      height: 480px;
+      min-height: 480px;
+      font-size: 16px;
+      line-height: 23px;
+      resize: both;
+    }
+
+    * {
+      font-family: inherit;
+      line-height: inherit;
+    }
+
+    textarea {
+      padding: 0px;
+      margin: 0px;
+      line-height: inherit;
+      background: transparent;
+      min-height: 100%;
+      overflow: hidden;
+      border: none;
+      outline: none;
+      width: calc(100% - 55px);
+      min-width: calc(100% - 55px);
+      resize: none;
+      font-family: inherit;
+      color: transparent;
+      caret-color: #989898;
+      overflow-wrap: normal;
+      white-space: pre;
+      padding-left: 0;
+      position: absolute;
+      top: 0;
+      font-size: inherit;
+      left: 0px;
+    }
+
+    textarea::-moz-selection,
+    textarea::selection {
+      color: #000fff00;
+      background: #ffffff0a;
+      border-radius: 10px;
+    }
+
+    pre {
+      padding: 0px;
+      margin: 0px;
+      user-select: none;
+      line-height: inherit;
+      position: absolute;
+      top: 0;
+      padding-left: 0;
+      pointer-events: none;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .petrel-code-editor-line-numbering {
+      position: sticky;
+      min-height: 100%;
+      left: 0;
+      line-height: inherit;
+      float: left;
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
+      width: fit-content;
+      padding-right: 5px;
+      text-align: right;
+      z-index: 10;
+      background: @colorBgBase;
+    }
+
+    .petrel-code-editor-line-numbering span {
+      display: block;
+    }
+
+    .petrel-code-editor-line-numbering span div {
+      height: 22px;
+      width: 100%;
+      left: 0px;
+      position: absolute;
+      background: #ffffff11;
+      margin-top: -1px;
+    }
+
+    .petrel-code-editor-autocompletion {
+      display: block;
+      min-height: 35px;
+      min-width: 240px;
+      max-width: 400px;
+      top: 22px;
+      position: absolute;
+      left: 92px;
+      background: #fff;
+    }
+
+    .petrel-code-editor-autocompletion a {
+      cursor: pointer;
+      display: block;
+    }
+
+    .petrel-code-editor-autocompletion a.selected {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .petrel-code-editor-autocompletion a span {
+      position: absolute;
+      right: 10px;
+      opacity: 0.6;
+      text-transform: lowercase;
+      margin-left: 15px;
+    }
+
+    .petrel-code-editor::-webkit-resizer {
+      background: #f5f5f5;
+      border-bottom-right-radius: 10px;
+    }
+
+    textarea,
+    pre {
+      left: 20px;
+      top: 15px;
+    }
+
+    .petrel-code-editor-line-numbering {
+      color: #8c8c8c;
+      padding-right: 9px;
+      min-height: 100%;
+
+      padding-top: 15px;
+      padding-left: 15px;
+    }
+
+    .petrel-code-editor-autocompletion {
+      background: #fff;
+      border-radius: 4px;
+      backdrop-filter: blur(7px);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+      max-height: 150px;
+      overflow: auto;
+    }
+
+    // .petrel-code-editor::-webkit-scrollbar {
+    //   width: 20px;
+    //   height: 20px;
+    //   background: #00000022;
+    //   border-radius: 20px;
+    //   border: 8px solid transparent;
+    //   background-clip: padding-box;
+    // }
+
+    // .petrel-code-editor::-webkit-scrollbar-thumb {
+    //   background: rgba(0, 0, 0, 0.3);
+    //   border-radius: 20px;
+    //   border: 8px solid transparent;
+    //   background-clip: padding-box;
+    // }
+
+    .petrel-code-editor-autocompletion a {
+      padding: 4px 6px;
+      margin: 5px;
+      border-radius: @borderRadius * 1px;
+      font-size: 16px;
+    }
+
+    .petrel-code-editor-autocompletion a:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .border {
+      border: @lineWidth * 1px solid @colorSplit;
+      border-radius: @borderRadius * 1px;
+
+      &:hover {
+        border-color: @colorPrimaryTextHover;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.events {
+  padding: @paddingXXS * 1px @paddingSM * 1px;
+
+  .event {
+    align-items: center;
+    display: flex;
+    gap: @paddingXXS * 1px;
+    height: @controlHeight * 1px;
+
+    .title {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: @paddingXXS * 1px;
+
+      .question {
+        color: @colorTextQuaternary;
+      }
+    }
+
+    .icon {
+      color: @colorTextSecondary;
+      font-size: @fontSize * 1px;
+    }
+  }
+}

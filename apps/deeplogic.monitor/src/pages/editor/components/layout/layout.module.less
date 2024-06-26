@@ -1,0 +1,93 @@
+.layout {
+  position: relative;
+
+  .content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    width: 100% !important;
+    height: calc(100vh - (@headerHeight + @footerHeight + 56 + @sizeLG) * 1px);
+    padding: 0 @size *1px;
+    padding-block-start: @sizeXL * 1px;
+    box-shadow: inset 0 0  @sizeXXS * 1px 0 @colorFillQuaternary;
+
+    .dropdown {
+      .icon {
+        color: @colorTextSecondary;
+      }
+
+      :global {
+        .ant-dropdown-menu {
+          .ant-dropdown-menu-item-icon {
+            color: @colorTextDescription;
+            font-size: @fontSize * 1px;
+          }
+
+          .ant-dropdown-menu-item {
+            width: @sizeLG * 7px;
+          }
+        }
+      }
+    }
+  }
+
+  .canvas {
+    :global {
+      .ant-drawer {
+        z-index: @zIndexPopupBase - 10;
+
+        &-mask {
+          z-index: @zIndexPopupBase - 10;
+        }
+      }
+
+      .ant-modal {
+        &-mask {
+          position: absolute;
+          z-index: @zIndexPopupBase - 10;
+        }
+
+        &-wrap {
+          position: absolute;
+          z-index: @zIndexPopupBase - 10;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  :global {
+    .ui-color-picker {
+      margin: 0;
+
+      .picker-area,
+      .color-preview-area {
+        padding: 0;
+      }
+
+      .color-preview-area {
+        margin-bottom: 0;
+
+        .input-group {
+          .input-field {
+            .label {
+              text-transform: uppercase;
+              color: @colorTextSecondary;
+            }
+
+            .input {
+              border: 1px solid @colorBorder;
+            }
+          }
+        }
+      }
+    }
+  }
+}

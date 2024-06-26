@@ -4,7 +4,7 @@ import Drag from '../../../common/drag';
 import {useComponent} from '../../../useComponent';
 import meta from './meta';
 import {DEFAULT_IMAGE_PREVIEW} from "../../../../global";
-// import defaultImage from "@assets/building.png";
+// import defaultImage from "@/assets/building.png";
 import defaultImage from "../../../assets/building.png"
 import equal from 'fast-deep-equal/es6';
 import {memo} from 'react';

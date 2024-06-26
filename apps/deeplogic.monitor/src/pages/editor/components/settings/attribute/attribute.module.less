@@ -1,0 +1,101 @@
+.fields {
+  .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: @paddingXXS * 1px;
+    padding: 0 @paddingXXS * 1px 0 @paddingSM * 1px;
+
+    :global {
+      .ant-select {
+        width: 100%;
+
+        &-selector {
+          height: 30px;
+          padding-inline-start: @paddingXXS * 1px;
+          padding-inline-end: (@paddingSM - 1) * 1px;
+        }
+      }
+
+      .ant-input-number {
+        width: 100%;
+
+        &-disabled {
+          background: transparent;
+        }
+
+        &-input {
+          padding-inline-start: @paddingXXS * 1px;
+          padding-inline-end: (@paddingSM - 1) * 1px;
+        }
+
+        &-prefix {
+          color: @colorTextTertiary;
+        }
+
+        &-handler {
+          border-inline-start-color: transparent;
+
+          &-wrap {
+            transition: opacity 50ms linear 50ms;
+            z-index: 1;
+          }
+
+          &-down {
+            border-block-start-color: transparent;
+          }
+        }
+      }
+
+      .ant-segmented-item {
+        &-icon,
+        &-label {
+          color: @colorTextTertiary;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &-selected {
+          .ant-segmented-item-label {
+            color: @colorPrimary;
+          }
+        }
+      }
+
+      .ant-form-item {
+        margin-bottom: 0;
+      }
+
+      .ant-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .formItem {
+      flex: 1;
+    }
+
+    .tag {
+      max-width: 135px;
+      overflow: hidden;
+
+      b {
+        margin: 0;
+      }
+    }
+  }
+
+  :global {
+    .ant-input,
+    .ant-segmented,
+    .ant-input-affix-wrapper,
+    .ant-input-number-affix-wrapper,
+    .ant-input-number,
+    .ant-select-selector {
+      border-radius: @borderRadius * 1px;
+      border-color: @colorSplit !important;
+    }
+  }
+}

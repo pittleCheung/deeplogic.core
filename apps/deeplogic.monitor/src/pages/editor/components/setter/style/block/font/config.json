@@ -1,0 +1,274 @@
+{
+  "fontFamily": {
+    "title": "字体",
+    "dataList": [
+      {
+        "label": "中文字体",
+        "options": [
+          {
+            "label": "微软雅黑",
+            "value": "Microsoft YaHei"
+          },
+          {
+            "label": "宋体",
+            "value": "SimSun"
+          },
+          {
+            "label": "黑体",
+            "value": "SimHei"
+          },
+          {
+            "label": "楷体",
+            "value": "KaiTi"
+          },
+          {
+            "label": "仿宋",
+            "value": "FangSong"
+          },
+          {
+            "label": "隶书",
+            "value": "LiSu"
+          },
+          {
+            "label": "幼圆",
+            "value": "YouYuan"
+          }
+        ]
+      },
+      {
+        "label": "英文字体",
+        "options": [
+          {
+            "label": "PingFang SC",
+            "value": "PingFang SC"
+          },
+          {
+            "label": "Inter",
+            "value": "Inter"
+          },
+          {
+            "label": "Arial",
+            "value": "Arial"
+          },
+          {
+            "label": "Arial Black",
+            "value": "Arial Black"
+          },
+          {
+            "label": "Comic Sans MS",
+            "value": "Comic Sans MS"
+          },
+          {
+            "label": "Courier New",
+            "value": "Courier New"
+          },
+          {
+            "label": "Georgia",
+            "value": "Georgia"
+          },
+          {
+            "label": "Impact",
+            "value": "Impact"
+          },
+          {
+            "label": "Times New Roman",
+            "value": "Times New Roman"
+          },
+          {
+            "label": "Trebuchet MS",
+            "value": "Trebuchet MS"
+          },
+          {
+            "label": "Verdana",
+            "value": "Verdana"
+          },
+          {
+            "label": "Lucida Console",
+            "value": "Lucida Console"
+          },
+          {
+            "label": "DigitalNumbersRegular",
+            "value": "DigitalNumbersRegular"
+          }
+        ]
+      }
+    ]
+  },
+  "fontWeight": {
+    "title": "字重",
+    "dataList": [
+      {
+        "label": "normal",
+        "value": "normal"
+      },
+      {
+        "label": "bold",
+        "value": "bold"
+      },
+      {
+        "label": "bolder",
+        "value": "bolder"
+      },
+      {
+        "label": "lighter",
+        "value": "lighter"
+      },
+      {
+        "label": "100",
+        "value": "100"
+      },
+      {
+        "label": "200",
+        "value": "200"
+      },
+      {
+        "label": "300",
+        "value": "300"
+      },
+      {
+        "label": "400",
+        "value": "400"
+      },
+      {
+        "label": "500",
+        "value": "500"
+      },
+      {
+        "label": "600",
+        "value": "600"
+      },
+      {
+        "label": "700",
+        "value": "700"
+      },
+      {
+        "label": "800",
+        "value": "800"
+      },
+      {
+        "label": "900",
+        "value": "900"
+      }
+    ]
+  },
+  "fontSize": {
+    "title": "字号",
+    "dataList": [
+      {
+        "label": "12",
+        "value": 12
+      },
+      {
+        "label": "14",
+        "value": 14
+      },
+      {
+        "label": "16",
+        "value": 16
+      },
+      {
+        "label": "18",
+        "value": 18
+      },
+      {
+        "label": "20",
+        "value": 20
+      },
+      {
+        "label": "24",
+        "value": 24
+      },
+      {
+        "label": "28",
+        "value": 28
+      },
+      {
+        "label": "32",
+        "value": 32
+      },
+      {
+        "label": "36",
+        "value": 36
+      },
+      {
+        "label": "40",
+        "value": 40
+      },
+      {
+        "label": "48",
+        "value": 48
+      },
+      {
+        "label": "56",
+        "value": 56
+      },
+      {
+        "label": "64",
+        "value": 64
+      },
+      {
+        "label": "72",
+        "value": 72
+      },
+      {
+        "label": "80",
+        "value": 80
+      },
+      {
+        "label": "96",
+        "value": 96
+      }
+    ]
+  },
+  "textAlign": {
+    "title": "文字对齐",
+    "dataList": [
+      {
+        "label": "左对齐",
+        "value": "left"
+      },
+      {
+        "label": "居中对齐",
+        "value": "center"
+      },
+      {
+        "label": "右对齐",
+        "value": "right"
+      }
+    ]
+  },
+  "fontStyle": {
+    "title": "文字样式",
+    "dataList": [
+      {
+        "label": "默认",
+        "value": "normal"
+      },
+      {
+        "label": "斜体",
+        "value": "italic"
+      }
+    ]
+  },
+  "textDecoration": {
+    "title": "文字装饰",
+    "dataList": [
+      {
+        "label": "默认",
+        "value": "none"
+      },
+      {
+        "label": "下划线",
+        "value": "underline"
+      },
+      {
+        "label": "上划线",
+        "value": "overline"
+      },
+      {
+        "label": "删除线",
+        "value": "line-through"
+      }
+    ]
+  }
+}

@@ -188,7 +188,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     resultMap.props.style = {
       ...styleMap["CHWPS"],
       ...deviceTranform(index, "CHWPS", 15),
-      marginTop: 7,
+      // marginTop: 7,
     }
     result[resultMap.id] = resultMap
     pointsObject[item.P.NAME] = 0
@@ -242,7 +242,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     resultMap.props.style = {
       ...styleMap["CWPS"],
       ...deviceTranform(index, "CWPS", 15),
-      marginTop: 7,
+      // marginTop: 7,
     }
     result[resultMap.id] = resultMap
     pointsObject[item.P.NAME] = 0

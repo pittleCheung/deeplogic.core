@@ -1,50 +1,67 @@
-import { Editor, Frame, useEditor } from "@craftjs/core";
+import { DefaultEventHandlers, Editor, Frame, useEditor } from "@craftjs/core";
+import { Layout as AntdLayout, Spin } from "antd"
+import Layout from "./components/layout"
 import materials from "@deeplogic/materials";
-import React, { useLayoutEffect } from "react";
-// 空调
-import { handleSource } from "../../auto3d/handleSource"
-import { source3 as source, deviceModelMap, links, global } from "../../data/data"
+import { debounce } from "lodash-es";
+import React, { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { deleteCustom, jsonCompress, setProject } from "./components/helper/utils";
+import { DesignerView } from "./components/DesignerView";
+
+class CustomEventHandlers extends DefaultEventHandlers {
+  handlers() {
+    const defaultHandlers = super.handlers()
+
+    return {
+      ...defaultHandlers,
+    }
+  }
+}
+
 
 // 空压
-const ContainerDemo = () => {
-  const { actions, query, enabled } = useEditor((state) => ({
-    enabled: state.options.enabled,
-  }))
+export const EditorContainer = () => {
+  const contentJson = useRef<any>(null)
+  /**
+   * @description 节点变化
+   * @param query
+   * @type {(function(*): void)|*}
+   */
+  const onNodesChange = useCallback(
+    debounce(async (query) => {
+      const json = query.serialize()
 
-  const startTime = performance.now()
+      const removeCustomJson = deleteCustom(json)
+      if (contentJson.current === removeCustomJson) {
+        return
+      }
 
-  useLayoutEffect(() => {
-    //  const json = lz.decompress(lz.decodeBase64(stateToLoad))
-    // const startTime = performance.now()
-    // 空调
-    const result = handleSource(source, deviceModelMap, links, global, "HVAC")
-    // const endTime = performance.now()
-    // const renderTime = endTime - startTime
-    // console.log(`JSON generator time: ${renderTime} ms`)
-    // console.log("是不是走了热更新了123")
-    // actions.deserialize({})
-    // console.log("result====>", result, renderTime)
+      contentJson.current = removeCustomJson
+      const compressed = await jsonCompress(removeCustomJson)
 
-    // 空压
-    // const result = handleSource(source, deviceModelMap, links, global, "HVAC")
-    
-    actions.deserialize(result)
-    // window.location.reload()
-  }, [])
+      setProject(compressed)
+      // onChange?.(compressed)
+    }, 500),
+    [],
+  )
 
-  // useEffect(() => {
-  //   const endTime = performance.now()
-  //   const renderTime = endTime - startTime
-  //   console.log(`JSON render time: ${renderTime} ms`, handleSource)
-  // },[source])
+  useEffect(() => {
+    return () => {
+      // 取消防抖函数
+      onNodesChange.cancel()
+    }
+  }, [onNodesChange])
 
-  return <Frame />
-}
-
-export const Container = () => {
   return (
-    <Editor resolver={{ ...materials }} enabled={false}>
-      <ContainerDemo />
-    </Editor>
+    <AntdLayout className="mainContent">
+      <Editor
+        resolver={{ ...materials }}
+        enabled={true}
+        onNodesChange={onNodesChange}>
+        <Layout>
+          <DesignerView />
+        </Layout>
+      </Editor>
+    </AntdLayout>
   )
 }
+

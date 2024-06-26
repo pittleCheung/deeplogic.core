@@ -1,0 +1,89 @@
+{
+  "flexControl": {
+    "title": "Flex布局控制器",
+    "dataList": [
+      {
+        "key": "topLeft",
+        "justifyContent": "flex-start",
+        "alignItems": "flex-start"
+      },
+      {
+        "key": "topCenter",
+        "justifyContent": "center",
+        "alignItems": "flex-start"
+      },
+      {
+        "key": "topRight",
+        "justifyContent": "flex-end",
+        "alignItems": "flex-start"
+      },
+      {
+        "key": "centerLeft",
+        "justifyContent": "flex-start",
+        "alignItems": "center"
+      },
+      {
+        "key": "centerCenter",
+        "justifyContent": "center",
+        "alignItems": "center"
+      },
+      {
+        "key": "centerRight",
+        "justifyContent": "flex-end",
+        "alignItems": "center"
+      },
+      {
+        "key": "bottomLeft",
+        "justifyContent": "flex-start",
+        "alignItems": "flex-end"
+      },
+      {
+        "key": "bottomCenter",
+        "justifyContent": "center",
+        "alignItems": "flex-end"
+      },
+      {
+        "key": "bottomRight",
+        "justifyContent": "flex-end",
+        "alignItems": "flex-end"
+      }
+    ]
+  },
+  "justifyContent": {
+    "title": "主轴对齐方式",
+    "dataList": [
+      {
+        "label": "请选择",
+        "value": ""
+      },
+      {
+        "label": "左对齐",
+        "value": "flex-start"
+      },
+      {
+        "label": "居中对齐",
+        "value": "center"
+      },
+      {
+        "label": "右对齐",
+        "value": "flex-end"
+      },
+      {
+        "label": "两端对齐",
+        "value": "space-between"
+      },
+      {
+        "label": "space-around",
+        "value": "space-around"
+      },
+      {
+        "label": "space-evenly",
+        "value": "space-evenly"
+      },
+      {
+        "label": "stretch",
+        "value": "stretch"
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+.theme {
+  display: flex;
+  gap: @sizeXS * 1px;
+
+  .item {
+    position: relative;
+    width: 44px;
+    height: 36px;
+    overflow: hidden;
+    background-color: @colorBgLayout;
+    border-radius: @borderRadiusOuter * 1px;
+    box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, .18);
+    cursor: pointer;
+
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: @colorBgBase;
+      content: "";
+    }
+
+    &:before {
+      width: 33%;
+      height: 100%;
+    }
+
+    &:after {
+      width: 100%;
+      height: 25%;
+    }
+
+    &.dark {
+      background-color: @colorTextHeading;
+
+      :global {
+        .anticon {
+          color: white;
+        }
+      }
+
+      &:before {
+        background-color: @colorTextLabel;
+      }
+
+      &:after {
+        background-color: @colorTextBase;
+      }
+    }
+
+    &.light {
+      background-color: @colorBgLayout;
+    }
+
+    &.darkBlue {
+      background-color: #1B2F58;
+
+      :global {
+        .anticon {
+          color: white;
+        }
+      }
+    }
+
+    :global {
+      .anticon {
+        position: absolute;
+        right: 6px;
+        bottom: 4px;
+        color: var(--ant-primary-color);
+        font-weight: 700;
+        font-size: 14px;
+        pointer-events: none;
+      }
+    }
+  }
+}

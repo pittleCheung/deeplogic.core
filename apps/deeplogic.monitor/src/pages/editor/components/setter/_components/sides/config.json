@@ -1,0 +1,44 @@
+{
+  "sideType": {
+    "title": "边框类型",
+    "dataList": [
+      {
+        "label": "上",
+        "value": "top"
+      },
+      {
+        "label": "右",
+        "value": "right"
+      },
+      {
+        "label": "下",
+        "value": "bottom"
+      },
+      {
+        "label": "左",
+        "value": "left"
+      }
+    ]
+  },
+  "radiusType": {
+    "title": "圆角类型",
+    "dataList": [
+      {
+        "label": "左上",
+        "value": "topLeft"
+      },
+      {
+        "label": "右上",
+        "value": "topRight"
+      },
+      {
+        "label": "右下",
+        "value": "bottomRight"
+      },
+      {
+        "label": "右左",
+        "value": "bottomLeft"
+      }
+    ]
+  }
+}

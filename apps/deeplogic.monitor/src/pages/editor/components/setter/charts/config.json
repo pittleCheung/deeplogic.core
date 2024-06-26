@@ -1,0 +1,39 @@
+{
+  "chartTabs": {
+    "title": "图表配置列",
+    "dataList": [
+      {
+        "label": "标题",
+        "key": "title"
+      },
+      {
+        "label": "图例",
+        "key": "legend"
+      },
+      {
+        "label": "网格",
+        "key": "grid"
+      },
+      {
+        "label": "X轴",
+        "key": "xAxis"
+      },
+      {
+        "label": "Y轴",
+        "key": "yAxis"
+      },
+      {
+        "label": "数据",
+        "key": "series"
+      },
+      {
+        "label": "提示框",
+        "key": "tooltip"
+      },
+      {
+        "label": "工具栏",
+        "key": "toolbox"
+      }
+    ]
+  }
+}

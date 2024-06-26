@@ -1,0 +1,38 @@
+.form {
+  :global {
+    .ant-form-item {
+      margin-bottom: @paddingXXS * 1px;
+
+      .ant-form-item-label {
+        label {
+          color: @colorTextSecondary;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - @headerHeight * 1px - @footerHeight * 1px - @editorHeaderHeight * 1px - @sizeXL * 1px);
+}
+
+.btn {
+  padding: 0 @paddingXXS * 1px !important;
+}
+
+.body {
+  padding-top: @paddingXS * 1px
+}
+
+.breadcrumb {
+  padding: @paddingXXS * 1px @paddingSM * 1px;
+  border-bottom: 1px solid @colorBorderSecondary;
+
+  :global {
+    .ant-breadcrumb-separator {
+      margin-inline: @marginXXS * 1px;
+    }
+  }
+}

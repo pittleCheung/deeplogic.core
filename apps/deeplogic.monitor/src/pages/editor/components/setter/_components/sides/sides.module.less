@@ -1,0 +1,134 @@
+.sides {
+  display: flex;
+
+  .top,
+  .left,
+  .right,
+  .bottom,
+  .topLeft,
+  .topRight,
+  .bottomRight,
+  .bottomLeft {
+    :global {
+      .ant-input-number {
+        &-group-addon {
+          padding-inline: 8px;
+          background: transparent;
+          font-size: 12px;
+          color: @colorTextQuaternary;
+        }
+
+        &-input {
+          padding-inline: 11px;
+
+          &-wrap {
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              right: 0;
+              height: 100%;
+              line-height: 30px;
+              padding-inline: 6px;
+              font-size: 10px;
+              color: @colorTextQuaternary;
+            }
+          }
+        }
+
+        &-handler {
+          border-inline-start-color: transparent;
+
+          &-wrap {
+            transition: opacity 50ms linear 50ms;
+            z-index: 1;
+          }
+
+          &-down {
+            border-block-start-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  .top {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '上';
+        }
+      }
+    }
+  }
+
+  .left {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '左';
+        }
+      }
+    }
+  }
+
+  .right {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '右';
+        }
+      }
+    }
+  }
+
+  .bottom {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '下';
+        }
+      }
+    }
+  }
+
+  .topLeft {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '上左';
+        }
+      }
+    }
+  }
+
+  .topRight {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '上右';
+        }
+      }
+    }
+  }
+
+  .bottomRight {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '下右';
+        }
+      }
+    }
+  }
+
+  .bottomLeft {
+    :global {
+      .ant-input-number-input-wrap {
+        &::after {
+          content: '下左';
+        }
+      }
+    }
+  }
+}

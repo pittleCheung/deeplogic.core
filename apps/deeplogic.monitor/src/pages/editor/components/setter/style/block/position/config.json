@@ -1,0 +1,127 @@
+{
+  "position": {
+    "title": "定位",
+    "dataList": [
+      {
+        "label": "无定位 - static",
+        "value": "static",
+        "icon": "static"
+      },
+      {
+        "label": "相对定位 - relative",
+        "value": "relative",
+        "icon": "relative"
+      },
+      {
+        "label": "绝对定位 - absolute",
+        "value": "absolute",
+        "icon": "absolute"
+      },
+      {
+        "label": "固定定位 - fixed",
+        "value": "fixed",
+        "icon": "fixed"
+      },
+      {
+        "label": "粘性定位 - sticky",
+        "value": "sticky",
+        "icon": "sticky"
+      }
+    ]
+  },
+  "display": {
+    "title": "显示",
+    "dataList": [
+      {
+        "label": "显示",
+        "value": "block",
+        "icon": "block"
+      },
+      {
+        "label": "隐藏",
+        "value": "none",
+        "icon": "none"
+      }
+    ]
+  },
+  "float": {
+    "title": "浮动",
+    "dataList": [
+      {
+        "label": "无浮动",
+        "value": "none",
+        "icon": "none"
+      },
+      {
+        "label": "左浮动",
+        "value": "left",
+        "icon": "left"
+      },
+      {
+        "label": "右浮动",
+        "value": "right",
+        "icon": "right"
+      }
+    ]
+  },
+  "clear": {
+    "title": "清除浮动",
+    "dataList": [
+      {
+        "label": "无",
+        "value": "none",
+        "icon": "none"
+      },
+      {
+        "label": "左浮动",
+        "value": "left",
+        "icon": "left"
+      },
+      {
+        "label": "右浮动",
+        "value": "right",
+        "icon": "right"
+      },
+      {
+        "label": "左右浮动",
+        "value": "both",
+        "icon": "both"
+      }
+    ]
+  },
+  "positionTemplate": {
+    "title": "定位模板",
+    "dataList": [
+      {
+        "label": "垂直居中",
+        "value": "vertical",
+        "icon": "vertical"
+      },
+      {
+        "label": "水平居中",
+        "value": "horizontal",
+        "icon": "horizontal"
+      },
+      {
+        "label": "左上角",
+        "value": "topLeft",
+        "icon": "topLeft"
+      },
+      {
+        "label": "右上角",
+        "value": "topRight",
+        "icon": "topRight"
+      },
+      {
+        "label": "左下角",
+        "value": "bottomLeft",
+        "icon": "bottomLeft"
+      },
+      {
+        "label": "右下角",
+        "value": "bottomRight",
+        "icon": "bottomRight"
+      }
+    ]
+  }
+}

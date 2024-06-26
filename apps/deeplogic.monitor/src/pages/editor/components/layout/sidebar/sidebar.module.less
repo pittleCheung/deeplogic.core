@@ -1,0 +1,60 @@
+.sidebar {
+  border-right: 1px solid @colorSplit;
+  overflow: hidden;
+  height: calc(100vh - @headerHeight * 1px - @footerHeight * 1px - @sizeLG * 1px);
+
+  .tabs {
+    padding: (@paddingSM - 2) * 1px @paddingSM * 1px;
+    border-bottom: 1px solid @colorSplit;
+    padding-block-end: (@paddingSM - 1) * 1px;
+    text-align: center;
+
+    :global {
+      .ant-segmented {
+        &-item {
+          &-selected {
+            color: @colorPrimary;
+          }
+
+          &-label {
+            .ant-space-item {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .layers {
+    height: calc(100vh - (@headerHeight + @footerHeight + @editorHeaderHeight + @controlHeight) * 1px);
+    overflow: hidden;
+    overflow-y: scroll;
+
+    h2 {
+      padding: 0;
+      margin: 0;
+    }
+
+    :global {
+      padding: @paddingXXS * 1px (@paddingXS - 1)* 1px  @paddingXXS * 1px @padding * 1px;
+
+      .craft-layer-children {
+        .craft-layer-node {
+
+        }
+      }
+
+      .inner {
+        a {
+          line-height: 0;
+        }
+      }
+
+      .sc-dicizt {
+        border-radius: @borderRadius * 1px;
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "layoutType": {
+    "title": "布局类型",
+    "dataList": [
+      {
+        "label": "水平",
+        "value": "row"
+      },
+      {
+        "label": "垂直",
+        "value": "column"
+      }
+    ]
+  },
+  "display": {
+    "title": "显示",
+    "dataList": [
+      {
+        "label": "弹性",
+        "value": "flex"
+      },
+      {
+        "label": "网格",
+        "value": "grid"
+      }
+    ]
+  },
+  "defaultLayout": {
+    "title": "默认布局",
+    "dataList": {
+      "display": "flex",
+      "flexDirection": "row"
+    }
+  },
+  "emptyLayout": {
+    "title": "空布局",
+    "dataList": {
+      "display": "",
+      "flexDirection": "",
+      "justifyContent": "",
+      "alignItems": "",
+      "alignContent": "",
+      "flexWrap": "",
+      "gap": "",
+      "rowGap": "",
+      "columnGap": "",
+      "justifyItems": ""
+    }
+  }
+}

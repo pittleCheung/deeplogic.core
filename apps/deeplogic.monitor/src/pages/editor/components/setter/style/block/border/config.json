@@ -1,0 +1,62 @@
+{
+  "borderStyle": {
+    "title": "样式",
+    "dataList": [
+      {
+        "label": "实线",
+        "value": "solid"
+      },
+      {
+        "label": "虚线",
+        "value": "dashed"
+      },
+      {
+        "label": "点线",
+        "value": "dotted"
+      }
+    ]
+  },
+  "borderType": {
+    "title": "类型",
+    "dataList": [
+      {
+        "label": "全部",
+        "value": "all"
+      },
+      {
+        "label": "局部",
+        "value": "side"
+      }
+    ]
+  },
+  "defaultBorder": {
+    "title": "默认边框",
+    "dataList": {
+      "borderWidth": 1,
+      "borderStyle": "solid",
+      "borderColor": "rgba(0,0,0,1)",
+      "borderSide": "all"
+    }
+  },
+  "emptyBorder": {
+    "title": "无边框",
+    "dataList": {
+      "borderWidth": 0,
+      "borderStyle": "",
+      "borderColor": "transparent",
+      "borderSide": ""
+    }
+  },
+  "defaultBorderRadius": {
+    "title": "默认圆角",
+    "dataList": {
+      "borderRadius": 0
+    }
+  },
+  "emptyBorderRadius": {
+    "title": "无圆角",
+    "dataList": {
+      "borderRadius": 0
+    }
+  }
+}

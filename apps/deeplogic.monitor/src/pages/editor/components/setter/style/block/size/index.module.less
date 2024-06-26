@@ -1,0 +1,23 @@
+.size {
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .number {
+    background: transparent;
+  }
+
+  .select {
+    flex: 1;
+  }
+
+  :global {
+    .ant-select {
+      &-selector {
+        height: 30px !important;
+      }
+    }
+  }
+}

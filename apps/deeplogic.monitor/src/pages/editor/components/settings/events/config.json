@@ -1,0 +1,32 @@
+{
+  "eventAction": {
+    "title": "事件动作",
+    "dataList": [
+      {
+        "label": "跳转到",
+        "value": "navigateTo"
+      },
+      {
+        "label": "打开弹窗",
+        "value": "openPopup"
+      },
+      {
+        "label": "外部连接",
+        "value": "link"
+      }
+    ]
+  },
+  "hrefTarget": {
+    "title": "链接打开方式",
+    "dataList": [
+      {
+        "label": "_self",
+        "value": "_self"
+      },
+      {
+        "label": "_blank",
+        "value": "_blank"
+      }
+    ]
+  }
+}

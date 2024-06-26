@@ -1,0 +1,18 @@
+:root {
+  --semi-color-primary-light-default: @colorPrimaryBg;
+  --semi-color-primary: @colorPrimary;
+}
+
+.empty {
+  flex: 1;
+  padding-top: @paddingLG * 6px;
+  margin-inline: 0;
+  background-color: @colorBgContainer;
+  border-right: 1px solid @colorSplit;
+
+  :global {
+    .ant-empty-footer {
+      text-align: center;
+    }
+  }
+}

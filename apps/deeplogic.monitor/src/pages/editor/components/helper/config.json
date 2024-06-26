@@ -1,0 +1,29 @@
+{
+  "pageStyle": {
+    "title": "页面初始化样式",
+    "dataList": {
+      "width": "100%",
+      "height": "auto",
+      "background": "linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1))",
+      "padding": 16,
+      "borderRadius": 0,
+      "widthType": "relative",
+      "heightType": "fit-content"
+    }
+  },
+  "defaultPage": {
+    "title": "默认页面",
+    "dataList": {
+      "ROOT": {
+        "type": {
+          "resolvedName": "Page"
+        },
+        "displayName": "Page",
+        "nodes": [],
+        "linkedNodes": {},
+        "hidden": false,
+        "isCanvas": true
+      }
+    }
+  }
+}

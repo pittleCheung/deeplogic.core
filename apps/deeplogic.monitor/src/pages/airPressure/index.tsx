@@ -117,7 +117,7 @@ const ContainerDemo = () => {
 export const AirPressure = () => {
   // console.log("result===>1")
   return (
-    <Editor resolver={{ ...materials }} enabled={true}>
+    <Editor resolver={{ ...materials }} enabled={false}>
       <ContainerDemo />
     </Editor>
   )

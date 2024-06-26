@@ -1,0 +1,81 @@
+{
+  "tabsList": {
+    "title": "Tabs",
+    "dataList": [
+      {
+        "label": "尺寸",
+        "key": "size"
+      },
+      {
+        "label": "位置",
+        "key": "position"
+      },
+      {
+        "label": "文字",
+        "key": "font"
+      },
+      {
+        "label": "描边",
+        "key": "border"
+      },
+      {
+        "label": "背景",
+        "key": "background"
+      },
+      {
+        "label": "布局",
+        "key": "layout"
+      },
+      {
+        "label": "间距",
+        "key": "spacing"
+      }
+    ]
+  },
+  "styleValue": {
+    "title": "样式值",
+    "dataList": {
+      "position": "static",
+      "width": "Auto",
+      "height": "Auto",
+      "fontFamily": "Arial",
+      "fontSize": 14,
+      "fontWeight": "normal",
+      "fontStyle": "normal",
+      "textDecoration": "none",
+      "textAlign": "left",
+      "lineHeight": 1.5,
+      "letterSpacing": 0,
+      "color": "rgba(0, 0, 0, 1)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "none",
+      "borderRadius": 0,
+      "boxShadow": "none",
+      "opacity": 1,
+      "zIndex": 0,
+      "overflow": "visible",
+      "cursor": "default",
+      "transform": "none",
+      "transition": "none",
+      "animation": "none",
+      "display": "block",
+      "float": "none",
+      "clear": "none",
+      "verticalAlign": "baseline",
+      "whiteSpace": "normal",
+      "wordBreak": "normal",
+      "wordWrap": "normal",
+      "content": "none",
+      "visibility": "visible",
+      "positionType": "relative",
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0,
+      "widthType": "fixed",
+      "widthUnit": "px",
+      "heightType": "fixed",
+      "heightUnit": "px"
+    }
+  }
+}

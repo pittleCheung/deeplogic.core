@@ -1,0 +1,7 @@
+.gap {
+  display: flex;
+  gap: 6px;
+}
+.gap .item {
+  width: 100%;
+}

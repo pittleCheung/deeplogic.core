@@ -1,10 +1,11 @@
-import { DICT_CATES } from '%config';
+import config from '%config';
 import { KNX_SPECS_OPTIONS } from '@/utils/config';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import useEditForm from '@hooks/useEditForm';
 import { Col, Form, Input, InputNumber, Modal, Row, Select, Spin, Switch, Tooltip } from 'antd';
 import { connect } from 'umi';
 
+const { DICT_CATES } = config
 function SourceEdit({ dispatch, source, editModalVisible, loading, Dicts }) {
   const title = source.F_SOURCE_ID === '-1' ? '添加驱动' : '编辑驱动';
 

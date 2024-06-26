@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  align-items: center;
+
+  .color {
+    flex: 1;
+    margin-right: 6px;
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+
+  :global {
+    .ant-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

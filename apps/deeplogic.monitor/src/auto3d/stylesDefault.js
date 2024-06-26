@@ -56,10 +56,10 @@ const vWH = { width: 5, height: 150, fill: '' };
 // const ARDTStyle = { ...commonStyle, width: 30, height: 60 }; // margin 10 储气干罐
 
 // const ACOPStyle = { ...commonStyle, width: 120, height: 130 }; // 螺旋空压机
-// const DDRYStyle = { ...commonStyle, width: 120, height: 120 }; // margin 10 吸干机
-// const RDRYStyle = { ...commonStyle, width: 95, height: 120 }; // margin 10 冷干机
-// const ARWTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气湿罐
-// const ARDTStyle = { ...commonStyle, width: 78, height: 120 }; // margin 10 储气干罐
+// const DDRYStyle = { ...commonStyle, width: 120, height: 120 };
+// const RDRYStyle = { ...commonStyle, width: 95, height: 120 };
+// const ARWTStyle = { ...commonStyle, width: 78, height: 120 };
+// const ARDTStyle = { ...commonStyle, width: 78, height: 120 };
 
 // 调整空压机的设备大小
 const ACOPStyle = { ...commonStyle, width: 105, height: 90 }; // 螺旋空压机
@@ -107,7 +107,6 @@ export const styleMap = {
 export const deviceMargin = {
   CHLS: 34,
   Pump: 63,
-  // CTS: 46,
   CTS: 31,
   CHWPS: 63,
   CWPS: 63
@@ -142,7 +141,6 @@ export const deviceNumToole = (obj) => {
     CHLSMarginHeight = 30;
   }
 
-  console.log('CHLSMarginHeight======>2', CHLSMarginHeight, CHLS);
   // 拼接设备间隙
   deviceMargin.CHLS = deviceMargin.CHLS + CHLSMarginHeight;
   deviceMargin.Pump = deviceMargin.Pump + CHLSMarginHeight;

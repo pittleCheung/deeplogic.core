@@ -1,0 +1,44 @@
+.panel {
+  border-block-end: 1px solid @colorSplit;
+
+  .header {
+    padding: @paddingXXS * 1px;
+    padding-left: @paddingSM * 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 600;
+      color: @colorTextLabel;
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      gap: 4px;
+
+      .action {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        cursor: pointer;
+        color: @colorTextTertiary;
+        border-radius: @borderRadius * 1px;
+        font-size: @fontSizeLG * 1px;
+
+        &:hover {
+          background: @colorFillSecondary;
+        }
+      }
+    }
+  }
+
+  .body {
+    padding: @paddingXXS * 1px;
+    padding-left: @padding * 1px;
+  }
+}

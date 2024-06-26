@@ -1,0 +1,60 @@
+{
+  "eventAction": {
+    "title": "事件动作",
+    "dataList": [
+      {
+        "label": "跳转到",
+        "value": "navigateTo"
+      },
+      {
+        "label": "打开弹窗",
+        "value": "openPopup"
+      },
+      {
+        "label": "外部连接",
+        "value": "link"
+      },
+      {
+        "label": "显示/隐藏组件",
+        "value": "displayComponent"
+      },
+      {
+        "label": "属性绑定",
+        "value": "bindProperty"
+      },
+      {
+        "label": "组件联动",
+        "value": "linkTo"
+      },
+      {
+        "label": "表单联动",
+        "value": "formLinkage"
+      },
+      {
+        "label": "数据下发",
+        "value": "pushData"
+      },
+      {
+        "label": "退出登录",
+        "value": "logout"
+      },
+      {
+        "label": "登录",
+        "value": "login"
+      }
+    ]
+  },
+  "hrefTarget": {
+    "title": "链接打开方式",
+    "dataList": [
+      {
+        "label": "_self",
+        "value": "_self"
+      },
+      {
+        "label": "_blank",
+        "value": "_blank"
+      }
+    ]
+  }
+}
