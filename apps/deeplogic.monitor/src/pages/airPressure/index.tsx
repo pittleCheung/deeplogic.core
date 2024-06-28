@@ -32,7 +32,7 @@ import {
 } from "../../data/atb"
 
 // error情况
-import { res_4_2_3_2_2, res_1_3_1_1_2 } from "../../data/ata"
+import { res_4_2_3_2_2, res_1_3_1_1_2, res_3_2_5_3_3 } from "../../data/ata"
 
 
 // 空压
@@ -58,7 +58,7 @@ const ContainerDemo = () => {
     // console.log("result====>", result, renderTime)
 
     timer.current = setTimeout(() => {
-      let target = true ? res_1_3_1_1_2 : res7
+      let target = true ? res_3_2_5_3_3 : res7
       const item = Object.keys(target?.CAS_PLANTS || {})?.[0]
       const result = handleSource(
         target.CAS_PLANTS[item],
@@ -117,7 +117,7 @@ const ContainerDemo = () => {
 export const AirPressure = () => {
   // console.log("result===>1")
   return (
-    <Editor resolver={{ ...materials }} enabled={true}>
+    <Editor resolver={{ ...materials }} enabled={false}>
       <ContainerDemo />
     </Editor>
   )

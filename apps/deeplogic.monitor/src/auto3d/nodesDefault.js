@@ -1300,18 +1300,7 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
           styleMap.h.height,
         translateY: pipeh1.props.style.translateY + styleMap.t.height / 2,
       }
-      generateSystemText(
-        result,
-        pipeh2,
-        "down",
-        type === "chw"
-          ? dev == "CTS"
-            ? systemTemprature.cwin
-            : systemTemprature.chwin
-          : dev == "CTS"
-            ? systemTemprature.cwin
-            : null,
-      )
+     
       const connT = connector("t")
       // 调整最后一个三头的位置
       connT.props.style = {
@@ -1346,17 +1335,41 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
       if (item.length !== 1) {
         result[connT.id] = connT
         result[pipeh2.id] = pipeh2
+        generateSystemText(
+           result,
+           pipeh2,
+           "down",
+           type === "chw"
+             ? dev == "CTS"
+               ? systemTemprature.cwin
+               : systemTemprature.chwin
+             : dev == "CTS"
+               ? systemTemprature.cwin
+               : null,
+         )
       }else{
         // 串联
          pipeh2.props.style.translateY = pipeh1.props.style.translateY
-         pipeh2.props.style.width = deviceXGap - styleMap.h.width / 2 - styleMap.h.width * .8 + 3
+         pipeh2.props.style.width = deviceXGap - styleMap.h.width / 2 - styleMap.h.width * .8 + 4
          pipeh2.props.style.translateX =
            pipeh1.props.style.translateX +
            (type === "chw"               
-             ? pipeh1.props.style.width       // 情况2 和 情况6方向相反
-             : -pipeh2.props.style.width)  
+             ? pipeh1.props.style.width - .5       // 情况2 和 情况6方向相反
+             : -pipeh2.props.style.width + .5)  
         //  pipeh2.props.style.translateX = pipev2.props.style.translateX - styleMap.v.width - .5
         result[pipeh2.id] = pipeh2
+        generateSystemText(
+          result,
+          pipeh2,
+          "down",
+          type === "chw"
+            ? dev == "CTS"
+              ? systemTemprature.cwin
+              : systemTemprature.chwin
+            : dev == "CTS"
+              ? systemTemprature.cwin
+              : null,
+        )
       }
       
     } else {
@@ -1558,8 +1571,20 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
       if(item.length === 1){
         pipeh2.props.style.translateY = pipeh1.props.style.translateY
         pipeh2.props.style.translateX = pipev2.props.style.translateX
-        pipeh2.props.style.width = deviceXGap - styleMap.h.width + 3
+        pipeh2.props.style.width = deviceXGap - styleMap.h.width + 3.5
         result[pipeh2.id] = pipeh2
+        generateSystemText(
+           result,
+           pipeh2,
+           "down",
+           type === "chw"
+             ? dev == "CTS"
+               ? systemTemprature.cwin
+               : systemTemprature.chwin
+             : dev == "CTS"
+               ? systemTemprature.cwin
+               : null,
+         )
       }else{
         // 并联
         generateSystemText(
@@ -2078,8 +2103,12 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
            result[connWchw.id] = connWchw
         }
       }
-      // 串联显示 并联隐藏  
-      if (item.length !== 1 ) {
+      // 串联显示 并联隐藏   dType为弯头显示的条件 串联下 情况5需要显示
+      if (item.length === 1) {
+        if(dType === "tower"){
+          result[connW.id] = connW   
+        }
+      }else{
         result[connW.id] = connW
       }
       break
@@ -2432,7 +2461,7 @@ export const chl_tower = (item, result, index, CT) => {
         translateY: pipeh0.props.style.translateY - styleMap.w.height / 2 + 4,
       }
       result[connW.id] = connW
-      generateSystemText(result, pipeh0, null, systemTemprature.cwout)
+      generateSystemText(result, pipeh0, item.length === 1 ? "down" : null, systemTemprature.cwout) 
     }
     const transObj = {
       translateX: fix(currentpump.translateX - styleMap["h"].width * 0.5),

@@ -107,13 +107,26 @@ export const handleSource = (
   let initTop = 0
 
   // 当前空压机数量小于湿罐数量 空压机需要往下移动
-  let curlen = Object.keys(ACOPS).length
-  let nextlen = Object.keys(ARWTS).length
-  if (curlen < nextlen) {
+  const acopKeys = Object.keys(ACOPS)
+  if(acopKeys.length === 0) return; // 没有空压机的情况
+  let curlen = acopKeys.length
+  // 按照空压机的下一个设备计算 空压机的位置
+  // let nextlen = Object.keys(ARWTS).length
+  // 按照所有设备最高的设备计算 空压机的位置
+  let currNode = ACOPS[acopKeys[0]]
+  let maxNodeNumber = Math.max(
+    currNode.ARDTS?.length,
+    currNode.ARWTS?.length,
+    currNode.RDRYS?.length,
+    currNode.DDRYS?.length,
+  )
+  if (curlen < maxNodeNumber) {
     initTop =
       initTop +
-      (styleMap.Acop.height + pGap.acopYGap) * Math.abs(curlen - nextlen) * 0.5
+      (styleMap.Acop.height + pGap.acopYGap) * Math.abs(curlen - maxNodeNumber) * 0.5
   }
+
+  console.log("initTop======>", currNode)
 
   let prevX = 0 //前一个节点的横坐标
   // 空压机分组 x: 50, y: height
