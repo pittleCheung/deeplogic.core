@@ -30,7 +30,8 @@ export const checkTotal = (obj, data, mapdata, vals, pointarr, type) => {
         str += "("
         mapdata.forEach((item, index) => {
             if (!vals?.[item]?.[1]) {
-                str += `${'${' + obj[item][status[0]].NAME + '}'}==1`;
+                // console.log("pipev.props.style.height===>1", vals?.[item]?.[1])
+                // str += `${'${' + obj[item][status[0]].NAME + '}'}==1`;
             } else {
                 str += `${'(${' + obj[item][status[0]].NAME + '}'}==1`;
                 str += `&&${'${' + vals[item][[type ? 0 : 1]][status[0]].NAME + '}'}==1)`;

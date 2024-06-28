@@ -129,33 +129,35 @@ const deviceTranformX = {}; // 设备水平位移
 let deviceTotalTransformY = 0; // 设备总的最大垂直位移
 // ['制冷机 CHLS', '冷冻泵 CHWPS', '冷却泵 CWPS', '冷却塔 CTS', '阀门 DVS'];
 export const deviceNumToole = (obj) => {
-  const { CHLS, CHWPS, CWPS, CTS } = obj; // 设备数量
+  const { CHLS, CHWPS, CWPS, CTS } = obj // 设备数量
   // 动态计算deviceMargin
-  const maxH = Math.max(...Object.values(obj)); // 计算最多的设备数量
+  const maxH = Math.max(...Object.values(obj)) // 计算最多的设备数量
   // 方式1: 默认用冷机的高度算: 冷机间隙 = 可视化内容高度 / 最多的设备数量 - 冷机数量 * 冷机高度;
   // let CHLSH = ConHeight / maxH - CHLS * chlWH.height;
   // 方式2: 默认用冷机的高度算: 设备间隙  = (可视化内容高度 - 冷机数量 * 冷机高度) / 最多的设备数量
   // Y轴上下两侧留白区域
-  const paddingY = 0;
-  let CHLSMarginHeight = (ConHeight - CHLS * chlWH.height - paddingY * 2) / maxH;
+  const paddingY = 0
+  let CHLSMarginHeight = (ConHeight - CHLS * chlWH.height - paddingY * 2) / maxH
   // 计算冷机设备垂直间隙限定最大值 大于100取100 小于80取80间距  小于50取50间距
   // CHLSMarginHeight = CHLSMarginHeight > 100 ? 100 : (CHLSMarginHeight < 80 ? (CHLSMarginHeight < 50 ? 50 : CHLSMarginHeight) : CHLSMarginHeight);
-  // console.log('CHLSMarginHeight======>1', CHLSMarginHeight);
-  CHLSMarginHeight = CHLSMarginHeight > 40 ? 40 : CHLSMarginHeight;
-  // 计算冷机设备垂直间隙限定最小值
-  // CHLSMarginHeight = CHLSMarginHeight < 35 ? 35 : CHLSMarginHeight;
-  if (CHLS < 4) {
-    CHLSMarginHeight = 45;
-  } else {
-    CHLSMarginHeight = 80;
-  }
+
+  CHLSMarginHeight = CHLSMarginHeight < 50 ? 50 : (CHLSMarginHeight > 80 ? 80 : CHLSMarginHeight);
+
+  // // 计算冷机设备垂直间隙限定最小值
+  // if (CHLS < 4) {
+  //   CHLSMarginHeight = 45;
+  // } else {
+  //   CHLSMarginHeight = 70;
+  // }
+
+  console.log("CHLSMarginHeight=====>", CHLSMarginHeight)
 
   // 拼接设备间隙
-  deviceMargin.CHLS = deviceMargin.CHLS + CHLSMarginHeight;
-  deviceMargin.Pump = deviceMargin.Pump + CHLSMarginHeight;
-  deviceMargin.CTS = deviceMargin.CTS + CHLSMarginHeight;
-  deviceMargin.CHWPS = deviceMargin.CHWPS + CHLSMarginHeight;
-  deviceMargin.CWPS = deviceMargin.CWPS + CHLSMarginHeight;
+  deviceMargin.CHLS = deviceMargin.CHLS + CHLSMarginHeight
+  deviceMargin.Pump = deviceMargin.Pump + CHLSMarginHeight
+  deviceMargin.CTS = deviceMargin.CTS + CHLSMarginHeight
+  deviceMargin.CHWPS = deviceMargin.CHWPS + CHLSMarginHeight
+  deviceMargin.CWPS = deviceMargin.CWPS + CHLSMarginHeight
 
   //  console.log("CHLSMarginHeight======>3", deviceMargin.Pump )
 
@@ -163,8 +165,8 @@ export const deviceNumToole = (obj) => {
     CHLS: (deviceMargin.CHLS + chlStyle.height) * CHLS,
     CHWPS: (deviceMargin.CHWPS + pumpStyle.height) * CHWPS,
     CWPS: (deviceMargin.CWPS + pumpStyle.height) * CWPS,
-    CTS: (deviceMargin.CTS + ctStyle.height) * CTS
-  };
+    CTS: (deviceMargin.CTS + ctStyle.height) * CTS,
+  }
 
   // 距离顶部最大偏移距离 = (容器高度 - 设备区域最大跨度) / 2
   // deviceTotalTransformY = (ConHeight - Math.max(...Object.values(newobj))) / 2;
@@ -174,21 +176,23 @@ export const deviceNumToole = (obj) => {
   // deviceTotalTransformY = deviceTotalTransformY < 100 ? 100 : deviceTotalTransformY; // 最大垂直距离小于100为100
 
   // 统一居中显示 距离顶部设置一个70px 避免触顶
-  deviceTotalTransformY = 70;
+  deviceTotalTransformY = 70
   // 计算横向设备之间的间隙 宽度默认先写死1400px
-  let canvasWidth = 1400;
+  let canvasWidth = 1400
   // if(window.screen.width > 2000){
   //     canvasWidth = 1600
   // }
   // X轴左右两侧留白区域
-  const paddingX = 100;
+  const paddingX = 100
   // 设备之间的间隙 = (容器区域-所有设备宽度-两侧留白宽度) / (设备种类数量 - 1)
-  deviceXGap = (canvasWidth - chlWH.width - pumpWH.width * 2 - ctWH.width - 2 * paddingX) / (4 - 1);
+  deviceXGap =
+    (canvasWidth - chlWH.width - pumpWH.width * 2 - ctWH.width - 2 * paddingX) /
+    (4 - 1)
   // 从冷却塔开始算 起始位置给一个paddingX
-  deviceTranformX.CTS = paddingX;
-  deviceTranformX.CWPS = ctStyle.width + deviceTranformX.CTS + deviceXGap;
-  deviceTranformX.CHLS = pumpStyle.width + deviceTranformX.CWPS + deviceXGap;
-  deviceTranformX.CHWPS = chlStyle.width + deviceTranformX.CHLS + deviceXGap;
+  deviceTranformX.CTS = paddingX
+  deviceTranformX.CWPS = ctStyle.width + deviceTranformX.CTS + deviceXGap
+  deviceTranformX.CHLS = pumpStyle.width + deviceTranformX.CWPS + deviceXGap
+  deviceTranformX.CHWPS = chlStyle.width + deviceTranformX.CHLS + deviceXGap
 
   //
   // deviceTranformX.CTS = hWH.width / 3 + pipeTStyle.width + 100; // 150 / 3 + 16 + 100 => 横管1/3 + 三头 + 100  = 166 从冷却塔开始算

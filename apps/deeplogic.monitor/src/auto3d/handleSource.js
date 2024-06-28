@@ -481,7 +481,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
   result[boxid].props.style.contentMinX = Math.min(...translateXCollect)
   result[boxid].props.style.contentMinY = Math.min(...translateYCollect)
   result[boxid].props.style.contentMaxY = Math.max(...translateYCollect)
-
+  
   result = {
     ...result,
     ...rootHeader,

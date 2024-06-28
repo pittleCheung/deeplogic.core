@@ -1279,7 +1279,7 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
             : 0),
         translateX:
           co_f.translateX +
-          (type === "chw" ? styleMap.t.width : fix(linkWidth * -1)),
+          (type === "chw" ? styleMap.t.width : fix(linkWidth * -1) + 2),
       }
 
       pipev2.props.status = {
@@ -1298,7 +1298,7 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
           pipeh1.props.style.translateX +
           pipeh1.props.style.width +
           styleMap.h.height,
-        translateY: pipeh1.props.style.translateY + styleMap.t.height / 2,
+        translateY: pipeh1.props.style.translateY + styleMap.t.height / 2 ,
       }
      
       const connT = connector("t")
@@ -1350,12 +1350,12 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
       }else{
         // 串联
          pipeh2.props.style.translateY = pipeh1.props.style.translateY
-         pipeh2.props.style.width = deviceXGap - styleMap.h.width / 2 - styleMap.h.width * .8 + 4
+         pipeh2.props.style.width = deviceXGap - styleMap.h.width / 2 - styleMap.h.width * .8 + 5
          pipeh2.props.style.translateX =
            pipeh1.props.style.translateX +
            (type === "chw"               
-             ? pipeh1.props.style.width - .5       // 情况2 和 情况6方向相反
-             : -pipeh2.props.style.width + .5)  
+             ? pipeh1.props.style.width - 1     // 情况2 和 情况6方向相反
+             : -pipeh2.props.style.width + 1)  
         //  pipeh2.props.style.translateX = pipev2.props.style.translateX - styleMap.v.width - .5
         result[pipeh2.id] = pipeh2
         generateSystemText(
@@ -1390,7 +1390,7 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
         height:
           current.props.style.height +
           deviceMargin[dev] -
-          styleMap["t"].height / 2,
+          styleMap["t"].height / 4,
       }
       // 竖管x位移 横管的位移 +/- 横管宽度 + 竖管宽度
       pipev.props.style.translateX = co_f.translateX + styleMap["v"].width
@@ -1427,7 +1427,7 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
           connT.props.style.translateY = connT.props.style.translateY + 3
         } else if (type === "cw") {
           // 情况6
-          connT.props.style.translateX = connT.props.style.translateX + 1.8
+          connT.props.style.translateX = connT.props.style.translateX + 2.5
           connT.props.style.translateY = connT.props.style.translateY + 3
         }
         result[connT.id] = connT
@@ -1571,7 +1571,7 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
       if(item.length === 1){
         pipeh2.props.style.translateY = pipeh1.props.style.translateY
         pipeh2.props.style.translateX = pipev2.props.style.translateX
-        pipeh2.props.style.width = deviceXGap - styleMap.h.width + 3.5
+        pipeh2.props.style.width = deviceXGap - styleMap.h.width + 4
         result[pipeh2.id] = pipeh2
         generateSystemText(
            result,
@@ -2379,7 +2379,7 @@ export const chl_tower = (item, result, index, CT) => {
     result[pipeh.id] = pipeh
     const pointvarr = []
     pipev.props.status = {
-      bind: `(${checkTotal(deviceIdsMapValue, item, CT, valuesMaps, pointvarr)})&&(${deviceCheckV(
+      bind: `(${checkTotal(deviceIdsMapValue, item, CT, valuesMaps, pointvarr,true)})&&(${deviceCheckV(
         deviceIdsMapValue[item[i]],
         item.slice(i, item.length)?.map((t) => deviceIdsMapValue[t]),
         item.slice(i, item.length)?.map((t) => valuesMaps?.[t]?.[1]),
