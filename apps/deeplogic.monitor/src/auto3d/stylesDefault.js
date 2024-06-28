@@ -104,12 +104,21 @@ export const styleMap = {
 //     CWPS: 63
 // }; // 设备垂直边距
 
+// export const deviceMargin = {
+//   CHLS: 34,
+//   Pump: 63,
+//   CTS: 31,
+//   CHWPS: 63,
+//   CWPS: 63
+// }; // 设备垂直边距
+
+// 统一使用冷机的间距默认34
 export const deviceMargin = {
   CHLS: 34,
-  Pump: 63,
-  CTS: 31,
-  CHWPS: 63,
-  CWPS: 63
+  Pump: 34,
+  CTS: 34,
+  CHWPS: 34,
+  CWPS: 34
 }; // 设备垂直边距
 
 // 设备X轴之间的间隙
@@ -138,7 +147,7 @@ export const deviceNumToole = (obj) => {
   if (CHLS < 4) {
     CHLSMarginHeight = 45;
   } else {
-    CHLSMarginHeight = 30;
+    CHLSMarginHeight = 80;
   }
 
   // 拼接设备间隙
@@ -164,7 +173,7 @@ export const deviceNumToole = (obj) => {
   // // deviceTotalTransformY = deviceTotalTransformY > 150 ? 150 : deviceTotalTransformY; // 最大垂直距离小于150
   // deviceTotalTransformY = deviceTotalTransformY < 100 ? 100 : deviceTotalTransformY; // 最大垂直距离小于100为100
 
-  // 统一居中显示
+  // 统一居中显示 距离顶部设置一个70px 避免触顶
   deviceTotalTransformY = 70;
   // 计算横向设备之间的间隙 宽度默认先写死1400px
   let canvasWidth = 1400;
@@ -218,8 +227,11 @@ export const deviceNumToole = (obj) => {
  * @param index 设备索引
  * @param type 设备类型
  */
-export const deviceTranform = (index, type, tag) => {
-  const translateY = deviceTotalTransformY + deviceMargin[type] * index + styleMap[type].height * index + tag;
+export const deviceTranform = (index, type, tag = 0) => {
+  // 之前是按照手动计算不同设备的margin值来算, 设备数量越多就会产生误差
+  // const translateY = deviceTotalTransformY + deviceMargin[type] * index + styleMap[type].height * index + tag;
+  // 统一按照冷机的高度计算
+  const translateY = deviceTotalTransformY + deviceMargin["CHLS"] * index + styleMap["CHLS"].height * index + tag;
   return {
     translateY,
     translateX: deviceTranformX[type]

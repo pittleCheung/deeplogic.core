@@ -3,9 +3,14 @@ import materials from "@deeplogic/materials";
 import React, { useLayoutEffect } from "react";
 // 空调
 import { handleSource } from "../../auto3d/handleSource"
-import { source3 as source, deviceModelMap, links, global } from "../../data/data"
-
-// 空压
+import {
+  source as source,
+  deviceModelMap,
+  links,
+  global,
+} from "../../data/data"
+import { source_re5 } from "../../data/datb"
+// 空调
 const ContainerDemo = () => {
   const { actions, query, enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
@@ -17,7 +22,7 @@ const ContainerDemo = () => {
     //  const json = lz.decompress(lz.decodeBase64(stateToLoad))
     // const startTime = performance.now()
     // 空调
-    const result = handleSource(source, deviceModelMap, links, global, "HVAC")
+    const result = handleSource(source_re5, deviceModelMap, links, global, "HVAC")
     // const endTime = performance.now()
     // const renderTime = endTime - startTime
     // console.log(`JSON generator time: ${renderTime} ms`)

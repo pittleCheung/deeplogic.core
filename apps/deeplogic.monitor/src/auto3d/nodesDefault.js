@@ -1198,7 +1198,7 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
         : fix(current.props.style.translateX - pipeh1.props.style.width) + 2
     // 横管的位置在设备的2/3处
     pipeh1.props.style.translateY = fix(
-      current.props.style.translateY + (current.props.style.height / 3) * 2 + 1,
+      current.props.style.translateY + (current.props.style.height / 3) * 2,
     )
 
     if (dev == "CTS" && values.length > 1) {
@@ -1223,18 +1223,18 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
     co_f = {
       translateX:
         type === "chw"
-          ? fix(
-              pipeh1.props.style.translateX + pipeh1.props.style.width * tag,
-            ) - 1
+          ? fix(pipeh1.props.style.translateX + pipeh1.props.style.width * tag)
           : fix(pipeh1.props.style.translateX - styleMap["t"].width),
       translateY: fix(
-        current.props.style.translateY + (current.props.style.height / 3) * 2,
+        current.props.style.translateY +
+          (current.props.style.height / 3) * 2 -
+          1,
       ),
     }
+    // 每一组总管的第一个第一个冷机,生成两个横管，一个三头连接头
+    const pipeh2 = pipe("h", direction) // 总管
+    const pipev2 = pipe("v", direction) // 竖直总管
     if (i === item.length - 1) {
-      // 每一组总管的第一个第一个冷机,生成两个横管，一个三头连接头
-      const pipeh2 = pipe("h", direction) // 总管
-      const pipev2 = pipe("v", direction) // 竖直总管
       pipeh2.props.status = {
         bind: totalstatus,
         type: "expressions",
@@ -1258,9 +1258,9 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
       // const linkWidth = deviceXGap - styleMap['h'].width/3 - styleMap['h'].width/ 2 - styleMap['w'].width * 2
       const linkWidth =
         deviceXGap -
-        styleMap["h"].width * 0.8 -
-        styleMap["h"].width / 2 -
-        styleMap["w"].width * 2 +
+        styleMap["h"].width * 0.8 - // 右侧横管
+        styleMap["h"].width / 2 - // 左侧横管
+        styleMap["w"].width * 2 + // 弯头
         2
       pipeh2.props.waterstyle = pipeType
       pipeh2.props.style = {
@@ -1270,21 +1270,17 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
         // 连接处宽度 = 设备间隙 - 设备左右两侧管子宽度 - 连接头宽度
         width: linkWidth,
         ...co_f,
-        // translateY: co_f.translateY + (type === 'chw' ? styleMap['v'].height * 0.25 : 0),
         translateY:
-          co_f.translateY +
-          (type === "chw" ? styleMap["v"].height * 0.25 : 0) +
-          2,
-        // translateX: co_f.translateX + (type === 'chw' ? styleMap.t.width : fix(styleMap['h'].width * -0.5))
+          pipeh1.props.style.translateY +
+          (type === "chw"
+            ? styleMap["v"].height * 0.25 +
+              styleMap.w.height -
+              styleMap.h.height / 4
+            : 0),
         translateX:
           co_f.translateX +
           (type === "chw" ? styleMap.t.width : fix(linkWidth * -1)),
       }
-
-      // console.log(
-      //   "deviceXGap - styleMap['h']/3 * 2===>",
-      //   deviceXGap - (styleMap["h"] / 3) * 2,
-      // )
 
       pipev2.props.status = {
         bind: totalstatus,
@@ -1297,7 +1293,12 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
         fill: EFAULT_PUMP_MAP[pipeType][0],
         height: fix(styleMap["v"].height * 0.25),
         ...co_f,
-        translateX: co_f.translateX + styleMap.t.height * 0.5 - 1,
+        // translateX: co_f.translateX + styleMap.t.height * 0.5,
+        translateX:
+          pipeh1.props.style.translateX +
+          pipeh1.props.style.width +
+          styleMap.h.height,
+        translateY: pipeh1.props.style.translateY + styleMap.t.height / 2,
       }
       generateSystemText(
         result,
@@ -1312,17 +1313,14 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
             : null,
       )
       const connT = connector("t")
-      // connT.props.style = {
-      //     ...styleMap['t'],
-      //     ...co_f,
-      //     translateY: co_f.translateY - styleMap['t'].height / 2,
-      //     rotate: type === 'chw' ? 90 : 180
-      // }
       // 调整最后一个三头的位置
       connT.props.style = {
         ...styleMap["t"],
         ...co_f,
-        translateY: co_f.translateY - styleMap["t"].height / 2 + (type === "chw" ? 3.5 : 2),
+        translateY:
+          co_f.translateY -
+          styleMap["t"].height / 2 +
+          (type === "chw" ? 3.5 : 2),
         translateX: type === "chw" ? co_f.translateX - 2.5 : co_f.translateX,
         rotate: type === "chw" ? 90 : 180,
       }
@@ -1331,16 +1329,36 @@ export const chl_pump = (item, result, type, dev, pipeType, pimps, index) => {
         connW2.props.style = {
           ...styleMap["w"],
           ...co_f,
-          translateX: co_f.translateX + styleMap["w"].width * 0.5 - 2.3,
-          translateY:
-            pipeh2.props.style.translateY - styleMap["w"].height * 0.5,
+          // translateX: co_f.translateX + styleMap["w"].width * 0.5,
+          // translateY:
+          //   pipeh2.props.style.translateY - styleMap["w"].height * 0.5,
+          translateY: pipev2.props.style.translateY + pipev2.props.style.height,
+          translateX: pipev2.props.style.translateX - styleMap.v.width / 4,
           rotate: 180,
         }
-        result[connW2.id] = connW2
-        result[pipev2.id] = pipev2
+        // 并联显示 串联隐藏
+        if (item.length !== 1) {
+          result[connW2.id] = connW2
+          result[pipev2.id] = pipev2
+        }
       }
-      result[pipeh2.id] = pipeh2
-      result[connT.id] = connT
+      // 并联显示 串联隐藏
+      if (item.length !== 1) {
+        result[connT.id] = connT
+        result[pipeh2.id] = pipeh2
+      }else{
+        // 串联
+         pipeh2.props.style.translateY = pipeh1.props.style.translateY
+         pipeh2.props.style.width = deviceXGap - styleMap.h.width / 2 - styleMap.h.width * .8 + 3
+         pipeh2.props.style.translateX =
+           pipeh1.props.style.translateX +
+           (type === "chw"               
+             ? pipeh1.props.style.width       // 情况2 和 情况6方向相反
+             : -pipeh2.props.style.width)  
+        //  pipeh2.props.style.translateX = pipev2.props.style.translateX - styleMap.v.width - .5
+        result[pipeh2.id] = pipeh2
+      }
+      
     } else {
       // 其他冷机生成一个横管，一个竖管，一个三头连接头，如果是最后一个冷机，则生成一个弯头连接头
       // 冷机左侧下方和右侧下方竖管 以及冷却塔右侧下方竖管
@@ -1481,15 +1499,30 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
         current.props.style.translateY + (current.props.style.height / 3) * 2,
       ),
     }
+    // 每一组总管的第一个第一个冷机,生成两个横管，一个三头连接头
+    const pipeh2 = pipe("h", direction) // 总管
+    const pipev2 = pipe("v", direction) // 竖直总管
     if (i === item.length - 1) {
-      // 每一组总管的第一个第一个冷机,生成两个横管，一个三头连接头
-      const pipeh2 = pipe("h", direction) // 总管
-      const pipev2 = pipe("v", direction) // 竖直总管
+      pipev2.props.status = {
+        bind: totalstatus,
+        type: "expressions",
+        point: totalarr,
+      }
+      pipev2.props.waterstyle = pipeType
+      pipev2.props.style = {
+        ...styleMap["v"],
+        fill: EFAULT_PUMP_MAP[pipeType][0],
+        height: fix(styleMap["v"].height * 0.25),
+        ...co_f,
+        translateX: pipeh1.props.style.translateX + pipeh1.props.style.width,
+        translateY: pipeh1.props.style.translateY + styleMap.t.height / 2,
+      }
       pipeh2.props.status = {
         bind: totalstatus,
         type: "expressions",
         point: totalarr,
       }
+
       ifTotalMap(
         {
           [dev == "CTS" ? "CTS" : type]: {
@@ -1506,12 +1539,7 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
       )
       // pipeh2为从左到右 下方冷却塔连接到水泵  水泵连接到冷机 冷机连接到水泵那条线
       // const linkWidth = deviceXGap - styleMap['h'].width/3 - styleMap['h'].width/ 2 - styleMap['w'].width * 2
-      const linkWidth =
-        deviceXGap -
-        styleMap["h"].width * 0.5 -
-        styleMap["h"].width / 2 -
-        styleMap["w"].width * 2 +
-        2
+      const linkWidth = deviceXGap - styleMap["h"].width - styleMap["v"].width * 2 
       pipeh2.props.waterstyle = pipeType
       pipeh2.props.style = {
         ...styleMap["h"],
@@ -1521,71 +1549,62 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
         width: linkWidth,
         ...co_f,
         // translateY: co_f.translateY + (type === 'chw' ? styleMap['v'].height * 0.25 : 0),
-        translateY:
-          co_f.translateY +
-          (type === "chw" ? styleMap["v"].height * 0.25 : 0) +
-          2,
+        translateY: pipev2.props.style.translateY + pipev2.props.style.height + styleMap.w.height / 2 - styleMap.h.height / 8,
         // translateX: co_f.translateX + (type === 'chw' ? styleMap.t.width : fix(styleMap['h'].width * -0.5))
-        translateX:
-          co_f.translateX +
-          (type === "chw" ? styleMap.t.width : fix(linkWidth * -1)),
-      }
-
-      pipev2.props.status = {
-        bind: totalstatus,
-        type: "expressions",
-        point: totalarr,
-      }
-      pipev2.props.waterstyle = pipeType
-      pipev2.props.style = {
-        ...styleMap["v"],
-        fill: EFAULT_PUMP_MAP[pipeType][0],
-        height: fix(styleMap["v"].height * 0.25),
-        ...co_f,
-        translateX: co_f.translateX + styleMap.t.height * 0.5 - 1,
-      }
-      generateSystemText(
-        result,
-        pipeh2,
-        "down",
-        type === "chw"
-          ? dev == "CTS"
-            ? systemTemprature.cwin
-            : systemTemprature.chwin
-          : dev == "CTS"
-            ? systemTemprature.cwin
-            : null,
-      )
-      const connT = connector("t")
-      // connT.props.style = {
-      //     ...styleMap['t'],
-      //     ...co_f,
-      //     translateY: co_f.translateY - styleMap['t'].height / 2,
-      //     rotate: type === 'chw' ? 90 : 180
-      // }
-      // 调整最后一个三头的位置
-      connT.props.style = {
-        ...styleMap["t"],
-        ...co_f,
-        translateY: co_f.translateY - styleMap["t"].height / 2 + 2,
-        translateX: co_f.translateX - 2.5,
-        rotate: 90,
-      }
-      if (type === "chw") {
-        const connW2 = connector("w")
-        connW2.props.style = {
-          ...styleMap["w"],
+        translateX: pipev2.props.style.translateX + styleMap.w.width - styleMap.v.width,
+      }  
+     
+      // 串联
+      if(item.length === 1){
+        pipeh2.props.style.translateY = pipeh1.props.style.translateY
+        pipeh2.props.style.translateX = pipev2.props.style.translateX
+        pipeh2.props.style.width = deviceXGap - styleMap.h.width + 3
+        result[pipeh2.id] = pipeh2
+      }else{
+        // 并联
+        generateSystemText(
+          result,
+          pipeh2,
+          "down",
+          type === "chw"
+            ? dev == "CTS"
+              ? systemTemprature.cwin
+              : systemTemprature.chwin
+            : dev == "CTS"
+              ? systemTemprature.cwin
+              : null,
+        )
+        const connT = connector("t")
+        // 调整最后一个三头的位置
+        connT.props.style = {
+          ...styleMap["t"],
           ...co_f,
-          translateX: co_f.translateX + styleMap["w"].width * 0.5 - 2.5,
           translateY:
-            pipeh2.props.style.translateY - styleMap["w"].height * 0.5,
-          rotate: 180,
+            pipev2.props.style.translateY -
+            styleMap.t.width / 2 -
+            styleMap.h.height / 4,
+          translateX:
+            pipev2.props.style.translateX -
+            styleMap.t.height / 2 -
+            styleMap.v.width / 4,
+          rotate: 90,
         }
-        result[connW2.id] = connW2
-        result[pipev2.id] = pipev2
+        if (type === "chw") {
+          const connW2 = connector("w")
+          connW2.props.style = {
+            ...styleMap["w"],
+            ...co_f,
+            translateY:
+              pipev2.props.style.translateY + pipev2.props.style.height,
+            translateX: pipev2.props.style.translateX - styleMap.v.width / 4,
+            rotate: 180,
+          }
+          result[connW2.id] = connW2
+          result[pipev2.id] = pipev2
+        }
+        result[pipeh2.id] = pipeh2
+        result[connT.id] = connT
       }
-      result[pipeh2.id] = pipeh2
-      result[connT.id] = connT
     } else {
       // 其他冷机生成一个横管，一个竖管，一个三头连接头，如果是最后一个冷机，则生成一个弯头连接头
       // 冷机左侧下方和右侧下方竖管 以及冷却塔右侧下方竖管
@@ -1602,12 +1621,13 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
         ...styleMap["v"],
         fill: EFAULT_PUMP_MAP[pipeType][0],
         height:
-          current.props.style.height +
+          styleMap.CHLS.height +
           deviceMargin[dev] -
           styleMap["t"].height / 2,
       }
       // 竖管x位移 横管的位移 +/- 横管宽度 + 竖管宽度
-      pipev.props.style.translateX = co_f.translateX + styleMap["v"].width
+      // pipev.props.style.translateX = co_f.translateX + styleMap["v"].width
+      pipev.props.style.translateX = pipeh1.props.style.translateX + pipeh1.props.style.width
       pipev.props.style.translateY = co_f.translateY + styleMap["t"].height / 2
       result[pipev.id] = pipev
       if (i === 0) {
@@ -1617,8 +1637,8 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
           ...styleMap["w"],
           ...co_f,
           // translateX: co_f.translateX - styleMap['v'].width * 0.5 * tag,
-          translateX: co_f.translateX - styleMap["v"].width * 0.5 * tag + 2,
-          translateY: fix(co_f.translateY - styleMap.h.height * 0.5) + .5,
+          translateX: pipev.props.style.translateX - styleMap.w.width / 2,
+          translateY: pipev.props.style.translateY - styleMap.w.height / 2 - styleMap.h.height / 4,
           rotate: tag == 1 ? 0 : -90,
         }
         result[connW.id] = connW
@@ -1628,16 +1648,11 @@ export const ct_cw_pump = (item, result, type, dev, pipeType, pimps, index) => {
         connT.props.style = {
           ...styleMap["t"],
           ...co_f,
-          translateY: fix(
-            current.props.style.translateY +
-              (current.props.style.height / 3) * 2 -
-              styleMap["t"].height / 2,
-          ),
           rotate: tag * 90,
         }
-        // 情况2和情况5 冷机右下中间三头的位置调整
-        connT.props.style.translateX = connT.props.style.translateX - 2.5
-        connT.props.style.translateY = connT.props.style.translateY + 2
+        // 情况5 冷机右下中间三头的位置调整  2px为管子像设备左侧移动了2px
+        connT.props.style.translateX = pipev.props.style.translateX - styleMap.t.height / 2 - 2
+        connT.props.style.translateY = pipev.props.style.translateY - styleMap.t.width / 2 - styleMap.h.height / 4
         result[connT.id] = connT
       }
     }
@@ -1829,16 +1844,49 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
           ? initpos
           : result[deviceMapIds[item[i - 1]]].props.style.translateY)) /
       (currentpump.height + deviceMargin.Pump)
+    
+    // 先计算横管
+    const pipeh1 = pipe("h", pipeType == "2" ? "1" : "0")
+    const pointarr = []
+    const total =
+      dType === "tower"
+        ? ifTotslPoints?.CHtoCT?.[index]
+        : dType === "tower_pump"
+          ? ifTotslPoints?.CTS?.[index]
+          : ifTotslPoints[type][index]
+    pipeh1.props.status = {
+      bind: `(${dType === "tower" ? ifTotal?.CHtoCT?.[index] : dType === "tower_pump" ? ifTotal?.CTS?.[index] : ifTotal[type][index]}) && (${deviceCheckH(deviceIdsMapValue[item[i]], null, pointarr)})`,
+      type: "expressions",
+      point: [...total, ...pointarr],
+    }
+    pipeh1.props.waterstyle = pipeType
+    pipeh1.props.style = {
+      ...styleMap["h"],
+      fill: EFAULT_PUMP_MAP[pipeType][0],
+      width: pipewidth + (dType === "tower" ? 2 : 0),
+      // 按照冷机的高度计算
+      translateY:
+        fix(currentpump.translateY + (styleMap.CHLS.height / 3) * 2) -
+        (dType === "tower" ? styleMap.CHLS.height / 3 : 0),
+      translateX: fix(
+        type === "chw"
+          ? translateX - 2
+          : currentpump.translateX + currentpump.width,
+      ),
+      zIndex: -1,
+    }
+
     // 不对齐就会多相应多的竖管
+    const pipev = pipe("v", direction)
     if (Math.abs(vnum) > 0 && dType !== "tower") {
-      const pipev = pipe("v", direction)
       pipev.props.waterstyle = pipeType
       pipev.props.style = {
         ...styleMap.v,
         fill: EFAULT_PUMP_MAP[pipeType][0],
-        height: fix(
-          (currentpump.height + deviceMargin.Pump) * Math.ceil(Math.abs(vnum)),
-        ),
+        // height: fix(
+        //   (currentpump.height + deviceMargin.Pump) * Math.ceil(Math.abs(vnum)),
+        // ),
+        height: styleMap.CHLS.height + deviceMargin.CHLS - styleMap["t"].height / 2,
         // translateX: fix(currentpump.translateX - styleMap.h.width * 0.25 * tag - styleMap.t.width * 0.5) + (type === 'cw' ? currentpump.width : 0),
         translateX:
           fix(
@@ -1846,13 +1894,18 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
               styleMap.h.width * 0.5 * tag -
               styleMap.t.width * 0.5,
           ) + (type === "cw" ? currentpump.width + styleMap.t.width * 0.5 : 0),
-        translateY: fix(
-          currentpump.translateY -
-            deviceMargin.Pump -
-            (deviceMargin.Pump + styleMap.CHWPS.height) *
-              Math.floor(Math.abs(vnum - 1)) -
-            styleMap.h.height * 0.5,
-        ),
+        // translateY: fix(
+        //   currentpump.translateY -
+        //     deviceMargin.Pump -
+        //     (deviceMargin.Pump + styleMap.CHWPS.height) *
+        //       Math.floor(Math.abs(vnum - 1)) -
+        //     styleMap.h.height * 0.5,
+        // ),
+        translateY: fix(pipeh1.props.style.translateY),
+      }
+      // 最后一个设备不画竖线
+      if (i !== item.length - 1) {
+        result[pipev.id] = pipev
       }
       if (vnum > 0 || (vnum < 0 && currentpump.translateY > initpos)) {
         // 条件判断用于属性设置
@@ -1866,8 +1919,9 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
               ? "1"
               : "0"
         // vnum为1 当 i === 0的是不会走到这个if里面来的
-        result[pipev.id] = pipev
+        // result[pipev.id] = pipev
       }
+     
       const pointarr = []
       // deviceIdsMapValue存了所有设备id和value的映射{设备id: 设备id对应的属性对象}
       // item是所有cwps的id的集合 当前四个设备下item为['fFTauxx93PFyarJ7rkfrhl', 'xMRTzmOw8VAKI8tKENLnox', 'jqgYs5JEIFc2U0qkx3P4T7', 'geyRu1XrlxJEcfqyJfyoBS']
@@ -1908,35 +1962,7 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
         result[connW.id] = connW
       }
     }
-    const pipeh1 = pipe("h", pipeType == "2" ? "1" : "0")
-    const pointarr = []
-    const total =
-      dType === "tower"
-        ? ifTotslPoints?.CHtoCT?.[index]
-        : dType === "tower_pump"
-          ? ifTotslPoints?.CTS?.[index]
-          : ifTotslPoints[type][index]
-    pipeh1.props.status = {
-      bind: `(${dType === "tower" ? ifTotal?.CHtoCT?.[index] : dType === "tower_pump" ? ifTotal?.CTS?.[index] : ifTotal[type][index]}) && (${deviceCheckH(deviceIdsMapValue[item[i]], null, pointarr)})`,
-      type: "expressions",
-      point: [...total, ...pointarr],
-    }
-    pipeh1.props.waterstyle = pipeType
-    pipeh1.props.style = {
-      ...styleMap["h"],
-      fill: EFAULT_PUMP_MAP[pipeType][0],
-      width: pipewidth,
-      translateY:
-        fix(
-          currentpump.translateY + styleMap.CHWPS.height - styleMap["h"].height,
-        ) - (dType === "tower" ? 20 : 3),
-      translateX: fix(
-        type === "chw"
-          ? translateX
-          : currentpump.translateX + currentpump.width,
-      ),
-      zIndex: -1,
-    }
+    
 
     // 第5种情况  冷却塔左三横线
     if (dType === "tower") {
@@ -1999,11 +2025,18 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
       const connW = wtag ? connector("t") : connector("w")
       connW.props.style = {
         ...styleMap[wtag ? "t" : "w"],
-        translateY: (wtag ? connectYT : connectYW) + (type === "cw" ? -1:0) + (dType === "tower" ? -1:0),
+        // translateY: (wtag ? connectYT : connectYW) + (type === "cw" ? -1:0) + (dType === "tower" ? -1:0),
+        translateY:
+          pipeh1.props.style.translateY +
+          (type === "cw" ? -styleMap.t.width / 2 + styleMap.h.height / 2 : 0) + // 三头横过来后高度变宽度 所以这里高度需要按照宽度计算 情况8冷却水泵右侧
+          ((type === "chw" && dType === "tower_pump") ? -styleMap.t.height / 2 + styleMap.h.height / 2 : 0) + // 情况8冷却水泵左侧
+          ((type === "chw" && dType === null) ? -styleMap.t.height / 2 + styleMap.h.height / 2 : 0) + // 情况7 冷冻水泵左侧
+          ((type === "chw" && dType === "tower") ? -styleMap.w.height / 2   : 0), // 情况5 冷却塔左侧
         // translateX: wtag ? (connectXT - styleMap['v'].width * tag) : connectXW,
-        translateX: (wtag
-          ? connectXT - styleMap["v"].width * tag 
-          : connectXW - 1) +  (type === "cw" ? 1.5:0) + (dType === "tower" ? -1:0),
+        translateX:
+          (wtag ? connectXT - styleMap["v"].width * tag : connectXW) +
+          (type === "cw" ? 1.5 : 0) +
+          (dType === "tower" ? -styleMap.h.height / 2 : 0),
         rotate:
           !wtag && type == "cw"
             ? 90
@@ -2011,7 +2044,6 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
               ? 180
               : -90,
       }
-      result[connW.id] = connW
       if (type === "chw" && dType !== "tower") {
         const pipev1 = pipe("v", direction)
         pipev1.props.waterstyle = pipeType
@@ -2019,34 +2051,40 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
           ...styleMap.v,
           fill: EFAULT_PUMP_MAP[pipeType][0],
           height: styleMap["v"].height * 0.25,
-          translateX: fix(
-            pipeh1.props.style.translateX -
-              styleMap["t"].height * 0.5 -
-              styleMap["v"].width * tag,
-          ),
-          translateY: fix(pipeh1.props.style.translateY),
+          // translateX: fix(
+          //   pipeh1.props.style.translateX -
+          //     styleMap["t"].height * 0.5 -
+          //     styleMap["v"].width * tag,
+          // ),
+          translateX: fix(pipev.props.style.translateX),
+          translateY: fix(pipeh1.props.style.translateY + styleMap.h.height),
         }
         pipev1.props.status = {
           bind: ifTotal[dType == "tower_pump" ? "CTS" : type][index],
           type: "expressions",
           point: ifTotslPoints[dType == "tower_pump" ? "CTS" : type][index],
         }
-        result[pipev1.id] = pipev1
         const connWchw = connector("w")
         connWchw.props.style = {
           ...styleMap["w"],
-          translateY:
-            pipev1.props.style.translateY +
-            pipev1.props.style.height -
-            styleMap["w"].height * 0.5 - (dType === "tower_pump" ? 1 : -1),
+          translateY:pipev1.props.style.translateY +  pipev1.props.style.height,
           translateX:
-            pipev1.props.style.translateX - styleMap["w"].width * 0.5 + .5,
+            pipev1.props.style.translateX - styleMap["w"].width * 0.5 + 0.5,
           rotate: 90,
         }
-        result[connWchw.id] = connWchw
+        // 串联显示 并联隐藏
+        if(item.length !== 1){
+           result[pipev1.id] = pipev1
+           result[connWchw.id] = connWchw
+        }
+      }
+      // 串联显示 并联隐藏  
+      if (item.length !== 1 ) {
+        result[connW.id] = connW
       }
       break
     }
+
     const connecW = (i) => {
       const connT = connector("w")
       connT.props.style = {
@@ -2061,14 +2099,15 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
       const connT = connector("t")
       connT.props.style = {
         ...styleMap["t"],
-        translateY: connectYT,
+        // translateY: connectYT,
+        // 居中显示
+        translateY: pipeh1.props.style.translateY - styleMap.t.height / 2 + styleMap.h.height / 2,
         translateX: connectXT - tag * 5,
         // 如果edg是isNaN(undefined) 则为true否则是false  三头默认0是朝下的 -90中间口朝右 90中间口朝左
         rotate: isNaN(edg) ? (type === "chw" ? -90 : 90) : 0,
       }
       result[connT.id] = connT
     }
-
     if (dType !== "tower") {
       if (i === 0) {
         // 每一组总管的第一个生成一个三头连接头
@@ -2077,13 +2116,7 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
           connW.props.style = {
             ...styleMap["w"],
             // 弯头往下调整2px
-            translateY:
-              fix(
-                currentpump.translateY +
-                  styleMap.CHWPS.height -
-                  styleMap["w"].height / 2 -
-                  styleMap["h"].height,
-              ) + 1.5,
+            translateY: fix(pipeh1.props.style.translateY - 2),
             // translateY: fix(currentpump.translateY + styleMap.CHWPS.height - styleMap['w'].height / 2 - styleMap['h'].height),
             // translateX: fix(currentpump.translateX - pipeh1.props.style.width * tag - styleMap['w'].width * tag + (tag === -1 ? 8 : 4)), //  + styleMap['v'].width * tag + (tag == -1 ? 4 : 0)
             translateX: fix(
@@ -2091,7 +2124,7 @@ export const pump_chl = (item, result, type, init, dType, pipeType, index) => {
                 pipeh1.props.style.width * tag -
                 styleMap["w"].width * tag +
                 (tag === -1 ? styleMap["w"].width + 2.5 : 3),
-            ), //  + styleMap['v'].width * tag + (tag == -1 ? 4 : 0)
+            ),
             rotate: tag == -1 ? 0 : 270,
           }
           result[connW.id] = connW
@@ -2162,11 +2195,11 @@ export const pump_In = (item, result) => {
       width: fix(styleMap["h"].width * 0.5 + 1),
       fill: EFAULT_PUMP_MAP[pipeType][0],
       translateX: current.translateX + current.width,
-      translateY:
-        current.translateY + current.height - styleMap["h"].height - 3,
+      // translateY: current.translateY + current.height - styleMap["h"].height - 3,
+      // 统一使用冷机的高度计算
+      translateY: current.translateY + styleMap["CHLS"].height / 3 * 2,
     }
     result[pipeh1.id] = pipeh1
-    // const conTranslateX = fix(pipeh1.props.style.translateX + styleMap['h'].width * 0.25);
     const conTranslateX = fix(
       pipeh1.props.style.translateX + styleMap["h"].width * 0.5,
     )
@@ -2227,7 +2260,7 @@ export const pump_In = (item, result) => {
     }
     const pipev = pipe("v", "1")
     pipev.props.waterstyle = pipeType
-    const height = styleMap.CHWPS.height + deviceMargin.CHWPS
+    // const height = styleMap.CHWPS.height + deviceMargin.CHWPS
     const pointvarr = []
     pipev.props.status = {
       bind: deviceCheckV(item, item.slice(0, i + 1), null, pointvarr),
@@ -2236,7 +2269,8 @@ export const pump_In = (item, result) => {
     }
     pipev.props.style = {
       ...styleMap["v"],
-      height,
+      // 利用冷机的高度计算
+      height: styleMap.CHLS.height + deviceMargin.CHLS,
       fill: EFAULT_PUMP_MAP[pipeType][0],
       // translateX: fix(pipeh1.props.style.translateX + styleMap['w'].width / 2 + styleMap['h'].width * 0.25),
       translateX: fix(
@@ -2454,36 +2488,28 @@ export const tower_chl = (item, result, index) => {
       }
     }
     pipev.props.waterstyle = pipeType
-    const pipevheight = styleMap.CTS.height + deviceMargin.CTS - 10
+    // 按照冷机的间距计算
+    const pipevheight = styleMap.CHLS.height + deviceMargin.CHLS
     pipev.props.style = {
       ...styleMap["v"],
-      // height: pipevheight, // 调整管子的高度
-      height: pipevheight + 1, // 调整管子的高度
+      height: pipevheight, // 调整管子的高度
       fill: EFAULT_PUMP_MAP[pipeType][0],
       translateX,
-      translateY: fix(
-        currenttower.translateY -
-          deviceMargin.CTS -
-          styleMap["CTS"].height * 0.5 -
-          10,
-      ),
+      translateY: currenttower.translateY +  (styleMap.CHLS.height / 3) - pipevheight,
     }
 
     if (i === 0) {
       // 每一组总管多生成一个弯头连接头
       // pipev.props.style.height = 50;
       pipev.props.style.height = styleMap.v.height / 3 + styleMap.t.height / 2
+      pipev.props.style.translateY = currenttower.translateY +  (styleMap.CHLS.height / 3) - pipev.props.style.height
       // pipev.props.style.translateY = currenttower.translateY - 30;
       // 调整第一个竖管的位移 向上移动2px
-      pipev.props.style.translateY = currenttower.translateY - 30 - 2
       const connW2 = connector("w")
       connW2.props.style = {
         ...styleMap["w"],
-        // translateX: fix(pipev.props.style.translateX - styleMap.v.width * 0.5),
-        // translateY: fix(pipev.props.style.translateY - styleMap['w'].height - styleMap.h.height * 0.5),
-        translateX: fix(pipev.props.style.translateX - styleMap.v.width * 0.5) + 1,
-        translateY:
-          fix(pipev.props.style.translateY - styleMap["w"].height) + 3,
+        translateX: fix(pipev.props.style.translateX - styleMap.v.width/4),
+        translateY: fix(pipev.props.style.translateY - styleMap["w"].height / 2),
         rotate: 270,
       }
       result[pipev.id] = pipev
@@ -2492,19 +2518,12 @@ export const tower_chl = (item, result, index) => {
       const connT = connector("t")
       connT.props.style = {
         ...styleMap["t"],
-        translateX: fix(pipev.props.style.translateX - styleMap.v.width * 0.5) - 1,
-        translateY:
-          fix(
-            currenttower.translateY -
-              styleMap["CTS"].height * 0.66 -
-              deviceMargin.CTS -
-              10,
-          ) + 3.5,
+        translateX: fix(pipev.props.style.translateX - styleMap.v.width * 0.5 - styleMap.h.height / 4),
+        translateY: fix(pipev.props.style.translateY - styleMap.t.height / 2 + styleMap.h.height / 2),
         rotate: -90,
       }
       result[connT.id] = connT
     }
-    // result[pipeh.id] = pipeh;
     result[pipev.id] = pipev
   }
 }

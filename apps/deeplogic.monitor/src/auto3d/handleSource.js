@@ -119,7 +119,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     deviceMapIdsTool(item.ID, resultMap.id, item)
     resultMap.props.style = {
       ...styleMap["CHLS"],
-      ...deviceTranform(index, "CHLS", 0),
+      ...deviceTranform(index, "CHLS"),
     }
     result[resultMap.id] = resultMap
     pointsObject[item.P.NAME] = 0
@@ -127,7 +127,6 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     chlsArr.push(resultMap)
     // 计算x文字居中的偏移量 和 文字居中的位置
     const [xAxis, center] = calcAxis(resultMap, item.NAME)
-    console.log("resultMap=======>", resultMap, "xAxis======>", xAxis)
     const { translateX, translateY } = generateTypoText({
       result,
       resultMap,
@@ -177,6 +176,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     )
   })
 
+  // 冷冻水
   CHWPS.forEach((item, index) => {
     const resultMap = device(
       "Pump",
@@ -185,10 +185,12 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       deviceModelMap?.CHWPS?.[item.ID],
     )
     deviceMapIdsTool(item.ID, resultMap.id, item)
+    // 计算和冷机之间的设备高度差 距离空压机2/3的位置上 - 上下两个横管的高度 + 垂直位移差
+    const diff = ((styleMap.Acop.height - styleMap.CHWPS.height) / 3) * 2 - styleMap.h.height * 2 + 2
     resultMap.props.style = {
       ...styleMap["CHWPS"],
-      ...deviceTranform(index, "CHWPS", 15),
-      // marginTop: 7,
+      ...deviceTranform(index, "CHWPS"),
+      marginTop: diff,
     }
     result[resultMap.id] = resultMap
     pointsObject[item.P.NAME] = 0
@@ -200,7 +202,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis,
-      yAxis: 10,
+      yAxis: diff,
     })
     generateText({
       result: result,
@@ -231,6 +233,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     })
   })
 
+  // 冷却水
   CWPS.forEach((item, index) => {
     const resultMap = device(
       "Pump",
@@ -239,10 +242,11 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       deviceModelMap?.CWPS?.[item.ID],
     )
     deviceMapIdsTool(item.ID, resultMap.id, item)
+    const diff = ((styleMap.Acop.height - styleMap.CHWPS.height) / 3) * 2 - styleMap.h.height * 2 + 2
     resultMap.props.style = {
       ...styleMap["CWPS"],
-      ...deviceTranform(index, "CWPS", 15),
-      // marginTop: 7,
+      ...deviceTranform(index, "CWPS"),
+      marginTop: diff,
     }
     result[resultMap.id] = resultMap
     pointsObject[item.P.NAME] = 0
@@ -254,7 +258,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
       resultMap,
       deviceName: item.NAME,
       xAxis,
-      yAxis: 10,
+      yAxis: diff,
     })
     generateText({
       result: result,
@@ -296,7 +300,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
     valuesMapsHandle(item.ID, item.VALVES, deviceModelMap?.VALVES)
     resultMap.props.style = {
       ...styleMap["CTS"],
-      ...deviceTranform(index, "CTS", 6),
+      ...deviceTranform(index, "CTS"),
     }
     result[resultMap.id] = resultMap
     pointsObject[item.P.NAME] = 0
@@ -427,7 +431,7 @@ export const handleSource = (source, deviceModelMap, links, global) => {
    * 每组第一个冷机的位置就是总管的位置，
    * 所有水泵的管子最终流向总管
    */
-  // 7. 最后一个水泵的左侧连接冷机 (水泵左侧连接冷机 即最后一个水泵左侧三横线一竖线)
+  // 7. 最后一个冷冻水泵的左侧连接冷机 (水泵左侧连接冷机 即最后一个水泵左侧三横线一竖线)
   connectCHWP.forEach((item, index) => {
     pump_chl(
       item,

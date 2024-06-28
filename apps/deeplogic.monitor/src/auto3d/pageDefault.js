@@ -76,16 +76,16 @@ const efficiencyTab = (parentid, source, tag) => {
     COP_CT_GROUP,
     P_PLANT,
   } = {
-    COP_PLANT: source?.["COP_PLANT"].NAME,
-    P_CH_GROUP: source?.["P_CH_GROUP"].NAME,
-    COP_CH_GROUP: source?.["COP_CH_GROUP"].NAME,
-    P_CHWP_GROUP: source?.["P_CHWP_GROUP"].NAME,
-    COP_CHWP_GROUP: source?.["COP_CHWP_GROUP"].NAME,
-    P_CWP_GROUP: source?.["P_CWP_GROUP"].NAME,
-    COP_CWP_GROUP: source?.["COP_CWP_GROUP"].NAME,
-    P_CT_GROUP: source?.["P_CT_GROUP"].NAME,
-    COP_CT_GROUP: source?.["COP_CT_GROUP"].NAME,
-    P_PLANT: source?.["P_PLANT"].NAME,
+    COP_PLANT: source?.["COP_PLANT"]?.NAME,
+    P_CH_GROUP: source?.["P_CH_GROUP"]?.NAME,
+    COP_CH_GROUP: source?.["COP_CH_GROUP"]?.NAME,
+    P_CHWP_GROUP: source?.["P_CHWP_GROUP"]?.NAME,
+    COP_CHWP_GROUP: source?.["COP_CHWP_GROUP"]?.NAME,
+    P_CWP_GROUP: source?.["P_CWP_GROUP"]?.NAME,
+    COP_CWP_GROUP: source?.["COP_CWP_GROUP"]?.NAME,
+    P_CT_GROUP: source?.["P_CT_GROUP"]?.NAME,
+    COP_CT_GROUP: source?.["COP_CT_GROUP"]?.NAME,
+    P_PLANT: source?.["P_PLANT"]?.NAME,
   }
   return {
     WjE5WGRXQ8: {
@@ -1752,6 +1752,7 @@ const efficiencyTab = (parentid, source, tag) => {
     },
   }
 }
+
 export const pageLayout = (parentid, source, tag) => {
   const drawerbtnid = nanoid(10)
   const drawercontentid = nanoid(10)
