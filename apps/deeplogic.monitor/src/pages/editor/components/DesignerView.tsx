@@ -25,14 +25,15 @@ export const DesignerView = () => {
       projId,
     ).finally(() => {
     })
+    console.log("onRender: ", onRender)
   }, [layout?.content.F_CONTENT, projId])
 
    useEffect(() => {
      initRender?.()
-     console.log("initRender: ", initRender)
    }, [initRender])
    const style = useMemo(() => pageStyle?.dataList, [pageStyle?.dataList])
    const displayName = useMemo(() => ({ displayName: "App" }), [])
+
    
   return (
     <Frame>

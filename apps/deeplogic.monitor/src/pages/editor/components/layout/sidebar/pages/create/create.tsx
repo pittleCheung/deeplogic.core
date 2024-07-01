@@ -10,6 +10,7 @@ function CreatePage() {
     const [active, setActive] = useState('page');
 
     function onFinish(values) {
+        console.log("create========>", active, onCreate)
         if (active === 'page') {
             onCreate?.({F_PAGE_ID: '-1', F_PT_ID: groupId, ...values});
         } else {
@@ -30,6 +31,7 @@ function CreatePage() {
             setActive('page');
         }
     }, [groupId]);
+
 
     return (
         <Modal open={open} onCancel={onCancel} footer={null}>

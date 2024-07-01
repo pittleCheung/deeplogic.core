@@ -52,7 +52,8 @@
     "react-selecto": "^1.26.3",
     "react-simple-keyboard": "^3.7.107",
     "react-window": "^1.8.10",
-    "ts-mxgraph": "^1.0.0"
+    "ts-mxgraph": "^1.0.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@emotion/css": "^11.11.2",

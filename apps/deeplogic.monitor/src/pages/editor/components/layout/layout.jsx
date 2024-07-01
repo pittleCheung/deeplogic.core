@@ -13,7 +13,6 @@ function DesignerLayout({ children }) {
   const contentRef = useRef(null);
   const { enabled, nodeCustom, isRoot, isParse, isUndo, isRedo, onKeyDown, onKeyboard } = useLayout();
   const designer = useDesigner();
-  console.log('designer: ', designer);
   const { sidebar } = designer;
   const { pageId } = sidebar?.page ? sidebar?.page : {};
   const isDevice = nodeCustom?.isDevice;
@@ -44,12 +43,13 @@ function DesignerLayout({ children }) {
     }
   }, [items,isDevice, isRoot, isParse, isUndo, isRedo,onKeyboard])
 
+  console.log("designer: ", designer, pageId)
   return (
     <Layout className={css.layout}>
       <Layout>
         <SideBar />
-        {pageId && (
-          <Layout.Content id='craft-canvas'>
+        {1 && (
+          <Layout.Content id="craft-canvas">
             <Toolbar />
             <div
               ref={contentRef}
@@ -57,27 +57,30 @@ function DesignerLayout({ children }) {
               onKeyDown={onKeyboardHandler}
               onMouseEnter={onMouseEnterHandler}
               onMouseLeave={onMouseLeaveHandler}
-              className={css.wrapper}
-            >
-              <Layout.Content ref={ref} className={css.content} id={'craft-content'}>
+              className={css.wrapper}>
+              <Layout.Content
+                ref={ref}
+                className={css.content}
+                id={"craft-content"}>
                 <Dropdown
                   menu={menu}
                   trigger={trigger}
                   destroyPopupOnHide
                   overlayClassName={css.dropdown}
-                  disabled={!enabled}
-                >
-                  <Layout.Content className={css.canvas}>{children}</Layout.Content>
+                  disabled={!enabled}>
+                  <Layout.Content className={css.canvas}>
+                    {children}
+                  </Layout.Content>
                 </Dropdown>
               </Layout.Content>
             </div>
           </Layout.Content>
         )}
-        {!pageId && <LayoutEmpty />}
+        {/* {!pageId && <LayoutEmpty />} */}
         {enabled && <Setter />}
       </Layout>
     </Layout>
-  );
+  )
 }
 
 export default DesignerLayout;

@@ -33,6 +33,7 @@ function Page({ children, ...props }) {
 
   // 全局滚动条样式匹配页面风格
   const tokens = AntTheme.getDesignToken(theme);
+  
   injectGlobal`
       .page ::-webkit-scrollbar-track {
           background-color: ${tokens.colorBorder} !important;

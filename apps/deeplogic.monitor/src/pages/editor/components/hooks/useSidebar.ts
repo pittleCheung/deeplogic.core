@@ -10,6 +10,10 @@ function useSidebar() {
     query
   } = useEditor();
 
+
+  console.log("pages==========>", sidebar)
+
+
   /**
    * 选中节点, 这里主要处理选中节点后, 重置画布中选中的组件为空
    * @type {(function(*): void)|*}
